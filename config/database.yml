@@ -21,7 +21,7 @@ test:
 production:
   adapter: postgresql
   encoding: unicode
-  database: myapp_production
+  database: lms_production
   pool: 5
-  username: lms-prod
-  
+  username: lms
+  password:

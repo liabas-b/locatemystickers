@@ -1,7 +1,8 @@
 class UsersController < ApplicationController
   include ApplicationHelper
 
-  before_filter :column_names
+  before_filter :column_names, only: [:index]
+  before_filter :stickers_column_names, only: [:show, :stickers]
   helper_method :sort_column, :sort_direction
   # before_filter :correct_user,  only: [:edit, :update, :show]
   # before_filter :admin_user,    only: [:destroy]
@@ -197,6 +198,9 @@ class UsersController < ApplicationController
 
     def column_names
       @column_names = User.column_names
+    end
+    def stickers_column_names
+      @column_names = Sticker.column_names
     end
 
     def correct_user
