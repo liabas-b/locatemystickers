@@ -6,4 +6,3 @@ $("#pagination-top").html("<%= escape_javascript(render("shared/navbar_paginatio
 $("#pagination-bottom").html("<%= escape_javascript(render("shared/navbar_pagination", models: @stickers)) %>");
 $("#followed_pagination-top").html("<%= escape_javascript(render("shared/navbar_pagination", models: @stickers, complement: 'followed_')) %>");
 $("#followed_pagination-bottom").html("<%= escape_javascript(render("shared/navbar_pagination", models: @stickers, complement: 'followed_')) %>");
-$("#resizable-map").html("<%= escape_javascript(render('shared/map_with_ptions')) %>");

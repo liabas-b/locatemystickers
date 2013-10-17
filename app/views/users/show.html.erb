@@ -1,8 +1,8 @@
 <% provide(:title, @user.name) %>
 
-<%= render 'user_info_header', user: @user %>
+<div class="container-fluid page-content-with-left-sidebar">
+  <%= render 'user_info_header', user: @user %>
 
-<div class="container-fluid page-content-with-header">
   <% if @markers_json != nil && @markers_json.length > 0 %>
     <div id="resizable-map" class="row-fluid">
       <div id="last-locations"></div>

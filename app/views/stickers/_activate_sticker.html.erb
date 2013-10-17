@@ -2,14 +2,14 @@
 	<%= form_for(sticker, :url => user_sticker_path(sticker.user_id, sticker), html: { method: :put }, remote: true) do |f| %>
   <%= f.hidden_field :is_active, :value => true %>
   <div class="actions">
-    <%= f.submit 'Off', class: 'btn btn-mini btn-danger' %>
+    <%= f.submit 'Off', class: 'btn-default btn-xs btn-danger' %>
   </div>
 <% end %>
 <% else %>
 	<%= form_for(sticker, :url => user_sticker_path(sticker.user_id, sticker), html: { method: :put }, remote: true) do |f| %>
   <%= f.hidden_field :is_active, :value => false %>
   <div class="actions">
-    <%= f.submit 'On ', class: 'btn btn-mini btn-success' %>
+    <%= f.submit 'On ', class: 'btn-default btn-xs btn-success' %>
   </div>
 <% end %>
 <% end %>

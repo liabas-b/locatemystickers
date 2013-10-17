@@ -37,9 +37,9 @@ Icon?
 ehthumbs.db
 Thumbs.db
 
-tmp/*
-tmp
-public/assets
-db/development.sqlite3
-
-Flat-UI/
+# RoR files #
+#############
+*.lock
+tmp/
+doc/
+public/assets/

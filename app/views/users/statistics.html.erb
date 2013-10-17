@@ -2,7 +2,7 @@
 
 <%= render 'user_info_header', user: @user %>
 
-<div class="container-fluid page-content-with-header">
+<div class="container-fluid page-content-with-left-sidebar">
   <div id="user-statistics" style="position:relative;top:-240px"></div>
   <div class="well well-padding paper-shadow">
     <h1><%= (current_user == @user ? "My statistics" : (@user.name + "'s statistics")) %></h1>

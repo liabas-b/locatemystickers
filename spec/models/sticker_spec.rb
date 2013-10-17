@@ -12,6 +12,7 @@
 #  is_active       :boolean          default(FALSE)
 #  code            :string(255)
 #  text            :string(255)
+#  color           :string(255)
 #
 
 require 'spec_helper'

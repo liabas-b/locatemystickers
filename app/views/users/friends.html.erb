@@ -2,7 +2,7 @@
 
 <%= render 'user_info_header', user: @user %>
 
-<div class="container-fluid page-content-with-header">
+<div class="container-fluid page-content-with-left-sidebar">
   <div id="friends-list" style="position:relative;top:-250px"></div>
 		<% if @user.followed_users.any? %>
 			<% @users = @user.followed_users %>

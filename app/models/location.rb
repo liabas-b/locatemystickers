@@ -10,6 +10,7 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  version    :integer          default(0)
+#  address    :string(255)
 #
 
 class Location < ActiveRecord::Base

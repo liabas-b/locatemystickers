@@ -14,16 +14,16 @@
   if current_user.following?(sticker) || current_user == user || current_user.admin? 
     %>
     <a href="<%= user_sticker_histories_path(user, sticker) %>"
-        class="btn btn-mini show-on-hover"><i class="icon-film"></i></a>
+        class="btn-default btn-xs show-on-hover">Events</a>
     <%
   end
   if current_user == user || current_user.admin? %>
     <a href="<%= edit_user_sticker_path(user, sticker) %>"
-  		class="btn btn-mini show-on-hover"><i class="icon-edit"></i></a>
+  		class="btn-default btn-xs show-on-hover">Edit</a>
     <a href="<%= user_sticker_path(user, sticker) %>"
     		data-method="delete"
     		data-confirm="You are about to delete sticker <%= sticker.name %>"
-    		class="btn btn-mini btn-danger show-on-hover"><i class="icon-remove"></i></a>
+    		class="btn-default btn-xs btn-danger show-on-hover">Delete</a>
   <% end 
   end%>
 </div>
