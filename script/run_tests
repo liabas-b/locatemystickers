@@ -1,0 +1,1 @@
+bundle exec rspec spec --tag focus --format h > rspec_output.html

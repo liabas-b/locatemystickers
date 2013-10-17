@@ -1,0 +1,7 @@
+bundle exec rake db:migrate && bundle exec rake db:populate
+while 1
+do
+ls db
+sleep 1
+clear
+done

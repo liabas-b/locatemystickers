@@ -1,0 +1,45 @@
+
+<div class="span<%= span_size ||= 12 %> well well-padding paper-shadow">
+	<table width="100%">
+		<tr>
+			<td width="82" valign="baseline">
+				<a href="<%= user_path(sticker.user) %>" class="user-pin">
+					<%= gravatar_for sticker.user, size: 64 %>
+				</a>
+			</td>
+			<td width="*" valign="top">
+				<h5>
+					<a href="<%= user_sticker_path(sticker.user, sticker) %>">
+						<%= sticker.name %><%= sticker.id.to_s %>
+					</a>
+				</h5>
+				<p>
+					Owned by
+					<a href="<%= user_path(sticker.user) %>">
+							<%= sticker.user.name %>.
+					</a><br/>
+					<a href="<%= user_sticker_locations_path(sticker.user, sticker) %>">
+						Has been located <%= sticker.locations.count %> times.
+					</a><br/>
+					<!--Type: <%= sticker_type_name(sticker) %> (<%= sticker_type_icon(sticker) %>)-->
+				</p>
+			</td>
+			<td valign="top">
+				<div class="pull-right">
+					<%= render 'stickers/sticker_toolbar', sticker: sticker %>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+			<td valign="bottom">
+				<small class="pull-right text-right muted">
+					Registered on <%= sticker.created_at %> | Updated on <%= sticker.updated_at %>
+				</small>
+			</td>
+		</tr>
+	</table>
+	<%= gmaps("polylines"   => { "data" => @polylines_json },
+						"markers"   => { "data" => @markers_json }) %>
+</div>

@@ -1,0 +1,25 @@
+<%
+	if defined?(linkmethod)
+		meth = linkmethod
+	else
+		meth = "get"
+	end
+%>
+
+<a href="<%= path %>" class="link-icon" data-method="<%= meth %>">
+	<table>
+		<tr>
+			<td width="20">
+				<% if defined?(icon) %>
+					<i class="icon-<%= icon %>"></i>
+				<% end %>
+				<% if defined?(image) %>
+					<%= image_tag image %>
+				<% end %>
+			</td>
+			<td>
+	      <%= label %>
+			</td>
+		</tr>
+	</table>
+</a>

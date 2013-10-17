@@ -1,0 +1,28 @@
+<%= form_for(@message) do |f| %>
+  <% if @message.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@message.errors.count, "error") %> prohibited this message from being saved:</h2>
+
+      <ul>
+      <% @message.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label "Your email" %>
+    <%= f.text_field :subject %>
+  </div>
+  <div class="field">
+    <%= f.label :content %>
+    <%= f.text_area :content, rows: 3, class: 'input-block-level', placeholder: "Please type your message here." %>
+  </div>
+  <%= f.hidden_field :from_user_id, :value => 0 %>
+  <%= f.hidden_field :user_id, :value => 1 %>
+  <div class="actions">
+    <%= f.submit 'Send', class: 'btn btn-primary' %>
+    <span class="help-inline">An e-mail will be sent to the developers in charge of the project.</span>
+  </div>
+<% end %>

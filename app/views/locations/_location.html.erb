@@ -1,0 +1,18 @@
+<%
+  sticker = @locations_stickers[location.id]
+  user = @stickers_users.nil? ? @user : @stickers_users[sticker.id]
+%>
+
+    <tr>
+      <td><%= location.latitude %></td>
+      <td><%= location.longitude %></td>
+      <td><%= link_to 'Show', user_sticker_location_path(user, sticker, location), class: 'btn' %></td>
+      <td><%= location.sticker_id %></td>
+      <td>
+        <%= link_to 'Edit', edit_user_sticker_location_path(user, sticker, location), class: 'btn' %>
+      </td>
+      <td>
+        <%= link_to 'X', user_sticker_location_path(user, sticker, location), method: :delete,
+                         :data => { :confirm => 'Are you sure to delete a location for sticker ' + sticker.name + '?' }, class: 'btn btn-danger' %>
+      </td>
+    </tr>

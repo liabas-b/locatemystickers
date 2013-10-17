@@ -1,0 +1,79 @@
+<% provide(:title, @sticker.name + "'s zones") %>
+<div class="container-fluid user-info">
+  <div class="page-header-back"></div>
+  <div class="row-fluid">
+    <%= render 'users/user_info', user: @user, span_size: 12 %>
+  </div>
+</div>
+
+<div class="container-fluid page-content-with-header">
+  <div id="user-stickers" class="row-fluid">
+    <div id="sticker" style="position:relative;top:-240px"></div>
+    <div id="stickers" class="row-fluid">
+      <%= render 'stickers/sticker_info_min', sticker: @sticker, span_size: 12 %>
+    </div>
+  </div>
+  <% if @polygons_json != nil && @polygons_json.length > 0 %>
+  <div id="resizable-map" class="row-fluid">
+    <div id="last-locations" style="position:relative;top:-250px"></div>
+    <%= render 'shared/polygons_map_with_options' %>
+  </div>
+  <br/>
+  <br/>
+  <% end %>
+  <div id="res" class="well well-padding paper-shadow">
+    <%= @res %>
+  </div>
+  <div id="zones" style="position:relative;top:-240px"></div>
+  <div id="sticker-zones" class="well well-padding paper-shadow">
+    <h1>Listing zones</h1>
+
+    <table>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Alert level</th>
+        <th>Alerts on enter</th>
+        <th>Alerts on exit</th>
+        <th>Sticker</th>
+        <th>Colour</th>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+
+    <% @zones.each do |zone| %>
+      <tr>
+        <td><%= zone.name %></td>
+        <td><%= zone.description %></td>
+        <td><%= zone.alert_level %></td>
+        <td><%= zone.alerts_on_enter %></td>
+        <td><%= zone.alerts_on_exit %></td>
+        <td><%= zone.sticker_id %></td>
+        <td><%= zone.colour %></td>
+        <td><%= link_to 'Show', user_sticker_zone_path(@user, @sticker, zone) %></td>
+        <td><%= link_to 'Edit', edit_user_sticker_zone_path(@user, @sticker, zone) %></td>
+        <td><%= link_to 'Destroy', user_sticker_zone_path(@user, @sticker, zone), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+
+      </tr>
+    <% end %>
+    </table>
+
+    <br />
+
+    <%= link_to 'New Zone', new_user_sticker_zone_path(@user, @sticker) %>
+  </div>
+</div>
+
+<!-- Sidebar Fixed left -->
+<div class="sidebar">
+  <h3>Navigate</h3>
+  <ul id="sidebar-nav" class="nav nav-list affix" data-offset-top="200px">
+    <li><a href="#sticker">Sticker</a></li>
+    <li><a href="#last-locations" class="last-locations">Map</a></li>
+    <li><a href="#zones">Zones</a></li>
+  </ul>
+</div>
+
+
+

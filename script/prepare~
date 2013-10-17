@@ -1,0 +1,1 @@
+bundle exec rake db:migrate && bundle exec rake db:populate && ./sript/start && sudo tail -f /var/log/nginx/*web-service* log/*

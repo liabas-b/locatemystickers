@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= full_title(yield(:title)) %></title>
+    <%= stylesheet_link_tag    "application", media: "all" %>
+    <%= javascript_include_tag "application" %>
+    <LINK REL="SHORTCUT ICON" HREF="/assets/favicon.ico">
+    <%= csrf_meta_tags %>
+    <%= render 'layouts/shim' %>
+    <script src="http://js.pusher.com/2.0/pusher.min.js"></script>
+    <script type="text/javascript">
+      /*var pusher = new Pusher('<%= Pusher.key %>');
+      <% if current_user.nil?
+      @channel = 0
+      else
+        @channel = current_user.id
+      end
+       %>
+      var channel = pusher.subscribe('notifications_channel<%= @channel %>');
+      channel.bind('new_notification', function(data) {
+        var json_data_object = eval("(" + data.notification + ")");
+        $('#conversation-with-' + json_data_object.from_user_id).append("<div><b><a href="/users/3">Test:</a></b><small class="muted pull-right">At</small></div>");
+        $('.alerts').html("<div class='alert alert-warning fade in'><button type='button' class='close' data-dismiss='alert'>x</button><strong>New</strong> message</div>");
+      });*/
+    </script>
+
+  </head>
+  <body style="background-color:<%= yield(:body_background_color) %>;">
+    <%= render 'layouts/header' %>
+    <div class="layout-container"><br/>
+      <span class="alerts">
+      <% flash.each do |key, value|
+        emphase = key.to_s.humanize.capitalize 
+        %>
+        <div class="alert alert-<%= key %> fade in">
+          <button type="button" class="close" data-dismiss="alert">×</button>
+          <strong><%= emphase %></strong> <%= value %>
+        </div>
+      <% end %>
+      </span>
+      <%= yield %>
+      <%=# debug(params) if Rails.env.development? 
+      %>      
+    </div>
+  </body>
+  <%= yield :scripts %>
+</html>

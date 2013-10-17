@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= full_title(yield(:title)) %></title>
+    <%= javascript_include_tag "application" %>
+    <%= javascript_tag Pousse::js([:everybody]) %>
+    <%= stylesheet_link_tag    "application", media: "all" %>
+    <LINK REL="SHORTCUT ICON" HREF="/assets/favicon.ico">
+    <%= csrf_meta_tags %>
+    <%= render 'layouts/shim' %>
+  </head>
+  <body>
+    <%= render 'layouts/header' %>
+    <div class="layout-container"><br/>
+      <span class="alerts">
+        <% flash.each do |key, value|
+          emphase = key.to_s.humanize.capitalize 
+        %>
+        <div class="alert alert-<%= key %> fade in">
+          <button type="button" class="close" data-dismiss="alert">×</button>
+          <strong><%= emphase %></strong> <%= value %>
+        </div>
+      <% end %>
+      </span>
+      <%= yield %>
+      <%=# debug(params) if Rails.env.development? 
+      %>      
+    </div>
+  </body>
+  <%= yield :scripts %>
+</html>

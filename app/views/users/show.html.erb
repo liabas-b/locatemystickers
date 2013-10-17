@@ -1,0 +1,28 @@
+<% provide(:title, @user.name) %>
+
+<%= render 'user_info_header', user: @user %>
+
+<div class="container-fluid page-content-with-header">
+  <% if @markers_json != nil && @markers_json.length > 0 %>
+    <div id="resizable-map" class="row-fluid">
+      <div id="last-locations"></div>
+      <%= render 'shared/map_with_options' %>
+    </div>
+  <% end %>
+  <div id="user-stickers" class="row-fluid">
+    <div id="own-stickers"></div>
+    	<%= render 'user_stickers' %>
+  </div>
+</div>
+
+<!-- Sidebar Fixed left -->
+<div class="sidebar well">
+  <%= render 'friends', user: @user %>
+  <h3>Navigate</h3>
+  <ul id="sidebar-nav" class="nav nav-list affix" data-offset-top="200px">
+    <% if @markers_json != nil && @markers_json.length > 0 %>
+    <li><a href="#last-locations" class="last-locations">Map</a></li>
+    <% end %>
+    <li><a href="#own-stickers">Stickers</a></li>
+  </ul>
+</div>

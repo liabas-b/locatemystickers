@@ -1,0 +1,20 @@
+<% provide(:title, 'Edit location') %>
+<% provide(:body_background_color, '#fff') %>
+<div style="position:absolute;left:2%;width: 95%; height:90%;">
+    <div class="well well-padding paper-shadow" style="height:100%; width: 100%">
+    	<br/>
+      <%= gmaps("markers"   => { "data" => @markers_json }) %>
+      <div id="map-options-panel" class="show-on-hover">
+        <!-- <a class="resize-button btn" href='#'>Expand</a> -->
+      </div>
+    </div>
+</div>
+<div style="opacity:.9; width:610px; margin:0 auto;">
+  <div class="well well-padding paper-shadow" style="margin-top:100px;">
+		<h3>Editing location <%= @location.id %> of sticker <%= @sticker.name %> <small>- at <%= @location.created_at %></small></h3>
+		<br/>
+		<%= render 'form' %>
+	</div>
+</div>
+
+

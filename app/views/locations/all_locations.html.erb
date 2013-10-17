@@ -1,0 +1,34 @@
+<% provide(:title, 'All locations') %>
+
+<%= render 'shared/server_stats_header' %>
+
+<div class="container-fluid page-content-with-header">
+  <% if @markers_json != nil %>
+  <div id="resizable-map" class="row-fluid">
+    <div id="last-locations" style="position:relative;top:-250px"></div>
+    <div class="well well-padding paper-shadow" style="height:100%">
+      <%= gmaps("markers"   => { "data" => @markers_json }) %>
+      <div id="map-options-panel" class="show-on-hover">
+        <a class="resize-button btn" href='#'>Expand</a>
+      </div>
+    </div>
+  </div>
+  <br/>
+  <br/>
+  <% end %>
+  <div id="locations-list" style="position:relative;top:-250px"></div>
+  <div class="well well-padding paper-shadow">
+		<h1>Locations of all stickers</h1>
+	</div>
+	<%= render 'all_locations_table', locations: @locations %>
+</div>
+
+<!-- Sidebar Fixed left -->
+<div class="sidebar">
+  <h3>Navigate</h3>
+  <ul id="sidebar-nav" class="nav nav-list affix" data-offset-top="200px">
+    <li><a href="#last-locations" class="last-locations">Map</a></li>
+    <li><a href="#locations-list" class="locations-list">Locations list</a></li>
+  </ul>
+</div>
+

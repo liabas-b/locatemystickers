@@ -1,0 +1,24 @@
+<% provide(:title, 'Your friends') %>
+
+<%= render 'user_info_header', user: @user %>
+
+<div class="container-fluid page-content-with-header">
+  <div id="friends-list" style="position:relative;top:-250px"></div>
+		<% if @user.followed_users.any? %>
+			<% @users = @user.followed_users %>
+			<%= render 'users/users_thumbnails', users: @user.followed_users %>
+			<div class="clear-both"></div>
+		<% else %>
+			<div class="well well-padding paper-shadow">
+				<%= render 'users/no_friends', user: @user %>
+			</div>
+		<% end %>
+</div>
+
+<!-- Sidebar Fixed left -->
+<div class="sidebar">
+  <h3>Navigate</h3>
+  <ul id="sidebar-nav" class="nav nav-list affix" data-offset-top="200px">
+    <li class=""><a href="#friends-list" class="friends-list">Friends list</a></li>
+  </ul>
+</div>

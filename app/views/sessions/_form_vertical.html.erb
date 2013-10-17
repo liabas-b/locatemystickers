@@ -1,0 +1,11 @@
+<%= form_for(:session, url: sessions_path) do |f| %>
+	<div class="input-prepend">
+		<span class="add-on"><i class="icon-envelope"></i></span>
+		<%= f.text_field :email, class: 'email' %>
+	</div><br/>
+	<div class="input-prepend">
+		<span class="add-on"><i class="icon-lock"></i></span>
+		<%= f.password_field :password, class: 'password' %>
+	</div><br/>
+	<%= f.submit "Sign in", class: "btn btn-success" %>
+<% end %>

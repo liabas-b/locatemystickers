@@ -1,0 +1,9 @@
+<%
+	stickers_locations_count = 0
+	stickers.each { |sticker| stickers_locations_count += sticker.locations.count }
+%>
+
+<ul class="list-inline list-title">
+	<li><h2><b><%= stickers.count %></b> <%= title %></h2></li>
+	<li><h3><b><%= stickers_locations_count.to_s %></b> Total locations</h3></li>
+</ul>

@@ -1,0 +1,12 @@
+<% complement = complement ||= "" %>
+
+<% if models.any? %>
+	<div class="navbar page-navbar paper-shadow">
+		<div class="navbar-inner page-navbar-inner">
+			<%= render 'shared/form_search', models: models, complement: complement %>
+	  	<div id="<%= complement %>pagination-top" style="position:absolute;right:10px;top:5px;">
+				<%= render 'shared/navbar_pagination', models: models %>
+			</div>
+		</div>
+	</div>
+<% end %>

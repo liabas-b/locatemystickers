@@ -1,0 +1,45 @@
+<%= form_for(@zone, :url => user_sticker_zones_path(current_user, @sticker)) do |f| %>
+  <% if @zone.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@zone.errors.count, "error") %> prohibited this zone from being saved:</h2>
+
+      <ul>
+      <% @zone.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :description %><br />
+    <%= f.text_field :description %>
+  </div>
+  <div class="field">
+    <%= f.label :alert_level %><br />
+    <%= f.number_field :alert_level %>
+  </div>
+  <div class="field">
+    <%= f.label :alerts_on_enter %><br />
+    <%= f.number_field :alerts_on_enter %>
+  </div>
+  <div class="field">
+    <%= f.label :alerts_on_exit %><br />
+    <%= f.number_field :alerts_on_exit %>
+  </div>
+  <div class="field">
+    <%= f.label :sticker_id %><br />
+    <%= f.number_field :sticker_id %>
+  </div>
+  <div class="field">
+    <%= f.label :colour %><br />
+    <%= f.text_field :colour %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

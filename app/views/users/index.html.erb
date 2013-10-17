@@ -1,0 +1,16 @@
+<% provide(:title, 'All users') %>
+
+<%= render 'shared/server_stats_header' %>
+
+<div class="container-fluid page-content-with-header">
+  <div id="users-list" style="position:relative;top:-250px"></div>
+		<%= render 'users/users_thumbnails', users: @users %>
+</div>
+
+<!-- Sidebar Fixed left -->
+<div class="sidebar">
+  <h3>Navigate</h3>
+  <ul id="sidebar-nav" class="nav nav-list affix" data-offset-top="200px">
+    <li class=""><a href="#users-list" class="users-list">Users list</a></li>
+  </ul>
+</div>

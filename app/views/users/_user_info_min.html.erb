@@ -1,0 +1,27 @@
+<% @user = user %>
+
+<div class="span<%= span_size %> well well-padding paper-shadow">
+	<table width="100%">
+		<tr>
+			<td width="82" valign="baseline">
+				<a href="<%= user_path(@user) %>" class="user-pin center">
+					<%= gravatar_for @user, size: 64 %>
+				</a>
+			</td>
+			<td width="*" valign="top">
+		    <h4>
+					<a href="<%= user_path(@user) %>">
+						<%= @user.name %>
+					</a>
+				</h4>
+				<%= @user.email %><br/>
+			</td>
+		</tr>
+	</table>
+	<div class="pull-right" style="position:absolute;right:10px;top:10px;">
+		<%= render 'users/user_toolbar', user: @user %>
+	</div>
+	<small class="pull-right text-right muted" style="position:absolute;right:10px;bottom:5px;">
+		Registered on <%= @user.created_at %>
+	</small>
+</div>

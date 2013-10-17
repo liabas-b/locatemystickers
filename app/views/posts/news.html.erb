@@ -1,0 +1,13 @@
+<div style="background-image: url('/assets/contact-background.jpg');position:fixed;right:0;left:0;bottom:0;top:0;z-index:-12">
+</div>
+<div style="width:800px; margin:0 auto;">
+  <div class="well paper-shadow" style="margin-top:100px;">
+    <h1>News feed</h1>
+    <% @posts.each do |post| %>
+      <div class="news-article">
+        <h2><%= post.title %></h2>
+        <p><%= post.content.html_safe %></p>
+      </div>
+    <% end %>
+  </div>
+</div>

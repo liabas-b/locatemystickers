@@ -1,0 +1,3 @@
+<% provide(:title, 'Stickers from ' + @user.name) %>
+<h1>Stickers from <%= @user.name %></h1>
+<%= render 'stickers/stickers_table', stickers: @stickers %>

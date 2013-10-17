@@ -1,0 +1,4 @@
+<%= form_for(current_user.friendships.build(followed_id: user.id), remote: true) do |f| %>
+  <%= f.hidden_field :followed_id %>
+  <%= f.submit "Friend", class: "btn btn-mini pull-right" %>
+<% end %>

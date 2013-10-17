@@ -1,0 +1,13 @@
+
+<% if current_user == user %>
+	You do not have any friend yet.
+	<ul>
+		<li><%= link_to 'Browse users', users_path %></li>
+		<li><a href="#">Invite a friend</a></li>
+	</ul>
+<% else %>
+	<%= @user.name %> does not have any friend yet.
+	<ul>
+		<li><%= render 'users/add_friend', user: user %></li>
+	</ul>
+<% end %>

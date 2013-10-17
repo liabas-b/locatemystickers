@@ -1,0 +1,3 @@
+$("#stickers").html("<%= escape_javascript(render("stickers")) %>");
+$("#pagination-top").html("<%= escape_javascript(render("shared/navbar_pagination", models: @users)) %>");
+$("#pagination-bottom").html("<%= escape_javascript(render("shared/navbar_pagination", models: @users)) %>");

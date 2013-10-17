@@ -1,0 +1,283 @@
+var can_trigger_scroll = true;
+var page_content_offset =  50;
+var current_fullscreen = 1;
+
+function scrollToAnchor(aid) {
+    if (can_trigger_scroll == true) {
+      var aTag = $(aid);
+      $('html,body').animate({scrollTop: aTag.offset().top - page_content_offset}, 500, jQuery.easing.easeInElastic(),
+        function(){
+          can_trigger_scroll = true;
+        });
+    }
+    can_trigger_scroll = false;
+}
+
+
+$(function() {
+
+
+  $('.full-screen').mouseenter(function() {
+    current_fullscreen = parseInt(this.id);
+    scrollToAnchor("#" + current_fullscreen);
+  });
+
+
+  $(window).resize(function() {
+    page_content_offset = $('.navbar-fixed-top').height();
+    $('.full-screen').height($(window).height() - page_content_offset);
+  });
+
+  $('.full-screen').height($(window).height() - page_content_offset);
+
+  $('.full-screen').bind('mousewheel', function(e){
+      e.preventDefault();
+      current_fullscreen = parseInt(this.id);
+      if (can_trigger_scroll == true) {
+        if (e.originalEvent.wheelDelta  > 0) {
+          if (parseInt(this.id) > 1 && parseInt(this.id) <= parseInt($('.full-screen').last().attr('id'))) {
+            var backwards = parseInt(this.id) - 1
+            scrollToAnchor("#" + backwards);
+            can_trigger_scroll = false;
+          }
+        }
+        else {
+          if (parseInt(this.id) > 0 && parseInt(this.id) < parseInt($('.full-screen').last().attr('id'))) {
+            var forwards = parseInt(this.id) + 1
+            scrollToAnchor("#" + forwards);
+            can_trigger_scroll = false;
+          }
+        }
+      }
+    });
+
+  $('.user-friends').bind('mousewheel', function(e){
+      e.preventDefault();
+      if (can_trigger_scroll == true) {
+        if (e.originalEvent.wheelDelta  > 0)
+          $('.user-friends').animate({scrollTop: this.scrollTop - $('.user-friends').height()}, 500, jQuery.easing.easeInElastic(),
+        function(){
+          can_trigger_scroll = true;
+        });
+        else
+          $('.user-friends').animate({scrollTop: this.scrollTop + $('.user-friends').height()}, 500, jQuery.easing.easeInElastic(),
+        function(){
+          can_trigger_scroll = true;
+        });
+        can_trigger_scroll = false;
+        console.log(this.scrollTop);
+      }
+    });
+
+
+  // $('.full-screen').waypoint(function(direction) {
+  //   console.log(parseInt(this.id));
+  //   console.log(direction);
+  //   if (parseInt(this.id) > 0 && parseInt(this.id) < parseInt($('.full-screen').last().attr('id'))
+  //     && direction == "down" && can_trigger_scroll == true) {
+  //   }
+  // });
+
+  $('.link-icon').hover(function(){
+    $(this).addClass('active');
+    $('.link-icon.active i').addClass('icon-white');
+    return false;
+  },function(){
+    $('.link-icon.active i').removeClass('icon-white');
+    $(this).removeClass('active');
+    return false;
+  });
+
+  $('#resizable-map .resize-button').click(function(){
+    $('#resizable-map').toggleClass('expanded');
+  });
+
+  $('#resizable-map .full-screen-button').click(function(){
+    $('#resizable-map').toggleClass('abs-full-screen');
+  });
+
+  $('#resizable-map .pause-button').click(function(){
+    $('.map-over.hideable').fadeTo( "slow" , 0.5, jQuery.easing.easeInElastic(), function() {
+      $('.map-over.hideable').toggleClass('hidden');
+    });
+    $('.map-over-message.hideable').fadeTo( "slow" , 1, jQuery.easing.easeInElastic(), function() {
+      $('.map-over-message.hideable').toggleClass('hidden');
+    });
+  });
+
+  $('.well').hover(function(){
+    $(this).addClass('active');
+    return false;
+  }, function(){
+    $(this).removeClass('active');
+    return false;
+  });
+
+  $('#sidebar-nav li a').click(function(){
+    $('html, body').animate({
+        scrollTop: $( $.attr(this, 'href') ).offset().top
+    }, 1000);
+    $('#sidebar-nav li a').removeClass('active');
+    $(this).toggleClass('active');
+    return false;
+  });
+
+  $(".pagination ul > li > a").click(function() {
+    $.getScript(this.href);
+    return false;
+  });
+  
+  $(".pagination ul > li > a").click(function() {
+    $.getScript(this.href);
+    return false;
+  });
+
+  $("#form_search input").keyup(function() {
+    $.get($("#form_search").attr("action"), $("#form_search").serialize() + '&' + $("#followed_form_search").serialize(), null, "script");
+    console.log(this.parentNode.parentNode.id);
+    return false;
+  });
+  $("#followed_form_search input").keyup(function() {
+    $.get($("#followed_form_search").attr("action"), $("#form_search").serialize() + '&' + $("#followed_form_search").serialize(), null, "script");
+    console.log(this.parentNode.parentNode.id);
+    return false;
+  });
+
+  var columnselectmenu = document.getElementById("column")
+  if (columnselectmenu != null)
+    columnselectmenu.onchange=(function() {
+      console.log("select column changed");
+      $.get($("#form_search").attr("action"), $("#form_search").serialize() + '&' + $("#followed_form_search").serialize(), null, "script");
+      return false;
+    });
+  var sortselectmenu = document.getElementById("search_sort")
+  if (sortselectmenu != null)
+    sortselectmenu.onchange=(function() {
+      console.log("select sort changed");
+      $.get($("#form_search").attr("action"), $("#form_search").serialize() + '&' + $("#followed_form_search").serialize(), null, "script");
+      return false;
+    });
+  var directionselectmenu = document.getElementById("search_direction")
+  if (directionselectmenu != null)
+    directionselectmenu.onchange=(function() {
+      console.log("select direction changed");
+      $.get($("#form_search").attr("action"), $("#form_search").serialize() + '&' + $("#followed_form_search").serialize(), null, "script");
+      return false;
+    });
+
+  var fcolumnselectmenu = document.getElementById("followed_column")
+  if (fcolumnselectmenu != null)
+    fcolumnselectmenu.onchange=(function() {
+      console.log("followed select column changed");
+      $.get($("#followed_form_search").attr("action"), $("#form_search").serialize() + '&' + $("#followed_form_search").serialize(), null, "script");
+      return false;
+    });
+  var fsortselectmenu = document.getElementById("followed_search_sort")
+  if (fsortselectmenu != null)
+    fsortselectmenu.onchange=(function() {
+      console.log("followed select sort changed");
+      $.get($("#followed_form_search").attr("action"), $("#form_search").serialize() + '&' + $("#followed_form_search").serialize(), null, "script");
+      return false;
+    });
+  var fdirectionselectmenu = document.getElementById("followed_search_direction")
+  if (fdirectionselectmenu != null)
+    fdirectionselectmenu.onchange=(function() {
+      console.log("followed select direction changed");
+      $.get($("#followed_form_search").attr("action"), $("#form_search").serialize() + '&' + $("#followed_form_search").serialize(), null, "script");
+      return false;
+    });
+
+
+  // MAP
+
+
+  var markersArray = [];
+
+  function clearOverlays() {
+    for (var i = 0; i < markersArray.length; i++ ) {
+      markersArray[i].setMap(null);
+    }
+    markersArray = [];
+  }
+
+  function drawLastLocations() {
+    var url = '/live_locations.json';
+    $.get(url, function(newItemData) {
+      console.log(newItemData.length)
+        for (var i = 0; i < newItemData.length; i++ ) {
+          var marker = new google.maps.Marker({
+            position: new google.maps.LatLng(newItemData[i].latitude, newItemData[i].longitude), 
+            map: Gmaps.map.serviceObject,
+            draggable: false,
+            icon: {
+              path: google.maps.SymbolPath.CIRCLE,
+              strokeColor: 'black',
+              strokeOpacity: 1.0,
+              strokeWeight: 1.0,
+              fillColor: newItemData[i].color,
+              fillOpacity: 1.0,
+              scale: 4
+            }
+          });
+          console.log('pushing marker ' + marker + ' to markers ' + markersArray)
+        for (var i = 0; i < newItemData.length; i++ ) {
+          // Gmaps.map.markers.push(marker);
+          markersArray.push(marker);
+          google.maps.event.addListener(marker,"click",function(){});
+      }}});
+      setTimeout(function() {
+        drawLastLocations();
+      }, 5000);
+  };
+
+  // On click, clear markers, place a new one, update coordinates in the form
+  Gmaps.map.callback = function() {
+    google.maps.event.addListener(Gmaps.map.serviceObject, 'click', function(event) {
+      placeMarker(event.latLng);
+      updateFormLocation(event.latLng);
+    });
+
+    google.maps.event.addListener(Gmaps.map.serviceObject, 'idle', function (event) {
+    });
+  };
+
+  // Update form attributes with given coordinates
+  function updateFormLocation(latLng) {
+    $('#property_latitude').val(latLng.lat());
+    $('#property_longitude').val(latLng.lng());
+    $('#property_gmaps_zoom').val(Gmaps.map.serviceObject.getZoom());
+  }
+
+  // Add a marker with an open infowindow
+  function placeMarker(latLng) {
+    var marker = new google.maps.Marker({
+      position: latLng, 
+      map: Gmaps.map.serviceObject,
+      draggable: true
+    });
+    google.maps.event.addListener(marker, 'click', function() {
+      updateFormLocation(this.getPosition());
+    });
+  }
+
+  function live_locations() {
+      console.log('live_locations');
+      clearOverlays();
+      setTimeout(function() {
+        drawLastLocations();
+        live_locations();
+      }, 1000);
+  }
+
+  $('.map-over').click(function() {
+    $('.map-over-message.hideable').fadeTo( "slow" , 0, jQuery.easing.easeInElastic(), function() {
+      $('.map-over-message.hideable').toggleClass('hidden');
+        drawLastLocations();
+    });
+    $('.map-over.hideable').fadeTo( "slow" , 0, jQuery.easing.easeInElastic(), function() {
+      $('.map-over.hideable').toggleClass('hidden');
+    });
+  });
+
+
+});

@@ -1,0 +1,1 @@
+sudo tail -f /var/log/nginx/*web-service* ./log/*

@@ -1,0 +1,52 @@
+<% if current_user.admin? %>
+  <li class="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+      <b>B</b>rowse <b class="caret"></b></a>
+    <ul class="dropdown-menu">
+      <li>
+        <%= render 'shared/icon_link', path: users_path,
+        label: "Users", icon: 'user' %>
+      </li>
+      <li>
+        <%= render 'shared/icon_link', path: stickers_path,
+        label: "Stickers", image: 'sticker_32.png' %>
+      </li>
+      <li>
+        <%= render 'shared/icon_link', path: locations_path,
+        label: "Locations", icon: 'map-marker' %>
+      </li>
+      <li>
+        <%= render 'shared/icon_link', path: histories_path,
+        label: "Histories", icon: 'film' %>
+      </li>
+      <li>
+        <%= render 'shared/icon_link', path: messages_path,
+        label: "Messages", icon: 'envelope' %>
+      </li>
+    </ul>
+  </li>
+  <li class="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+      <b>A</b>dmin <b class="caret"></b></a>
+    <ul class="dropdown-menu">
+      <li>
+        <%= render 'shared/icon_link', path: '/admin',
+        label: "Dashboard", icon: 'wrench' %>
+      </li>
+      <li>
+        <%= render 'shared/icon_link', path: '/admin/developer_guide',
+        label: "Guide", icon: 'wrench' %>
+      </li>
+      <li>
+        <%= render 'shared/icon_link', path: '/posts',
+        label: "News", icon: 'wrench' %>
+      </li>
+      <li>
+        <%= render 'shared/icon_link', path: '/admin/simulator',
+        label: "Simulator", icon: 'wrench' %>
+      </li>
+    </ul>
+  </li>
+  <li>
+  </li>
+<% end %>

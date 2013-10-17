@@ -1,0 +1,10 @@
+#!/bin/bash --login
+
+parse_git_branch () {
+  git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
+}
+
+git checkout master
+git fetch origin
+git merge origin/$(parse_git_branch)
+git push origin master

@@ -1,0 +1,7 @@
+<ul>
+<% for history in @histories %>
+	<li>
+	  <%= render 'history_info_min', history: history, span_size: 12 %>
+  </li>
+<% end %>
+</ul>

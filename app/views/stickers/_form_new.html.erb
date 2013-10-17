@@ -1,0 +1,21 @@
+<%= form_for @sticker, :url => user_stickers_path(@user) do |f| %>
+  <% if @sticker.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@sticker.errors.count, "error") %> prohibited this sticker from being saved:</h2>
+
+      <ul>
+      <% @sticker.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

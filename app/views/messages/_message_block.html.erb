@@ -1,0 +1,26 @@
+ <div>
+
+<% if (!message.from_user_id.nil? && message.from_user_id != 0)
+    user = get_ws_user(message.from_user_id)
+  end
+  unless user.nil?
+ %>
+  <b>
+    <a href="<%= user_path(user) %>">
+      <% if (user == current_user) %>
+        Me:
+      <% else %>
+        <%= user.name %>:
+      <% end %>
+    </a>
+  </b>
+<% else %>
+  <b>
+    Unknown user:
+  </b>
+<% end %>
+<%= message.content %>
+<small class="muted pull-right">
+  At <%= message.created_at %> 
+</small>
+</div>

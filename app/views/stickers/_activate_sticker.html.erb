@@ -1,0 +1,15 @@
+<% if current_user != nil && sticker.is_active == false %>
+	<%= form_for(sticker, :url => user_sticker_path(sticker.user_id, sticker), html: { method: :put }, remote: true) do |f| %>
+  <%= f.hidden_field :is_active, :value => true %>
+  <div class="actions">
+    <%= f.submit 'Off', class: 'btn btn-mini btn-danger' %>
+  </div>
+<% end %>
+<% else %>
+	<%= form_for(sticker, :url => user_sticker_path(sticker.user_id, sticker), html: { method: :put }, remote: true) do |f| %>
+  <%= f.hidden_field :is_active, :value => false %>
+  <div class="actions">
+    <%= f.submit 'On ', class: 'btn btn-mini btn-success' %>
+  </div>
+<% end %>
+<% end %>

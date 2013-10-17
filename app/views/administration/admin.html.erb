@@ -1,0 +1,23 @@
+<% provide(:title, 'Administration pannel') %>
+<div style="background-image: url('/assets/contact-background.jpg');position:absolute;right:0;left:0;bottom:0;top:0">
+</div>
+<div style="opacity:.9; width:610px; margin:0 auto;">
+  <div class="well paper-shadow" style="margin-top:100px;">
+		<h1>Administration pannel</h1><br/>
+		<p class="lead">
+			Managing tools for our awesome app!
+		</p>
+		<div class="well paper-shadow">
+			<a href="<%= posts_path %>"><h2>News feed</h2></a>
+			<p>Publish articles to communicate with the public.</p>
+		</div>
+		<div class="well paper-shadow">
+			<a href="/admin/developer_guide"><h2>Developer guide</h2></a>
+			<p>Here is some help for whoever wants to help on the development of this web application.</p>
+		</div>
+		<div class="well paper-shadow">
+			<a href="/admin/simulator"><h2>Stickers simulator 3000</h2></a>
+			<p>Simulates activity of multiple stickers. Try to make our app crash if you dare!</p>
+		</div>
+	</div>
+</div>

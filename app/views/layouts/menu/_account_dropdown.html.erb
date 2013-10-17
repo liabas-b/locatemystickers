@@ -1,0 +1,62 @@
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>M</b>e <b class="caret"></b></a>
+  <ul class="dropdown-menu">
+    <li>
+      <%= render 'shared/icon_link', path: user_path(current_user),
+      label: "Profile", icon: 'user' %>
+    </li>
+    <li>
+      <%= render 'shared/icon_link', path: user_path(current_user) + '/friends',
+      label: "Friends", icon: 'user' %>
+    </li>
+    <li>
+      <%= render 'shared/icon_link', path: user_messages_path(current_user),
+      label: "Messages", icon: 'envelope' %>
+    </li>
+    <li>
+      <%= render 'shared/icon_link', path: edit_user_path(current_user),
+      label: "Settings", icon: 'wrench' %>
+    </li>
+    <li>
+      <%= render 'shared/icon_link', path: user_path(current_user) + '/statistics',
+      label: "Stats", icon: 'wrench' %>
+    </li>
+    <li class="divider"></li>
+    <li>
+      <%= render 'shared/icon_link', path: signout_path,
+      label: "Sign out", icon: 'off', linkmethod: "DELETE" %>
+    </li>
+  </ul>
+</li>
+
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+    <b>M</b>e <b class="caret"></b></a>
+  <ul class="dropdown-menu">
+    <li>
+      <%= render 'shared/icon_link', path: user_path(current_user),
+      label: "Profile", icon: 'user' %>
+    </li>
+    <li>
+      <%= render 'shared/icon_link', path: user_path(current_user) + '/friends',
+      label: "Friends", icon: 'user' %>
+    </li>
+    <li>
+      <%= render 'shared/icon_link', path: user_messages_path(current_user),
+      label: "Messages", icon: 'envelope' %>
+    </li>
+    <li>
+      <%= render 'shared/icon_link', path: edit_user_path(current_user),
+      label: "Settings", icon: 'wrench' %>
+    </li>
+    <li>
+      <%= render 'shared/icon_link', path: user_path(current_user) + '/statistics',
+      label: "Stats", icon: 'wrench' %>
+    </li>
+    <li class="divider"></li>
+    <li>
+      <%= render 'shared/icon_link', path: signout_path,
+      label: "Sign out", icon: 'off', linkmethod: "DELETE" %>
+    </li>
+  </ul>
+</li>

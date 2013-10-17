@@ -1,0 +1,30 @@
+<% provide(:title, 'All relationships') %>
+<h1>All relationships</h1>
+
+<table class="table table-hover">
+  <tr>
+    <th>Follower</th>
+    <th>Sticker</th>
+    <th>Owner</th>
+    <th>Date</th>
+  </tr>
+  <% @relationships.each do |relationship| %>
+    <tr>
+      <td>
+      	<%= render 'users/user_info_min',
+                   :user => user(relationship.follower_id) %>
+      </td>
+      <td>
+	      <%= link_to sticker(relationship.sticker_id).name,
+	      						sticker(relationship.sticker_id) %>
+      </td>
+      <td>
+      	<%= render 'users/user_info_min',
+      						 :user => user(relationship.owner_id) %>
+      </td>
+      <td>
+	      <%= relationship.created_at %>
+      </td>
+    </tr>
+  <% end %>
+</table>

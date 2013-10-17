@@ -1,0 +1,1 @@
+/etc/init.d/puma stop && rm db/development.sqlite3 && bundle exec rake db:migrate && bundle exec rake db:populate && ./start && sudo tail -f /var/log/nginx/*web-service* ../log/*

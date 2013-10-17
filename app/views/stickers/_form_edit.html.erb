@@ -1,0 +1,20 @@
+<%= form_for @sticker, :url => user_sticker_path(@user, @sticker), method: "PUT" do |f| %>
+
+  <%= render 'shared/error_messages', object: f.object %>
+  <div class="row-fluid">
+
+	<%= f.hidden_field :id, :value => @sticker.id %>
+	<%= f.hidden_field :code, :value => @sticker.code %>
+	<%= f.hidden_field :version, :value => @sticker.version %>
+	<%= f.hidden_field :user_id, :value => @sticker.user_id %>
+	<%= f.hidden_field :sticker_type_id, :value => @sticker.sticker_type_id %>
+    <%= render 'shared/input_row', args: [{ icon: 'star', field: :name, placeholder: "Name" }], f: f %>
+    <%= render 'shared/input_row', args: [{ icon: 'list', field: :text, placeholder: "Description" }], f: f %>
+    <%= render 'shared/bool_input_row', args: [{ text: "Is active?", field: :is_active, placeholder: "Is active" }], f: f %>
+    
+    <br/>
+    <div class="row-fluid" style="margin-left:40px;">
+      <%= f.submit "Submit", class: "btn", id: "Submit" %>
+    </div>
+  </div>
+<% end %>

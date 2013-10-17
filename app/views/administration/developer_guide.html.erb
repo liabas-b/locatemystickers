@@ -1,0 +1,62 @@
+<% provide(:title, 'Developer guide') %>
+<div style="background-image: url('/assets/contact-background.jpg');position:absolute;right:0;left:0;bottom:0;top:0">
+</div>
+<div style="opacity:.9; width:910px; margin:0 auto;">
+	<div class="well paper-shadow" style="margin-top:100px;">
+		
+		<ol class="breadcrumb">
+			<li><%= link_to 'Administration', '/admin' %> /</li>
+			<li class="active">Developper Guide</li>
+		</ol>
+
+		<h2>Welcome, LMS developer</h2>
+		<p>
+			Here are some usefull notes for developping on the web application of our solution.
+			<ol>
+				<li><%= link_to 'Up and running', '#up-and-running' %></li>
+			</ol>
+			Please contact Benoit Liabastre for more information.
+		</p>
+		
+		<div id="up-and-running" class="well paper-shadow" style="margin-top:30px;">
+			<h3>Up and running</h3>
+			<p>
+				For this guide, I assume you already have Ruby, Ruby on Rails, and RVM installed on your machine as explained in <%= link_to 'this tutorial', 'http://www.rackspace.com/blog/installing-rails-on-a-mac/' %> (stop before "ImageMagik" chapter, and ignore Xquartz installatio")
+				<ol>
+					<li>
+						<b>Check out the source</b>:
+						<code>git cone git@locatemystickers.com:development/web-service.git</code><br/>
+						<code>cd web-service</code><br/><br/>
+						In this folder, there is both the source for the web service and web application.<br/>
+						Since they use all the same models, I did that to replicate as less code as possible.
+						To be sure you develop on the web application, check:
+						<ul>
+							<li>
+								That <code>Rails.configuration.app_scope = "webapp"</code> is set to "webapp" (and not "service") in app/config/environment.rb.
+								This variable is used in the code (eg. some helpers) to know wich app is running.
+							</li>
+							<li>
+								That <code>#scope :module => "service" do</code> and its closing tag are correctly commented in app/config/routes.rb
+								When this is not commented, the routes are set to use web service controllers in app/controlers/service/. Else, app/controlers/ are used.
+								Never edit app/controllers/service/* when you develop on the web application.
+							</li>
+						</ul>
+					</li><br/>
+					<li>
+						<b>Install the app</b>: <code>bundle install --without production test</code><br/>
+						This installs the Gems contained in your Gemfile and their dependances.
+					</li><br/>
+					<li>
+						<b>Migrate the database</b>: <code>bundle exec rake db:migrate</code><br/>
+						This creates the database of the app, using the ActiveRecord ORM. Rake executes all the migrations contained in db/migrate/.
+					</li><br/>
+					<li>
+						<b>Run the application</b>: <code>rails s</code><br/>
+						This runs the rails server of the application on port 3000. You can now see the app on <%= link_to 'localhost:3000', 'http://localhost:3000/' %>
+						Note: if you want to run multiple Ruby on Rails applications on your machine, use <code>rails s -p $port</code>.
+					</li>
+				</ol>
+			</p>
+		</div>
+	</div>
+</div>

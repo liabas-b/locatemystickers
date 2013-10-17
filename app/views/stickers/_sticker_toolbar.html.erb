@@ -1,0 +1,29 @@
+
+<div  id="follow_form<%= sticker.id %>" class="sticker-toolbar btn-toolbar btn-group pull-right">
+  <% if current_user.admin? || current_user.is_friend?(user) || current_user == user
+    if current_user == user || current_user.admin? %>
+    <div class="pull-right" style="margin-left: 10px; margin-top: 0px;">
+      <%= render 'stickers/activate_sticker', sticker: sticker %>
+    </div>
+  <% end %>
+  <% if current_user != user %>
+    <div class="pull-right" style="margin-left: 10px; margin-top: 0px;">
+      <%= render 'stickers/follow_sticker', sticker: sticker %>
+    </div>
+  <% end
+  if current_user.following?(sticker) || current_user == user || current_user.admin? 
+    %>
+    <a href="<%= user_sticker_histories_path(user, sticker) %>"
+        class="btn btn-mini show-on-hover"><i class="icon-film"></i></a>
+    <%
+  end
+  if current_user == user || current_user.admin? %>
+    <a href="<%= edit_user_sticker_path(user, sticker) %>"
+  		class="btn btn-mini show-on-hover"><i class="icon-edit"></i></a>
+    <a href="<%= user_sticker_path(user, sticker) %>"
+    		data-method="delete"
+    		data-confirm="You are about to delete sticker <%= sticker.name %>"
+    		class="btn btn-mini btn-danger show-on-hover"><i class="icon-remove"></i></a>
+  <% end 
+  end%>
+</div>

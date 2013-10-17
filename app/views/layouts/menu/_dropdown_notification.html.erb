@@ -1,0 +1,69 @@
+<%
+	aclass = 'notification_dropdown_link_' + notification.id.to_s
+%>
+
+<% if (notification.subject == 'sticker') %>
+	<a href="<%= user_sticker_path(notification.user, notification.sticker) %>" class="<%= aclass %>">
+		<%= notification.created_at %>:
+		<%= notification.user.name %>  
+		<%= notification.operation %>
+		<%= notification.subject %>
+		<%= notification.sticker.name %>
+	</a>
+<% end %>
+
+<% if (notification.subject == 'user') %>
+	<a href="<%= user_path(notification.user.id) %>" class="<%= aclass %>">
+		<%= notification.created_at %>: 
+		<%= notification.user.name %>
+		<%= notification.operation %>
+	</a>
+<% end %>
+
+<% if (notification.subject == 'location') %>
+	<a href="<%= user_sticker_path(notification.user, notification.sticker) %>" class="<%= aclass %>">
+		<%= notification.created_at %>:
+		Located sticker
+		<%= notification.sticker.name %>
+		at 
+		<%= location.latitude %>, 
+		<%= location.longitude %>.
+	</a>
+<% end %>
+
+<% if (notification.subject == 'message')
+	if (notification.notification_confirmed == 1)
+		iclass = "ok "
+	else
+		iclass = "envelope "
+	end
+	%>
+	<a href="<%= user_messages_path(notification.notification.user) %>" class="<%= aclass %>">
+		<i class="icon-<%= iclass %> icon<%= aclass %>"></i>
+		<% if notification.message.from_user %>
+			Received a message from
+			<%= notification.message.from_user.name %>
+		<% end %>
+	</a>
+<% end %>
+<% if notification.notification_confirmed == 0 %>
+	<div style="margin:0;padding:0;width:0;height:0;overflow:hidden">
+	<%= form_for(notification, url: history_path(notification.id), remote: true, method: :put) do |f| %>
+	  <input id="notification_confirmed"
+			name="history[notification_confirmed]"
+			type="hidden" value="1" />
+	<% end %>
+</div>
+	<script type="text/javascript">
+	  $('.<%= aclass %>').hover(
+	  function() {
+	  	if ($('.icon<%= aclass %>').hasClass('icon-ok') == false)
+	  	{
+		  	$('#new_history_<%= notification.id.to_s %>').submit();
+		  	$('.icon<%= aclass %>').removeClass('icon-<%= iclass %>');
+		  	$('.icon<%= aclass %>').addClass('icon-ok');
+		    $(this).addClass("notification_confirmed");
+		  }
+	  });
+	</script>
+<% end %>

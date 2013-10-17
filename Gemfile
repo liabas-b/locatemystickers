@@ -1,0 +1,47 @@
+source 'https://rubygems.org'
+
+gem 'bundler', '1.3.5'
+gem 'rails', '3.2.13'
+gem 'sqlite3', '1.3.7'
+gem 'bcrypt-ruby', '3.0.1'
+gem 'will_paginate', '~> 3.0'
+gem 'faker', '1.0.1'
+gem 'gmaps4rails', '~> 2.0.0.pre'
+gem 'pony', '1.4'
+gem 'hashie', '2.0.5'
+gem 'geocoder', '1.1.8'
+gem 'pousse', '0.0.5'
+
+group :development, :test do
+  gem 'rspec-rails', '2.11.0'
+  gem 'guard-rspec', '1.2.1'
+  gem 'guard-spork', '1.2.0'
+  gem 'spork', '0.9.2'
+  gem 'annotate', '2.5.0'
+  gem 'log4r', '1.1.10'
+  gem 'capybara', '1.1.2'
+end
+
+# Gems used only for assets and not required
+# in production environments by default.
+group :assets do
+  gem 'coffee-rails', '3.2.2'
+  gem 'uglifier', '1.2.3'
+  gem 'execjs', '2.0.1'
+  gem 'therubyracer'
+  gem 'less-rails-bootstrap'
+  gem 'jquery-rails'
+end
+
+group :production do
+  gem 'rake', '10.1.0'
+  gem 'i18n', '0.6.1'
+  gem 'multi_json', '1.8.0'
+  gem 'hike', '1.2.3'
+  gem 'tilt', '1.4.1'
+  gem 'mime-types', '1.25'
+  gem 'treetop', '1.4.15'
+  gem 'coffee-script-source', '1.6.3'
+  gem 'pg', '0.12.2'
+  gem 'puma'
+end

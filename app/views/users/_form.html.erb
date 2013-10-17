@@ -1,0 +1,22 @@
+<%= form_for(@user) do |f| %>
+<%= f.hidden_field :id, :value => @user.id %>
+  <%= render 'shared/error_messages', object: f.object %>
+  <div class="row-fluid">
+
+    <%= render 'shared/input_row', args: [{ icon: 'user', field: :first_name, placeholder: "First Name" },
+                                          { icon: 'user', field: :last_name, placeholder: "Last Name" }], f: f %>
+    <%= render 'shared/input_row', args: [{ icon: 'envelope', field: :email, placeholder: "Email adress" }], f: f %>
+    <%= render 'shared/input_row', args: [{ icon: 'call', field: :phone, placeholder: "Phone number" }], f: f %>
+    <%= render 'shared/input_row', args: [{ icon: 'globe', field: :adress, placeholder: "Adress" },
+                                          { icon: 'globe', field: :zip_code, placeholder: "Zip code" },
+                                          { icon: 'globe', field: :city, placeholder: "City" },
+                                          { icon: 'globe', field: :country, placeholder: "Country" }], f: f %>
+    <%= render 'shared/input_password_row', args: [{ icon: 'lock', field: :password, placeholder: "Password" },
+                                          { icon: 'lock', field: :password_confirmation, placeholder: "Confirm password" }], f: f %>
+    
+    <br/>
+    <div class="row-fluid" style="margin-left:40px;">
+      <%= f.submit "Submit", class: "btn", id: "Submit" %>
+    </div>
+  </div>
+<% end %>

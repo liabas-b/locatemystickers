@@ -1,0 +1,27 @@
+<table>
+	<tr>
+		<%= form_for(:session, url: sessions_path) do |f| %>
+
+			<td class="navbar-form">
+				<div class="input-prepend">
+		      <span class="add-on"><i class="icon-envelope"></i></span>
+					<%= f.text_field :email, class: 'email' %>
+				</div>
+			</td>
+
+			<td class="navbar-form">
+				<div class="input-prepend">
+		      <span class="add-on"><i class="icon-lock"></i></span>
+						<%= f.password_field :password, class: 'password' %>
+				</div>
+			</td>
+
+			<td class="navbar-form">
+				<div style="margin-top: -10px">
+					<%= f.submit "Sign in", class: "btn" %>
+				</div>
+			</td>
+
+		<% end %>
+	</tr>
+</table>

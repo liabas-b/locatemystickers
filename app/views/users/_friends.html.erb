@@ -1,0 +1,19 @@
+	<% if @user.followed_users.any? %>
+		<a href="<%= user_path(@user) %>/friends"><h3>Friends</h3></a>
+	<% else %>
+		<h3>Friends</h3>
+	<% end %>
+	<div class="user-friends">
+		<% if @user.followed_users.any? %>
+		<% i = 1 %>
+			<% @user.followed_users.each do |friend| %>
+				<%= render 'users/friend', friend: friend, endrow: (i % 3 == 0) %>
+				<% i += 1%>
+			<% end %>
+			<div class="clear-both"></div>
+		<% else %>
+			<p>
+				<%= render 'users/no_friends', user: @user %>
+			</p>
+		<% end %>
+	</div>

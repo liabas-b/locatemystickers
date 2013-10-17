@@ -1,0 +1,29 @@
+<div class="well paper-shadow map" style="height:100%">
+	<div class="map-over hideable">
+	</div>
+	<div class="map-over-message hideable">
+		<div class="message hideable">
+		<h1 class="title hideable">Click to use live map</h1>
+		<p class="lead paper-shadow hideable" class="lead">The live map show you all your sticker locations in real-time</p>
+		</div>
+	</div>
+	<% if @polylines_json %>
+		<%= gmaps("markers"   => { "data" => @markers_json }, "polylines" => { "data" => @polylines_json }, "options" => { "draggable" => true })  %>
+	<% else %>
+		<%= gmaps("markers"   => { "data" => [] ,
+			:options => {
+				"draggable" => false,
+				:raw => '{  }' }
+				})
+		%>
+	<% end %>
+	<div id="map-options-panel" class="show-on-hover">
+	  <a class="resize-button btn" href='#'>Expand</a>
+	  <a class="full-screen-button btn" href='#'>Full screen</a>
+	  <a class="pause-button btn" href='#'>Pause</a>
+	  <input id="property_latitude"></input>
+	  <input id="property_longitude"></input>
+	  <input id="property_gmaps_zoom"></input>
+	</div>
+</div>
+

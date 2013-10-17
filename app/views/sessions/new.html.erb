@@ -1,0 +1,10 @@
+<% provide(:title, "Sign in") %>
+<div style="background-image: url('/assets/contact-background.jpg');position:absolute;right:0;left:0;bottom:0;top:0;z-index:-12">
+</div>
+<div style="opacity:.9; width:650px; margin:0 auto;">
+	<div class="well paper-shadow text-center" style="margin-top:80px;">
+		<h1>Sign in</h1><br/>
+	    <%= render 'form_vertical' %><br/>
+	    <p>New user?<br/><br/><%= link_to "Sign up now!", signup_path, class: "btn btn-primary" %></p>
+	</div>
+</div>

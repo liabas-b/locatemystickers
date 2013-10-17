@@ -1,0 +1,33 @@
+<div class="container-fluid page-content">
+  <h1>All posts</h1>
+  <div class="well well-padding paper-shadow">
+    <table class="table table-bordered table-hover">
+      <tr>
+        <th>Title</th>
+        <th>Content</th>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+
+    <% @posts.each do |post| %>
+      <tr>
+        <td><%= post.title %></td>
+        <td><%= post.content %></td>
+        <td><%= link_to 'Show', post %></td>
+        <td><%= link_to 'Edit', edit_post_path(post) %></td>
+        <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+    </table>
+  </div>
+</div>
+
+
+<!-- Sidebar Fixed left -->
+<div class="sidebar-no-header">
+  <h3>Tools</h3>
+  <ul id="sidebar-nav">
+    <li><%= link_to 'New Post', new_post_path %></li>
+  </ul>
+</div>

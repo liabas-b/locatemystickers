@@ -1,0 +1,35 @@
+<% provide(:title, @sticker.name + ' locations') %>
+
+<%= render 'users/user_info_header', user: @user %>
+
+<div class="container-fluid page-content-with-header">
+  <div id="locations-map" style="position:relative;top:-250px"></div>
+  <% if @markers_json != nil && @markers_json.length > 0 %>
+  <div id="resizable-map" class="row-fluid">
+    <div id="last-locations" style="position:relative;top:-250px"></div>
+    <div class="well well-padding paper-shadow" style="height:100%">
+      <%= gmaps("markers"   => { "data" => @markers_json }) %>
+      <div id="map-options-panel" class="show-on-hover">
+        <a class="resize-button btn" href='#'>Expand</a>
+      </div>
+    </div>
+  </div>
+  <br/>
+  <br/>
+  <% end %>
+
+  <div id="locations-list" style="position:relative;top:-250px"></div>
+  <div class="well well-padding paper-shadow">
+		<h3>Locations of sticker "<%= @sticker.name %>"</h3>
+	</div>
+	<%= render 'all_locations_table', locations: @locations %>
+</div>
+
+<!-- Sidebar Fixed left -->
+<div class="sidebar">
+  <h3>Navigate</h3>
+  <ul id="sidebar-nav" class="nav nav-list affix" data-offset-top="200px">
+    <li class=""><a href="#locations-map" class="locations-map">Map</a></li>
+    <li class=""><a href="#locations-list" class="locations-list">Locations list</a></li>
+  </ul>
+</div>

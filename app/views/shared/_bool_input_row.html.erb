@@ -1,0 +1,8 @@
+<div class="row-fluid">
+  <% args.each do |arg| %>
+      <div class="input-prepend">
+        <span class="add-on"><%= arg[:text] %></span>
+        <%= f.check_box arg[:field], placeholder: arg[:placeholder] %>
+      </div>
+  <% end %>
+</div>

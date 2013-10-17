@@ -1,0 +1,32 @@
+<% complement = complement ||= "" %>
+<%= form_tag @form_path, :method => 'get', :id => complement + "form_search", remote: true do |f| %>
+<%= hidden_field_tag :complement, complement %>
+<%= hidden_field_tag :direction, 'asc' %>
+<div class="accordion" style="margin-top:5px;">
+  <div class="accordion-group">
+    <div class="accordion-heading">
+			<div class="input-prepend">
+				<span class="add-on"><i class="icon-search"></i></span>
+				<%= text_field_tag complement + 'search', params[complement + 'search'] %>
+				<span class="add-on">
+		      <a style="display:inline;" class="accordion-toggle" data-toggle="collapse" data-parent=".accordion" href="#collapseOne">
+		        <i class="icon-zoom-in"></i>
+		      </a>
+	      </span>
+			</div>
+    </div>
+    <div id="collapseOne" class="accordion-body collapse">
+      <div class="accordion-inner">
+				<div class="input-prepend">
+					<span class="add-on"><i class="icon-filter"></i></span>
+				 	<%= select_tag(complement + "column", options_for_select(@column_names, "name")) %>
+				</div>
+				<div class="input-prepend">
+					<span class="add-on">sort by</span>
+				 	<%= select_tag(complement + "sort", options_for_select(@column_names, "name"), id: complement + "search_sort") %>
+				</div>
+      </div>
+    </div>
+  </div>
+</div>
+<% end %>

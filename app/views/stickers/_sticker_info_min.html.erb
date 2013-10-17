@@ -1,0 +1,39 @@
+<div class="span<%= span_size ||= 12 %> well well-padding paper-shadow">
+	<div class="sticker-color-ribbon" style="background-color:<%= sticker.color %>;">
+	</div>
+	<table width="100%" style="margin-bottom: 15px; margin-left: 20px;">
+		<tr>
+			<td width="*" valign="top">
+				<h5>
+					<a href="<%= user_sticker_path(user, sticker) %>">
+						<%= sticker.name %>
+					</a>
+				</h5>
+				<p>
+					Owned by
+					<a href="<%= user_path(user) %>">
+							<%= user.name %>.
+					</a><br/>
+					<a href="<%= user_sticker_locations_path(user, sticker) %>">
+						Has been located <%= sticker.locations.count %> times.
+					</a><br/>
+					<a href="<%= user_sticker_zones_path(user, sticker) %>">
+						Has <%= sticker.zones.count %> zones defined.
+					</a><br/>
+					Last location: <%= sticker.last_location_address %>.<br/>
+					Code: <%= sticker.code %>.
+					</a><br>
+					Type: <%= sticker_type_name(sticker) %> <!--(<%= sticker_type_icon(sticker) %>)-->
+					<br/>
+					<%= sticker.text %>
+				</p>
+			</td>
+		</tr>
+	</table>
+	<div class="pull-right" style="position:absolute;right:10px;top:10px;">
+		<%= render 'stickers/sticker_toolbar', sticker: sticker, user: user %>
+	</div>
+	<small class="pull-right text-right muted" style="position:absolute;right:10px;bottom:5px;">
+		Registered on <%= sticker.created_at %> | Updated on <%= sticker.updated_at %>
+	</small>
+</div>

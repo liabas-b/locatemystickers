@@ -1,0 +1,3 @@
+$("#histories").html("<%= escape_javascript(render("histories")) %>");
+$("#pagination-top").html("<%= escape_javascript(render("shared/navbar_pagination", models: @histories)) %>");
+$("#pagination-bottom").html("<%= escape_javascript(render("shared/navbar_pagination", models: @histories)) %>");

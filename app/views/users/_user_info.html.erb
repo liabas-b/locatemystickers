@@ -1,0 +1,32 @@
+<div class='user-info well paper-shadow'>
+	<div class='avatar'>
+		<%= gravatar_for @user, size: 150 %>
+	</div>
+	<div class='info-block'>
+    	<h3 style="margin-top:-10px; margin-bottom:0px; margin-left:-2px;">
+			<a href="<%= user_path(@user) %>">
+				<%= @user.name %>
+			</a>
+		</h3>
+		<a href="<%= user_stickers_path(@user) %>">
+			<b><%= @stickers.count %></b> stickers.
+		</a><br/>
+		<a href="<%= user_stickers_path(@user) %>">
+			<b><%= @user.followed_users.count %></b> friends.
+		</a><br/>
+		<%= @user.email %><br/>
+		<% if current_user.admin? %>
+			<a href="<%= user_path(@user) + '/messages' %>">
+				Messages: <b><%= Message.count_sent_messages(@user, @user.messages) %></b> sent, <b><%=  Message.count_received_messages(@user, @user.messages)  %></b> received.
+			</a><br/>
+			<%= adress_for @user %><br/>
+			<%= phone_for @user %>
+		<% end %>
+	</div>
+	<div class="pull-right" style="position:absolute;right:10px;top:10px;">
+		<%= render 'users/user_toolbar', user: @user %>
+	</div>
+	<small class="pull-right text-right muted" style="position:absolute;right:10px;bottom:5px;">
+		Registered on <%= @user.created_at %>
+	</small>
+</div>

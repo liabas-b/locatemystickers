@@ -1,0 +1,43 @@
+<% if (history.subject == 'sticker')
+	user = get_ws_user(history.user_id)
+	sticker = get_ws_user_sticker(history.user_id, history.sticker_id) %>
+	<%= history.created_at %>:
+	<a href="<%= user_path(user.id) %>"><%= user.name %></a>  
+	<%= history.operation %>
+	<%= history.subject %>
+	<%= link_to sticker.name, user_sticker_path(user, sticker) %>
+<% end %>
+
+<% if (history.subject == 'user')
+	user = get_ws_user(history.user_id) %>
+	<%= history.created_at %>: 
+	<a href="<%= user_path(user.id) %>"><%= user.name %></a>  
+	<%= history.operation %>
+<% end %>
+
+<% if (history.subject == 'location')
+	user = get_ws_sticker_possessor(history.sticker_id)
+	sticker = get_ws_user_sticker(user.id, history.sticker_id)
+	location = get_ws_user_sticker_location(user.id, history.sticker_id, history.location_id) %>
+	<%= history.created_at %>:
+	<a href="<%= user_path(user.id) %>"><%= user.name %></a>:
+	Located sticker
+	<%= link_to sticker.name, user_sticker_path(user, sticker) %>
+	at 
+	<%= link_to location.latitude, user_sticker_location_path(user, sticker, location) %>, 
+	<%= link_to location.longitude, user_sticker_location_path(user, sticker, location) %>.
+<% end %>
+
+<% if (history.subject == 'message')
+	message = get_ws_user_message(history.user_id, history.message_id)
+	user = get_ws_user(message.from_user_id)
+	to_user = get_ws_user(message.user_id)
+	%>
+	<%= history.created_at %>:
+	<%= link_to user.name, user_path(user.id) %>
+	has sent a
+	<%= link_to 'message', user_messages_path(user) %>
+	to 
+	<%= link_to to_user.name, user_path(to_user) %>
+<% end %>
+<br/>

@@ -1,0 +1,44 @@
+<div id="stickers-title" class="well well-padding paper-shadow">
+	<%= render "stickers/sticker_list_title", title: 'Stickers', stickers: @stickers %>
+</div>
+<% if @stickers.any? %>
+	<%= render 'stickers/stickers_table', stickers: @stickers, user: @user %>
+<% else %>
+	<div class="well well-padding paper-shadow">
+		<p>
+			<%= (current_user == @user ? "You have" : (@user.name + " has")) %> not registered any sticker or phone yet.
+			<ul>
+				<li><a href="#">Order a sticker</a></li>
+				<li><a href="#">Register a new sticker</a></li>
+				<li><a href="#">Register a phone</a></li>
+			</ul>
+		</p>
+	</div>
+<% end %>
+
+<div id="followed-stickers-title" class="well well-padding paper-shadow">
+	<%= render "stickers/sticker_list_title", title: 'Followed stickers', stickers: @followed_stickers %>
+</div>
+<% if @followed_stickers.any? %>
+	<%= render 'stickers/stickers_table', stickers: @followed_stickers, user: @user, complement: 'followed_' %>
+<% else %>
+	<div class="well well-padding paper-shadow">
+		<p>
+			<%= (current_user?(@user) ? "You do" : (@user.name + " does")) %> not 
+			<span id="follow-tooltip">
+        <a href="#" data-toggle="tooltip" title="" data-original-title="To follow a sticker, go to your friend's profile and browse his stickers.
+			You can only follow the sticker of one of your friends.">follow</a>
+      </span>
+			any sticker or phone yet.
+		</p>
+		<p class="text-info">
+			
+		</p>
+	</div>
+<% end %>
+
+<script type="text/javascript">
+  jQuery( function($) {
+    $("#follow-tooltip a").tooltip()
+	});
+</script>

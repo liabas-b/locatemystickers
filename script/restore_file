@@ -1,0 +1,4 @@
+#!/bin/bash --login
+file=$1
+#git rev-list -n 1 HEAD -- $file
+git checkout $(git rev-list -n 1 HEAD -- "$file") -- "$file"

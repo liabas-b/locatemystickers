@@ -1,0 +1,8 @@
+<div class="row-fluid">
+  <% args.each do |arg| %>
+      <div class="input-prepend">
+        <span class="add-on"><i class="icon-<%= arg[:icon] %>"></i></span>
+        <%= f.text_field arg[:field], placeholder: arg[:placeholder] %>
+      </div>
+  <% end %>
+</div>

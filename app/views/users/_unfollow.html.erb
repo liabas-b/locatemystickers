@@ -1,0 +1,6 @@
+<%= form_for(current_user.friendships.build(followed_id: user.id), html: { method: :delete }, remote: true) do |f| %>
+  <input id="friendship_followed_id"
+		name="friendship[followed_id]"
+		type="hidden" value="3" />
+  <%= f.submit "Friend", class: "btn btn-mini pull-right btn-success" %>
+<% end %>

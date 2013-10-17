@@ -1,0 +1,9 @@
+$("#stickers-title").html("<%= escape_javascript(render("stickers/sticker_list_title", stickers: @stickers, title: 'Stickers')) %>");
+$("#followed-stickers-title").html("<%= escape_javascript(render("stickers/sticker_list_title", stickers: @followed_stickers, title: 'Followed Stickers')) %>");
+$("#stickers").html("<%= escape_javascript(render("stickers/stickers", stickers: @stickers)) %>");
+$("#followed_stickers").html("<%= escape_javascript(render("stickers/stickers", stickers: @followed_stickers)) %>");
+$("#pagination-top").html("<%= escape_javascript(render("shared/navbar_pagination", models: @stickers)) %>");
+$("#pagination-bottom").html("<%= escape_javascript(render("shared/navbar_pagination", models: @stickers)) %>");
+$("#followed_pagination-top").html("<%= escape_javascript(render("shared/navbar_pagination", models: @stickers, complement: 'followed_')) %>");
+$("#followed_pagination-bottom").html("<%= escape_javascript(render("shared/navbar_pagination", models: @stickers, complement: 'followed_')) %>");
+$("#resizable-map").html("<%= escape_javascript(render('shared/map_with_ptions')) %>");

@@ -1,0 +1,145 @@
+#!/bin/bash --login
+
+web_service_url='http://localhost:3000/'
+
+# utils
+
+function alert {
+    echo -e "\e[0;31m[alert]\t$1\e[0;00m"
+}
+function display_info {
+    echo -e "\e[0;34m[display_info]\t$1\e[0;00m"
+}
+function success {
+    echo -e "\e[0;32m[success]\t$1\e[0;00m"
+}
+
+# $1 = route
+function test_get_service {
+	status=$(r=(IFS=' '
+			$(curl -Is --connect-timeout 5 --silent --output /dev/null  -X GET					\
+			$web_service_url$1 || echo 1 500))
+	echo ${r[1]})
+
+	echo $status
+	if [ status -eq '200' ]
+		then
+		success "GET $1"
+	else
+		alert "GET $1"
+	fi
+}
+
+# $1 = route
+# $2 = route
+function test_post_service {
+	status=$(r=(IFS=' '
+		$(curl -Is --connect-timeout 5 --silent --output /dev/null  -X POST					\
+	-H "Content-Type: application/json" 	\
+	-d @$2									\
+	$web_service_url$1 || echo 1 500))
+	echo ${r[1]})
+
+	if [ ${status:-0} -eq 200 ]
+		then
+		success "POST $1"
+	else
+		alert "POST $1"
+	fi
+}
+
+# $1 = route
+# $2 = route
+function test_put_service {
+	status=$(r=(IFS=' '
+		$(curl -Is --connect-timeout 5 --silent --output /dev/null  -X PUT					\
+	-H "Content-Type: application/json" 	\
+	-d @$2									\
+	$web_service_url$1 || echo 1 500))
+	echo ${r[1]})
+
+	if [ ${status:-0} -eq 200 ]
+		then
+		success "PUT $1"
+	else
+		alert "PUT $1"
+	fi
+}
+
+# $1 = route
+# $2 = route
+function test_delete_service {
+	status=$(r=(IFS=' '
+		$(curl -Is --connect-timeout 5 --silent --output /dev/null curl -X DELETE				\
+	-H "Content-Type: application/json" 	\
+	$web_service_url$1 || echo 1 500))
+	echo ${r[1]})
+
+	if [ ${status:-0} -eq 200 ]
+		then
+		success "DELETE $1"
+	else
+		alert "DELETE $1"
+	fi
+}
+
+
+# HISTORY
+
+# create
+test_post_service "/histories.json" ./script/json/history.json
+
+# read
+test_get_service "/histories.json"
+test_get_service "/users/1/histories.json"
+test_get_service "/users/1/stickers/1/histories.json"
+
+test_get_service "/histories/1.json"
+test_get_service "/users/1/histories/1.json"
+test_get_service "/users/1/stickers/1/histories/1.json"
+
+# update
+test_put_service "/histories.json" ./script/json/history.json
+
+# delete
+test_delete_service "/histories/6.json"
+
+
+
+# USER
+
+# create
+test_post_service "/users.json" ./script/json/user.json
+
+# read
+test_get_service "/users.json"
+test_get_service "/users/1.json"
+
+# update
+test_put_service "/users.json" ./script/json/user.json
+
+# delete
+test_delete_service "/users/6.json"
+
+
+
+# STICKER
+
+# create
+test_post_service "/stickers.json" ./script/json/sticker.json
+
+# read
+test_get_service "/stickers.json"
+test_get_service "/users/1/stickers.json"
+
+test_get_service "/stickers/1.json"
+test_get_service "/users/1/stickers/1.json"
+test_get_service "/users/1/stickers/1/stickers/1.json"
+
+# update
+test_put_service "/stickers.json" ./script/json/sticker.json
+
+# delete
+test_delete_service "/stickers/6.json"
+
+

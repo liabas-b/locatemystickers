@@ -1,0 +1,55 @@
+<% provide(:title, 'About Us') %>
+<div class="center hero-unit">
+	<h1>We locate stickers!</h1><br/>
+  <div class="row-fluid">
+  <div class="span7">
+		<p>
+			LocateMyStickers is a simple and complete geolocation solution.
+		<p>
+		</p>
+			If you get tired of losing your precious things, or wonder where your cat goes during the day? Think about us!
+		</p>
+		<p>
+			We provide little stickers that will permit you to <b>track whatever you want</b>.
+			Stick it, and follow the way your sticker will take through our iOs, Android and web applications!
+		</p>
+	</div>
+  <div class="span3 offset1">
+	  <%= image_tag 'lmslogo_400.png' %>
+	</div>
+	</div>
+<br/>
+	<p class='lead'>
+		<b>Is'nt that awesome, for us head-in-the-clouds? :)</b>
+	</p>
+</div>
+<div class="center hero-unit">
+	<h1>Who we are</h1><br/>
+	<div class="row-fluid">
+		<ul class="thumbnails">
+			<% @admins.each do |admin| %>
+			  <li>
+			  	<a href="<%= user_path(admin) %>">
+						<%= gravatar_for admin, size: 128, class: "user-pin" %>
+			  	</a>
+			  </li>
+		  <% end %>
+		</ul>
+	</div>
+	<p>
+		We are a team of seven developers driven by the thought that geolocation, today, remains not as accessible and used as it should.
+	</p>
+	<p>
+		We take our time to produce a solution that provides an easy, efficient, and free way to locate one's personnal belongings.
+	</p><br/>
+	<p class='lead'>
+		We need your advices! Please <%= link_to "contact us!", contact_path %> and share your idea of what such a solution should be :)
+	</p>
+</div>
+<div class="center hero-unit">
+	<h1>The web application</h1><br/>
+	<p class='lead'>
+		You are on the LocateMyStickers Web application. LocateMyStickers is also available on iOs and Android.
+	</p><br/>
+	<p><%= image_tag 'shema-web-service.png', class: 'img-rounded' %></p>
+</div>

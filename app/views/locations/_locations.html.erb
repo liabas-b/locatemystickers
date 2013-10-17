@@ -1,0 +1,8 @@
+
+<div class="well well-padding paper-shadow">
+  <table class="table table-hover">
+<% locations.each do |location| %>
+  <%= render 'locations/location', location: location %>
+<% end %>
+  </table>
+</div>

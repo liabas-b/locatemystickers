@@ -1,0 +1,16 @@
+<% if current_user != nil && !current_user.following?(sticker) %>
+	<% then %>
+		<%= form_for(current_user.relationships.build(owner_id: sticker.user_id, sticker_id: sticker.id), remote: true) do |f| %>
+	  <div><%= f.hidden_field :owner_id %></div>
+	  <div><%= f.hidden_field :sticker_id %></div>
+	  <%= f.submit "Following", class: "btn btn-mini pull-right" %>
+	<% end %>
+	<% else %>
+	<% if current_user != nil && current_user.relationships != nil %>
+		<%= form_for(current_user.relationships.find_by_sticker_id(sticker.id),
+		             html: { method: :delete },
+		             remote: true) do |f| %>
+		<%= f.submit "Following", class: "btn btn-mini pull-right btn-success" %>
+	<% end %>
+	<% end %>
+<% end %>

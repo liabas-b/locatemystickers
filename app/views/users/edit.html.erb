@@ -1,0 +1,24 @@
+<% provide(:title, "Editing " + @user.name) %>
+
+<%= render 'users/user_info_header', user: @user %>
+
+<div class="container-fluid page-content-with-header">
+  <div id="user-edit" class="row-fluid">
+    <div id="edit" style="position:relative;top:-240px"></div>
+    <div class="well well-padding paper-shadow">
+		  <h1>Edit your information</h1>
+		</div>
+    <div class="well well-padding paper-shadow" style="padding-top:30px">
+		  <%= render 'form' %>
+		</div>
+	</div>
+</div>
+
+<!-- Sidebar Fixed left -->
+<div class="sidebar">
+  <%= render 'friends', user: @user %>
+  <h3>Navigate</h3>
+  <ul id="sidebar-nav" class="nav nav-list affix" data-offset-top="200px">
+    <li><a href="#edit">Edit</a></li>
+  </ul>
+</div>

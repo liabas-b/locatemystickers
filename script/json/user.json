@@ -1,0 +1,15 @@
+{
+	admin: true,
+	adress: "13 Les Grenadiers",
+	city: "Grimaud",
+	compteur: 24,
+	country: "France",
+	email: "b.liabastre@gmail.com",
+	first_name: "Benoit",
+	last_name: "Liabastre",
+	name: "Benoit Liabastre",
+	password_digest: "$2a$10$4xxHSlcZogyC/WyIsvPCCuoSaBcoNQUTj4.4SW2ihqfc2X7oMa9AW",
+	phone: "008613001938293",
+	remember_token: "Pb6dm48UlcG7dkZx0xRLMQ",
+	zip_code: "83310"
+}

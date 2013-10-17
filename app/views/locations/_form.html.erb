@@ -1,0 +1,45 @@
+<% complement = complement ||= "" %>
+<%= form_for @location, :url => user_sticker_location_path(@user, @sticker, @location) do |f| %>
+  <% if @location.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@location.errors.count, "error") %> prohibited this location from being saved:</h2>
+
+      <ul>
+      <% @location.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+<div class="accordion" style="margin-top:5px;">
+  <div class="accordion-group">
+    <div class="accordion-heading text-center">
+      <div class="input-prepend">
+        <span class="add-on"><i class="icon-search"></i></span>
+        <%= f.text_field :latitude %>
+        <%= f.text_field :longitude %>
+        <span class="add-on">
+          <a style="display:inline;" class="accordion-toggle" data-toggle="collapse" data-parent=".accordion" href="#collapseOne">
+            <i class="icon-zoom-in"></i>
+          </a>
+        </span>
+      </div>
+      <br/>
+      <br/>
+      <%= f.submit 'Save', class: 'btn btn-primary' %>
+    </div>
+    </div>
+    <div id="collapseOne" class="accordion-body collapse">
+      <div class="accordion-inner">
+        <div class="input-prepend">
+          <span class="add-on"><i class="icon-filter"></i></span>
+        </div>
+        <div class="input-prepend">
+          <span class="add-on">sort by</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<% end %>
+

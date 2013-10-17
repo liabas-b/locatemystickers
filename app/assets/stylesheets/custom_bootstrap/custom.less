@@ -1,0 +1,340 @@
+
+// Custom bootstrap last layer
+// --------------------------------------------------
+
+
+@brand-primary:         #bd1e39;
+@white:									#ffffff;
+
+@import url("http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,300italic,400italic");
+@font-face {
+  font-family: "Flat-UI-Icons-16";
+  src: url("../fonts/Flat-UI-Icons-16.eot");
+  src: url("../fonts/Flat-UI-Icons-16.eot?#iefix") format("embedded-opentype"), url("../fonts/Flat-UI-Icons-16.woff") format("woff"), url("../fonts/Flat-UI-Icons-16.ttf") format("truetype"), url("../fonts/Flat-UI-Icons-16.svg#Flat-UI-Icons-16") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+	background: #f5f5f5;
+}
+
+a:hover {
+	color: @brand-primary;
+	text-decoration: none;
+}
+
+.clear-both {
+  clear: both;
+}
+
+// LAYOUT
+
+// NAV BARS
+
+// Top
+
+#top-nav.navbar {
+	background-color: @brand-primary;
+	padding:0 15px;
+	color: #fff;
+	border: none;
+	a {
+		color: @white;
+		&:hover {
+			background: lighten(@brand-primary, 10%);
+		}
+	}
+}
+
+.navbar-brand {
+	line-height:51px;
+	padding:0 12px;
+	font-size:2em;
+	color: @white;
+}
+
+#top-nav .brand:hover{
+	color:#dddcdc;
+	text-decoration:none;
+}
+
+.navbar-toggle {
+	color: @white;
+}
+
+.navbar-collapse.in {
+	overflow-y: hidden;
+	overflow-x: hidden;
+}
+.navbar-collapse {
+	overflow-y: hidden;
+	overflow-x: hidden;
+}
+
+// Hero
+
+.hero {
+	display: table-cell;
+	vertical-align: middle;
+	width:800px;
+  margin:0 10px; /* espacement horizontal des blocs */
+  border:1px solid #fff;
+  vertical-align:middle;
+  text-align:left;
+  background: @white;
+}
+
+// Containers
+
+.sidebar {
+	position: fixed;
+	left: 20px;
+	float: left;
+	width: 200px;
+	top: 50px;
+	bottom: 0;
+}
+
+.layout-container {
+	margin-top: 50px;
+	margin-left: 240px;
+	margin-right: 20px;
+}
+
+.full-screen {
+	display: table;
+	position: relative;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	text-align: center;
+}
+
+.abs-full-screen {
+	position: absolute;
+	min-width: 100%;
+	min-height: 100%;
+	max-width: 100%;
+	max-height: 100%;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	text-align: center;
+	z-index: 12000;
+}
+
+.earth-background {
+	background-image: url('/assets/contact-background.jpg');
+	position:absolute;
+	right:0;
+	left:0;
+	bottom:0;
+	top:0;
+	z-index:-12;
+}
+
+.well {
+	border: none;
+	border-radius: 0;
+	box-shadow: none;
+	-webkit-box-shadow: none;
+	background: white;
+}
+
+.well.active { 
+	.show-on-hover {
+    visibility: visible;
+  }
+}
+
+.show-on-hover {
+	visibility: collapse;
+}
+
+#resizable-map {
+  height: 400px;
+  -webkit-transition: all .3s linear;
+  -moz-transition: all .3s linear;
+  transition: all .3s linear;
+}
+#resizable-map.expanded {
+  height: 600px;
+}
+
+.row-fluid {
+	margin-bottom: 20px;
+}
+
+.list-title {
+	margin-top: -10px;
+	margin-bottom: -10px;
+}
+
+// Buttons
+
+.sign-up-btn {
+	padding-top: 50px;
+	border: 0;
+	width: 100%;
+	min-height: 135px;
+	height: 70px;
+	font-size: 20px;
+}
+
+// Utility
+
+.paper-shadow {
+  position: relative;
+}
+
+.paper-shadow:before, .paper-shadow:after
+{
+  z-index: -1;
+  position: absolute;
+  content: "";
+  bottom: 5px;
+  right: 5px;
+  width: 50%;
+  top: 80%;
+  max-width:300px;
+  background: #CCC;
+  -webkit-box-shadow: 0 5px 2px #CCC;
+  -moz-box-shadow: 0 5px 2px #CCC;
+  box-shadow: 0 5px 2px #CCC;
+  -webkit-transform: rotate(1deg);
+  -moz-transform: rotate(1deg);
+  -o-transform: rotate(1deg);
+  -ms-transform: rotate(1deg);
+  transform: rotate(1deg);
+}
+
+.input-prepend select {
+  border: none;
+}
+.input-prepend .add-on {
+  border: none;
+  padding-right: 20px;
+  background-color: white;
+}
+.navbar-fixed-top .input-prepend > .add-on {
+  background-color: transparent;
+  border: none;
+  padding-right: 10px;
+}
+
+.accordion {
+  margin-bottom: 0;
+}
+.accordion-group {
+  border: none;
+}
+.accordion-inner {
+  padding: 0;
+  border: none;
+}
+#form_search {
+  margin-bottom: -10px;
+}
+
+.fixed-header {
+  position: fixed;
+  top: 0px;
+  right: 20px;
+  left: 20px;
+  background-color: #f5f5f5;
+  z-index: 1;
+  height: 250px;
+  min-width: 1137px;
+}
+
+// USER
+
+.user-info {
+	height: 190px;
+	h3 {
+		font-weight: bold;
+	}
+	.avatar {
+		position: absolute;
+	}
+	.info-block {
+		position: absolute;
+		left: 190px;
+		top: 30px;
+	}
+}
+.user-thumbnail {
+	float: left;
+	display: block;
+}
+.user-friends {
+	min-height: 54px;
+	max-height: 324px;
+	overflow-y: hidden;
+}
+
+// MAP
+
+.map {
+	overflow: hidden;
+	text-align: center;
+	margin-bottom: 20px;
+}
+
+.map-over {
+	position: absolute;
+	left:0;
+	right:0;
+	bottom:0;
+	top:0;
+	background: white;
+	z-index: 12;
+	opacity: .4;
+}
+
+.map-over-message {
+	position: absolute;
+	margin: 0 auto;
+	width: 100%;
+	opacity: 1;
+	z-index: 12;
+	.message {
+		margin: auto;
+		width: 80%;
+		height: 80%;
+		.title {
+			max-width: 40%;
+			margin-top: 50px;
+		}
+		.lead {
+			max-width: 50%;
+			width: auto;
+			background: #ffffff;
+		}
+	}
+}
+
+.hideable {
+	overflow: hidden;
+}
+
+.hidden {
+	visibility: collapse;
+}
+
+// STICKER
+
+.sticker-color-ribbon {
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	width: 20px;
+}

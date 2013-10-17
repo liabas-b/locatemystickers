@@ -1,0 +1,11 @@
+{
+	location_id: 0,
+	message_id: 0,
+	notification_confirmed: 1,
+	notification_level: 0,
+	notify: 0,
+	operation: "registered",
+	sticker_id: 2,
+	subject: "sticker",
+	user_id: 2
+}

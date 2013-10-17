@@ -1,0 +1,4 @@
+class AddTextToSticker < ActiveRecord::Migration
+  def change
+  end
+end

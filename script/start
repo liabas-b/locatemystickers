@@ -1,0 +1,2 @@
+sudo start-stop-daemon --verbose --start --background --exec /etc/init.d/run-puma /home/webservice/web-service/ config/puma.rb ./log/puma.log
+#sudo /etc/init.d/run-puma /home/webservice/web-service/ config/puma.rb ./log/puma.log
