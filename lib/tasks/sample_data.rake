@@ -107,7 +107,8 @@ def make_relationships
   users = User.all
   user  = users.first
   user.stickers.create!(name: "TEST STICKER OFFICIEL",
-                        text: 'This is the super ultra hard rocking test sticker that will be used to demonstrate basic concepts of the application.')
+                        text: 'This is the super ultra hard rocking test sticker that will be used to demonstrate basic concepts of the application.',
+                        color: '#bd1e39')
   user.stickers.find_by_name("TEST STICKER OFFICIEL").locations.create!(latitude: 39.948437, longitude: 116.341043)
   user.stickers.find_by_name("TEST STICKER OFFICIEL").locations.create!(latitude: 39.487085, longitude: 115.964024)
   user.stickers.find_by_name("TEST STICKER OFFICIEL").locations.create!(latitude: 39.438314, longitude: 116.308033)
