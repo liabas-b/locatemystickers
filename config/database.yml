@@ -20,6 +20,8 @@ test:
 
 production:
   adapter: postgresql
-  host: localhost
-  username: user
-  database: lms-prod
+  encoding: unicode
+  database: myapp_production
+  pool: 5
+  username: lms-prod
+  
