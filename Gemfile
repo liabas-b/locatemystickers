@@ -2,7 +2,6 @@ source 'https://rubygems.org'
 
 gem 'bundler', '1.3.5'
 gem 'rails', '3.2.13'
-gem 'sqlite3', '1.3.7'
 gem 'bcrypt-ruby', '3.0.1'
 gem 'will_paginate', '~> 3.0'
 gem 'faker', '1.0.1'
@@ -20,6 +19,7 @@ group :development, :test do
   gem 'annotate', '2.5.0'
   gem 'log4r', '1.1.10'
   gem 'capybara', '1.1.2'
+  gem 'sqlite3', '1.3.7'
 end
 
 # Gems used only for assets and not required
