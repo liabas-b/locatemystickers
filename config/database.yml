@@ -23,5 +23,5 @@ production:
   encoding: unicode
   database: lms_production
   pool: 5
-  username: lms
+  username:  postgres
   password:
