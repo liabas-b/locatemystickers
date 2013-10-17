@@ -9,7 +9,7 @@
 			</a>
 		</h3>
 		<a href="<%= user_stickers_path(@user) %>">
-			<b><%= @stickers.count %></b> stickers.
+			<b><%= @user.stickers.count %></b> stickers.
 		</a><br/>
 		<a href="<%= user_stickers_path(@user) %>">
 			<b><%= @user.followed_users.count %></b> friends.

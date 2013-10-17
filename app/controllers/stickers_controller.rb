@@ -62,7 +62,7 @@ class StickersController < ApplicationController
     @form_path = user_stickers_path(@user)
 
     respond_to do |format|
-        format.html { gmaps_sticker_way } # show.html.erb
+        format.html #{ gmaps_sticker_way } # show.html.erb
         format.json { render :json => @sticker }
       end
   end
@@ -70,6 +70,7 @@ class StickersController < ApplicationController
   # GET /users/1/stickers/new
   # GET /users/1/stickers/new.json
   def new
+    @user = User.find(params[:user_id])
     @sticker = Sticker.new
     @sticker.user_id = @user.id
     @sticker.sticker_type_id = params[:sticker_type_id]
@@ -174,8 +175,10 @@ class StickersController < ApplicationController
     end
 
     def gmaps_sticker_way
-      gmaps_sticker_polylines
-      gmaps_sticker_markers
+      if @sticker.locations && @sticker.locations.any?
+        gmaps_sticker_polylines
+        gmaps_sticker_markers
+      end
     end
 
     def gmaps_sticker_markers
