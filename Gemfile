@@ -13,7 +13,7 @@ gem 'geocoder', '1.1.8'
 gem 'pousse', '0.0.5'
 
 # Assets
-# gem 'coffee-rails', '3.2.2'
+gem 'coffee-rails', '3.2.2'
 gem 'uglifier', '1.2.3'
 gem 'execjs', '2.0.1'
 gem 'therubyracer'
