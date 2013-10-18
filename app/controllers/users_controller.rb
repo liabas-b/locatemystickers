@@ -42,7 +42,6 @@ class UsersController < ApplicationController
 	end
 
 	# GET /users/new
-	# GET /users/new.json
 	def new
 		@user = User.new
 
@@ -54,6 +53,10 @@ class UsersController < ApplicationController
 	# GET /users/1/edit
 	def edit
 		@user = User.find(params[:id])
+
+		respond_to do |format|
+			format.html
+		end
 	end
 
 	# POST /users
