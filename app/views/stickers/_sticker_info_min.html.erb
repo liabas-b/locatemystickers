@@ -20,7 +20,7 @@
 					<a href="<%= user_sticker_zones_path(user, sticker) %>">
 						Has <%= sticker.zones.count %> zones defined.
 					</a><br/>
-					Last location: <%= sticker.last_location_address %>.<br/>
+					Last location: <%= sticker.last_location %>.<br/>
 					Code: <%= sticker.code %>.
 					</a><br>
 					Type: <%= sticker_type_name(sticker) %> <!--(<%= sticker_type_icon(sticker) %>)-->

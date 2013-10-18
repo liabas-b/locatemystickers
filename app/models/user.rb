@@ -22,12 +22,12 @@
 
 class User < ActiveRecord::Base
 	attr_accessible :name, :first_name, :last_name, :adress, :zip_code, :country, :city, :phone,
-									:email, :password, :password_confirmation, :email_confirmation,
-									:remember_token, :relationships, :compteur, :stickers, :followed_id, :notifications,
-									:admin, :created_at, :id, :password_digest, :updated_at
+					:email, :password, :password_confirmation, :email_confirmation,
+					:remember_token, :relationships, :compteur, :stickers, :followed_id, :notifications,
+					:admin, :created_at, :id, :password_digest, :updated_at
 									
-	# Relactions #
-	#########
+	# Relations #
+	########
 
 	has_secure_password
 
@@ -60,28 +60,20 @@ class User < ActiveRecord::Base
 	validates :password_confirmation, presence: true
 
 	# Filters #
-	########
+	######
+	after_create :after_create_callback
+	after_update :after_update_callback
+	before_destroy :before_destroy_callback
 	before_save do |user|
 		user.email = email.downcase
 		user.name = user.first_name + " " + user.last_name
 		create_remember_token
 	end
 
-	after_create do |user|
-		user.histories.create!(subject: "user", operation: "created")
-	end
-
-	after_update do |user|
-		user.histories.create!(subject: "user", operation: "updated")
-	end
-
-	before_destroy do |user|
-		user.histories.create!(subject: "user", operation: "deleted")
-	end
-
 	# Methods #
 	########
 
+	
 	def self.search(search, column = 'name')
 		if search
 			where("#{column} LIKE ?", "%#{search}%")
@@ -94,7 +86,9 @@ class User < ActiveRecord::Base
 		Message.where('messages.from_user_id=' + user.id.to_s)
 	end
 
+	
 	# Sticker sharing
+
 	def following?(sticker)
 		relationships.find_by_sticker_id(sticker.id)
 	end
@@ -109,7 +103,9 @@ class User < ActiveRecord::Base
 		relationships.find_by_sticker_id(sticker.id).destroy
 	end
 	
+
 	# Friendships
+	
 	def is_friend?(other_user)
 		friendships.find_by_followed_id(other_user.id)
 	end
@@ -128,16 +124,28 @@ class User < ActiveRecord::Base
 		message.save
 	end
 
+	
+	# Synchronization
+
 	def update_all_locations
 		self.stickers.each { |sticker| sticker.update_locations }
 	end
-
-	# Private methods #
-	#############
 
 	private
 
 		def create_remember_token
 			self.remember_token = SecureRandom.urlsafe_base64
+		end
+
+		def after_create_callback
+			self.histories.create!(subject: "user", operation: "created")
+		end
+
+		def after_update_callback
+			self.histories.create!(subject: "user", operation: "updated")
+		end
+
+		def before_destroy_callback
+			self.histories.create!(subject: "user", operation: "deleted")
 		end
 end

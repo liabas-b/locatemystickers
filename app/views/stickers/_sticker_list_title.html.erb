@@ -1,6 +1,6 @@
 <%
 	stickers_locations_count = 0
-	stickers.each { |sticker| stickers_locations_count += sticker.locations.count }
+	stickers.each { |sticker| stickers_locations_count += sticker.locations.count } if stickers.any?
 %>
 
 <ul class="list-inline list-title">

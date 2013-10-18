@@ -38,7 +38,7 @@ class Sticker < ActiveRecord::Base
 
 	def self.search(search, column = 'name')
 		if search
-			if column == 'id' || column == 'sticker_type_id' || column == 'user_id' || column == 'version' || column == 'is_active'
+			if ['id', 'sticker_type_id' , 'user_id', 'is_active']. include?(column)
 				where("stickers.#{column} = ?", "#{search}")
 			else
 				where("stickers.#{column} LIKE ?", "%#{search}%")
@@ -62,20 +62,21 @@ class Sticker < ActiveRecord::Base
 			delete_ss_sticker_location(location.id)
 		end
 		self.last_location = self.locations.last.address if self.locations.count > 0
+		self.last_location = 'Unknown' if self.last_location.nil?
 	end
 
 	private
 
 		def after_create_callback
-			sticker.histories.create!(subject: "sticker", operation: "created")
+			self.histories.create!(subject: "sticker", operation: "created")
 		end
 
 		def after_update_callback
-			sticker.histories.create!(subject: "sticker", operation: "updated")
+			self.histories.create!(subject: "sticker", operation: "updated")
 		end
 
 		def before_destroy_callback
-			sticker.histories.create!(subject: "sticker", operation: "deleted")
+			self.histories.create!(subject: "sticker", operation: "deleted")
 		end
 
 		def generate_code
