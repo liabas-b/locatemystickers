@@ -119,7 +119,7 @@ end
 def make_locations
   stickers = Sticker.all
   stickers.each { |sticker|
-    3.times do |n|
+    1.times do |n|
       sticker.locations.create!(latitude: (-50 + rand(130)), longitude: (-130 + rand(180)))
     end
   }

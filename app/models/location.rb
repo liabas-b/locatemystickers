@@ -35,6 +35,7 @@ class Location < ActiveRecord::Base
 
   # NOTIFICATION TRIGGERS
   after_create do |location|
+    location.sticker.last_location = "Test"
     location.histories.create!(subject: "location", operation: "created", sticker_id: location.sticker.id)
   end
   after_update do |location|

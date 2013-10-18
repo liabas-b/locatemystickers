@@ -1,10 +1,12 @@
 class ApplicationController < ActionController::Base
-	before_filter :get_user_notifications
 	
-  protect_from_forgery
-  include SessionsHelper
+	protect_from_forgery
+	include SessionsHelper
+	include HistoriesHelper
 
-  def is_number?(object)
-    true if Float(object) rescue false
-  end
+	before_filter :get_user_notifications
+
+	def is_number?(object)
+		true if Float(object) rescue false
+	end
 end
