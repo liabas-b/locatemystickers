@@ -1,8 +1,7 @@
 <% provide(:title, 'About Us') %>
-<div class="center hero-unit">
+<div id="1" class="full-screen">
+<div class="hero center">
 	<h1>We locate stickers!</h1><br/>
-  <div class="row-fluid">
-  <div class="span7">
 		<p>
 			LocateMyStickers is a simple and complete geolocation solution.
 		<p>
@@ -13,20 +12,19 @@
 			We provide little stickers that will permit you to <b>track whatever you want</b>.
 			Stick it, and follow the way your sticker will take through our iOs, Android and web applications!
 		</p>
-	</div>
-  <div class="span3 offset1">
 	  <%= image_tag 'lmslogo_400.png' %>
-	</div>
-	</div>
-<br/>
+	<br/>
 	<p class='lead'>
 		<b>Is'nt that awesome, for us head-in-the-clouds? :)</b>
 	</p>
 </div>
-<div class="center hero-unit">
+</div>
+
+<div id="2" class="full-screen">
+<div class="hero text-center">
 	<h1>Who we are</h1><br/>
 	<div class="row-fluid">
-		<ul class="thumbnails">
+		<ul class="list-inline">
 			<% @admins.each do |admin| %>
 			  <li>
 			  	<a href="<%= user_path(admin) %>">
@@ -46,10 +44,14 @@
 		We need your advices! Please <%= link_to "contact us!", contact_path %> and share your idea of what such a solution should be :)
 	</p>
 </div>
-<div class="center hero-unit">
+</div>
+
+<div id="3" class="full-screen">
+<div class="hero text-center">
 	<h1>The web application</h1><br/>
 	<p class='lead'>
 		You are on the LocateMyStickers Web application. LocateMyStickers is also available on iOs and Android.
 	</p><br/>
 	<p><%= image_tag 'shema-web-service.png', class: 'img-rounded' %></p>
+</div>
 </div>

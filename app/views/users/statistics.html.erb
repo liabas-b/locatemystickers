@@ -6,7 +6,7 @@
   <div id="user-statistics" style="position:relative;top:-240px"></div>
   <div class="well well-padding paper-shadow">
     <h1><%= (current_user == @user ? "My statistics" : (@user.name + "'s statistics")) %></h1>
-    <ul class="inline">
+    <ul class="list-inline">
       <li><h3><a href="<%= user_path(@user) %>/friends"><b><%= @user.followed_users.count %></b></a> friends</h3></li>
       <li><h3><a href="<%= user_stickers_path(@user) %>"><b><%= @user_locations_count %></b></a> locations</h3></li>
       <li><h3><a href="<%= user_stickers_path(@user) %>"><b><%= @stickers.count %></b></a> stickers</h3></li>
@@ -18,7 +18,7 @@
   <div id="server-statistics" style="position:relative;top:-240px"></div>
   <div class="well well-padding paper-shadow">
     <h1>Server statistics</h1>
-    <ul class="inline">
+    <ul class="list-inline">
       <% if current_user.admin? %>
         <li><h3><a href="<%= users_path %>"><b><%= @server_stats["total_users"] %></b></a> users</h3></li>
         <li><h3><a href="<%= histories_path %>"><b><%= @server_stats["total_events"] %></b></a> events</h3></li>

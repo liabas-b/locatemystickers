@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131012013207) do
+ActiveRecord::Schema.define(:version => 20131018152944) do
 
   create_table "friendships", :force => true do |t|
     t.integer  "follower_id"
@@ -104,6 +104,7 @@ ActiveRecord::Schema.define(:version => 20131012013207) do
     t.string   "code"
     t.string   "text"
     t.string   "color"
+    t.string   "last_location"
   end
 
   add_index "stickers", ["code"], :name => "index_stickers_on_code", :unique => true
