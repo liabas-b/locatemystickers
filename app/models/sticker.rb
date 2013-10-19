@@ -52,19 +52,41 @@ class Sticker < ActiveRecord::Base
 
 	# Gets all missing locations that were stored on the stickers server
 	def update_locations
+		# if self.code and not self.code.empty?
+		# 	new_locations = get_ss_sticker_locations(self.code)
+		# 	new_locations.each do |location|
+		# 		Location.create!( 
+		# 			latitude: location.latitude,
+		# 			longitude: location.longitude,
+		# 			sticker_id: location.sticker_id,
+		# 			created_at: location.created_at,
+		# 			updated_at: location.updated_at
+		# 		)
+		# 		delete_ss_sticker_location(location.id)
+		# 	end
+		# 	self.last_location = self.locations.last.address if self.locations.count > 0
+		# else
+		# 	self.last_location = 'Unknown' if self.last_location.nil?
+		# end
+	end
+
+	def update_last_location
 		if self.code and not self.code.empty?
-			new_locations = get_ss_sticker_locations(self.code)
-			new_locations.each do |location|
-				Location.create!( 
-					latitude: location.latitude,
-					longitude: location.longitude,
-					sticker_id: location.sticker_id,
-					created_at: location.created_at,
-					updated_at: location.updated_at
-				)
-				delete_ss_sticker_location(location.id)
+			new_location = get_ss_sticker_last_location(self.code)
+			if new_location
+				sticker = Sticker.find_by_code(new_location['sticker_code'])
+				if sticker
+					sticker.locations.create!( 
+						latitude: new_location['latitude'],
+						longitude: new_location['longitude'],
+						created_at: new_location['created_at'],
+						updated_at: new_location['updated_at']
+					)
+					# delete_ss_sticker_location(location.id)
+					sticker.last_location = sticker.locations.last.address if sticker.locations.count > 0
+					puts "update_last_location " + self.locations.last.inspect
+				end
 			end
-			self.last_location = self.locations.last.address if self.locations.count > 0
 		end
 		self.last_location = 'Unknown' if self.last_location.nil?
 	end

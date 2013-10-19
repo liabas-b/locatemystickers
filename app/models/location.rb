@@ -14,9 +14,8 @@
 #
 
 class Location < ActiveRecord::Base
-	attr_accessible :latitude, :longitude, :created_at, :gmaps, :id, :sticker_id, :updated_at, :version
-
-	default_scope order: 'locations.created_at DESC'
+	attr_accessible :latitude, :longitude, :created_at, :gmaps, :id, :sticker_id, :updated_at
+	default_scope order: 'locations.id desc'
 
 	# Relations #
 	########
@@ -25,7 +24,6 @@ class Location < ActiveRecord::Base
 
 	# Validations #
 	#########
-	validates :version, presence: true
 	validates :sticker_id, presence: true
 	validates :latitude, presence: true
 	validates :longitude, presence: true
@@ -38,9 +36,10 @@ class Location < ActiveRecord::Base
 	# Callbacks #
 	########
 	after_validation :fetch_address, :reverse_geocode
-	after_create :after_create_callback
-	after_update :after_update_callback
-	before_destroy :before_destroy_callback
+	# after_save :after_save_callback
+	# after_create :after_create_callback
+	# after_update :after_update_callback
+	# before_destroy :before_destroy_callback
 
 	# Methods #
 	########

@@ -16,13 +16,13 @@
 </div>
 
 <!-- Sidebar Fixed left -->
-<div class="sidebar well">
+<% content_for :sidebar do %>
   <%= render 'friends', user: @user %>
   <h3>Navigate</h3>
-  <ul id="sidebar-nav" class="nav nav-list affix" data-offset-top="200px">
+  <ul id="sidebar-nav" class="nav nav-list">
     <% if @markers_json != nil && @markers_json.length > 0 %>
     <li><a href="#last-locations" class="last-locations">Map</a></li>
     <% end %>
     <li><a href="#own-stickers">Stickers</a></li>
   </ul>
-</div>
+<% end %>

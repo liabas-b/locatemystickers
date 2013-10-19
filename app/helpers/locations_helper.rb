@@ -52,16 +52,19 @@ module LocationsHelper
 
 	def parse_ss_locations_from_parsed_json(paginate = false, per_page = 10, page = 1)
 	    locations = Array.new
-	    @parsed_json.each do |location, r|
-            sticker = Sticker.find_by_code(location['sticker_code'])
-            CLogger.debug "parse_ss_locations_from_parsed_json: sticker: " + sticker.inspect.to_s + " location[:sticker_code]: " + location['sticker_code']
-	      l = Location.new(:latitude => location['latitude'],
-                        :longitude => location['longitude'],
-                        :sticker_id => sticker.id,
-                        :created_at => location['created_at'],
-                        :updated_at => location['updated_at'])
-	      l.id = location['id']
-	      locations.push(l)
+	    @parsed_json.each do |location|
+	    	sql = "select stickers.id from stickers where stickers.code=\"#{location['sticker_code'] }\" limit 1"
+		records_array = ActiveRecord::Base.connection.execute(sql)
+		if records_array.any?
+	            sticker_id = records_array[0]['id']
+		      l = Location.new(:latitude => location['latitude'],
+	                        :longitude => location['longitude'],
+	                        :sticker_id => sticker_id,
+	                        :created_at => location['created_at'],
+	                        :updated_at => location['updated_at'])
+		      l.id = location['id']
+		      locations.push(l)
+		    end
 	    end
 	    locations = locations.paginate(:page => page, :per_page=> per_page) if paginate
 	    return locations

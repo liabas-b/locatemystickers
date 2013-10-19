@@ -32,8 +32,8 @@ class UsersController < ApplicationController
 				@stickers = @user.stickers.search(params[:search], params["column"]).reorder(stickers_sort_column + " " + stickers_sort_direction).paginate(per_page: 10, :page => params[:page])
 				@followed_stickers = @user.followed_stickers.search(params[:search], params["column"]).reorder(stickers_sort_column + " " + stickers_sort_direction).paginate(per_page: 10, :page => params[:page])
 				@form_path = user_path(@user)
-
 				@user.update_all_locations
+
 				gmaps_last_locations_markers
 			end
 			format.js
@@ -275,17 +275,17 @@ class UsersController < ApplicationController
 				end
 				unless @last_locations.nil?
 					@markers_json = @last_locations.to_gmaps4rails do |location, marker|
-						marker.infowindow render_to_string(:partial => "/locations/maps_info_window",
-																							 :locals => { :location => location })
+						# marker.infowindow render_to_string(:partial => "/locations/maps_info_window",
+						# 																	 :locals => { :location => location })
 						
-						marker.picture({
-														:picture => "http://www.blankdots.com/img/github-32x32.png",
-														:width   => 32,
-														:height  => 32
-													 })
-						marker.title   location.created_at.to_datetime
-						marker.json({ :id => location.id })
-						CLogger.debug marker.inspect
+						# marker.picture({
+						# 								:picture => "http://www.blankdots.com/img/github-32x32.png",
+						# 								:width   => 32,
+						# 								:height  => 32
+						# 							 })
+						# marker.title   location.created_at.to_datetime
+						# marker.json({ :id => location.id })
+						# CLogger.debug marker.inspect
 					end
 				end
 			end

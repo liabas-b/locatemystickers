@@ -21,56 +21,49 @@ def make_users
                        zip_code:  "83310",
                        city:      "Grimaud",
                        country:   "France",
-                       phone:     "008613001938293",
-                       compteur: 0)
+                       phone:     "008613001938293")
   admin.toggle!(:admin)
 
   admin = User.create!(first_name: "Frederic",
                        last_name: "Theault",
                        email:    "ftheault@gmail.com",
                        password: "astero",
-                       password_confirmation: "astero",
-                       compteur: 0)
+                       password_confirmation: "astero")
   admin.toggle!(:admin)
 
   admin = User.create!(first_name:     "Adrien",
                        last_name: "Guffens",
                        email:    "adril.gu@gmail.com",
                        password: "adri24",
-                       password_confirmation: "adri24",
-                       compteur: 0)
+                       password_confirmation: "adri24")
   admin.toggle!(:admin)
 
   admin = User.create!(first_name:     "Denis",
                        last_name: "Anfossi",
                        email:    "anfoss_d@epitech.net",
                        password: "password",
-                       password_confirmation: "password",
-                       compteur: 0)
+                       password_confirmation: "password")
   admin.toggle!(:admin)
 
   admin = User.create!(first_name:     "Sylvain",
                        last_name: "Reclus",
                        email:    "reclus_s@epitech.net",
                        password: "password",
-                       password_confirmation: "password",
-                       compteur: 0)
+                       password_confirmation: "password")
   admin.toggle!(:admin)
 
   admin = User.create!(first_name:     "Irfane",
                        last_name: "Goulamabasse",
                        email:    "goulam_a@epitech.net",
                        password: "password",
-                       password_confirmation: "password",
-                       compteur: 0)
+                       password_confirmation: "password")
   admin.toggle!(:admin)
   
   admin = User.create!(first_name:     "Yann",
                        last_name: "Koeth",
                        email:    "koeth_y@epitech.net",
                        password: "password",
-                       password_confirmation: "password",
-                       compteur: 0)
+                       password_confirmation: "password")
   admin.toggle!(:admin)
   
   30.times do |n|
@@ -82,8 +75,7 @@ def make_users
                  last_name: last_name,
                  email:    email,
                  password: password,
-                 password_confirmation: password,
-                 compteur: 0)
+                 password_confirmation: password)
   end
 end
 

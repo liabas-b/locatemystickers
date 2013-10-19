@@ -11,7 +11,7 @@ class LocationsController < ApplicationController
   # GET /users/1/stickers/1/locations
   # GET /users/1/stickers/1/locations.json
   def index
-    @sticker = Sticker.find(params[:sticker_id])
+     @sticker = Sticker.where(' code="' + params[:sticker_id] + '" OR id="' + params[:sticker_id] + '" AND user_id=' + params[:user_id]).first
     @locations = @sticker.locations.search(params[:search], params["column"]).reorder(sort_column + " " + sort_direction)
     @locations = @locati0ons.paginate(per_page: params[:per_page] || 10 , :page => params[:page]) if params[:paginate] == 'true'
 
@@ -130,11 +130,11 @@ class LocationsController < ApplicationController
   def live_locations
     @last_locations = Array.new
     current_user.stickers.each do |sticker|
-      sticker.update_locations
-      location = sticker.last_location
+      sticker.update_last_location
+      puts sticker.locations.first
+      location = sticker.locations.first
       unless location.nil?
-        location.color = Sticker.find_by_code(location.sticker_code).color
-        @last_locations.push(location)
+        @last_locations.push({location: location, color: sticker.color})
       end
     end
     render :json => @last_locations

@@ -132,7 +132,8 @@ module ApplicationHelper
   # Stickers server
 
   def stickers_server_url(data = nil)
-    @data_url = 'http://stickersserver.herokuapp.com/' + data
+    @data_url = 'http://127.0.0.1:3333/' + data
+    # @data_url = 'http://stickersserver.herokuapp.com/' + data
     return @data_url
   end
 
@@ -141,11 +142,17 @@ module ApplicationHelper
     get_url
     return Location.new(@parsed_json)
   end
-
+ 
   def get_ss_sticker_locations(sticker_code, number_limit = nil, date_limit = nil)
     stickers_server_url('locations.json?search=' + sticker_code + '&column=sticker_code&paginate=false')
     get_url
     return parse_ss_locations_from_parsed_json
+  end
+
+  def get_ss_sticker_last_location(sticker_code, number_limit = nil, date_limit = nil)
+    stickers_server_url('last_location?sticker_code=' + sticker_code)
+    get_url
+    return @parsed_json
   end
 
   def delete_ss_sticker_location(location_id, number_limit = nil, date_limit = nil)
@@ -155,8 +162,7 @@ module ApplicationHelper
   end
 
   def post_ss_sticker_configuration(configuration)
-    raise configuration.to_query
-    stickers_server_url('sticker_configurations.json?activate=' + configuration.activate.to_s + '&sticker_code=' + configuration.sticker_code + '&frequency_update=' + configuration.frequency_update.to_s)
+    stickers_server_url('sticker_configurations.json?sticker_configuration[activate]=' + configuration.activate.to_s + '&sticker_configuration[sticker_code]=' + configuration.sticker_code + '&sticker_configuration[frequency_update]=' + configuration.frequency_update.to_s)
     post_url
     return @parsed_json
   end

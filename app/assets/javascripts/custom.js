@@ -202,13 +202,15 @@ $(function() {
 
   function drawLastLocations() {
     var url = '/live_locations.json';
+      console.log("drawLastLocations");
     $.get(url, function(newItemData) {
-      console.log(newItemData.length)
         for (var i = 0; i < newItemData.length; i++ ) {
+      console.log(i + ' - ' + newItemData[i].location.latitude)
           var marker = new google.maps.Marker({
-            position: new google.maps.LatLng(newItemData[i].latitude, newItemData[i].longitude), 
+            position: new google.maps.LatLng(newItemData[i].location.latitude, newItemData[i].location.longitude), 
             map: Gmaps.map.serviceObject,
             draggable: false,
+            title: '' + newItemData[i].location.id,
             icon: {
               path: google.maps.SymbolPath.CIRCLE,
               strokeColor: 'black',
@@ -219,12 +221,22 @@ $(function() {
               scale: 4
             }
           });
-          console.log('pushing marker ' + marker + ' to markers ' + markersArray)
-        for (var i = 0; i < newItemData.length; i++ ) {
-          // Gmaps.map.markers.push(marker);
+          var old_marker_index = -1;
+            for (var y = 0; y < markersArray.length; y++ ) {
+              if (markersArray[y].title == '' + newItemData[i].location.id) {
+                old_marker_index = y;
+                console.log("markersArray[old_marker_index] " + markersArray[old_marker_index].title)
+              }
+              // if (old_marker_index > -1) {
+              //   console.log("removing markersArray[old_marker_index] " + markersArray[old_marker_index].title)
+              //     markersArray.splice(old_marker_index, 1);
+              // }
+              // markersArray.push(marker);
+          }
           markersArray.push(marker);
           google.maps.event.addListener(marker,"click",function(){});
-      }}});
+        }
+    });
       setTimeout(function() {
         drawLastLocations();
       }, 5000);
