@@ -155,11 +155,20 @@ module ApplicationHelper
   end
 
   def post_ss_sticker_configuration(configuration)
-    stickers_server_url('sticker_configurations.json' +
-                                    '?activate=' + configuration.activate.to_s +
-                                    '&sticker_code=' + configuration.sticker_code +
-                                    '&frequency_update=' + configuration.frequency_update.to_s)
+    raise configuration.to_query
+    stickers_server_url('sticker_configurations.json?activate=' + configuration.activate.to_s + '&sticker_code=' + configuration.sticker_code + '&frequency_update=' + configuration.frequency_update.to_s)
     post_url
     return @parsed_json
+  end
+
+  def generate_documentation(params)
+    Prawn::Document.new do
+      params.each do |key, value|
+        text key, align: :center
+        value.each do |k, v|
+          text "#{k}: #{v}"
+        end
+      end
+    end.render
   end
 end

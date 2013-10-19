@@ -29,4 +29,10 @@ class StaticPagesController < ApplicationController
   def contact
     @message = Message.new
   end
+
+  def documentation
+    respond_to do |format|
+      format.html { redirect_to '/doc/apidoc.html' }
+    end
+  end
 end

@@ -26,6 +26,7 @@ class StickerConfigurationsController < ApplicationController
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @sticker_configuration }
+      format.pdf { generate_documentation([stickerconfiguration: [cle: 'valeur']]) }
     end
   end
 
@@ -50,6 +51,13 @@ class StickerConfigurationsController < ApplicationController
 
   # POST /sticker_configurations
   # POST /sticker_configurations.json
+  param :user, Hash, :desc => "User info" do
+    param :first_name, String, :desc => "User first name", :required => true
+    param :last_name, String, :desc => "User last name", :required => true
+    param :password, String, :desc => "Password for login", :required => true
+    param :email, String, :desc => "Email for login", :required => true
+    param :membership, ["standard","premium"], :desc => "User membership"
+  end
   def create
     @sticker_configuration = StickerConfiguration.new(params[:sticker_configuration])
 

@@ -64,5 +64,8 @@ module LocateMyStickers
     config.active_record.whitelist_attributes = true
 
     config.middleware.use Rack::ContentLength
+    
+    config.active_record.auto_explain_threshold_in_seconds = nil
+
   end
 end

@@ -1,4 +1,7 @@
 LocateMyStickers::Application.routes.draw do
+  
+  match '/documentation', to: 'static_pages#documentation'
+
   root :to => 'static_pages#home'
 
   match '/live_locations', :to => "locations#live_locations"
