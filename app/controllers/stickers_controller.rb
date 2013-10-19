@@ -61,7 +61,7 @@ class StickersController < ApplicationController
 	# GET /users/1/stickers/1
 	# GET /users/1/stickers/1.json
 	def show
-		@sticker = Sticker.where("code='" + params[:id] + "' OR id='" + params[:id] + "' AND user_id='" + params[:user_id]).first
+		@sticker = Sticker.where("code='" + params[:id] + "' OR id='" + params[:id] + "' AND user_id='" + params[:user_id] + "'").first
 		@user = User.find_by_id(@sticker.user_id)
 		@form_path = user_stickers_path(@user)
 
