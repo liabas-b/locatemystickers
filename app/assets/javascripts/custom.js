@@ -225,7 +225,8 @@ $(function() {
             for (var y = 0; y < markersArray.length; y++ ) {
               if (markersArray[y].title == '' + newItemData[i].location.id) {
                 old_marker_index = y;
-                console.log("markersArray[old_marker_index] " + markersArray[old_marker_index].title)
+                console.log("markersArray[old_marker_index] " + markersArray[old_marker_index].title);
+                markersArray[old_marker_index].setLatLng(new google.maps.LatLng(newItemData[i].location.latitude, newItemData[i].location.longitude));
               }
               // if (old_marker_index > -1) {
               //   console.log("removing markersArray[old_marker_index] " + markersArray[old_marker_index].title)
