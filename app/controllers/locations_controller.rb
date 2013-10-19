@@ -11,7 +11,7 @@ class LocationsController < ApplicationController
   # GET /users/1/stickers/1/locations
   # GET /users/1/stickers/1/locations.json
   def index
-     @sticker = Sticker.where(' code="' + params[:sticker_id] + '" OR id="' + params[:sticker_id] + '" AND user_id=' + params[:user_id]).first
+    @sticker = Sticker.where(' code="' + params[:sticker_id] + '" OR id="' + params[:sticker_id] + '" AND user_id=' + params[:user_id]).first
     @locations = @sticker.locations.search(params[:search], params["column"]).reorder(sort_column + " " + sort_direction)
     @locations = @locati0ons.paginate(per_page: params[:per_page] || 10 , :page => params[:page]) if params[:paginate] == 'true'
 
