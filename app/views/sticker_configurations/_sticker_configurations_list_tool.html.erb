@@ -1,0 +1,9 @@
+<ul class="nav nav-tabs well-tabs">
+  <li class="active"><%= link_to 'Sticker configurations', '#' %></li>
+  <li><%= link_to 'New Sticker configuration', new_user_sticker_sticker_configuration_path %></li>
+</ul>
+
+
+<div class="well paper-shadow tabbed-well">
+  <%= render 'sticker_configurations/sticker_configurations_table' %>
+</div>

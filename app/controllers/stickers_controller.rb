@@ -186,25 +186,18 @@ class StickersController < ApplicationController
 		end
 
 		def gmaps_sticker_markers
-			@markers_json = @sticker.locations.to_gmaps4rails do |location, marker|
-				marker.infowindow render_to_string(:partial => "/locations/maps_info_window",
-																					 :locals => { :object => location })
-				marker.title   @sticker.name
-				marker.sidebar "i'm the sidebar"
-				marker.json({ :id => location.id })
-			end
+			@markers_json = @sticker.locations.to_gmaps4rails
 		end
 
 		def gmaps_sticker_polylines
 			polylines_array = Array.new()
 			one_polyline = Array.new()
 			
-			@locations.each do |location|
-				point = {
-					"lng" => location.longitude,
-					"lat" => location.latitude
+			@sticker.locations.each do |location|
+				one_polyline << {
+					'ng' => location.longitude,
+					'lat' => location.latitude
 				}
-				one_polyline << point
 			end
 
 			polylines_array = [one_polyline]

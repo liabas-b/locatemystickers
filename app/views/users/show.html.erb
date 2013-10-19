@@ -1,6 +1,6 @@
 <% provide(:title, @user.name) %>
 
-<div class="container-fluid page-content-with-left-sidebar">
+<div class="container-fluid page-content">
   <%= render 'user_info_header', user: @user %>
 
   <% if @markers_json != nil && @markers_json.length > 0 %>

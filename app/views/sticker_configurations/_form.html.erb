@@ -1,0 +1,29 @@
+<%= form_for(@sticker_configuration, :url => user_sticker_sticker_configurations_path(@user, @sticker)) do |f| %>
+  <% if @sticker_configuration.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@sticker_configuration.errors.count, "error") %> prohibited this sticker_configuration from being saved:</h2>
+
+      <ul>
+      <% @sticker_configuration.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :sticker_code %><br />
+    <%= f.text_field :sticker_code %>
+  </div>
+  <div class="field">
+    <%= f.label :frequency_update %><br />
+    <%= f.number_field :frequency_update %>
+  </div>
+  <div class="field">
+    <%= f.label :activate %><br />
+    <%= f.number_field :activate %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

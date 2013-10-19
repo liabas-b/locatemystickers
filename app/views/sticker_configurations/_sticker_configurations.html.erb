@@ -1,0 +1,14 @@
+<table class='table table-hover'>
+  <tr>
+    <th>Sticker code</th>
+    <th>Frequency update</th>
+    <th>Activate</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @sticker_configurations.each do |sticker_configuration| %>
+    <%= render 'sticker_configurations/sticker_configuration', :sticker_configuration => sticker_configuration %>
+<% end %>
+</table>

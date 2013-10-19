@@ -1,0 +1,9 @@
+
+  <tr>
+    <td><%= sticker_configuration.sticker_code %></td>
+    <td><%= sticker_configuration.frequency_update %></td>
+    <td><%= sticker_configuration.activate %></td>
+    <td><%= link_to 'Show', user_sticker_sticker_configuration_path(@user.id, @sticker.id, sticker_configuration) %></td>
+    <td><%= link_to 'Edit', edit_user_sticker_sticker_configuration_path(@user, @sticker, sticker_configuration) %></td>
+    <td><%= link_to 'Destroy', user_sticker_sticker_configuration_path(@user, @sticker, sticker_configuration), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>

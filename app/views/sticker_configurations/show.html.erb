@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Sticker code:</b>
+  <%= @sticker_configuration.sticker_code %>
+</p>
+
+<p>
+  <b>Frequency update:</b>
+  <%= @sticker_configuration.frequency_update %>
+</p>
+
+<p>
+  <b>Activate:</b>
+  <%= @sticker_configuration.activate %>
+</p>
+
+
+<%= link_to 'Edit', edit_user_sticker_sticker_configuration_path(@user, @sticker, @sticker_configuration) %> |
+<%= link_to 'Back', user_sticker_sticker_configurations_path(@user, @sticker) %>

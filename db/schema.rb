@@ -86,6 +86,14 @@ ActiveRecord::Schema.define(:version => 20131018152944) do
     t.datetime "updated_at",     :null => false
   end
 
+  create_table "sticker_configurations", :force => true do |t|
+    t.string   "sticker_code"
+    t.integer  "frequency_update"
+    t.integer  "activate"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
+
   create_table "sticker_types", :force => true do |t|
     t.string   "name"
     t.string   "icon"

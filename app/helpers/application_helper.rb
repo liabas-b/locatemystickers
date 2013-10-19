@@ -6,6 +6,7 @@ module ApplicationHelper
   include ZonesHelper
   include HistoriesHelper
   include StaticPagesHelper
+  include StickerConfigurationsHelper
   
   def total_locations_of_stickers(stickers)
     count = 0
@@ -150,6 +151,15 @@ module ApplicationHelper
   def delete_ss_sticker_location(location_id, number_limit = nil, date_limit = nil)
     stickers_server_url('locations/' + location_id.to_s + '.json')
     delete_url
+    return @parsed_json
+  end
+
+  def post_ss_sticker_configuration(configuration)
+    stickers_server_url('sticker_configurations.json' +
+                                    '?activate=' + configuration.activate.to_s +
+                                    '&sticker_code=' + configuration.sticker_code +
+                                    '&frequency_update=' + configuration.frequency_update.to_s)
+    post_url
     return @parsed_json
   end
 end

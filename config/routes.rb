@@ -19,6 +19,7 @@ LocateMyStickers::Application.routes.draw do
     end
     resources :messages, :histories
     resources :stickers do
+      resources :sticker_configurations
       resources :histories, :locations
       resources :zones do
         resources :zone_locations

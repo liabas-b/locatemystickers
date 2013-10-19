@@ -1,0 +1,10 @@
+<span class="alerts">
+	<% flash.each do |key, value|
+			emphase = key.to_s.humanize.capitalize 
+			%>
+			<div class="alert alert-<%= key %> fade in">
+				<button type="button" class="close" data-dismiss="alert">×</button>
+				<strong><%= emphase %></strong> <%= value %>
+			</div>
+	<% end %>
+</span>

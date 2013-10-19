@@ -1,0 +1,7 @@
+<% complement = complement ||= "" %>
+
+<%= render 'shared/search_navbar_top', models: @sticker_configurations, complement: complement %>
+<div id="<%= complement %>sticker_configurations" class="row-fluid">
+	<%= render 'sticker_configurations/sticker_configurations', sticker_configurations: @sticker_configurations %>
+</div>
+<%= render 'shared/search_navbar_bottom', models: @sticker_configurations, complement: complement %>

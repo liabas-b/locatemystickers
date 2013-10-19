@@ -17,12 +17,14 @@
 
 class Sticker < ActiveRecord::Base
 	include ApplicationHelper
-	attr_accessible :name, :user, :locations, :version, :sticker_type_id, :color, :code, :text, :is_active, :created_at, :updated_at, :user_id, :last_location
+	attr_accessible :name, :user, :locations, :version, :sticker_type_id, :color, :code, :text, :is_active, :created_at, :updated_at, :user_id, :last_location,
+					:sticker_configuration
 
 	belongs_to :user
 	has_many :locations, dependent: :destroy
 	has_many :zones, dependent: :destroy
 	has_many :histories
+	has_one :sticker_configuration
 
 	validates :name, presence: true, length: { maximum: 140 }
 	validates :user_id, presence: true

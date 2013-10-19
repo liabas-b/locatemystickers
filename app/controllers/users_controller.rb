@@ -5,14 +5,14 @@ class UsersController < ApplicationController
 	helper_method :sort_column, :sort_direction
 
 	# Filters
-	before_filter :column_names, only: [:index]
+	before_filter :column_names, only: [:index, :friends]
 	before_filter :stickers_column_names, only: [:show, :stickers]	
 
 	# GET /users
 	# GET /users.json
 	def index
 		@users = User.search(params[:search], params["column"]).reorder(sort_column + " " + sort_direction)
-		@users = @users.paginate(per_page: 10, :page => params[:page]) if (params[:paginate] == 'true')
+		@users = @users.paginate(per_page: 10, :page => params[:page]) unless (params[:paginate] == 'false')
 		@form_path = users_path
 
 		respond_to do |format|
@@ -145,7 +145,7 @@ class UsersController < ApplicationController
 	def friends
 		@title = "Friends"
 		@user = User.find(params[:id])
-		@users = @user.followed_users#.search(params[:search], params["column"]).reorder(sort_column + " " + sort_direction).paginate(per_page: 10, :page => params[:page])
+		@users = @user.followed_users.search(params[:search], params["column"]).reorder(sort_column + " " + sort_direction).paginate(per_page: 10, :page => params[:page])
 
 		respond_to do |format|
 			format.html
