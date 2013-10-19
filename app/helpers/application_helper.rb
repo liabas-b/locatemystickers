@@ -132,8 +132,8 @@ module ApplicationHelper
   # Stickers server
 
   def stickers_server_url(data = nil)
-    # @data_url = 'http://127.0.0.1:3333/' + data
-    @data_url = 'http://stickersserver.herokuapp.com/' + data
+    @data_url = 'http://127.0.0.1:3333/' + data
+    # @data_url = 'http://stickersserver.herokuapp.com/' + data
     return @data_url
   end
 

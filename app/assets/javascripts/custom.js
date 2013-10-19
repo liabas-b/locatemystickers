@@ -206,36 +206,37 @@ $(function() {
     $.get(url, function(newItemData) {
         for (var i = 0; i < newItemData.length; i++ ) {
       console.log(i + ' - ' + newItemData[i].location.latitude)
-          var marker = new google.maps.Marker({
-            position: new google.maps.LatLng(newItemData[i].location.latitude, newItemData[i].location.longitude), 
-            map: Gmaps.map.serviceObject,
-            draggable: false,
-            title: '' + newItemData[i].location.id,
-            icon: {
-              path: google.maps.SymbolPath.CIRCLE,
-              strokeColor: 'black',
-              strokeOpacity: 1.0,
-              strokeWeight: 1.0,
-              fillColor: newItemData[i].color,
-              fillOpacity: 1.0,
-              scale: 4
-            }
-          });
+          
           var old_marker_index = -1;
-            for (var y = 0; y < markersArray.length; y++ ) {
+          
+          for (var y = 0; y < markersArray.length; y++ ) {
               if (markersArray[y].title == '' + newItemData[i].location.id) {
                 old_marker_index = y;
                 console.log("markersArray[old_marker_index] " + markersArray[old_marker_index].title);
-                markersArray[old_marker_index].setLatLng(new google.maps.LatLng(newItemData[i].location.latitude, newItemData[i].location.longitude));
+                markersArray[old_marker_index].position = new google.maps.LatLng(newItemData[i].location.latitude, newItemData[i].location.longitude);
               }
-              // if (old_marker_index > -1) {
-              //   console.log("removing markersArray[old_marker_index] " + markersArray[old_marker_index].title)
-              //     markersArray.splice(old_marker_index, 1);
-              // }
-              // markersArray.push(marker);
           }
-          markersArray.push(marker);
-          google.maps.event.addListener(marker,"click",function(){});
+
+			if (old_marker_index == -1) {
+				console.log("pushing new location")
+	          var marker = new google.maps.Marker({
+	            position: new google.maps.LatLng(newItemData[i].location.latitude, newItemData[i].location.longitude), 
+	            map: Gmaps.map.serviceObject,
+	            draggable: false,
+	            title: '' + newItemData[i].location.id,
+	            icon: {
+	              path: google.maps.SymbolPath.CIRCLE,
+	              strokeColor: 'black',
+	              strokeOpacity: 1.0,
+	              strokeWeight: 1.0,
+	              fillColor: newItemData[i].color,
+	              fillOpacity: 1.0,
+	              scale: 4
+	            }
+	          });
+	          markersArray.push(marker);
+	          google.maps.event.addListener(marker,"click",function(){});
+         }
         }
     });
       setTimeout(function() {
