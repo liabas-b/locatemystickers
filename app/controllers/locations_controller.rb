@@ -11,9 +11,10 @@ class LocationsController < ApplicationController
   # GET /users/1/stickers/1/locations
   # GET /users/1/stickers/1/locations.json
   def index
+    @user = User.find(params[:user_id])
     @sticker = Sticker.where(' code="' + params[:sticker_id] + '" OR id="' + params[:sticker_id] + '" AND user_id=' + params[:user_id]).first
     @locations = @sticker.locations.search(params[:search], params["column"]).reorder(sort_column + " " + sort_direction)
-    @locations = @locati0ons.paginate(per_page: params[:per_page] || 10 , :page => params[:page]) if params[:paginate] == 'true'
+    @locations = @locations.paginate(per_page: params[:per_page] || 10 , :page => params[:page]) unless params[:paginate] == 'false'
 
     respond_to do |format|
       format.html { gmaps_all_locations_markers } # index.html.erb
@@ -24,8 +25,7 @@ class LocationsController < ApplicationController
 
   def count
     @sticker = Sticker.find(params[:sticker_id])
-    @locations = @sticker.locations.order(:id).paginate(:page => params[:page])
-    render :json => @locations.count
+    render :json => @sticker.locations.count
   end
 
   # GET /locations
@@ -43,6 +43,8 @@ class LocationsController < ApplicationController
   # GET /users/1/stickers/1/locations/1
   # GET /users/1/stickers/1/locations/1.json
   def show
+    @user = User.find(params[:user_id])
+    @sticker = Sticker.find(params[:sticker_id])
     @location = Location.find(params[:id])
 
     respond_to do |format|
@@ -54,7 +56,7 @@ class LocationsController < ApplicationController
   # GET /users/1/stickers/1/locations/new
   # GET /users/1/stickers/1/locations/new.json
   def new
-    instanciate_user(params[:user_id])
+    @user = User.find(params[:user_id])
     @location = Location.new
     @sticker = Sticker.find(params[:sticker_id])
 
@@ -156,7 +158,7 @@ class LocationsController < ApplicationController
 
     def gmaps_all_locations_markers
       @markers_json = @locations.to_gmaps4rails do |location, marker|
-        sticker = get_ws_sticker(location.sticker_id)
+        sticker = location.sticker_id
         unless sticker.nil?
           marker.infowindow render_to_string(:partial => "/locations/maps_info_window",
                                              :locals => { :location => location, :sticker => sticker })
@@ -168,7 +170,7 @@ class LocationsController < ApplicationController
 
     def gmaps_location_marker
       @markers_json = @location.to_gmaps4rails do |location, marker|
-        sticker = get_ws_sticker(location.sticker_id)
+        sticker = location.sticker_id
         unless sticker.nil?
           marker.infowindow render_to_string(:partial => "/locations/maps_info_window",
                                              :locals => { :location => location, :sticker => sticker })

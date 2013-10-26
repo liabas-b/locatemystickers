@@ -37,6 +37,14 @@ class Sticker < ActiveRecord::Base
 	after_create :after_create_callback
 	after_update :after_update_callback
 	before_destroy :before_destroy_callback
+  	
+  	def self.find(input)
+  		if input.is_a?(Integer)
+	     		super
+	    	else
+	      	find_by_code(input)
+	    	end
+	end
 
 	def self.search(search, column = 'name')
 		if search
@@ -89,6 +97,10 @@ class Sticker < ActiveRecord::Base
 			end
 		end
 		self.last_location = 'Unknown' if self.last_location.nil?
+	end
+
+	def share_with (user)
+		user.follow!(self.user.id, self.id)
 	end
 
 	private
