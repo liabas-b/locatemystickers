@@ -61,7 +61,7 @@ class StickersController < ApplicationController
 	# GET /users/1/stickers/1
 	# GET /users/1/stickers/1.json
 	def show
-		@sticker = Sticker.where("code='" + params[:id] + "' OR id='" + params[:id] + "' AND user_id='" + params[:user_id] + "'").first
+		@sticker = Sticker.where("code='" + params[:id].to_i + "' OR id='" + params[:id].to_i + "' AND user_id='" + params[:user_id] + "'").first
 		@user = User.find_by_id(@sticker.user_id)
 		@form_path = user_stickers_path(@user)
 
@@ -87,7 +87,7 @@ class StickersController < ApplicationController
 
 	# GET /users/1/stickers/1/edit
 	def edit
-		@sticker = Sticker.find(params[:id])
+		@sticker = Sticker.find(params[:id].to_i)
 		@user = User.find_by_id(@sticker.user_id)
 	end
 
@@ -112,7 +112,7 @@ class StickersController < ApplicationController
 	# PUT /users/1/stickers/1
 	# PUT /users/1/stickers/1.json
 	def update
-		@sticker = Sticker.find(params[:id])
+		@sticker = Sticker.find(params[:id].to_i)
 		@user = User.find_by_id(@sticker.user_id)
 
 		respond_to do |format|
@@ -130,9 +130,9 @@ class StickersController < ApplicationController
 	# DELETE /users/1/stickers/1
 	# DELETE /users/1/stickers/1.json
 	def destroy
-		@sticker = Sticker.where("code='" + params[:id] + "' AND user_id=" + params[:user_id]).first
-		if (@sticker == nil && is_number?(params[:id]))
-			@sticker = Sticker.where("id=" + params[:id] + " AND user_id=" + params[:user_id]).first
+		@sticker = Sticker.where("code='" + params[:id].to_i + "' AND user_id=" + params[:user_id]).first
+		if (@sticker == nil && is_number?(params[:id].to_i))
+			@sticker = Sticker.where("id=" + params[:id].to_i + " AND user_id=" + params[:user_id]).first
 		end
 		if (@sticker != nil)
 			@sticker.destroy
@@ -152,8 +152,14 @@ class StickersController < ApplicationController
 	end
 
 	def last_location_address
-		sticker = Sticker.find(params[:id])
+		sticker = Sticker.find(params[:id].to_i)
 		render :json =>  stickerlocations.last.address
+	end
+
+	def share_with_user
+		@sticker = Sticker.find(params[:id].to_i)
+		@sticker.share_with(User.find(params[:with_user_id]))
+		render :json => true, status: :ok
 	end
 
 	private
@@ -170,7 +176,7 @@ class StickersController < ApplicationController
 		end
 
 		def correct_sticker_user
-			@sticker = current_user.stickers.find_by_id(params[:id])
+			@sticker = current_user.stickers.find_by_id(params[:id].to_i)
 			redirect_to root_url unless current_user.admin? || !@sticker.nil?
 		end
 

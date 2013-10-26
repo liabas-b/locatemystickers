@@ -1,6 +1,6 @@
 <%
-  sticker = @locations_stickers[location.id]
-  user = @stickers_users.nil? ? @user : @stickers_users[sticker.id]
+  sticker = location.sticker
+  user = sticker.user
 %>
 
     <tr>

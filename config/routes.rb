@@ -15,6 +15,7 @@ LocateMyStickers::Application.routes.draw do
   match '/users/:user_id/stickers/count', to: 'stickers#count'
   match '/users/:user_id/stickers/:sticker_id/locations/count', to: 'locations#count'
   match '/users/:user_id/stickers/:id/lastlocationaddress', to: 'stickers#last_location_address'
+  match '/users/:user_id/stickers/:id/share_with_user', to: 'stickers#share_with_user'
 
   resources :users do
     resources :conversations do
