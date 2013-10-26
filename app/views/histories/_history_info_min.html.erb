@@ -1,24 +1,23 @@
 <% if (history.subject == 'sticker')
-	user = get_ws_user(history.user_id)
-	sticker = get_ws_user_sticker(history.user_id, history.sticker_id) %>
+	sticker = Sticker.find(history.sticker_id) %>
 	<%= history.created_at %>:
-	<a href="<%= user_path(user.id) %>"><%= user.name %></a>  
+	<a href="<%= user_path(sticker.user.id) %>"><%= sticker.user.name %></a>  
 	<%= history.operation %>
 	<%= history.subject %>
-	<%= link_to sticker.name, user_sticker_path(user, sticker) %>
+	<%= link_to sticker.name, user_sticker_path(sticker.user, sticker) %>
 <% end %>
 
 <% if (history.subject == 'user')
-	user = get_ws_user(history.user_id) %>
+	user = User.find(history.user_id) %>
 	<%= history.created_at %>: 
 	<a href="<%= user_path(user.id) %>"><%= user.name %></a>  
 	<%= history.operation %>
 <% end %>
 
 <% if (history.subject == 'location')
-	user = get_ws_sticker_possessor(history.sticker_id)
-	sticker = get_ws_user_sticker(user.id, history.sticker_id)
-	location = get_ws_user_sticker_location(user.id, history.sticker_id, history.location_id) %>
+	location = Location.find(history.location_id)
+	sticker =Sticker.find(location.sticker_id)
+	user = User.find(sticker.user_id) %>
 	<%= history.created_at %>:
 	<a href="<%= user_path(user.id) %>"><%= user.name %></a>:
 	Located sticker
@@ -29,9 +28,9 @@
 <% end %>
 
 <% if (history.subject == 'message')
-	message = get_ws_user_message(history.user_id, history.message_id)
-	user = get_ws_user(message.from_user_id)
-	to_user = get_ws_user(message.user_id)
+	message = Message.find(history.message_id)
+	user = User.find(message.from_user_id)
+	to_user = User.find(message.user_id)
 	%>
 	<%= history.created_at %>:
 	<%= link_to user.name, user_path(user.id) %>

@@ -1,11 +1,9 @@
 <div id="messages">
-	<div class="accordion" style="margin-top:5px;">
-	  <% @conversations.each do |subject, conversation| %>
-			<%
-					from_user = get_ws_user(conversation.first.from_user_id)
-					with_user = get_ws_user(conversation.first.user_id)
-			%>
-	    <%= render 'conversation', subject: subject, conversation: conversation, from_user: from_user, with_user: with_user %>
-	  <% end %>
-	</div>
+  <% @conversations.each do |subject, conversation| %>
+	<%
+			from_user = User.find(conversation.first.from_user_id)
+			with_user = User.find(conversation.first.user_id)
+	%>
+    <%= render 'conversation', subject: subject, conversation: conversation, from_user: from_user, with_user: with_user %>
+  <% end %>
 </div>

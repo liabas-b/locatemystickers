@@ -35,9 +35,10 @@ class Location < ActiveRecord::Base
 
 	# Callbacks #
 	########
-	after_validation :fetch_address, :reverse_geocode
+	after_validation :fetch_address
+	#, :reverse_geocoder
 	# after_save :after_save_callback
-	# after_create :after_create_callback
+	after_create :after_create_callback
 	# after_update :after_update_callback
 	# before_destroy :before_destroy_callback
 
@@ -77,7 +78,8 @@ class Location < ActiveRecord::Base
 	private
 
 		def after_create_callback
-			self.histories.create!(subject: "location", operation: "created")
+			self.sticker.touch
+			# self.histories.create!(subject: "location", operation: "created")
 		end
 
 		def after_update_callback

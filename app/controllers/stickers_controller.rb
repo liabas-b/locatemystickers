@@ -12,7 +12,7 @@ class StickersController < ApplicationController
 		@user = User.find_by_id(params[:user_id])
 		@title = @user.name
 		@stickers = @user.stickers.search(params[:search], params[:column]).reorder(sort_column + " " + sort_direction)
-		@stickers = @stickers.paginate(per_page: params[:per_page] || 10 , :page => params[:page]) if params[:paginate] == 'true'
+		@stickers = @stickers.paginate(per_page: params[:per_page] || 10 , :page => params[:page]) unless params[:paginate] == 'false'
 		@form_path = user_stickers_path(@user)
 
 		respond_to do |format|
@@ -26,7 +26,7 @@ class StickersController < ApplicationController
 	def get_stickers
 		user = User.find_by_id(params[:user_id])
 		stickers = user.stickers.search(params[:search], params[:column]).reorder(sort_column + " " + sort_direction)
-		stickers = stickers.paginate(per_page: params[:per_page] || 10 , :page => params[:page]) if params[:paginate] == 'true'
+		stickers = stickers.paginate(per_page: params[:per_page] || 10 , :page => params[:page]) unless params[:paginate] == 'false'
 
 		respond_to do |format|
 			format.json { render :json => stickers }
@@ -49,7 +49,7 @@ class StickersController < ApplicationController
 		@title = "All"
 		@form_path = stickers_path
 		@stickers = Sticker.search(params[:search], params['column']).reorder(sort_column + " " + sort_direction)
-		@stickers = @stickers.paginate(per_page: params[:per_page] || 10 , page: params[:page]) if params[:paginate] == 'true'
+		@stickers = @stickers.paginate(per_page: params[:per_page] || 10 , page: params[:page]) unless params[:paginate] == 'false'
 
 		respond_to do |format|
 			format.html { render 'stickers/show_stickers' }
@@ -61,7 +61,7 @@ class StickersController < ApplicationController
 	# GET /users/1/stickers/1
 	# GET /users/1/stickers/1.json
 	def show
-		@sticker = Sticker.where("code='" + params[:id].to_i + "' OR id='" + params[:id].to_i + "' AND user_id='" + params[:user_id] + "'").first
+		@sticker = Sticker.find(params[:id])
 		@user = User.find_by_id(@sticker.user_id)
 		@form_path = user_stickers_path(@user)
 
@@ -87,7 +87,7 @@ class StickersController < ApplicationController
 
 	# GET /users/1/stickers/1/edit
 	def edit
-		@sticker = Sticker.find(params[:id].to_i)
+		@sticker = Sticker.find(params[:id])
 		@user = User.find_by_id(@sticker.user_id)
 	end
 
@@ -112,7 +112,7 @@ class StickersController < ApplicationController
 	# PUT /users/1/stickers/1
 	# PUT /users/1/stickers/1.json
 	def update
-		@sticker = Sticker.find(params[:id].to_i)
+		@sticker = Sticker.find(params[:id])
 		@user = User.find_by_id(@sticker.user_id)
 
 		respond_to do |format|
@@ -130,10 +130,7 @@ class StickersController < ApplicationController
 	# DELETE /users/1/stickers/1
 	# DELETE /users/1/stickers/1.json
 	def destroy
-		@sticker = Sticker.where("code='" + params[:id].to_i + "' AND user_id=" + params[:user_id]).first
-		if (@sticker == nil && is_number?(params[:id].to_i))
-			@sticker = Sticker.where("id=" + params[:id].to_i + " AND user_id=" + params[:user_id]).first
-		end
+		@sticker = Sticker.find(params[:id])
 		if (@sticker != nil)
 			@sticker.destroy
 			respond_to do |format|
@@ -152,12 +149,12 @@ class StickersController < ApplicationController
 	end
 
 	def last_location_address
-		sticker = Sticker.find(params[:id].to_i)
+		sticker = Sticker.find(params[:id])
 		render :json =>  stickerlocations.last.address
 	end
 
 	def share_with_user
-		@sticker = Sticker.find(params[:id].to_i)
+		@sticker = Sticker.find(params[:id])
 		@sticker.share_with(User.find(params[:with_user_id]))
 		render :json => true, status: :ok
 	end
@@ -176,7 +173,7 @@ class StickersController < ApplicationController
 		end
 
 		def correct_sticker_user
-			@sticker = current_user.stickers.find_by_id(params[:id].to_i)
+			@sticker = current_user.stickers.find_by_id(params[:id])
 			redirect_to root_url unless current_user.admin? || !@sticker.nil?
 		end
 

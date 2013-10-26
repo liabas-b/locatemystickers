@@ -1,8 +1,8 @@
 <% provide(:title, 'All Events') %>
 
-<%= render 'shared/server_stats_header' %>
-
 <div class="container-fluid page-content">
+  <%= render 'shared/server_stats_header' %>
+
   <div id="histories-list" style="position:relative;top:-250px"></div>
 		<h1>All events</h1>
 	  <div class="well well-padding paper-shadow header-well">
@@ -11,10 +11,10 @@
 </div>
 
 <!-- Sidebar Fixed left -->
-<div class="sidebar">
+<% content_for :sidebar do %>
+  <%= render 'users/friends' %>
   <h3>Navigate</h3>
   <ul id="sidebar-nav" class="nav nav-list affix" data-offset-top="200px">
     <li><a href="#histories-list" class="histories-list">Histories list</a></li>
   </ul>
-</div>
-
+<% end %>

@@ -6,12 +6,13 @@ class HistoriesController < ApplicationController
   # GET /histories
   # GET /histories.json
   def index
+    @user = current_user
     if (params.has_key?(:user_id) && !params[:user_id].nil?)
-      @histories = History.where("user_id="+ params[:user_id]).search(params[:search], params["column"]).reorder(sort_column + " " + sort_direction).paginate(:page => params[:page])
+      @histories = History.where("user_id="+ params[:user_id])
       if (params.has_key?(:sticker_id) && !params[:sticker_id].nil?)
-        @histories = @histories.where("sticker_id="+ params[:sticker_id])
+        @histories += @histories.where("sticker_id="+ params[:sticker_id])
         if (params.has_key?(:location_id) && !params[:location_id].nil?)
-          @histories = @histories.where("location_id="+ params[:location_id])
+          @histories += @histories.where("location_id="+ params[:location_id])
         end
       end
       @form_path = user_histories_path(User.find(params[:user_id]))

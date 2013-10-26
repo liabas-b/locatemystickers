@@ -7,7 +7,7 @@
 	end
 %>
 
-<div class="accordion-group well well-padding paper-shadow">
+<div class="well well-padding paper-shadow">
   <div class="accordion-heading">
 		<h4>
       <a style="display:inline;" class="accordion-toggle" data-toggle="collapse" data-parent=".accordion" href="#collapseOne<%= conversation.first.id %>">
@@ -21,19 +21,14 @@
        and <%= link_to with_user.name, user_path(with_user) %>
     </h4>
   </div>
-  <div id="collapseOne<%= conversation.first.id %>" class="accordion-body collapse">
-    <div class="accordion-inner" style="margin-left:20px;">
-    	<br/>
-			<blockquote id="conversation-with-<%= with_user.id %>">
-				<%
-					conversation = conversation.reverse 
-					conversation.each do |message| %>
-				  <%= render 'message_block', message: message %>
-				<% end %>
-			</blockquote>
-			<div style="border-bottom:1px solid #f5f5f5; height:1px; width:100%; padding-right: 20px;margin-bottom:20px;"></div>
-			<%= render 'form', from: from_user.id, to: with_user.id, conversation: conversation %>
-    </div>
-  </div>
+  <blockquote id="conversation-with-<%= with_user.id %>">
+  	<%
+  		conversation = conversation.reverse 
+  		conversation.each do |message| %>
+  	  <%= render 'message_block', message: message %>
+  	<% end %>
+  </blockquote>
+  <div style="border-bottom:1px solid #f5f5f5; height:1px; width:100%; padding-right: 20px;margin-bottom:20px;"></div>
+  <%= render 'form', from: from_user.id, to: with_user.id, conversation: conversation %>
 </div>
 

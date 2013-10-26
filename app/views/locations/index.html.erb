@@ -1,8 +1,8 @@
 <% provide(:title, @sticker.name + ' locations') %>
 
-<%= render 'users/user_info_header', user: @user %>
-
 <div class="container-fluid page-content">
+  <%= render 'users/user_info_header', user: @user %>
+
   <div id="locations-map" style="position:relative;top:-250px"></div>
   <% if @markers_json != nil && @markers_json.length > 0 %>
   <div id="resizable-map" class="row-fluid">
@@ -14,8 +14,6 @@
       </div>
     </div>
   </div>
-  <br/>
-  <br/>
   <% end %>
 
   <div id="locations-list" style="position:relative;top:-250px"></div>
@@ -26,10 +24,11 @@
 </div>
 
 <!-- Sidebar Fixed left -->
-<div class="sidebar">
+<% content_for :sidebar do %>
+  <%= render 'users/friends', user: @user %>
   <h3>Navigate</h3>
   <ul id="sidebar-nav" class="nav nav-list affix" data-offset-top="200px">
     <li class=""><a href="#locations-map" class="locations-map">Map</a></li>
     <li class=""><a href="#locations-list" class="locations-list">Locations list</a></li>
   </ul>
-</div>
+<% end %>

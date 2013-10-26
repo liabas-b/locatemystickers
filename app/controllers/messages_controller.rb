@@ -15,6 +15,11 @@ class MessagesController < ApplicationController
     end
     @messages = @messages.sort_by { |m| m.created_at }.reverse
     @conversations = @messages.group_by { |message| message.subject }
+    if (params.has_key?(:user_id) && !params[:user_id].nil?)
+      @title = User.find(params[:user_id]).name + "'s messages"
+    else
+      @title = "Messages"
+    end
 
     respond_to do |format|
       format.html # index.html.erb

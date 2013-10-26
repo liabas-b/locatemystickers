@@ -1,15 +1,16 @@
 <% provide(:title, @title) %>
 
-<%= render 'shared/server_stats_header' %>
-
 <div class="container-fluid page-content">
+  <%= render 'shared/server_stats_header' %>
+
   <div id="messages-list" style="position:relative;top:-250px"></div>
-		<h1><%= @title %></h1><br/>
-		<%= render 'messages', messages: @messages %>
+  <h1><%= @title %></h1><br/>
+  <%= render 'messages', messages: @messages %>
 </div>
 
 <!-- Sidebar Fixed left -->
-<div class="sidebar">
+<% content_for :sidebar do %>
+  <%= render 'users/friends', user: @user %>
   <h3>Navigate</h3>
   <ul id="sidebar-nav" class="nav nav-list affix" data-offset-top="200px">
     <li><a href="#messages-list" class="messages-list">Messages list</a></li>
@@ -18,4 +19,4 @@
 	    	<%= subject.split.delete_if{|x| @user.first_name == x || @user.last_name == x}.join(' ') %></a></li>
     <% end %>
   </ul>
-</div>
+<% end %>

@@ -1,18 +1,20 @@
 <% provide(:title, @title + ' stickers') %>
 
-<%= render 'shared/server_stats_header' %>
 
 <div class="container-fluid page-content">
+  <%= render 'shared/server_stats_header' %>
+
   <div id="stickers-list" style="position:relative;top:-250px"></div>
 	<%= render 'stickers/stickers_table', stickers: @stickers, user: @user %>
 </div>
 
 <!-- Sidebar Fixed left -->
-<div class="sidebar">
+<% content_for :sidebar do %>
+  <%= render 'users/friends', user: @user %>
   <h3>Navigate</h3>
   <ul id="sidebar-nav" class="nav nav-list affix" data-offset-top="200px">
     <li><a href="#stickers-list" class="stickers-list">Stickers list</a></li>
 		<li><%= link_to 'New Sticker', new_user_sticker_path(@user) %></li>
   </ul>
-</div>
+<% end %>
 

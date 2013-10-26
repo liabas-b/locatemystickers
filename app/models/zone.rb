@@ -29,10 +29,8 @@ class Zone < ActiveRecord::Base
   end
 
   def generate_locations
-    i = 0
-    4.times do
+    4.times do |i|
       self.locations.create!(zone_id: self.id,latitude: rand(50 - self.id) + Math.sin(i * 20) * 2, longitude: rand(50 - self.id) * Math.cos(i *20) * -1)
-      i = i + 1
     end
   end
 end

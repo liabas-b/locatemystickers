@@ -1,3 +1,5 @@
-<div class="sidebar well affix" data-offset-top="-200px">
-	<%= yield :sidebar %>
-</div>
+<% if content_for?(:sidebar) %>
+  <div class="sidebar well affix" data-offset-top="-200px">
+  	<%= yield :sidebar %>
+  </div>
+<% end %>

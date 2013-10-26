@@ -1,5 +1,13 @@
-<h1>New message</h1>
+<% provide(:title, @title) %>
 
-<%= render 'form', from: current_user.id, to: params[:user_id] %>
+<div class="container-fluid page-content">
+  <%= render 'shared/server_stats_header' %>
+  <div id="messages-list" style="position:relative;top:-250px"></div>
+  <h1><%= @title %></h1>
+  <%= render 'form', from: current_user.id, to: params[:user_id] %>
+</div>
 
-<%= link_to 'Back', messages_path %>
+<!-- Sidebar Fixed left -->
+<% content_for :sidebar do %>
+  <%= render 'users/friends', user: @user %>
+<% end %>

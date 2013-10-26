@@ -1,7 +1,7 @@
  <div>
 
 <% if (!message.from_user_id.nil? && message.from_user_id != 0)
-    user = get_ws_user(message.from_user_id)
+    user = User.find(message.from_user_id)
   end
   unless user.nil?
  %>

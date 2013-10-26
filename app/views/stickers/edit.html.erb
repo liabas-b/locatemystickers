@@ -1,16 +1,28 @@
-<% provide(:title, 'Editing sticker') %>
-<div style="background-image: url('/assets/contact-background.jpg');position:absolute;right:0;left:0;bottom:0;top:0">
-</div>
-<div style="opacity:.9; width:610px; margin:0 auto;">
-  <div class="well paper-shadow" style="margin-top:100px;">
-		<h1>Editing sticker</h1><br/>
-		<p class="lead">
-			Edit your sticker here.
-		</p>
-		<%= render 'form_edit' %>
-		<%= link_to 'Back', user_stickers_path(@user) %>
-	</div>
-</div>
+<% provide(:title, 'Editing sticker #{@sticker.name}') %>
 
-<h1></h1>
+<div class="container-fluid page-content">
+  <%= render 'users/user_info_header', user: @user %>
 
+  <div id="user-stickers" class="row-fluid">
+    <div id="sticker" style="position:relative;top:-240px"></div>
+    <div id="stickers" class="row-fluid">
+      <%= render 'sticker_info_min', sticker: @sticker, user: @user, locations: @locations, zones: @zones, span_size: 12 %>
+    <div id="edit" style="position:relative;top:-240px"></div>
+    <div id="edit" class="well paper-shadow">
+      <h1>Editing sticker</h1><br/>
+      <p class="lead">
+        Edit your sticker here.
+      </p>
+      <%= render 'form_edit' %>
+      <%= link_to 'Back', user_stickers_path(@user) %>
+    </div>
+  </div>
+
+<% content_for :sidebar do %>
+  <%= render 'users/friends', user: @user %>
+  <h3>Navigate</h3>
+  <ul id="sidebar-nav" class="nav nav-list affix" data-offset-top="200px">
+    <li><a href="#sticker">Sticker</a></li>
+    <li><a href="#edit">Edit</a></li>
+  </ul>
+<% end %>

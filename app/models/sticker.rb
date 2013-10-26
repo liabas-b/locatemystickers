@@ -29,7 +29,7 @@ class Sticker < ActiveRecord::Base
 	validates :name, presence: true, length: { maximum: 140 }
 	validates :user_id, presence: true
 
-	default_scope order: 'stickers.created_at DESC'
+	default_scope order: 'stickers.updated_at DESC'
 
 	# Callbacks
 	before_save :generate_code
@@ -39,7 +39,7 @@ class Sticker < ActiveRecord::Base
 	before_destroy :before_destroy_callback
   	
   	def self.find(input)
-  		if input.is_a?(Integer)
+  		if input.is_a?(Integer) || input.to_i != 0
 	     		super
 	    	else
 	      	find_by_code(input)
