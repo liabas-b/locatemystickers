@@ -1,0 +1,7 @@
+%h2 Fence
+= zone.locations.inspect
+- zone.locations.each do |location|
+  = form_for location, { url: user_sticker_zone_fence_path(user, sticker, zone), remote: true } do |f|
+    = f.textarea :latitude, location.latitude
+    = f.textarea :longitude, location.longitude
+    = f.submit

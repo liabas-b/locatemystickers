@@ -1,12 +1,11 @@
-require 'net/http'
-
 class ZonesController < ApplicationController
   before_filter :column_names
 
   # GET /user/1/sticker/1/zones
   # GET /user/1/sticker/1/zones.json
   def index
-    @zones = Zone.where('sticker_id = ' + params[:sticker_id])
+    @sticker = Sticker.find(params[:sticker_id])
+    @zones = @sticker.zones
     @user = User.find(params[:user_id])
     declare_sticker
 

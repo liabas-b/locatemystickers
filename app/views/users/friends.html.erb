@@ -1,5 +1,13 @@
 <% provide(:title, 'Your friends') %>
 
+<% content_for :sidebar do %>
+  <%= render 'friends', user: @user %>
+  <h3>Navigate</h3>
+  <ul id="sidebar-nav" class="nav nav-list">
+    <li class=""><a href="#friends-list" class="friends-list">Friends list</a></li>
+  </ul>
+<% end %>
+
 <div class="page-content">
 	<%= render 'user_info_header', user: @user %>
   	<div id="friends-list"></div>
@@ -11,12 +19,4 @@
 			<%= render 'users/no_friends', user: @user %>
 		</div>
 	<% end %>
-</div>
-
-<!-- Sidebar Fixed left -->
-<div class="sidebar well">
-  <h3>Navigate</h3>
-  <ul id="sidebar-nav">
-    <li class=""><a href="#friends-list" class="friends-list">Friends list</a></li>
-  </ul>
 </div>

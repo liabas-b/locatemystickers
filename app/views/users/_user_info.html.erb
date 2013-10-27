@@ -11,7 +11,7 @@
 		<a href="<%= user_stickers_path(@user) %>">
 			<b><%= @user.stickers.count %></b> stickers.
 		</a><br/>
-		<a href="<%= user_stickers_path(@user) %>">
+		<a href="<%= user_path(@user) %>/friends">
 			<b><%= @user.followed_users.count %></b> friends.
 		</a><br/>
 		<%= @user.email %><br/>
@@ -23,10 +23,8 @@
 			<%= phone_for @user %>
 		<% end %>
 	</div>
-	<div class="pull-right" style="position:absolute;right:10px;top:10px;">
-		<%= render 'users/user_toolbar', user: @user %>
-	</div>
 	<small class="pull-right text-right muted" style="position:absolute;right:10px;bottom:5px;">
 		Registered on <%= @user.created_at %>
 	</small>
+	<%= render 'users/user_info_toolbar', user: @user %>
 </div>

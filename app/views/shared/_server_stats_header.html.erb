@@ -10,11 +10,11 @@
 		<tr>
 			<td width="190" valign="baseline">
 				<a href="<%= user_path(current_user) %>" class="user-info-pin center">
-					<%= gravatar_for current_user, size: 165 %>
+					<%= gravatar_for current_user, size: 150 %>
 				</a>
 			</td>
 			<td width="*" valign="top" style="text-align:center">
-				<br/>Already...<br/><br/>
+				<br/>Already...<br/>
 				<ul class="list-inline">
 					<li><h1><a href="<%= users_path %>"><b><%= @stats["total_users"] %></b></a> users</h1></li>
 					<li><h2><a href="<%= histories_path %>"><b><%= @stats["total_events"] %></b></a> events</h2></li>

@@ -1,0 +1,7 @@
+.content-center
+  %h1 API Routes
+  - @routes.each do |route|
+    .box
+      - route.each do |route_part|
+        = route_part
+        %br

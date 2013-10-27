@@ -15,7 +15,7 @@ class ZoneLocations < ActiveRecord::Base
 
   belongs_to :zone
 
-	acts_as_gmappable :process_geocoding => false
+  acts_as_gmappable :process_geocoding => false
 
   def sticker
   	Sticker.find(Zone.find(self.zone_id).sticker.id)

@@ -2,28 +2,18 @@ class StaticPagesController < ApplicationController
   include ApplicationHelper
 
   def home
-		redirect_to user_path(current_user.id) if signed_in?
+	redirect_to user_path(current_user.id) if signed_in?
   end
 
   def help
   end
 
   def about
-    @admins = Array.new()
-    User.all.each do |user|
-      if user.admin?
-        @admins.push(user)
-      end
-    end
+    @admins = User.where(admin: true)
   end
 
   def admin
-    @admins = Array.new()
-    User.all.each do |user|
-      if user.admin?
-        @admins.push(user)
-      end
-    end
+    @admins = User.where(admin: true)
   end
 
   def contact

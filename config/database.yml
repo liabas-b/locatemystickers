@@ -3,6 +3,16 @@
 #
 #   Ensure the SQLite 3 gem is defined in your Gemfile
 #   gem 'sqlite3'
+
+
+# development:
+#   adapter: postgresql
+#   encoding: unicode
+#   database: lms_development
+#   pool: 5
+#   username:  postgres
+#   password: ladeno12
+
 development:
   adapter: sqlite3
   database: db/lms-development.sqlite3
@@ -24,4 +34,4 @@ production:
   database: lms_production
   pool: 5
   username:  postgres
-  password:
+  password: ladeno12

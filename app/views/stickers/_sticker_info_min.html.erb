@@ -15,7 +15,7 @@
 							<%= user.name %>.
 					</a><br/>
 					<a href="<%= user_sticker_locations_path(user, sticker) %>">
-						Has been located <%= sticker.locations.count %> times.
+						Has been located <span class="sticker_locations_count" id="<%= sticker.id %>"><%= sticker.locations.count %></span> times.
 					</a><br/>
 					<a href="<%= user_sticker_zones_path(user, sticker) %>">
 						Has <%= sticker.zones.count %> zones defined.

@@ -68,6 +68,7 @@ class StickersController < ApplicationController
 		respond_to do |format|
 			format.html { gmaps_sticker_way }
 			format.json { render :json => @sticker }
+			format.js
 		end
 	end
 
@@ -150,13 +151,29 @@ class StickersController < ApplicationController
 
 	def last_location_address
 		sticker = Sticker.find(params[:id])
-		render :json =>  stickerlocations.last.address
+		sticker.update_last_location
+		render :json =>  sticker.last_location
+	end
+
+	def last_location
+		sticker = Sticker.find(params[:id])
+		sticker.update_last_location
+		render :json =>  sticker.locations.last
 	end
 
 	def share_with_user
 		@sticker = Sticker.find(params[:id])
 		@sticker.share_with(User.find(params[:with_user_id]))
 		render :json => true, status: :ok
+	end
+
+	def update_locations
+		@sticker = Sticker.find(params[:id])
+		@new_locations = @sticker.update_locations
+		respond_to do |format|
+			format.js
+			format.json { render :json => @new_locations }
+		end
 	end
 
 	private

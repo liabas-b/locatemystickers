@@ -19,4 +19,11 @@ class AdministrationController < ApplicationController
 	      format.js
 	    end
 	end
+
+	def routes
+		@routes = Array.new
+		puts 'bundle exec rake routes > routes'
+		system 'bundle exec rake routes > routes'
+		File.open("routes", "r") {|io| io.read}.split(/\r?\n/).each { |l| @routes << l.split(' ') };
+	end
 end

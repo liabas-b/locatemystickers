@@ -1,0 +1,164 @@
+                                   root        /                                                                                     static_pages#home
+                      users_create_user        /users/create_user(.:format)                                                          users#create_user
+                      users_delete_user        /users/delete_user(.:format)                                                          users#delete_user
+                           users_admins        /users/admins(.:format)                                                               users#admins
+                            users_count        /users/count(.:format)                                                                users#count
+                                               /users/:id/updateddata(.:format)                                                      users#updated_data
+                                               /users/:id/getstickers(.:format)                                                      stickers#get_stickers
+                                               /users/:id/friends(.:format)                                                          users#friends
+                                               /users/:id/add_friend(.:format)                                                       users#add_friend
+                                               /users/:id/remove_friend(.:format)                                                    users#remove_friend
+                                               /users/:id/is_friend(.:format)                                                        users#is_friend
+                                               /users/:id/update_user(.:format)                                                      users#update_user
+                                               /users/:id/statistics(.:format)                                                       users#statistics
+                         create_message        /create_message(.:format)                                                             messages#create_message
+                                               /users/:id/new_notifications(.:format)                                                users#new_notifications
+                                               /users/:id/old_notifications(.:format)                                                users#old_notifications
+          update_user_sticker_locations        /users/:user_id/stickers/:id/update_locations(.:format)                               stickers#update_locations
+                                               /users/:user_id/stickers/count(.:format)                                              stickers#count
+                                               /users/:id/empty_stickers_locations(.:format)                                         users#empty_stickers_locations
+                                               /stickers/:id/possessor(.:format)                                                     stickers#possessor
+                         update_sticker        /update_sticker(.:format)                                                             stickers#update
+                         delete_sticker        /delete_sticker(.:format)                                                             stickers#destroy
+                         live_locations        /live_locations(.:format)                                                             locations#live_locations
+                                               /users/:user_id/stickers/:sticker_id/locations/count(.:format)                        locations#count
+                                               /users/:user_id/stickers/:id/lastlocationaddress(.:format)                            stickers#last_location_address
+                                               /users/:user_id/stickers/:id/share_with_user(.:format)                                stickers#share_with_user
+                                               /users/:user_id/stickers/:sticker_id/zones/:id/fence(.:format)                        zones#fence
+                                               /histories/:id/confirm(.:format)                                                      histories#confirm
+             user_conversation_messages GET    /users/:user_id/conversations/:conversation_id/messages(.:format)                     messages#index
+                                        POST   /users/:user_id/conversations/:conversation_id/messages(.:format)                     messages#create
+          new_user_conversation_message GET    /users/:user_id/conversations/:conversation_id/messages/new(.:format)                 messages#new
+         edit_user_conversation_message GET    /users/:user_id/conversations/:conversation_id/messages/:id/edit(.:format)            messages#edit
+              user_conversation_message GET    /users/:user_id/conversations/:conversation_id/messages/:id(.:format)                 messages#show
+                                        PUT    /users/:user_id/conversations/:conversation_id/messages/:id(.:format)                 messages#update
+                                        DELETE /users/:user_id/conversations/:conversation_id/messages/:id(.:format)                 messages#destroy
+                user_conversation_users GET    /users/:user_id/conversations/:conversation_id/users(.:format)                        users#index
+                                        POST   /users/:user_id/conversations/:conversation_id/users(.:format)                        users#create
+             new_user_conversation_user GET    /users/:user_id/conversations/:conversation_id/users/new(.:format)                    users#new
+            edit_user_conversation_user GET    /users/:user_id/conversations/:conversation_id/users/:id/edit(.:format)               users#edit
+                 user_conversation_user GET    /users/:user_id/conversations/:conversation_id/users/:id(.:format)                    users#show
+                                        PUT    /users/:user_id/conversations/:conversation_id/users/:id(.:format)                    users#update
+                                        DELETE /users/:user_id/conversations/:conversation_id/users/:id(.:format)                    users#destroy
+                     user_conversations GET    /users/:user_id/conversations(.:format)                                               conversations#index
+                                        POST   /users/:user_id/conversations(.:format)                                               conversations#create
+                  new_user_conversation GET    /users/:user_id/conversations/new(.:format)                                           conversations#new
+                 edit_user_conversation GET    /users/:user_id/conversations/:id/edit(.:format)                                      conversations#edit
+                      user_conversation GET    /users/:user_id/conversations/:id(.:format)                                           conversations#show
+                                        PUT    /users/:user_id/conversations/:id(.:format)                                           conversations#update
+                                        DELETE /users/:user_id/conversations/:id(.:format)                                           conversations#destroy
+                          user_messages GET    /users/:user_id/messages(.:format)                                                    messages#index
+                                        POST   /users/:user_id/messages(.:format)                                                    messages#create
+                       new_user_message GET    /users/:user_id/messages/new(.:format)                                                messages#new
+                      edit_user_message GET    /users/:user_id/messages/:id/edit(.:format)                                           messages#edit
+                           user_message GET    /users/:user_id/messages/:id(.:format)                                                messages#show
+                                        PUT    /users/:user_id/messages/:id(.:format)                                                messages#update
+                                        DELETE /users/:user_id/messages/:id(.:format)                                                messages#destroy
+                         user_histories GET    /users/:user_id/histories(.:format)                                                   histories#index
+                                        POST   /users/:user_id/histories(.:format)                                                   histories#create
+                       new_user_history GET    /users/:user_id/histories/new(.:format)                                               histories#new
+                      edit_user_history GET    /users/:user_id/histories/:id/edit(.:format)                                          histories#edit
+                           user_history GET    /users/:user_id/histories/:id(.:format)                                               histories#show
+                                        PUT    /users/:user_id/histories/:id(.:format)                                               histories#update
+                                        DELETE /users/:user_id/histories/:id(.:format)                                               histories#destroy
+    user_sticker_sticker_configurations GET    /users/:user_id/stickers/:sticker_id/sticker_configurations(.:format)                 sticker_configurations#index
+                                        POST   /users/:user_id/stickers/:sticker_id/sticker_configurations(.:format)                 sticker_configurations#create
+ new_user_sticker_sticker_configuration GET    /users/:user_id/stickers/:sticker_id/sticker_configurations/new(.:format)             sticker_configurations#new
+edit_user_sticker_sticker_configuration GET    /users/:user_id/stickers/:sticker_id/sticker_configurations/:id/edit(.:format)        sticker_configurations#edit
+     user_sticker_sticker_configuration GET    /users/:user_id/stickers/:sticker_id/sticker_configurations/:id(.:format)             sticker_configurations#show
+                                        PUT    /users/:user_id/stickers/:sticker_id/sticker_configurations/:id(.:format)             sticker_configurations#update
+                                        DELETE /users/:user_id/stickers/:sticker_id/sticker_configurations/:id(.:format)             sticker_configurations#destroy
+                 user_sticker_histories GET    /users/:user_id/stickers/:sticker_id/histories(.:format)                              histories#index
+                                        POST   /users/:user_id/stickers/:sticker_id/histories(.:format)                              histories#create
+               new_user_sticker_history GET    /users/:user_id/stickers/:sticker_id/histories/new(.:format)                          histories#new
+              edit_user_sticker_history GET    /users/:user_id/stickers/:sticker_id/histories/:id/edit(.:format)                     histories#edit
+                   user_sticker_history GET    /users/:user_id/stickers/:sticker_id/histories/:id(.:format)                          histories#show
+                                        PUT    /users/:user_id/stickers/:sticker_id/histories/:id(.:format)                          histories#update
+                                        DELETE /users/:user_id/stickers/:sticker_id/histories/:id(.:format)                          histories#destroy
+                 user_sticker_locations GET    /users/:user_id/stickers/:sticker_id/locations(.:format)                              locations#index
+                                        POST   /users/:user_id/stickers/:sticker_id/locations(.:format)                              locations#create
+              new_user_sticker_location GET    /users/:user_id/stickers/:sticker_id/locations/new(.:format)                          locations#new
+             edit_user_sticker_location GET    /users/:user_id/stickers/:sticker_id/locations/:id/edit(.:format)                     locations#edit
+                  user_sticker_location GET    /users/:user_id/stickers/:sticker_id/locations/:id(.:format)                          locations#show
+                                        PUT    /users/:user_id/stickers/:sticker_id/locations/:id(.:format)                          locations#update
+                                        DELETE /users/:user_id/stickers/:sticker_id/locations/:id(.:format)                          locations#destroy
+       user_sticker_zone_zone_locations GET    /users/:user_id/stickers/:sticker_id/zones/:zone_id/zone_locations(.:format)          zone_locations#index
+                                        POST   /users/:user_id/stickers/:sticker_id/zones/:zone_id/zone_locations(.:format)          zone_locations#create
+    new_user_sticker_zone_zone_location GET    /users/:user_id/stickers/:sticker_id/zones/:zone_id/zone_locations/new(.:format)      zone_locations#new
+   edit_user_sticker_zone_zone_location GET    /users/:user_id/stickers/:sticker_id/zones/:zone_id/zone_locations/:id/edit(.:format) zone_locations#edit
+        user_sticker_zone_zone_location GET    /users/:user_id/stickers/:sticker_id/zones/:zone_id/zone_locations/:id(.:format)      zone_locations#show
+                                        PUT    /users/:user_id/stickers/:sticker_id/zones/:zone_id/zone_locations/:id(.:format)      zone_locations#update
+                                        DELETE /users/:user_id/stickers/:sticker_id/zones/:zone_id/zone_locations/:id(.:format)      zone_locations#destroy
+                     user_sticker_zones GET    /users/:user_id/stickers/:sticker_id/zones(.:format)                                  zones#index
+                                        POST   /users/:user_id/stickers/:sticker_id/zones(.:format)                                  zones#create
+                  new_user_sticker_zone GET    /users/:user_id/stickers/:sticker_id/zones/new(.:format)                              zones#new
+                 edit_user_sticker_zone GET    /users/:user_id/stickers/:sticker_id/zones/:id/edit(.:format)                         zones#edit
+                      user_sticker_zone GET    /users/:user_id/stickers/:sticker_id/zones/:id(.:format)                              zones#show
+                                        PUT    /users/:user_id/stickers/:sticker_id/zones/:id(.:format)                              zones#update
+                                        DELETE /users/:user_id/stickers/:sticker_id/zones/:id(.:format)                              zones#destroy
+                   user_sticker_minimap        /users/:user_id/stickers/:sticker_id/minimap(.:format)                                stickers#minimap
+                          user_stickers GET    /users/:user_id/stickers(.:format)                                                    stickers#index
+                                        POST   /users/:user_id/stickers(.:format)                                                    stickers#create
+                       new_user_sticker GET    /users/:user_id/stickers/new(.:format)                                                stickers#new
+                      edit_user_sticker GET    /users/:user_id/stickers/:id/edit(.:format)                                           stickers#edit
+                           user_sticker GET    /users/:user_id/stickers/:id(.:format)                                                stickers#show
+                                        PUT    /users/:user_id/stickers/:id(.:format)                                                stickers#update
+                                        DELETE /users/:user_id/stickers/:id(.:format)                                                stickers#destroy
+                 followed_stickers_user GET    /users/:id/followed_stickers(.:format)                                                users#followed_stickers
+                   shared_stickers_user GET    /users/:id/shared_stickers(.:format)                                                  users#shared_stickers
+                         following_user GET    /users/:id/following(.:format)                                                        users#following
+                         followers_user GET    /users/:id/followers(.:format)                                                        users#followers
+                                  users GET    /users(.:format)                                                                      users#index
+                                        POST   /users(.:format)                                                                      users#create
+                               new_user GET    /users/new(.:format)                                                                  users#new
+                              edit_user GET    /users/:id/edit(.:format)                                                             users#edit
+                                   user GET    /users/:id(.:format)                                                                  users#show
+                                        PUT    /users/:id(.:format)                                                                  users#update
+                                        DELETE /users/:id(.:format)                                                                  users#destroy
+                            friendships POST   /friendships(.:format)                                                                friendships#create
+                             friendship DELETE /friendships/:id(.:format)                                                            friendships#destroy
+                          relationships POST   /relationships(.:format)                                                              relationships#create
+                           relationship DELETE /relationships/:id(.:format)                                                          relationships#destroy
+                               sessions POST   /sessions(.:format)                                                                   sessions#create
+                            new_session GET    /sessions/new(.:format)                                                               sessions#new
+                                session DELETE /sessions/:id(.:format)                                                               sessions#destroy
+                               messages GET    /messages(.:format)                                                                   messages#index
+                                        POST   /messages(.:format)                                                                   messages#create
+                            new_message GET    /messages/new(.:format)                                                               messages#new
+                           edit_message GET    /messages/:id/edit(.:format)                                                          messages#edit
+                                message GET    /messages/:id(.:format)                                                               messages#show
+                                        PUT    /messages/:id(.:format)                                                               messages#update
+                                        DELETE /messages/:id(.:format)                                                               messages#destroy
+                              histories GET    /histories(.:format)                                                                  histories#index
+                                        POST   /histories(.:format)                                                                  histories#create
+                            new_history GET    /histories/new(.:format)                                                              histories#new
+                           edit_history GET    /histories/:id/edit(.:format)                                                         histories#edit
+                                history GET    /histories/:id(.:format)                                                              histories#show
+                                        PUT    /histories/:id(.:format)                                                              histories#update
+                                        DELETE /histories/:id(.:format)                                                              histories#destroy
+                                  posts GET    /posts(.:format)                                                                      posts#index
+                                        POST   /posts(.:format)                                                                      posts#create
+                               new_post GET    /posts/new(.:format)                                                                  posts#new
+                              edit_post GET    /posts/:id/edit(.:format)                                                             posts#edit
+                                   post GET    /posts/:id(.:format)                                                                  posts#show
+                                        PUT    /posts/:id(.:format)                                                                  posts#update
+                                        DELETE /posts/:id(.:format)                                                                  posts#destroy
+                                 signup        /signup(.:format)                                                                     users#new
+                                 signin        /signin(.:format)                                                                     sessions#new
+                                signout        /signout(.:format)                                                                    sessions#destroy
+                                   help        /help(.:format)                                                                       static_pages#help
+                                  about        /about(.:format)                                                                      static_pages#about
+                                contact        /contact(.:format)                                                                    static_pages#contact
+                                  stats        /stats(.:format)                                                                      static_pages#stats
+                                   news        /news(.:format)                                                                       posts#news
+                          documentation        /documentation(.:format)                                                              static_pages#documentation
+                           admin_routes        /admin/routes(.:format)                                                               administration#routes
+                  admin_developer_guide        /admin/developer_guide(.:format)                                                      administration#developer_guide
+                admin_launch_simulation        /admin/launch_simulation(.:format)                                                    administration#launch_simulation
+                        admin_simulator        /admin/simulator(.:format)                                                            administration#simulator
+                                  admin        /admin(.:format)                                                                      administration#admin
+                                        DELETE /friendships(.:format)                                                                friendships#destroy
+                               stickers        /stickers(.:format)                                                                   stickers#all_stickers
+                              locations        /locations(.:format)                                                                  locations#all_locations
+                          conversations        /conversations(.:format)                                                              conversations#all_conversations
+                                  zones        /zones(.:format)                                                                      zones#all_zones

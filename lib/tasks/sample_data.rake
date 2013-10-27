@@ -24,6 +24,14 @@ def make_users
                        phone:     "008613001938293")
   admin.toggle!(:admin)
 
+  admin = User.create!(first_name: "Hermes",
+                       last_name: "Bozec",
+                       email:    "hermes.bozec@epitech.eu",
+                       password: "azerty",
+                       password_confirmation: "azerty",
+                       compteur: 0)
+  admin.toggle!(:admin)
+
   admin = User.create!(first_name: "Frederic",
                        last_name: "Theault",
                        email:    "ftheault@gmail.com",

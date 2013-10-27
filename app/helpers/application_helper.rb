@@ -143,8 +143,12 @@ module ApplicationHelper
     return Location.new(@parsed_json)
   end
  
-  def get_ss_sticker_locations(sticker_code, number_limit = nil, date_limit = nil)
-    stickers_server_url('locations.json?search=' + sticker_code + '&column=sticker_code&paginate=false')
+  def get_ss_sticker_locations(sticker_code, page = nil)
+    if page.nil?
+      stickers_server_url('locations.json?search=' + sticker_code + '&column=sticker_code&paginate=false')
+    else
+      stickers_server_url('locations.json?search=' + sticker_code + '&column=sticker_code&paginate=true&page=' + page.to_s)
+    end
     get_url
     return parse_ss_locations_from_parsed_json
   end

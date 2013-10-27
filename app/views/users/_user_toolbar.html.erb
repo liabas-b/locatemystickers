@@ -1,18 +1,16 @@
   <div class="user-toolbar btn-toolbar btn-group pull-right">
     <% if current_user != @user %>
-      <div id="friendship_form<%= @user.id.to_s %>" class="pull-right" style="margin-left: 10px; margin-top: 0px;">
+      <div id="friendship_form<%= @user.id.to_s %>" class="pull-right">
         <%= render 'users/add_friend' %>
       </div>
-      <div id="message-popover-<%= @user.id %>" class="btn-default btn-xs show-on-hover">
-          <a href="#" data-toggle="popover" data-placement="bottom" data-html="true" data-content="<form accept-charset='UTF-8' action='/messages' class='new_message' id='new_message' method='post'><div style='margin:0;padding:0;display:inline'><input name='utf8' type='hidden' value='✓'><input name='authenticity_token' type='hidden' value='01OdtR9vSXHHUsvOpevvQ2do4pNStUB0v3Xw6Lun3Lk='></div>
+          <a id="message-popover-<%= @user.id %>" href="#" data-toggle="popover" data-placement="bottom" data-html="true" data-content="<form accept-charset='UTF-8' action='/messages' class='new_message' id='new_message' method='post'><div style='margin:0;padding:0;display:inline'><input name='utf8' type='hidden' value='✓'><input name='authenticity_token' type='hidden' value='01OdtR9vSXHHUsvOpevvQ2do4pNStUB0v3Xw6Lun3Lk='></div>
             <textarea cols='40' id='message_content' name='message[content]' rows='2' style='max-width: 600px;max-height:150px;'></textarea>
             <input id='message_from_user_id' name='message[from_user_id]' type='hidden' value='<%= current_user.id %>'>
             <input id='message_user_id' name='message[user_id]' type='hidden' value='<%= @user.id %>'>
             <div class='actions'>
               <input class='btn' name='commit' type='submit' value='Send'>
             </div>
-          </form>" title="" data-original-title="New message"><i class="icon-envelope"></i></a>
-      </div>
+          </form>" class="btn-default btn-xs show-on-hover">Send message</a>
       <script type="text/javascript">
           $("#message-popover-<%= @user.id %> a").popover()
       </script>
