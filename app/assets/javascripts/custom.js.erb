@@ -20,9 +20,9 @@ function update_sticker_locations(user_id, sticker_id) {
       $.get("/users/" + user_id + "/stickers/" + sticker_id + "/locations/count.json",function(data,status){
         $('.sticker_locations_count').html(data + "...")
       });
-    if (data.length > 0) {
-       update_sticker_locations(user_id, sticker_id)
-     }
+    // if (data.length > 0) {
+    //    update_sticker_locations(user_id, sticker_id)
+    //  }
   });
 }
 
