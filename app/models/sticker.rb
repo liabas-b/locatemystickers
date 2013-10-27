@@ -68,18 +68,18 @@ class Sticker < ActiveRecord::Base
   end
 
   def do_update_locations
-      new_locations = get_ss_sticker_locations(self.code, 1)
-      new_locations.each do |location|
-        Location.create!( 
-          latitude: location.latitude,
-          longitude: location.longitude,
-          sticker_id: location.sticker_id,
-          created_at: location.created_at,
-          updated_at: location.updated_at
-        )
-        delete_ss_sticker_location(location.id)
-      end
-      self.last_location = self.locations.last.address if self.locations.count > 0
+      # new_locations = get_ss_sticker_locations(self.code, 1)
+      # new_locations.each do |location|
+      #   Location.create!( 
+      #     latitude: location.latitude,
+      #     longitude: location.longitude,
+      #     sticker_id: location.sticker_id,
+      #     created_at: location.created_at,
+      #     updated_at: location.updated_at
+      #   )
+      #   delete_ss_sticker_location(location.id)
+      # end
+      # self.last_location = self.locations.last.address if self.locations.count > 0
       PousseMailer.send_alert.deliver
   end
 
