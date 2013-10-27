@@ -15,14 +15,13 @@ function scrollToAnchor(aid) {
 
 
 function update_sticker_locations(user_id, sticker_id) {
-        $('.sticker_locations_count').append(" (Loading...)")
   $.get("/users/" + user_id + "/stickers/" + sticker_id + "/update_locations.json",function(data,status){
       $.get("/users/" + user_id + "/stickers/" + sticker_id + "/locations/count.json",function(data,status){
         $('.sticker_locations_count').html(data + "...")
       });
-    // if (data.length > 0) {
-    //    update_sticker_locations(user_id, sticker_id)
-    //  }
+    if (data.length > 0) {
+       update_sticker_locations(user_id, sticker_id)
+     }
   });
 }
 
