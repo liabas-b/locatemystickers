@@ -64,11 +64,11 @@ class Sticker < ActiveRecord::Base
     else
       self.last_location = 'Unknown' if self.last_location.nil?
     end
-    Location.last(100)
   end
 
   def do_update_locations
       new_locations = get_ss_sticker_locations(self.code)
+      puts "[Sticker #{self.code} do_update_locations] got: " + new_locations.inspect
       new_locations.each do |location|
         Location.create!( 
           latitude: location.latitude,
@@ -80,7 +80,7 @@ class Sticker < ActiveRecord::Base
         delete_ss_sticker_location(location.id)
       end
       self.last_location = self.locations.last.address if self.locations.count > 0
-      PousseMailer.send_alert.deliver
+      # PousseMailer.send_alert.deliver
   end
 
   def update_last_location
