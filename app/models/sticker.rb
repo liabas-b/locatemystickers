@@ -60,7 +60,7 @@ class Sticker < ActiveRecord::Base
   # Gets all missing locations that were stored on the stickers server
   def update_locations
     if self.code and not self.code.empty?
-      delay(run_at: 1.minute.from_now, queue: 'LOCATIONS').do_update_locations
+      delay(run_at: 1.minute.from_now, queue: 'default').do_update_locations
     else
       self.last_location = 'Unknown' if self.last_location.nil?
     end
