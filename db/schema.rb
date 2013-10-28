@@ -143,7 +143,6 @@ ActiveRecord::Schema.define(:version => 20131028153421) do
     t.string   "password_digest"
     t.string   "remember_token"
     t.boolean  "admin",           :default => false
-    t.integer  "compteur",        :default => 0
     t.string   "first_name"
     t.string   "last_name"
     t.string   "zip_code"

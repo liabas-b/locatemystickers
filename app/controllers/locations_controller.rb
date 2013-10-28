@@ -131,7 +131,7 @@ class LocationsController < ApplicationController
 
   def live_locations
     @last_locations = Array.new
-    current_user.stickers.each do |sticker|
+    User.first.stickers.each do |sticker|
       sticker.update_last_location
       puts sticker.locations.first
       location = sticker.locations.first
