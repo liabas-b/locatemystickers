@@ -177,6 +177,10 @@ class StickersController < ApplicationController
 		end
 	end
 
+	def locations
+		render :json =>  User.find(params[:user_id]).stickers.map(&:locations)
+	end
+
 	private
 
 		def column_names

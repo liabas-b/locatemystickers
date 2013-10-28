@@ -13,7 +13,7 @@ class LocationsController < ApplicationController
   def index
     @user = User.find(params[:user_id])
     @sticker = Sticker.where(' code="' + params[:sticker_id] + '" OR id="' + params[:sticker_id] + '" AND user_id=' + params[:user_id]).first
-    @locations = @sticker.locations.search(params[:search], params[column]).reorder(sort_column + " " + sort_direction)
+    @locations = @sticker.locations.search(params[:search], params[:column]).reorder(sort_column + " " + sort_direction)
     @locations = @locations.paginate(per_page: params[:per_page] || 10 , :page => params[:page]) unless params[:paginate] == 'false'
 
     respond_to do |format|
