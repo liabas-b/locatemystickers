@@ -1,4 +1,5 @@
-class Notifier do
+class Notifier
+  
   def new_user user
     UserMailer.welcome_email(user).deliver
   end
