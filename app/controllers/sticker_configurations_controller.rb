@@ -112,6 +112,6 @@ class StickerConfigurationsController < ApplicationController
     end
 
     def get_sticker
-     @sticker = Sticker.where(' code="' + params[:sticker_id] + '" OR id="' + params[:sticker_id] + '" AND user_id=' + params[:user_id]).first
+     @sticker = Sticker.find(params[:sticker_id])
     end
 end

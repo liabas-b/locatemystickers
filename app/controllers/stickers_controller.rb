@@ -64,9 +64,8 @@ class StickersController < ApplicationController
 		@sticker = Sticker.find(params[:id])
 		@user = User.find_by_id(@sticker.user_id)
 		@form_path = user_stickers_path(@user)
-		PousseMailer.send_alert
-    		UserMailer.delay(run_at: Time.now + 1.hour + 1.minute, queue: 'default').welcome_email(@user)
-		#.delay(run_at: 1.minute.from_now, queue: 'default')
+		# PousseMailer.send_alert
+    		# UserMailer.delay(run_at: Time.now + 1.hour + 1.minute, queue: 'default').welcome_email(@user)
 
 		respond_to do |format|
 			format.html { gmaps_sticker_way }
