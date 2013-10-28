@@ -139,6 +139,7 @@ class User < ActiveRecord::Base
 
 		def after_create_callback
 			self.histories.create!(subject: "user", operation: "created")
+			Notifier.new_user user: user
 		end
 
 		def after_update_callback
