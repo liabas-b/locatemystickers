@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131027013208) do
+ActiveRecord::Schema.define(:version => 20131028153421) do
 
   create_table "delayed_jobs", :force => true do |t|
     t.integer  "priority",   :default => 0
@@ -129,6 +129,8 @@ ActiveRecord::Schema.define(:version => 20131027013208) do
     t.string   "text"
     t.string   "color"
     t.string   "last_location"
+    t.float    "last_longitude"
+    t.float    "last_latitude"
   end
 
   add_index "stickers", ["code"], :name => "index_stickers_on_code", :unique => true
