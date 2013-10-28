@@ -23,6 +23,7 @@
                          live_locations        /live_locations(.:format)                                                             locations#live_locations
                                                /users/:user_id/stickers/:sticker_id/locations/count(.:format)                        locations#count
                                                /users/:user_id/stickers/:id/lastlocationaddress(.:format)                            stickers#last_location_address
+                                               /users/:user_id/stickers/:id/last_location(.:format)                                  stickers#last_location
                                                /users/:user_id/stickers/:id/share_with_user(.:format)                                stickers#share_with_user
                                                /users/:user_id/stickers/:sticker_id/zones/:id/fence(.:format)                        zones#fence
                                                /histories/:id/confirm(.:format)                                                      histories#confirm
