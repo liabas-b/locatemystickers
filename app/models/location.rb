@@ -79,15 +79,17 @@ class Location < ActiveRecord::Base
 
 		def after_create_callback
 			self.sticker.touch
-			# self.histories.create!(subject: "location", operation: "created")
+			self.sticker.last_longitude = self.longitude
+			self.sticker.last_latitude = self.latitude
+			self.histories.create!(subject: "location", operation: "created", sticker: location.sticker, user: location.sticker.user)
 		end
 
 		def after_update_callback
-			self.histories.create!(subject: "location", operation: "updated")
+			self.histories.create!(subject: "location", operation: "updated", sticker: location.sticker, user: location.sticker.user)
 		end
 
 		def before_destroy_callback
-			self.histories.create!(subject: "location", operation: "deleted")
+			self.histories.create!(subject: "location", operation: "deleted", sticker: location.sticker, user: location.sticker.user)
 		end
 
 end
