@@ -123,6 +123,7 @@ LocateMyStickers::Application.routes.draw do
   match '/admin/developer_guide', to: 'administration#developer_guide'
   match '/admin/launch_simulation', to: 'administration#launch_simulation'
   match '/admin/simulator', to: 'administration#simulator'
+  match '/admin/web_sockets', to: 'administration#web_sockets'
   match '/admin', to: 'administration#admin'
 
 

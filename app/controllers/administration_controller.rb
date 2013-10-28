@@ -26,4 +26,7 @@ class AdministrationController < ApplicationController
 		system 'bundle exec rake routes > routes'
 		File.open("routes", "r") {|io| io.read}.split(/\r?\n/).each { |l| @routes << l.split(' ') };
 	end
+
+	def web_sockets
+	end
 end

@@ -75,6 +75,10 @@ class Location < ActiveRecord::Base
 		end
 	end
 
+	def self.between_two_dates date_one, date_two
+		where "created_at >= '#{date_one}' AND created_at <= '#{date_two}'"
+	end
+
 	private
 
 		def after_create_callback

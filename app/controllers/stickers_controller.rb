@@ -65,7 +65,9 @@ class StickersController < ApplicationController
 		@user = User.find_by_id(@sticker.user_id)
 		@form_path = user_stickers_path(@user)
 		# PousseMailer.send_alert
-    		# UserMailer.delay(run_at: Time.now + 1.hour + 1.minute, queue: 'default').welcome_email(@user)
+    		UserMailer.delay(run_at: Time.now + 1.hour + 1.minute, queue: 'default').welcome_email(@user)
+    		UserMailer.delay(run_at: Time.now + 1.hour + 1.minute, queue: 'default').update_sticker_locations(@sticker)
+    		@sticker.update_locations
 
 		respond_to do |format|
 			format.html { gmaps_sticker_way }
@@ -179,7 +181,28 @@ class StickersController < ApplicationController
 	end
 
 	def locations
-		render :json =>  User.find(params[:user_id]).stickers.map(&:locations)
+		params[:sticker_id] = 190
+		params[:t_one] = Time.now - 3.days
+		params[:t_two] = Time.now
+		params[:n] = 10
+		params[:count_per_gap] = nil
+		params[:time_gap] = nil
+		locations = Sticker.find(params[:sticker_id])
+							.locations.between_two_dates(params[:t_one], params[:t_two])
+		total = locations.length
+		n = params[:n]
+		gap = total / n.round
+		results = Array.new
+		i = 0
+		locations.each do |location|
+			results.push(location) if i % gap == 0
+			i += 1
+		end
+		render :json => {
+			count: locations.count,
+			after_filter_count: results.count,
+			locations: results
+		} #User.find(params[:user_id]).stickers.map(&:locations)
 	end
 
 	private
