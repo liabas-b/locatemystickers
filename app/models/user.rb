@@ -139,7 +139,7 @@ class User < ActiveRecord::Base
 
 		def after_create_callback
 			self.histories.create!(subject: "user", operation: "created")
-			UserMailer.new_user user: self
+			UserMailer.welcome_email(self).deliver
 		end
 
 		def after_update_callback
