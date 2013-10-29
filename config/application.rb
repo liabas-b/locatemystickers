@@ -71,7 +71,7 @@ module LocateMyStickers
     config.action_mailer.smtp_settings = {
       address:              'smtp.gmail.com',
       port:                 587,
-      domain:               'locatemystickers.herokuapp.com',
+      domain:               'locatemystickers-test.herokuapp.com',
       user_name:            'b.liabastre',
       password:             '120590120590',
       authentication:       'plain',
