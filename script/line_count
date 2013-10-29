@@ -1,0 +1,13 @@
+#!/bin/sh
+
+rb_line_count=$(find app -type f -name "*.rb" -exec cat {} + | wc -l)
+erb_line_count=$(find app -type f -name "*.erb" -exec cat {} + | wc -l)
+coffee_line_count=$(find app -type f -name "*.coffee" -exec cat {} + | wc -l)
+js_line_count=$(find app -type f -name "*.js" -exec cat {} + | wc -l)
+
+echo "$rb_line_count lines of Ruby (*.rb)."
+echo "$erb_line_count lines of ERB templates (*.erb)."
+echo "$coffee_line_count lines of CoffeeScript (*.coffee)."
+echo "$js_line_count lines of JS (*.js)."
+
+echo "$(expr $rb_line_count + $erb_line_count + $coffee_line_count + $js_line_count) total lines in app"

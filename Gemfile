@@ -12,7 +12,7 @@ gem 'hashie', '2.0.5'
 gem 'geocoder', '1.1.8'
 gem 'pousse', '0.0.5'
 gem 'haml'
-
+gem 'newrelic_rpm'
 gem 'delayed_job_active_record'
 
 # Assets

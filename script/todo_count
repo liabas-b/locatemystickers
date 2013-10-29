@@ -1,0 +1,7 @@
+#!/bin/sh
+./clear
+todo_count=$(grep TODO . -R | grep -v \.git | wc -l)
+# The script itself contains the word several times.
+todo_count=$[$todo_count - 2]
+echo "$todo_count TODOs need to be fixed."
+

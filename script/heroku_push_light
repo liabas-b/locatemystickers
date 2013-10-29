@@ -1,0 +1,3 @@
+#!/bin/sh
+git push heroku master && heroku restart && echo "Server online at http://$(heroku apps).herokuapp.com"
+
