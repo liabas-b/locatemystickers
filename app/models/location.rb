@@ -79,6 +79,21 @@ class Location < ActiveRecord::Base
 		where "created_at >= '#{date_one}' AND created_at <= '#{date_two}'"
 	end
 
+	def self.for_stickers stickers
+		sticker_ids = ""
+		i = 1
+		stickers.map(&:id).each do |id|
+			sticker_ids << id.to_s
+			sticker_ids << ", " if i < stickers.count
+			i += 1
+		end
+		where("sticker_id IN (#{sticker_ids})")
+	end
+
+	def self.get_max max
+		limit(max.to_i)
+	end
+
 	private
 
 		def after_create_callback

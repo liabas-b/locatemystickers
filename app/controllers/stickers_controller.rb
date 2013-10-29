@@ -180,7 +180,7 @@ class StickersController < ApplicationController
 		end
 	end
 
-	def locations
+	def locations_for
 		params[:sticker_id] = 190
 		params[:t_one] = Time.now - 3.days
 		params[:t_two] = Time.now
@@ -204,6 +204,40 @@ class StickersController < ApplicationController
 			locations: results
 		} #User.find(params[:user_id]).stickers.map(&:locations)
 	end
+
+	def locations
+		params[:user_id] = 1
+		params[:t_one] = Time.now - 3.days
+		params[:t_two] = Time.now
+		params[:n] = 10
+		params[:count_per_gap] = nil
+		params[:time_gap] = nil
+
+		user = User.find(params[:user_id])
+		locations = Location.for_stickers(user.stickers).between_two_dates(params[:t_one], params[:t_two])
+
+		results = Hash.new
+		total = locations.length
+		n = params[:n]
+		i = 0
+		locations.each do |location|
+			results[location.sticker_id] = Array.new if results[location.sticker_id].nil? 
+
+			# gap = Location.where('sticker_id = ' + location.sticker.id.to_s).count / n.round
+			# gap |= 1
+			# puts gap
+			results[location.sticker_id].push(location) #f (results[location.sticker_id].count) % gap == 0
+
+			i += 1
+		end
+
+		render :json => results
+	end
+			# count: locations.count,
+			# after_filter_count: results.count,
+			# locations: locations,
+			#results: results
+		# } #User.find(params[:user_id]).stickers.map(&:locations)
 
 	private
 
