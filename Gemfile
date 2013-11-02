@@ -14,6 +14,7 @@ gem 'pousse', '0.0.5'
 gem 'haml'
 gem 'newrelic_rpm'
 gem 'delayed_job_active_record'
+gem 'dotenv-rails', '~> 0.8'
 
 # Assets
 gem 'coffee-rails', '3.2.2'
