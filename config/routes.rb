@@ -38,6 +38,7 @@ LocateMyStickers::Application.routes.draw do
   match '/users/:user_id/stickers/:id/update_locations', to: 'stickers#update_locations', as: 'update_user_sticker_locations'
   match '/users/:user_id/stickers/count', to: 'stickers#count'
   match '/users/:user_id/stickers/locations', to: 'stickers#locations'
+  match '/users/:user_id/stickers/:id/locations_for', to: 'stickers#locations_for'
   match '/users/:id/empty_stickers_locations', :to => 'users#empty_stickers_locations'
   match '/stickers/:id/possessor', :to => 'stickers#possessor'
   match '/update_sticker', :to => 'stickers#update'
@@ -55,8 +56,8 @@ LocateMyStickers::Application.routes.draw do
   match '/users/:user_id/stickers/:id/share_with_user', to: 'stickers#share_with_user'
 
 
-  # Locations  #
-  #########
+  # Zones  #
+  #######
 
     match '/users/:user_id/stickers/:sticker_id/zones/:id/fence', to: 'zones#fence'
 

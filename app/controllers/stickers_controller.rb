@@ -65,8 +65,10 @@ class StickersController < ApplicationController
 		@user = User.find_by_id(@sticker.user_id)
 		@form_path = user_stickers_path(@user)
 		# PousseMailer.send_alert
-    		UserMailer.delay(run_at: Time.now + 1.hour + 1.minute, queue: 'default').welcome_email(@user)
-    		UserMailer.delay(run_at: Time.now + 1.hour + 1.minute, queue: 'default').update_sticker_locations(@sticker)
+
+    		UserMailer.delay(run_at: Time.now + 1.minute, queue: 'default').welcome_email(@user)
+    		UserMailer.delay(run_at: Time.now + 1.minute, queue: 'default').update_sticker_locations(@sticker)
+
     		@sticker.update_locations
 
 		respond_to do |format|
@@ -181,13 +183,13 @@ class StickersController < ApplicationController
 	end
 
 	def locations_for
-		params[:sticker_id] = 190
+		params[:id] = 190
 		params[:t_one] = Time.now - 3.days
 		params[:t_two] = Time.now
 		params[:n] = 10
 		params[:count_per_gap] = nil
 		params[:time_gap] = nil
-		locations = Sticker.find(params[:sticker_id])
+		locations = Sticker.find(params[:id])
 							.locations.between_two_dates(params[:t_one], params[:t_two])
 		total = locations.length
 		n = params[:n]
