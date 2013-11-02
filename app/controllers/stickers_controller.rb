@@ -65,6 +65,7 @@ class StickersController < ApplicationController
 		@user = User.find_by_id(@sticker.user_id)
 		@form_path = user_stickers_path(@user)
 		
+		before = Delayed::Job.count
 		PousseMailer.send_alert
 
     		UserMailer.delay(run_at: Time.now + 1.minute, queue: 'default').welcome_email(@user)
@@ -73,7 +74,10 @@ class StickersController < ApplicationController
     		@sticker.update_locations
 
 		respond_to do |format|
-			format.html { gmaps_sticker_way }
+			format.html {
+				flash[:notice] = "Created #{ Delayed::Job.count - before } jobs"
+				gmaps_sticker_way
+			}
 			format.json { render :json => @sticker }
 			format.js
 		end
