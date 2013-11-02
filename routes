@@ -16,6 +16,8 @@
                                                /users/:id/old_notifications(.:format)                                                users#old_notifications
           update_user_sticker_locations        /users/:user_id/stickers/:id/update_locations(.:format)                               stickers#update_locations
                                                /users/:user_id/stickers/count(.:format)                                              stickers#count
+                                               /users/:user_id/stickers/locations(.:format)                                          stickers#locations
+                                               /users/:user_id/stickers/:id/locations_for(.:format)                                  stickers#locations_for
                                                /users/:id/empty_stickers_locations(.:format)                                         users#empty_stickers_locations
                                                /stickers/:id/possessor(.:format)                                                     stickers#possessor
                          update_sticker        /update_sticker(.:format)                                                             stickers#update
@@ -154,9 +156,11 @@ edit_user_sticker_sticker_configuration GET    /users/:user_id/stickers/:sticker
                                    news        /news(.:format)                                                                       posts#news
                           documentation        /documentation(.:format)                                                              static_pages#documentation
                            admin_routes        /admin/routes(.:format)                                                               administration#routes
+                           update_route        /admin/update_route/:id(.:format)                                                     administration#update_route
                   admin_developer_guide        /admin/developer_guide(.:format)                                                      administration#developer_guide
                 admin_launch_simulation        /admin/launch_simulation(.:format)                                                    administration#launch_simulation
                         admin_simulator        /admin/simulator(.:format)                                                            administration#simulator
+                      admin_web_sockets        /admin/web_sockets(.:format)                                                          administration#web_sockets
                                   admin        /admin(.:format)                                                                      administration#admin
                                         DELETE /friendships(.:format)                                                                friendships#destroy
                                stickers        /stickers(.:format)                                                                   stickers#all_stickers

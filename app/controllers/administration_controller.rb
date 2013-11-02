@@ -15,16 +15,57 @@ class AdministrationController < ApplicationController
 	def launch_simulation
 		system("pwd >> launch_simulation");
 		#system("ruby simulate_stickers.rb");
-	    respond_to do |format|
-	      format.js
-	    end
+		respond_to do |format|
+			format.js
+		end
 	end
 
 	def routes
-		@routes = Array.new
-		puts 'bundle exec rake routes > routes'
-		system 'bundle exec rake routes > routes'
-		File.open("routes", "r") {|io| io.read}.split(/\r?\n/).each { |l| @routes << l.split(' ') };
+
+		if params[:update] == 'true'
+			file_routes = Array.new
+			puts 'bundle exec rake routes > routes'
+			system 'bundle exec rake routes > routes'
+			File.open("routes", "r") {|io| io.read}.split(/\r?\n/).each { |l| file_routes << l.split(' ') };
+
+			AppRoute.destroy_all
+
+			file_routes.each do |route|
+				name = 'Default name'
+				method = 'Default method'
+				path = 'Default path'
+				action = 'Default action'
+				route.each do |r|
+					if r.include?('#')
+						action = r
+					elsif r.include?('_')
+						name = r
+					elsif r.include?('/')
+						path = r
+					elsif r.include?('GET')
+						method = r
+					end
+				end
+				AppRoute.create!({
+					title: 'Title ' + AppRoute.count.to_s,
+					name: name,
+					path: path,
+					method: method,
+					action: action
+				})
+			end
+		end
+
+		@routes = AppRoute.all
+	end
+
+	def update_route
+		route = AppRoute.find(params[:id])
+		route.update_attributes(params[:app_route])
+		
+		respond_to do |format|
+			format.js
+		end
 	end
 
 	def web_sockets

@@ -1,0 +1,53 @@
+= form_for(route, url: update_route_path(route.id), remote: true) do |f|
+  %table.table.table-hover
+    %tr
+      %td
+        = f.label :title
+      %td
+        = f.text_field :title, value: route.title
+    %tr
+      %td
+        = f.label :goal
+      %td
+        = f.text_field :goal, value: route.goal
+    %tr
+      %td
+        = f.label :extensions
+      %td
+        = f.text_field :extensions, value: route.extensions
+    %tr
+      %td
+        = f.label :action
+      %td
+        = f.text_field :action, value: route.action
+    %tr
+      %td
+        = f.label :method
+      %td
+        = f.text_field :method, value: route.method
+    %tr
+      %td
+        = f.label :path
+      %td
+        = f.text_field :path, value: route.path
+    %tr
+      %td
+        = f.label :description
+      %td
+        = f.text_area :description, value: route.description, rows: 3
+    %tr
+      %td
+        = f.label :arguments
+      %td
+        = f.text_area :arguments, value: route.arguments, rows: 3
+    %tr
+      %td
+        = f.label :response_body
+      %td
+        = f.text_area :response_body, value: route.response_body, rows: 3
+    %tr
+      %td
+        = f.label :example_request
+      %td
+        = f.text_area :example_request, value: route.example_request, rows: 3
+  = f.submit 'Save', :class => 'btn btn-primary'

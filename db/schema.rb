@@ -11,7 +11,24 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131028153421) do
+ActiveRecord::Schema.define(:version => 20131102164635) do
+
+  create_table "app_routes", :force => true do |t|
+    t.string   "name"
+    t.string   "path"
+    t.string   "method"
+    t.string   "description"
+    t.string   "goal"
+    t.string   "title"
+    t.string   "arguments"
+    t.string   "extensions"
+    t.string   "responses_status"
+    t.string   "response_body"
+    t.string   "example_request"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+    t.string   "action"
+  end
 
   create_table "delayed_jobs", :force => true do |t|
     t.integer  "priority",   :default => 0
@@ -143,6 +160,7 @@ ActiveRecord::Schema.define(:version => 20131028153421) do
     t.string   "password_digest"
     t.string   "remember_token"
     t.boolean  "admin",           :default => false
+    t.integer  "compteur",        :default => 0
     t.string   "first_name"
     t.string   "last_name"
     t.string   "zip_code"
