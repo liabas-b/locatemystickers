@@ -24,6 +24,7 @@ gem 'therubyracer'
 gem 'less-rails-bootstrap'
 gem 'jquery-rails'
 gem 'sass-rails', '~> 3.2.3'
+gem 'websocket-rails'
 
 
 group :development, :test do

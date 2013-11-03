@@ -13,7 +13,8 @@ class AdministrationController < ApplicationController
 	end
 
 	def launch_simulation
-		system("pwd >> launch_simulation");
+		send_message :new_location, Location.last
+		# system("pwd >> launch_simulation");
 		#system("ruby simulate_stickers.rb");
 		respond_to do |format|
 			format.js
