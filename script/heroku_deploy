@@ -1,22 +1,38 @@
 #!/bin/bash
 app="locatemystickers-$1"
 remote="heroku-$1"
+pousse_remote="heroku-pousse-$1"
+pousse="live-$1"
+secret="poussette"
+
+echo "Create app $pousse on remote $pousse_remote"
+heroku create $pousse -r $pousse_remote --region eu
+
 echo "Create app $app on remote $remote"
-heroku create "locatemystickers-$1" -r "$remote" --region eu
+heroku create "locatemystickers-$1" -r $remote --region eu
 heroku domains:add $1.locatemystickers.com -a "$app"
 
+heroku config:set POUSSE_SECRET="$secret" \
+  NEW_RELIC_LICENSE_KEY=61d583fab39634e2c5c66e68b94eea16326120fa \
+  NEW_RELIC_APP_NAME="$pousse"\
+  -a "$pousse"
+
 heroku config:add \
-  RAILS_ENV="staging" \
-  MAIN_DOMAIN="locatemystickers.herokuapp.com" \
+  RAILS_ENV="production" \
+  MAIN_DOMAIN="$app.herokuapp.com" \
   STK_MAIL_PORT="2525" \
   STK_MAIL_SERVER="mailtrap.io" \
   STK_MAIL_USERNAME="lms-test-e91808af6885954d" \
   STK_MAIL_PASSWORD="07d5e194f86e87ef" \
   NEW_RELIC_LICENSE_KEY="61d583fab39634e2c5c66e68b94eea16326120fa" \
-  MAINTENANCE_PAGE_URL=http://doc.locatemystickers.com/error/503.html \
-  ERROR_PAGE_URL=http://doc.locatemystickers.com/error/500.html \
+  NEW_RELIC_APP_NAME="$app"\
+  POUSSE_SECRET="$secret" \
+  POUSSE_REDIS="$redis_url" \
+  POUSSE_URL="//$pousse.herokuapp.com:80" \
   -a "$app"
 
+  # MAINTENANCE_PAGE_URL=http://doc.locatemystickers.com/error/503.html \
+  # ERROR_PAGE_URL=http://doc.locatemystickers.com/error/500.html \
   # STK_AWS_BUCKET="studyka_staging" \
   # STK_AWS_KEY="AKIAJGPQKWO7PZJMSCVA" \
   # STK_AWS_SECRET="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" \
@@ -27,12 +43,22 @@ heroku config:add \
 # heroku labs:enable user-env-compile -a "$app" &
 # heroku addons:add sentry:developer -a "$app" &
 # heroku addons:add pgbackups:auto-month -a "$app" &
+
 heroku addons:add newrelic -a "$app"
+
 # git fetch master
 git branch -d tmp-deploy-$$ # if the branch exists we delete it
 git branch tmp-deploy-$$ # -t upstream/master
 git push "$remote" tmp-deploy-$$:master
 git branch -d tmp-deploy-$$
 
-heroku run rake db:migrate -a "$app"
-heroku run rake db:populate -a "$app"
+heroku run bundle exec rake db:migrate -a "$app"
+heroku run bundle exec rake db:populate -a "$app"
+
+git remote add poussette https://github.com/Studyka/poussette.git
+git fetch poussette
+git branch -d tmp-deploy-$$ # if the branch exists we delete it
+git branch tmp-deploy-$$ -t poussette/master
+git push "$pousse_remote" tmp-deploy-$$:master
+git branch -d tmp-deploy-$$
+redis_url=`heroku config -s -a "$pousse" | grep REDISTOGO_URL | sed "s/REDISTOGO_URL=//g"`

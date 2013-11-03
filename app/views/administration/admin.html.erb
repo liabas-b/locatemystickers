@@ -1,22 +1,34 @@
 <% provide(:title, 'Administration pannel') %>
-<div style="background-image: url('/assets/contact-background.jpg');position:absolute;right:0;left:0;bottom:0;top:0">
-</div>
+<div class="planet"></div>
 <div style="opacity:.9; width:610px; margin:0 auto;">
-  <div class="well paper-shadow" style="margin-top:100px;">
+	<div class="well paper-shadow" style="margin-top:100px;">
 		<h1>Administration pannel</h1><br/>
-		<p class="lead">
-			Managing tools for our awesome app!
-		</p>
-		<a href="<%= posts_path %>"><h2>News feed</h2></a>
-		<p>Publish articles to communicate with the public.</p>
-		<a href="/admin/developer_guide"><h2>Developer guide</h2></a>
-		<p>Here is some help for whoever wants to help on the development of this web application.</p>
-		<a href="/admin/simulator"><h2>Stickers simulator 3000</h2></a>
-		<p>Simulates activity of multiple stickers. Try to make our app crash if you dare!</p>
-		<a href="/admin/web_sockets"><h2>Web sockets manager</h2></a>
-		<p>We sockets rock</p>
-		<a href="/admin/routes"><h2>Application routes</h2></a>
-		<p>Generates routes for the app, for you to explore :)</p>
+		<div class="row">
+			<div class="col-md-3">
+				<p class="lead">
+					Browse !
+				</p>
+				<a href="<%= users_path %>"><h4>Users</h4></a>
+				<a href="<%= stickers_path %>"><h4>Stickers</h4></a>
+				<a href="<%= locations_path %>"><h4>Locations</h4></a>
+				<a href="<%= messages_path %>"><h4>Messages</h4></a>
+				<a href="<%= histories_path %>"><h4>Events</h4></a>
+			</div>
+			<div class="col-md-9">
+				<p class="lead">
+					Managing tools for our awesome app !
+				</p>
+				<a href="<%= posts_path %>"><h4>News feed</h4></a>
+				<p>Publish articles to communicate with the public.</p>
+				<a href="/admin/developer_guide"><h4>Developer guide</h4></a>
+				<p>Here is some help for whoever wants to help on the development of this web application.</p>
+				<a href="/admin/simulator"><h4>Stickers simulator 3000</h4></a>
+				<p>Simulates activity of multiple stickers. Try to make our app crash if you dare!</p>
+				<a href="/admin/web_sockets"><h4>Web sockets manager</h4></a>
+				<p>We sockets rock</p>
+				<a href="/admin/routes"><h4>Application routes</h4></a>
+				<p>Generates routes for the app, for you to explore :)</p>
+			</div>
 		</div>
 	</div>
 </div>
