@@ -104,12 +104,16 @@ class LocationsController < ApplicationController
     @sticker = Sticker.find_by_id(@location.sticker_id)
     @user = User.find_by_id(@sticker.user_id)
 
+    flash[:notice] = "Location " + @location.id.to_s + " updated"
+
     respond_to do |format|
       if @location.update_attributes(params[:location])
         format.html { redirect_to user_sticker_location_path(@user, @sticker, @location), notice: 'Location was successfully updated.' }
+        format.js
         format.json { render :json => @location, :status => :updated }
       else
         format.html { render action: "edit" }
+        format.js
         format.json { render json: @location.errors, status: :unprocessable_entity }
       end
     end
@@ -157,27 +161,27 @@ class LocationsController < ApplicationController
     end
 
     def gmaps_all_locations_markers
-      @markers_json = @locations.to_gmaps4rails do |location, marker|
-        sticker = location.sticker_id
-        unless sticker.nil?
-          marker.infowindow render_to_string(:partial => "/locations/maps_info_window",
-                                             :locals => { :location => location, :sticker => sticker })
-          marker.title   location.created_at.to_datetime
-          marker.json({ :id => location.id })
-        end
-      end
+      # @markers_json = @locations.to_gmaps4rails do |location, marker|
+      #   sticker = location.sticker_id
+      #   unless sticker.nil?
+      #     marker.infowindow render_to_string(:partial => "/locations/maps_info_window",
+      #                                        :locals => { :location => location, :sticker => sticker })
+      #     marker.title   location.created_at.to_datetime
+      #     marker.json({ :id => location.id })
+      #   end
+      # end
     end
 
     def gmaps_location_marker
-      @markers_json = @location.to_gmaps4rails do |location, marker|
-        sticker = location.sticker_id
-        unless sticker.nil?
-          marker.infowindow render_to_string(:partial => "/locations/maps_info_window",
-                                             :locals => { :location => location, :sticker => sticker })
-          marker.title   location.created_at.to_datetime
-          marker.json({ :id => location.id })
-        end
-      end
+      # @markers_json = @location.to_gmaps4rails do |location, marker|
+      #   sticker = location.sticker_id
+      #   unless sticker.nil?
+      #     marker.infowindow render_to_string(:partial => "/locations/maps_info_window",
+      #                                        :locals => { :location => location, :sticker => sticker })
+      #     marker.title   location.created_at.to_datetime
+      #     marker.json({ :id => location.id })
+      #   end
+      # end
     end
 
     def correct_user

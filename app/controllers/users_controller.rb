@@ -274,7 +274,7 @@ class UsersController < ApplicationController
 					end
 				end
 				unless @last_locations.nil?
-					@markers_json = @last_locations.to_gmaps4rails do |location, marker|
+					# @markers_json = @last_locations.to_gmaps4rails do |location, marker|
 						# marker.infowindow render_to_string(:partial => "/locations/maps_info_window",
 						# 																	 :locals => { :location => location })
 						
@@ -286,7 +286,7 @@ class UsersController < ApplicationController
 						# marker.title   location.created_at.to_datetime
 						# marker.json({ :id => location.id })
 						# CLogger.debug marker.inspect
-					end
+					# end
 				end
 			end
 		end

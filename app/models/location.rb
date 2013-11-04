@@ -31,7 +31,7 @@ class Location < ActiveRecord::Base
 	# Geocoding #
 	#########
 	reverse_geocoded_by :latitude, :longitude
-	acts_as_gmappable :process_geocoding => false
+	# acts_as_gmappable :process_geocoding => false
 
 	# Callbacks #
 	########
@@ -39,7 +39,7 @@ class Location < ActiveRecord::Base
 	#, :reverse_geocoder
 	# after_save :after_save_callback
 	after_create :after_create_callback
-	# after_update :after_update_callback
+	after_update :after_update_callback
 	# before_destroy :before_destroy_callback
 
 	# Methods #
@@ -100,15 +100,15 @@ class Location < ActiveRecord::Base
 			self.sticker.touch
 			self.sticker.last_longitude = self.longitude
 			self.sticker.last_latitude = self.latitude
-			self.histories.create!(subject: "location", operation: "created", sticker: location.sticker, user: location.sticker.user)
+			# self.histories.create!(subject: "location", operation: "created", sticker: location.sticker, user: location.sticker.user)
 		end
 
 		def after_update_callback
-			self.histories.create!(subject: "location", operation: "updated", sticker: location.sticker, user: location.sticker.user)
+			# self.histories.create!(subject: "location", operation: "updated", sticker: self.sticker, user: self.sticker.user)
 		end
 
 		def before_destroy_callback
-			self.histories.create!(subject: "location", operation: "deleted", sticker: location.sticker, user: location.sticker.user)
+			# self.histories.create!(subject: "location", operation: "deleted", sticker: location.sticker, user: location.sticker.user)
 		end
 
 end

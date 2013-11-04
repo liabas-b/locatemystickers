@@ -3,6 +3,7 @@
 	<head>
 		<title><%= full_title(yield :title) %></title>
 		<%= javascript_include_tag "application" %>
+		# Everybody is your channel
 		<%= javascript_tag Pousse::js([:everybody]) %>
 		<%= stylesheet_link_tag    "application", media: "all" %>
 		<LINK REL="SHORTCUT ICON" HREF="/assets/favicon.ico">

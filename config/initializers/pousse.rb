@@ -1,3 +1,12 @@
+# Pousse::configure do |config|
+# config.server = ''
+# config.secret = ''
+# config.redis = {
+#   host: '',
+#   port: '',
+#   password: ''
+# } 
+# end
 Pousse::configure do |config|
   config.server = ENV['POUSSE_SERVER'] # Warning: You must specify the port in development mode (eg: http://mypousssette.herokuapp.com:80)
   config.secret = ENV['POUSSE_SECRET']

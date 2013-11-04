@@ -27,6 +27,6 @@ class LiveLocationsController < WebsocketRails::BaseController
   end
 
   def new_location
-    send_message :event_name, Location.last
+    send_message :new_location, Location.last
   end
 end

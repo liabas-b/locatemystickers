@@ -36,4 +36,6 @@ LocateMyStickers::Application.configure do
   config.assets.debug = false
   
   config.middleware.delete Rack::Lock
+
+  config.debug_active = true
 end

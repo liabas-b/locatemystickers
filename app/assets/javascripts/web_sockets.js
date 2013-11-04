@@ -1,14 +1,5 @@
 window.onload = function() {
 
-  var io = require('socket.io').listen(4242);
-
-  io.sockets.on('connection', function (socket) {
-    socket.emit('news', { hello: 'world' });
-    socket.on('my other event', function (data) {
-      console.log(data);
-    });
-  });
-
   // Get references to elements on the page.
   var form = document.getElementById('message-form');
   var messageField = document.getElementById('message');
@@ -18,7 +9,7 @@ window.onload = function() {
 
 
   // Create a new WebSocket.
-  var socket = new WebSocket('ws://0.0.0.0:4242/');
+  var socket = new WebSocket('ws://12.12.12.7:4242/');
 
 
   // Handle any errors that occur.
@@ -71,6 +62,7 @@ window.onload = function() {
 
     // Clear out the message field.
     messageField.value = '';
+    messagesList.scrollTop = messagesList.scrollHeight;
 
     return false;
   };
