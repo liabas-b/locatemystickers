@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title><%= full_title(yield :title) %></title>
+        <%= javascript_include_tag "application" %>
+        <%= javascript_tag Pousse::js([:everybody]) %>
+        <%= stylesheet_link_tag    "application", media: "all" %>
+        <LINK REL="SHORTCUT ICON" HREF="/assets/favicon.ico">
+        <%= csrf_meta_tags %>
+        <%= render 'layouts/shim' %>
+    </head>
+    <body>
+        <header>
+            <div class="brand">
+                <!--Live GoPro, later implement all api possibilities: elevations, -->
+                <h1>LocateMy<s>Stickers</s></h1>
+            </div>
+            
+            <div id="main_buttons">
+                <div class="left">
+                    <div id="me_button" class="button"></div>
+                </div>
+
+                <div class="right">
+                    <div id="search_button" class="button">
+                        <a class="icon-search icon"></a>
+                        <input placeholder="SEARCH"></input>
+                    </div><div id="friends_button" class="button">
+                        <a class="icon-friend icon"></a>
+                        <h2>Friends</h2>
+                    </div><div id="stickers_button" class="button">
+                        <a class="icon-sticker icon"></a>
+                        <h2>Stickers</h2>
+                        <i class="icon-notification icon">4</i>
+                    </div>
+                </div>
+            </div>
+            <!--div id="login_wrap" class="right">
+                <input placeholder="Your mail"></input>
+                <input placeholder="******"></input>
+            </div-->
+        </header>
+        <div id="friends_list">
+
+        </div>
+        <div id="first_actions" class="wrapper_big wrapper_cube">
+            <div class="cube">
+                <div id="get_started" class="front">
+                    <h1 class="hidden">Get Started</h1>
+                    <div id="map_canvas"></div>
+
+                    <div id="stickers_list">
+                        <div id="loading_stickers" class="spinner"></div>
+                    </div>
+                </div>
+
+                <!--div id="understand_layout" class="up">
+                    <h1>Okay, next !</h1>
+                </div>
+
+                <div id="no_sticker_yet" class="hidden">
+                    <div class="get box_action">
+                        <h1>Get</h1>
+                        <i class="icon"></i>
+                    </div>
+                    <div class="add box_action">
+                        <h1>Add</h1>
+                        <i class="icon">+</i>
+                    </div>
+                    <div class="use box_action">
+                        <h1>Use</h1>
+                        <i class="icon"></i>
+                    </div>
+                </div>
+
+                <div id="get_sticker" class="hidden">
+                    <div class="buy box_action">
+                        <h1>1</h1>
+                        <i class="icon"></i>
+                        <p>Just to try</p>                    
+                    </div>
+                    <div class="buy box_action">
+                        <h1>5</h1>
+                        <i class="icon"></i>
+                        <p>Perfect starting kit</p>
+                    </div>
+                    <div class="buy box_action">
+                        <h1>More </h1>
+                        <i class="icon"></i>
+                        <p>I love it, i want more !</p>
+                    </div>
+                </div>
+
+                <div id="add_sticker" class="hidden">
+                    <div class="add input_id box_action">
+                        <h1>id</h1>
+                        <div style="height:130px">
+                            <input placeholder="Type your ID"></input>
+                        </div>
+                        <p>Behind your sticker</p>                    
+                    </div>
+                    <div class="add scan_qr box_action">
+                        <h1>Scan</h1>
+                        <i class="icon"></i>
+                        <p>Use your webcam, or phone</p>
+                    </div>
+                    <div class="add add_friends box_action">
+                        <h1>Friends</h1>
+                        <i class="icon"></i>
+                        <p>Request access to friends </p>
+                    </div>
+                </div-->
+            </div>
+        </div>
+    <%= yield :scripts %>
+
+        <script src="assets/js/jquery-1.10.2.js" type="text/javascript"></script>
+        <script type="text/javascript" src="http://maps.google.com/maps/api/js?&sensor=false"></script>
+        <script type="text/javascript" src="assets/js/v3_epoly.js"></script>
+        <script type="text/javascript" src="assets/js/md5.js"></script>
+
+        <script>
+            $(document).ready(function() {
+
+                //__Application variables, setup and start
+                    var base_url = "https://locatemystickers-dev.herokuapp.com";
+                    //var server = "http://localhost:3000";
+                    var list_stickers = [];
+                    var list_friends = [];
+                    var me = null;
+                    var map;
+
+                    initialize();
+
+                    function initialize() {
+                        // Call this on 'user_log()'
+                        get_me();
+
+                        add_events_listner();
+                        create_map();
+                        get_stickers();
+                        get_friends();
+
+                        // Call a fuction to show history from last "Show" to visitor..
+                        get_sticker_history();
+                    }
+                //\_Application setup and start
+
+                //__Hide and show animations
+                    function toggle_friends_list (event) {
+                        $('#friends_list').toggleClass('visible');
+                        $('#friends_button').toggleClass('active');
+                    }
+
+                    function toggle_stickers_list (event) {
+                        $('#stickers_list').toggleClass('stickers_list_visible');
+                        $('#stickers_button').toggleClass('active');
+                    }
+
+                    function toggle_sticker_marker(event) {
+                        var sticker_id = event.currentTarget.id.substr(8);
+                        var index = get_sticker_index(sticker_id);
+                        var sticker = list_stickers[index];
+
+                        if (sticker.marker == null) {
+                            sticker.marker = create_marker( sticker.latitude,
+                                                            sticker.longitude,
+                                                            sticker.name);
+
+                            sticker.visible = true;
+                        } else if (sticker.visible == false) {
+                            sticker.marker.setVisible(true);
+                            sticker.visible = true;
+                        } else if (sticker.visible == true && $(event.target).hasClass('Position')) {
+                            sticker.marker.setVisible(false);
+                            sticker.visible = false;
+                        }
+
+                        if (sticker.visible == true && $(event.target).hasClass('History')) {
+                            play_sticker_history(sticker);
+                        }
+
+                        if ($(event.target).hasClass('Position')) {
+                            $('#sticker_'+sticker_id).toggleClass('active');
+                            $('#sticker_'+sticker_id+' .Position').toggleClass('active');
+                            $('#sticker_'+sticker_id+' p').toggleClass('active');
+                        } else if ($(event.target).hasClass('History')) {
+                            // RE-WORK HERE
+                            $('#sticker_'+sticker_id).toggleClass('active');
+                            $('#sticker_'+sticker_id+' .History').toggleClass('active');
+                            $('#sticker_'+sticker_id+' p').toggleClass('active');
+                        }
+                    }
+
+                    function play_sticker_history(sticker) {
+
+                        if (sticker.polylines.length > 0) {
+                            //var path = routes.overview_path;
+                            var distance = 5; // Every 5 meters.
+
+                            animate_marker(sticker, 0, 0);
+
+                            /*for (m=0;m<sticker.polylines.length;m++) {
+                                polyline = sticker.polylines[m];
+
+                                //animate_marker(distance, sticker, polyline);
+                                 
+                                var points = polyline.GetPointsAtDistance(distance);
+                               
+                                if (points.length > 0)
+                                    animate_marker(sticker, points, points.length - 1);
+                            }*/
+                            
+                            /*for (m=0;m<sticker.history_steps.length;m++) {
+                                var legs = sticker.history_steps[m].legs;
+                                
+                                for (i=0;i<legs.length;i++) {
+                                    if (i == 0) { 
+                                        //startLocation.latlng = legs[i].start_location;
+                                        //startLocation.address = legs[i].start_address;
+                                        //// marker = google.maps.Marker({map:map,position: startLocation.latlng});
+                                        //marker = createMarker(legs[i].start_location,"start",legs[i].start_address,"green");
+                                    }
+                                    //endLocation.latlng = legs[i].end_location;
+                                    //endLocation.address = legs[i].end_address;
+                                    
+                                    var steps = legs[i].steps;
+                                    for (j=0;j<steps.length;j++) {
+                                        var nextSegment = steps[j].path;
+                                        for (k=0;k<nextSegment.length;k++) {
+                                            var next_segment = new google.maps.LatLng(nextSegment[k].lb, nextSegment[k].mb);
+                                            
+
+                                            t = setTimeout(sticker.marker.setPosition(next_segment), 100);
+                                            //polyline.getPath().push(nextSegment[k]);
+                                            //bounds.extend(nextSegment[k]);
+                                        }
+                                    }
+                                }
+                            }*/
+                        } else {
+                            console.log('no history');
+                        }
+                    }
+
+                    // Distance d'une polyline.. 
+                    function animate_marker(sticker, i_polyline, i_point) {
+
+                        // Only if point exist ?                        
+                        points = sticker.polylines[i_polyline].points;
+                        point = points[i_point];
+                        
+                        sticker.marker.setPosition(point);
+
+                        if (i_point >= points.length - 1) {
+                            if (i_polyline >= sticker.polylines.length - 1) {
+                                // console.log('end of: Polylines & Points');
+                                return;
+                            } else {
+                                // console.log('next polyline');
+                                i_polyline = i_polyline + 1;
+                                i_point = 0;
+                                t = setTimeout(function () {
+                                    animate_marker(sticker, i_polyline, i_point);
+                                }, 10);
+                            }
+                        } else {
+                            // console.log('next point');
+                            i_point = i_point + 1;
+                            p = setTimeout(function () {
+                                animate_marker(sticker, i_polyline, i_point);
+                            }, 10);
+                        }
+
+                        // Next todo: geocode the position ? To display a new adress if it change.
+                        // Update poly: Trace poly to the next 5m distance.
+
+                        
+                   }
+
+
+
+                   /* 
+                    function animate(d) {
+                        // alert("animate("+d+")");
+                        if (d>eol) {
+                            map.panTo(endLocation.latlng);
+                            marker.setPosition(endLocation.latlng);
+                            return;
+                        }
+                        $
+                        var p = polyline.GetPointAtDistance(d);
+                        
+                        // Center the map on the marker new Position.
+                        //map.panTo(p);
+             
+                        // Set the marker new Positions.
+                        marker.setPosition(p);
+                        
+                        // Display Marker Address when it change. 
+                        geocoder.geocode( 
+                        {
+                            latLng: p
+                        },
+                        function(results, status) 
+                        {
+                            if (status == google.maps.GeocoderStatus.OK)
+                            {
+                                console.log(results[0].formatted_address);
+                                if (contentString != results[0].formatted_address)
+                                {
+                                    contentString = '<b>'+results[0].formatted_address+'</b>';
+                                    infowindow.setContent(contentString);
+                                }
+                            }
+                        });
+
+                        updatePoly(d);
+                        timerHandle = setTimeout("animate("+(d+step)+")", tick);
+                    }*/
+
+                //\_Hide and show animations
+
+                //__Getters: stickers, friends, sticker_history.
+                    function get_me() {
+                        $.getJSON(base_url+'/users/1.json?paginate=false', function(json_user) {
+                            me = create_user(json_user);
+                            create_me_card();
+                        });
+                    }
+
+                    function get_stickers() {
+                        $.getJSON(base_url+'/users/1/stickers.json?paginate=false', function(json_stickers) {
+                            $.each(json_stickers, function(key, json_sticker) {
+                               list_stickers.push(create_sticker(json_sticker));
+                            });
+
+                            create_stickers_cards();
+                        });
+                    }
+
+                    function get_friends() {
+                        $.getJSON(base_url+'/users/1/friends.json?paginate=false', function(json_friends) {
+                            $.each(json_friends, function(key, json_friend) {
+                               list_friends.push(create_friend(json_friend));
+                            });
+
+                            create_friends_cards();
+                        });
+                    }
+
+                    function get_sticker_index(sticker_id) {
+                        var index_sticker = null;
+
+                        for(j=0; j<list_stickers.length; j++) {
+                            if (list_stickers[j].id == sticker_id) {
+                                index_sticker = j;
+                                break;
+                            }
+                        }
+
+                        return index_sticker;
+                    }
+
+                    function get_sticker_history(sticker_id) {
+                        var asking_locations = 10;
+
+                        $.getJSON(base_url+'/users/1/stickers/locations.json?n='+asking_locations, function(json_locations) {
+                            $.each(json_locations, function(key, sticker_location) {
+                                if (sticker_location != '') {
+                                    for (i=0;i<sticker_location.length;i++) {
+                                        if (sticker_location[i] != 'undefined') {
+                                            var sticker_id =    key;
+                                            var sticker_index = get_sticker_index(sticker_id);
+
+                                            list_stickers[sticker_index].locations.push(create_location(sticker_location[i]));
+                                        } 
+                                    }
+                                } 
+                            });
+                            create_stickers_history();
+                        });
+                    }
+
+                    function get_directions(sticker_key, from, to, checkpoints) {
+                        //directionsDisplay = new google.maps.DirectionsRenderer(rendererOptions);
+                        var directionsService = new google.maps.DirectionsService();
+                        var travelMode = google.maps.DirectionsTravelMode.DRIVING;
+
+                        var request = {
+                            origin: from,
+                            destination: to,
+                            travelMode: travelMode
+                        };
+
+                        /*
+
+
+                        */
+
+                        directionsService.route(request, function(response, status) {
+                            if (status == google.maps.DirectionsStatus.OK)
+                            {   
+                                var route      = response.routes[0];
+
+                                for (i=0; i<route.legs.length; i++) {
+                                    for (j=0; j<route.legs[i].steps.length; j++) {
+                                        
+                                        polyline = new google.maps.Polyline();
+
+
+
+
+
+                                        var nextSegment = route.legs[i].steps[j].path;
+                                        for (k=0;k<nextSegment.length;k++) {
+                                            polyline.getPath().push(nextSegment[k]);
+                                            //bounds.extend(nextSegment[k]);
+                                        }
+
+                                        polyline.points = polyline.GetPointsAtDistance(5);
+
+                                        //polyline = route.legs[i].steps[j].polyline;
+
+                                        list_stickers[sticker_key].polylines.push(polyline);
+                                    }
+                                }
+                                //var history_leg = create_history_leg(routes);
+                                //list_stickers[sticker_key].history_steps.push(history_leg);
+                            } else {
+                                //console.log('no route: '+status);
+                            }
+                            //console.log(response.routes[0].legs[0].steps);
+
+                            // Create a renderer for directions and bind it to the map.
+                            //var rendererOptions = {map: map}
+                            //directionsDisplay = new google.maps.DirectionsRenderer(rendererOptions);
+                            //directionsDisplay.setDirections(response);
+                        });
+                    }
+                //\_Getters: stickers, friends, sticker_history.
+                    
+
+                //__Create objects: map, marker, sticker, sticker.location, stickers.cards, friends, friends cards, history, address.
+                    function create_map() {
+                        // Fill lat and lng here and LATER --> Read from map_center. (Map center is set based on last Moving marker) 
+                        var map_center = new google.maps.LatLng(48.857423, 2.35147);
+
+                        var map_options = {
+                            zoom: 4,
+                            center: map_center,
+                            mapTypeId: google.maps.MapTypeId.ROADMAP,
+                            streetViewControl: false,
+                            mapTypeControl: false,
+                        };
+
+                        map = new google.maps.Map(document.getElementById("map_canvas"), map_options);
+
+                        return map;
+                    }
+
+                    function create_marker(lat, lng, title) {
+                        var infowindow = new google.maps.InfoWindow(
+                        {
+                            size: new google.maps.Size(150,50)
+                        });
+
+                        var position = new google.maps.LatLng(lat, lng);
+
+                        var marker_description = '<b>'+title+'</b>';
+                        var marker = new google.maps.Marker({
+                            position: position,
+                            map: map,
+                            animation: google.maps.Animation.DROP,
+                            title: "titlex",
+                            zIndex: Math.round(position.lat()*-100000)<<5
+                        });
+                        
+                        // Maybe not required, test without
+                        //marker.setVisible(false);
+
+                        infowindow.setContent(marker_description);
+                        //infowindow.open(map,marker);
+
+                        return marker;
+                    }
+
+                    function create_user(json_user) {
+                        var user = new Object();
+
+                        user.id         = json_user.id;
+                        user.name       = json_user.name;
+                        user.email      = json_user.email;
+                        user.first_name = json_user.first_name;
+                        user.last_name  = json_user.last_name;
+                        user.adress     = json_user.adress;
+                        user.city       = json_user.city;
+                        user.zip_code   = json_user.zip_code;
+                        user.country    = json_user.country;
+                        user.created_at = json_user.created_at;
+                        user.phone      = json_user.phone;
+
+                        return user;
+                    }
+
+                    function create_sticker(json_sticker) {
+                        var sticker = new Object();
+
+                        sticker.name            = json_sticker.name;
+                        sticker.id              = json_sticker.id;
+                        sticker.type_id         = json_sticker.sticker_type_id;
+                        sticker.date            = json_sticker.updated_at;
+                        sticker.latitude        = json_sticker.last_latitude,
+                        sticker.longitude       = json_sticker.last_longitude,
+                        sticker.visible         = false;
+                        sticker.marker          = null;
+                        sticker.locations       = [];
+                        sticker.history_steps   = [];
+                        sticker.polylines       = [];
+
+                        return sticker;
+                    }
+
+                    function create_location(sticker_location) {
+                        var location = new Object();
+
+                        location.id =           sticker_location.id;
+                        location.latitude =     sticker_location.latitude
+                        location.longitude =    sticker_location.longitude;
+                        location.timestamp =    sticker_location.created_at;
+
+                        return location;
+                    }
+
+                    function create_history_leg(routes) {
+                        var history_step = new Object();
+
+                        history_step.legs   = routes.legs;
+
+                        return history_step;
+                    }
+
+                    function create_friend(json_friend) {
+                        var friend = new Object();
+
+                        friend.name =   json_friend.name;
+                        friend.id =     json_friend.id;
+                        friend.email =  json_friend.email;
+
+                        return friend;
+                    }
+
+                    function create_me_card() {
+                        if (me != null) {
+                            $('<img>', {
+                                'id':'me_img',
+                                'src':'http://www.gravatar.com/avatar/'+md5(me.email)+'.jpg?s=50&d=m'
+                            }).appendTo("#me_button");   
+                        }
+                    }
+
+                    function create_stickers_cards() {
+                        if (list_stickers != null) {
+                            $('#loading_stickers').addClass('hidden');
+                            $.each(list_stickers, function(key, value) {
+                                $("<div>", {
+                                    "id":   'sticker_'+value.id,
+                                    "class":'sticker_card',
+                                    html:   '<label style="background-color:#78B0EC"></label>'+
+                                            '<p></p>'+
+                                            '<h2 class="card_name">'+value.name+'</h2>'+
+                                            '<div class="options">'+
+                                                '<div class="spinner hidden"></div>'+
+                                                '<h2 class="Position">Position</h2>'+
+                                                '<h2 class="History">History</h2>'+
+                                            '</div>'
+                                }).appendTo("#stickers_list");
+
+                                // Listen click on the new sticker_card. 
+                                $('#sticker_'+value.id).click(toggle_sticker_marker);
+                            });
+                            return true;
+                        } else {
+                            return false;
+                        }
+                    }
+
+                    function create_friends_cards() {
+                        if (list_friends != null) {
+                            $.each(list_friends, function(key, value) {
+                                $("<img>", {
+                                    "id":   'friend_'+value.id,
+                                    "class":'friend_card',
+                                    "src":'http://www.gravatar.com/avatar/'+md5(value.email)+'.jpg?s=49&d=mm'
+                                }).appendTo("#friends_list");
+                            });
+                            return true;
+                        } else {
+                            return false;
+                        }
+                    }
+
+                    // Function will be re-worked later - POC
+                    function create_stickers_history() {
+                        if (list_stickers != null) {
+                            $.each(list_stickers, function(key, sticker) {
+                                if (sticker.locations.length > 2) {
+                                    for(i=0; i<sticker.locations.length - 1; i++) {
+                                        var sticker_latitude        = sticker.locations[i].latitude;
+                                        var sticker_latitude_next   = sticker.locations[i+1].latitude;
+                                        var sticker_longitude       = sticker.locations[i].longitude;
+                                        var sticker_longitude_next  = sticker.locations[i+1].longitude;
+
+                                        if (sticker_latitude != '0' && sticker_longitude != '0' && 
+                                            sticker_longitude_next != '0' && sticker_latitude_next != '0' &&
+                                            sticker_latitude != sticker_latitude_next && sticker_longitude != sticker_longitude_next)
+                                        {
+                                            var from =  new google.maps.LatLng(sticker.locations[i].latitude, sticker.locations[i].longitude);
+                                            var to =    new google.maps.LatLng(sticker.locations[i+1].latitude, sticker.locations[i+1].longitude);
+
+                                            // Cant call get_directions too much time.
+                                            // console.log(list_stickers[sticker]);
+                                            get_directions(key, from, to);
+                                        } else {
+                                            //console.log('anormal: latitude or longitude = 0');
+                                        }
+                                    }
+                                } else {
+                                   
+                                }
+                            });
+                        }
+                        // Move this function on the server, and get sticker.locations.directions[] from server.
+
+                        return true;
+                    }
+
+                    // Allow one request to get all address (use it for sticker.loation.address ? to avoid requests)--> Check - https://developers.google.com/maps/documentation/geocoding/?hl=FR#GeocodingRequests
+                    function create_address(lat, lng, address) {
+                        if (typeof(lat)!=='undefined' && typeof(lng)!=='undefined')
+                        {   
+                            var latlng = new google.maps.LatLng(lat, lng);
+                            geocoder.geocode( { 'latlng': latlng}, function(results, status) {
+                                console.log(results);
+
+                                // Contains the geocoded address
+                                return results[0].formatted_address;
+                            });
+                        } else if (typeof(address)!=='undefined') {
+                            var geocoder = new google.maps.Geocoder();
+                            geocoder.geocode( { 'address': address}, function(results, status) {
+                                console.log(results);
+
+                                // Contains the geocoded latitude,longitude
+                                return results[0].geometry.location;
+                            });
+                        } else {
+                            console.log('error code: #421 - please contact administrators with the code.');
+                            return null;
+                        }
+                    }
+                //\_Create objects: map, marker, sticker, sticker.location, stickers.cards, friends, friends cards, history, address.
+
+                //__Helpers: listner
+                    function add_events_listner() {
+                        $('#stickers_button').click(toggle_stickers_list);
+                        $('#friends_button').click(toggle_friends_list);
+                    }
+
+                    function move_marker(marker, latlng) {
+
+
+                        marker.setPosition(latlng);
+                    }
+                //\_Helpers: listner
+            });
+        </script>
+
+        <script>
+        //  TODO : Change WRAPPER, CONTAINER, .. pour AREA ! Wrapper_sticker --> sticker_area
+
+            /*$('#get_started').click(function() {
+                //$('.wrapper_cube').css('-webkit-perspective', '1000px');
+                //$('.cube').css('-webkit-transform','rotateX(-90deg) translateZ(140px)');
+                //$('.cube').toggleClass('show_up');
+                //$('.cube').function(next());
+            });
+
+            $('#understand_layout').click(function() {
+                $('#no_sticker_yet').toggleClass('hidden up');
+            });
+
+            $('#no_sticker_yet .get').click(function() {
+                $('#no_sticker_yet').toggleClass('hidden');
+                $('#get_sticker').toggleClass('hidden');
+            });
+
+            $('#no_sticker_yet .add').click(function() {
+                $('#no_sticker_yet').toggleClass('hidden');
+                $('#add_sticker').toggleClass('hidden');
+            });
+
+            function nextface(up) {
+
+            }*/
+        </script>
+        <audio id="music_visit" controls style="display:none">
+            <source src="assets/audio/decouverte.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+    </body>
+</html>

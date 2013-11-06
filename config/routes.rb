@@ -109,6 +109,7 @@ LocateMyStickers::Application.routes.draw do
   # Static pages #
   ##########
 
+  match '/map',    to: 'static_pages#map'
   match '/help',    to: 'static_pages#help'
   match '/about',   to: 'static_pages#about'
   match '/contact', to: 'static_pages#contact'

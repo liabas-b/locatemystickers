@@ -76,7 +76,7 @@ class Location < ActiveRecord::Base
 		
 		def before_create_callback
 			self.date = Time.now
-		 	self.is_new = 't'
+		 	self.is_new = true
 		 	if self.sticker_id.nil? && self.sticker_code
 		 		self.sticker = Sticker.find(self.sticker_code).id
 		 	end

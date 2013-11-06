@@ -172,6 +172,7 @@ class StickersController < ApplicationController
 
 	def update_locations
 		@sticker = Sticker.find(params[:id])
+		# TODO
 		@new_locations = @sticker.delay(run_at: Time.now, queue: 'locations').update_locations
 		respond_to do |format|
 			format.js
