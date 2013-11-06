@@ -136,8 +136,6 @@ GEM
       coderay (~> 1.0.5)
       method_source (~> 0.8)
       slop (~> 3.4)
-    puma (2.5.1)
-      rack (>= 1.1, < 2.0)
     rack (1.4.5)
     rack-cache (1.2)
       rack (>= 0.4)
@@ -253,7 +251,6 @@ DEPENDENCIES
   pg (= 0.12.2)
   pony (= 1.4)
   pousse
-  puma
   rails (= 3.2.13)
   rake (= 10.1.0)
   rspec-rails (= 2.11.0)

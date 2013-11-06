@@ -14,7 +14,7 @@
 #
 
 class Location < ActiveRecord::Base
-	attr_accessible :latitude, :longitude, :created_at, :gmaps, :id, :sticker_id, :updated_at
+	attr_accessible :latitude, :longitude, :created_at, :id, :sticker_id, :updated_at, :sticker_code
 	default_scope order: 'locations.id desc'
 
 	# Relations #
@@ -31,7 +31,6 @@ class Location < ActiveRecord::Base
 	# Geocoding #
 	#########
 	reverse_geocoded_by :latitude, :longitude
-	# acts_as_gmappable :process_geocoding => false
 
 	# Callbacks #
 	########

@@ -50,5 +50,4 @@ group :production do
   gem 'coffee-script-source', '1.6.3'
   gem 'pg', '0.12.2'
   gem 'activerecord-postgresql-adapter'
-  gem 'puma'
 end
