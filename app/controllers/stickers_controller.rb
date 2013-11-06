@@ -206,10 +206,8 @@ class StickersController < ApplicationController
 	end
 
 	def locations
-		# params[:user_id] = 1
 		params[:from_date] = Time.now - 3000.days
 		params[:to_date] = Time.now
-		# params[:n] = 10
 		params[:count_per_gap] = nil
 		params[:time_gap] = nil
 

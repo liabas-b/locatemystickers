@@ -329,7 +329,7 @@
                     }
 
                     function get_stickers() {
-                        $.getJSON(base_url+'/users/1/stickers.json?paginate=false', function(json_stickers) {
+                        $.getJSON(base_url+'/users/' + "<%= current_user.id.to_s %>" + '/stickers.json?paginate=false', function(json_stickers) {
                             $.each(json_stickers, function(key, json_sticker) {
                                list_stickers.push(create_sticker(json_sticker));
                             });
@@ -339,7 +339,7 @@
                     }
 
                     function get_friends() {
-                        $.getJSON(base_url+'/users/1/friends.json?paginate=false', function(json_friends) {
+                        $.getJSON(base_url+'/users/' + "<%= current_user.id.to_s %>" + '/friends.json?paginate=false', function(json_friends) {
                             $.each(json_friends, function(key, json_friend) {
                                list_friends.push(create_friend(json_friend));
                             });
@@ -364,7 +364,7 @@
                     function get_sticker_history(sticker_id) {
                         var asking_locations = 10;
 
-                        $.getJSON(base_url+'/users/1/stickers/locations.json?n='+asking_locations, function(json_locations) {
+                        $.getJSON(base_url+'/users/' + "<%= current_user.id.to_s %>" + '/stickers/locations.json?n='+asking_locations, function(json_locations) {
                             $.each(json_locations, function(key, sticker_location) {
                                 if (sticker_location != '') {
                                     for (i=0;i<sticker_location.length;i++) {
