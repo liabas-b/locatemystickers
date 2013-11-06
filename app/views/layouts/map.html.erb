@@ -322,7 +322,7 @@
 
                 //__Getters: stickers, friends, sticker_history.
                     function get_me() {
-                        $.getJSON(base_url+'/users/1.json?paginate=false', function(json_user) {
+                        $.getJSON(base_url+'/users/' + "<%= current_user.id.to_s %>" + '.json?paginate=false', function(json_user) {
                             me = create_user(json_user);
                             create_me_card();
                         });
