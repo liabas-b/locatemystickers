@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131104151741) do
+ActiveRecord::Schema.define(:version => 20131106132044) do
 
   create_table "app_routes", :force => true do |t|
     t.string   "name"
@@ -75,10 +75,12 @@ ActiveRecord::Schema.define(:version => 20131104151741) do
     t.float    "latitude"
     t.float    "longitude"
     t.boolean  "gmaps"
-    t.datetime "created_at",                :null => false
-    t.datetime "updated_at",                :null => false
-    t.integer  "version",    :default => 0
+    t.datetime "created_at",                  :null => false
+    t.datetime "updated_at",                  :null => false
+    t.integer  "version",      :default => 0
     t.string   "address"
+    t.string   "sticker_code"
+    t.boolean  "is_new"
   end
 
   add_index "locations", ["sticker_id"], :name => "index_locations_on_sticker_id"

@@ -14,7 +14,7 @@
 #
 
 class Location < ActiveRecord::Base
-	attr_accessible :latitude, :longitude, :created_at, :id, :sticker_id, :updated_at, :sticker_code
+	attr_accessible :latitude, :longitude, :created_at, :id, :sticker_id, :updated_at, :sticker_code, :is_new
 	default_scope order: 'locations.id desc'
 
 	# Relations #
