@@ -64,7 +64,7 @@ class StickersController < ApplicationController
 		@sticker = Sticker.find(params[:id])
 		@user = User.find_by_id(@sticker.user_id)
 		@form_path = user_stickers_path(@user)
-    		@sticker.update_locations
+    		@sticker.delay.update_locations
 
 		respond_to do |format|
 			format.html {
