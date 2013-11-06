@@ -36,6 +36,7 @@ group :development, :test do
   gem 'capybara', '1.1.2'
   gem 'sqlite3', '1.3.7'
   gem 'hirb'
+  gem 'railroad'
   gem 'factory_girl_rails'
 end
 

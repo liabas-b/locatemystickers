@@ -2,7 +2,7 @@
 <html>
     <head>
         <title><%= full_title(yield :title) %></title>
-        <%= javascript_include_tag "http://maps.google.com/maps/api/js?sensor=false" %>
+        <%= javascript_include_tag "https://maps.google.com/maps/api/js?sensor=false" %>
         <%= javascript_include_tag "map" %>
         <%= javascript_tag Pousse::js([:everybody]) %>
         <%= stylesheet_link_tag    "map", media: "all" %>
