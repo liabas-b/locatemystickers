@@ -68,6 +68,7 @@ class Sticker < ActiveRecord::Base
   end
 
   def do_update_locations
+      UserMailer.updated_sticker_locations(self).deliver
       puts "[Sticker #{self.code} do_update_locations] asking for locations"
       new_locations = Location.where(sticker_code: self.code).where(is_new: true)
       # new_locations = get_ss_sticker_locations(self.code)
