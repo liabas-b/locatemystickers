@@ -97,18 +97,19 @@ class Location < ActiveRecord::Base
 	private
 
 		def after_create_callback
+			PousseMailer.new_location(self).deliver
 			self.sticker.touch
 			self.sticker.last_longitude = self.longitude
 			self.sticker.last_latitude = self.latitude
-			# self.histories.create!(subject: "location", operation: "created", sticker: location.sticker, user: location.sticker.user)
+			self.histories.create!(subject: "location", operation: "created", sticker_id: self.sticker, user_id: self.sticker.user)
 		end
 
 		def after_update_callback
-			# self.histories.create!(subject: "location", operation: "updated", sticker: self.sticker, user: self.sticker.user)
+			self.histories.create!(subject: "location", operation: "updated", sticker_id: self.sticker, user_id: self.sticker.user)
 		end
 
 		def before_destroy_callback
-			# self.histories.create!(subject: "location", operation: "deleted", sticker: location.sticker, user: location.sticker.user)
+			self.histories.create!(subject: "location", operation: "deleted", sticker_id: self.sticker, user_id: self.sticker.user)
 		end
 
 end

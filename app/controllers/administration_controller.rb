@@ -8,12 +8,13 @@ class AdministrationController < ApplicationController
 	end
 
 	def simulator
-		@sticker = get_ws_user_stickers(current_user.id).first
+		@sticker = current_user.stickers.first
 		@simulation = Simulation.create!(user_id: current_user.id, sticker_id: @sticker.id, locations_sent: 0, description: "#{current_user.name}: Simulation " + Simulation.count.to_s)
 	end
 
 	def launch_simulation
-		send_message :new_location, Location.last
+		@simulation = Simulation.find(params[:simulation_id])
+		@sticker = Sticker.find(@simulation.sticker_id)
 		# system("pwd >> launch_simulation");
 		#system("ruby simulate_stickers.rb");
 		respond_to do |format|

@@ -7,9 +7,8 @@ class UserMailer < ActionMailer::Base
     mail(to: @user.email, subject: "Welcome #{@user.name}")
   end
 
-  def update_sticker_locations sticker
+  def updated_sticker_locations sticker
     @sticker = sticker
-    @sticker.update_locations
     mail(to: @sticker.user.email, subject: "Your sticker #{@sticker.name} now has #{@sticker.locations.count} locations.")
   end
 end

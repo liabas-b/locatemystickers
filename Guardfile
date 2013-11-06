@@ -1,7 +1,17 @@
 # A sample Guardfile
 # More info at https://github.com/guard/guard#readme
 
-guard 'rspec', :version => 2, :all_after_pass => false do
+guard 'rspec', :version => 2, :all_after_pass => false, :cli => '--tag focus' do
+
+
+  watch(%r{^spec/controllers/.+_spec\.rb$})
+  watch(%r{^spec/models/.+integration_spec\.rb$})
+  watch(%r{^spec/helpers/.+_spec\.rb$})
+  watch(%r{^spec/mailers/.+_spec\.rb$})
+  watch(%r{^spec/support/.+_spec\.rb$})
+  watch(%r{^spec/routing/.+_spec\.rb$})
+  watch(%r{^spec/requests/.+_spec\.rb$})
+
 
   watch(%r{^app/controllers/(.+)_(controller)\.rb$})  do |m|
     ["spec/routing/#{m[1]}_routing_spec.rb",

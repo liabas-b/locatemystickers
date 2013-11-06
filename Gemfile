@@ -6,18 +6,15 @@ gem 'rails', '3.2.13'
 gem 'bcrypt-ruby', '3.0.1'
 gem 'will_paginate', '~> 3.0'
 gem 'faker', '1.0.1'
-gem 'gmaps4rails', '~> 2.0.0.pre'
 gem 'pony', '1.4'
 gem 'hashie', '2.0.5'
 gem 'geocoder', '1.1.8'
-gem 'pousse'
 gem 'haml'
 gem 'newrelic_rpm'
 gem 'delayed_job_active_record'
 gem 'dotenv-rails', '~> 0.8'
-# gem 'faye-websocket'
-# gem 'web-socket-ruby'
-# gem 'em-websocket'
+gem 'pousse'
+gem 'daemons'
 
 # Assets
 gem 'coffee-rails', '3.2.2'
@@ -27,7 +24,6 @@ gem 'therubyracer'
 gem 'less-rails-bootstrap'
 gem 'jquery-rails'
 gem 'sass-rails', '~> 3.2.3'
-gem 'websocket-rails'
 
 
 group :development, :test do
@@ -40,6 +36,7 @@ group :development, :test do
   gem 'capybara', '1.1.2'
   gem 'sqlite3', '1.3.7'
   gem 'hirb'
+  gem 'factory_girl_rails'
 end
 
 group :production do
@@ -55,5 +52,3 @@ group :production do
   gem 'activerecord-postgresql-adapter'
   gem 'puma'
 end
-gem 'apipie-rails'
-gem "daemons"

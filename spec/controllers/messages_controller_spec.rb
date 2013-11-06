@@ -24,7 +24,10 @@ describe MessagesController do
   # Message. As you add validations to Message, be sure to
   # update the return value of this method accordingly.
   def valid_attributes
-    {}
+    {
+      subject: 'Hi',
+      content: 'Hi there!'
+    }
   end
 
   # This should return the minimal set of values that should be in the session

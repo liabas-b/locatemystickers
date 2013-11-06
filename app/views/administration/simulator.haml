@@ -8,5 +8,5 @@
     %h2 Stickers simulator 3000
     %p
       "Simulation #{@simulation.description} running with sticker #{ link_to @sticker.name , user_sticker_path(@sticker.user_id, @sticker.id) }
-      = form_tag "/admin/launch_simulation", :method => 'get', remote: true do |f|
+      = form_tag "/admin/launch_simulation?simulation_id=" + @simulation.id.to_s, :method => 'get', remote: true do |f|
         = submit_tag 'Launch', class: 'btn-default btn-primary center'

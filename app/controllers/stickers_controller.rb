@@ -64,18 +64,10 @@ class StickersController < ApplicationController
 		@sticker = Sticker.find(params[:id])
 		@user = User.find_by_id(@sticker.user_id)
 		@form_path = user_stickers_path(@user)
-		
-		before = Delayed::Job.count
-		LiveMailer.send_alert
-
-    		UserMailer.delay(run_at: Time.now + 1.minute, queue: 'default').welcome_email(@user)
-    		UserMailer.delay(run_at: Time.now + 1.minute, queue: 'default').update_sticker_locations(@sticker)
-
-    		@sticker.update_locations
+    		@sticker.delay.update_locations
 
 		respond_to do |format|
 			format.html {
-				flash[:success] = "Created #{ Delayed::Job.count - before } jobs"
 				gmaps_sticker_way
 			}
 			format.json { render :json => @sticker }
@@ -180,7 +172,7 @@ class StickersController < ApplicationController
 
 	def update_locations
 		@sticker = Sticker.find(params[:id])
-		@new_locations = @sticker.update_locations
+		@new_locations = @sticker.delay(run_at: Time.now, queue: 'locations').update_locations
 		respond_to do |format|
 			format.js
 			format.json { render :json => @new_locations }
@@ -276,7 +268,7 @@ class StickersController < ApplicationController
 		end
 
 		def gmaps_sticker_markers
-			@markers_json = @sticker.locations.to_gmaps4rails
+			# @markers_json = @sticker.locations.to_gmaps4rails
 		end
 
 		def gmaps_sticker_polylines

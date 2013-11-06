@@ -1,1 +1,5 @@
-alert("hello");
+
+for ( var i = 0; i < 180; i++ ) {
+  console.log(i);
+  $.post( "http://stickersserver.herokuapp.com/locations.json", { location: { latitude: i, longitude: i, sticker_code: "<%= @sticker.code %>" } });
+}

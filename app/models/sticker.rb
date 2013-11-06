@@ -61,31 +61,33 @@ class Sticker < ActiveRecord::Base
   # Gets all missing locations that were stored on the stickers server
   def update_locations
     if self.code and not self.code.empty?
-      do_update_locations
+      self.do_update_locations
     else
       self.last_location = 'Unknown' if self.last_location.nil?
     end
   end
 
   def do_update_locations
-     delay(run_at: Time.now + 1.hour + 1.minute, queue: 'dafault') do
-        new_locations = get_ss_sticker_locations(self.code)
-        puts "[Sticker #{self.code} do_update_locations] got: " + new_locations.inspect
-        new_locations.each do |location|
-          Location.create!( 
-            latitude: location.latitude,
-            longitude: location.longitude,
-            sticker_id: location.sticker_id,
-            created_at: location.created_at,
-            updated_at: location.updated_at
-          )
-          delete_ss_sticker_location(location.id)
-        end
-        self.last_location = self.locations.last.address if self.locations.count > 0
-        # PousseMailer.send_alert.deliver
-        end
+      puts "[Sticker #{self.code} do_update_locations] asking for locations"
+      new_locations = get_ss_sticker_locations(self.code)
+      puts "[Sticker #{self.code} do_update_locations] got: " + new_locations.inspect
+      new_locations.each do |location|
+        Location.create!( 
+          latitude: location.latitude,
+          longitude: location.longitude,
+          sticker_id: location.sticker_id,
+          created_at: location.created_at,
+          updated_at: location.updated_at
+        )
+        delete_ss_sticker_location(location.id)
+      end
+      self.last_location = self.locations.last.address if self.locations.count > 0
+      if new_locations && new_locations.count > 0
+        self.delay(run_at: Time.now + 10.seconds).do_update_locations
+      end
+      self.delay(run_at: Time.now + 10.seconds).do_update_locations
   end
-
+  
   def update_last_location
     # if self.code and not self.code.empty?
     #   new_location = get_ss_sticker_last_location(self.code)

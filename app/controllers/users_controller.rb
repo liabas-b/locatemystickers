@@ -67,6 +67,7 @@ class UsersController < ApplicationController
 			format.html do
 				if @user.save
 					sign_in @user unless signed_in?
+			    		UserMailer.delay(run_at: Time.now, queue: 'mailing').welcome_email(@user)
 					flash[:success] = "Welcome " + @user.name + "!"
 					redirect_to user_path(@user.id)
 				else
@@ -76,6 +77,7 @@ class UsersController < ApplicationController
 			format.json do
 				if @user.save
 					sign_in @user unless signed_in?
+			    		UserMailer.delay(run_at: Time.now, queue: 'mailing').welcome_email(@user)
 					render :json => @user, status: :created
 				else
 					render :json => @user.errors, status: :bad_request

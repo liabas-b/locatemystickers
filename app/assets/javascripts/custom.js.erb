@@ -16,7 +16,7 @@ function scrollToAnchor(aid) {
 
 function update_sticker_locations(user_id, sticker_id) {
   $.get("/users/" + user_id + "/stickers/" + sticker_id + "/update_locations.json",function(data,status){
-      $.get("/users/" + user_id + "/stickers/" + sticker_id + "/locations/count.json",function(datacount,status){
+      $.get("/users/" + user_id + "/stickers/" + sticker_id + "/locations/count.json",function(datacount,status){ 
         $('span#' + sticker_id + '.sticker_locations_count').html(datacount + "...")
       });
       console.log('update locations got data: ' + data.length)
@@ -258,53 +258,53 @@ $(function() {
   };
 
   // On click, clear markers, place a new one, update coordinates in the form
-  Gmaps.map.callback = function() {
-    google.maps.event.addListener(Gmaps.map.serviceObject, 'click', function(event) {
-      placeMarker(event.latLng);
-      updateFormLocation(event.latLng);
-    });
+//   Gmaps.map.callback = function() {
+//     google.maps.event.addListener(Gmaps.map.serviceObject, 'click', function(event) {
+//       placeMarker(event.latLng);
+//       updateFormLocation(event.latLng);
+//     });
 
-    google.maps.event.addListener(Gmaps.map.serviceObject, 'idle', function (event) {
-    });
-  };
+//     google.maps.event.addListener(Gmaps.map.serviceObject, 'idle', function (event) {
+//     });
+//   };
 
-  // Update form attributes with given coordinates
-  function updateFormLocation(latLng) {
-    $('#property_latitude').val(latLng.lat());
-    $('#property_longitude').val(latLng.lng());
-    $('#property_gmaps_zoom').val(Gmaps.map.serviceObject.getZoom());
-  }
+//   // Update form attributes with given coordinates
+//   function updateFormLocation(latLng) {
+//     $('#property_latitude').val(latLng.lat());
+//     $('#property_longitude').val(latLng.lng());
+//     $('#property_gmaps_zoom').val(Gmaps.map.serviceObject.getZoom());
+//   }
 
-  // Add a marker with an open infowindow
-  function placeMarker(latLng) {
-    var marker = new google.maps.Marker({
-      position: latLng, 
-      map: Gmaps.map.serviceObject,
-      draggable: true
-    });
-    google.maps.event.addListener(marker, 'click', function() {
-      updateFormLocation(this.getPosition());
-    });
-  }
+//   // Add a marker with an open infowindow
+//   function placeMarker(latLng) {
+//     var marker = new google.maps.Marker({
+//       position: latLng, 
+//       map: Gmaps.map.serviceObject,
+//       draggable: true
+//     });
+//     google.maps.event.addListener(marker, 'click', function() {
+//       updateFormLocation(this.getPosition());
+//     });
+//   }
 
-  function live_locations() {
-      console.log('live_locations');
-      clearOverlays();
-      setTimeout(function() {
-        drawLastLocations();
-        live_locations();
-      }, 1000);
-  }
+//   function live_locations() {
+//       console.log('live_locations');
+//       clearOverlays();
+//       setTimeout(function() {
+//         drawLastLocations();
+//         live_locations();
+//       }, 1000);
+//   }
 
-  $('.map-over').click(function() {
-    $('.map-over-message.hideable').fadeTo( "slow" , 0, jQuery.easing.easeInElastic(), function() {
-      $('.map-over-message.hideable').toggleClass('hidden');
-        drawLastLocations();
-    });
-    $('.map-over.hideable').fadeTo( "slow" , 0, jQuery.easing.easeInElastic(), function() {
-      $('.map-over.hideable').toggleClass('hidden');
-    });
-  });
+//   $('.map-over').click(function() {
+//     $('.map-over-message.hideable').fadeTo( "slow" , 0, jQuery.easing.easeInElastic(), function() {
+//       $('.map-over-message.hideable').toggleClass('hidden');
+//         drawLastLocations();
+//     });
+//     $('.map-over.hideable').fadeTo( "slow" , 0, jQuery.easing.easeInElastic(), function() {
+//       $('.map-over.hideable').toggleClass('hidden');
+//     });
+//   });
 
 
 });

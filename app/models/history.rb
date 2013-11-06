@@ -23,12 +23,18 @@ class History < ActiveRecord::Base
   belongs_to :sticker
   belongs_to :location
   belongs_to :message
-  
+
+  after_create :broadcast
+    
   def self.search(search, column = 'subject')
     if search
       where("#{column} LIKE ?", "%#{search}%")
     else
       scoped
     end
+  end
+
+  def broadcast
+    # TODO
   end
 end

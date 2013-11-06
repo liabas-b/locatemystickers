@@ -20,8 +20,8 @@ window.onload = function() {
 
   // Show a connected message when the WebSocket is opened.
   socket.onopen = function(event) {
-    socketStatus.innerHTML = 'Connected to: ' + event.currentTarget.URL;
-    socketStatus.className = 'open';
+    // socketStatus.innerHTML = 'Connected to: ' + event.currentTarget.URL;
+    // socketStatus.className = 'open';
 
     socket.send("Hello\n");
   };
@@ -31,52 +31,52 @@ window.onload = function() {
   socket.onmessage = function(event) {
     var message = event.data;
 
-    messagesList.innerHTML += '<li class="received"><span>Received:</span>' +
-    message + '</li>';
-    messagesList.scrollTop = messagesList.scrollHeight;
+    // messagesList.innerHTML += '<li class="received"><span>Received:</span>' +
+    // message + '</li>';
+    // messagesList.scrollTop = messagesList.scrollHeight;
   };
 
 
   // Show a disconnected message when the WebSocket is closed.
   socket.onclose = function(event) {
-    socketStatus.innerHTML = 'Disconnected from WebSocket.';
-    socketStatus.className = 'closed';
+    // socketStatus.innerHTML = 'Disconnected from WebSocket.';
+    // socketStatus.className = 'closed';
   };
 
 
-  // Send a message when the form is submitted.
-  form.onsubmit = function(e) {
-    e.preventDefault();
+  // // Send a message when the form is submitted.
+  // form.onsubmit = function(e) {
+  //   e.preventDefault();
 
-    // Retrieve the message from the textarea.
-    var message = messageField.value;
+  //   // Retrieve the message from the textarea.
+  //   var message = messageField.value;
 
-    // var message = '{"email": {"name":"'+messageField.value+'", "email":"'+messageField.value+'"}}';
+  //   // var message = '{"email": {"name":"'+messageField.value+'", "email":"'+messageField.value+'"}}';
 
-    // Send the message through the WebSocket.
-    socket.send(message);
+  //   // Send the message through the WebSocket.
+  //   socket.send(message);
 
-    // Add the message to the messages list.
-    messagesList.innerHTML += '<li class="sent"><span>Sent:</span>' + message +
-    '</li>';
+  //   // Add the message to the messages list.
+  //   // messagesList.innerHTML += '<li class="sent"><span>Sent:</span>' + message +
+  //   // '</li>';
 
-    // Clear out the message field.
-    messageField.value = '';
-    messagesList.scrollTop = messagesList.scrollHeight;
+  //   // Clear out the message field.
+  //   // messageField.value = '';
+  //   // messagesList.scrollTop = messagesList.scrollHeight;
 
-    return false;
-  };
+  //   return false;
+  // };
 
 
   // Close the WebSocket connection when the close button is clicked.
-  closeBtn.onclick = function(e) {
-    e.preventDefault();
+  // closeBtn.onclick = function(e) {
+  //   e.preventDefault();
 
-    // Close the WebSocket.
-    socket.close();
+  //   // Close the WebSocket.
+  //   socket.close();
 
-    return false;
-  };
+  //   return false;
+  // };
 
 
   // public method for encoding an Uint8Array to base64
