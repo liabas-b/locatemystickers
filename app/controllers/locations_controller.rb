@@ -58,6 +58,7 @@ class LocationsController < ApplicationController
   def new
     @user = User.find(params[:user_id])
     @location = Location.new
+    @location.is_new = true
     @sticker = Sticker.find(params[:sticker_id])
 
     respond_to do |format|

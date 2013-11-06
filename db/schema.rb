@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131106132044) do
+ActiveRecord::Schema.define(:version => 20131106132554) do
 
   create_table "app_routes", :force => true do |t|
     t.string   "name"
@@ -81,6 +81,7 @@ ActiveRecord::Schema.define(:version => 20131106132044) do
     t.string   "address"
     t.string   "sticker_code"
     t.boolean  "is_new"
+    t.datetime "date"
   end
 
   add_index "locations", ["sticker_id"], :name => "index_locations_on_sticker_id"

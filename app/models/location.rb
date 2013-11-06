@@ -37,6 +37,7 @@ class Location < ActiveRecord::Base
 	after_validation :fetch_address
 	#, :reverse_geocoder
 	# after_save :after_save_callback
+	before_create :before_create_callback
 	after_create :after_create_callback
 	after_update :after_update_callback
 	# before_destroy :before_destroy_callback
@@ -73,9 +74,9 @@ class Location < ActiveRecord::Base
 
 	private
 		
-		def after_create_callback
+		def before_create_callback
 			self.date = Time.now
-		 	self.is_new = true
+		 	self.is_new = 't'
 		 	if self.sticker_id.nil? && self.sticker_code
 		 		self.sticker = Sticker.find(self.sticker_code).id
 		 	end
@@ -85,6 +86,9 @@ class Location < ActiveRecord::Base
 			self.sticker.touch
 			self.sticker.last_longitude = self.longitude
 			self.sticker.last_latitude = self.latitude
+		end
+
+		def after_create_callback
 			self.histories.create!(subject: "location", operation: "created", sticker_id: self.sticker, user_id: self.sticker.user)
 		end
 
