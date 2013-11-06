@@ -69,7 +69,7 @@ class Sticker < ActiveRecord::Base
 
   def do_update_locations
       puts "[Sticker #{self.code} do_update_locations] asking for locations"
-      new_locations = Location.where(is_new: true).where(sticker_id: nil)
+      new_locations = Location.where(sticker_code: self.code).where(is_new: true).where(sticker_id: nil)
       # new_locations = get_ss_sticker_locations(self.code)
       puts "[Sticker #{self.code} do_update_locations] got: " + new_locations.inspect
       new_locations.each do |location|
