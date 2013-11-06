@@ -68,10 +68,8 @@ class Sticker < ActiveRecord::Base
   end
 
   def do_update_locations
-      UserMailer.updated_sticker_locations(self).deliver
       puts "[Sticker #{self.code} do_update_locations] asking for locations"
       new_locations = Location.where(sticker_code: self.code).where(is_new: true)
-      # new_locations = get_ss_sticker_locations(self.code)
       puts "[Sticker #{self.code} do_update_locations] got: " + new_locations.inspect
       new_locations.each do |location|
         location.update_attributes(is_new: false)
@@ -80,7 +78,7 @@ class Sticker < ActiveRecord::Base
       end
       UserMailer.updated_sticker_locations(self).deliver
       self.last_location = self.locations.last.address if self.locations.count > 0
-      self.delay.do_update_locations
+      self.do_update_locations
   end
   
   def update_last_location
