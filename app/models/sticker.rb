@@ -79,10 +79,7 @@ class Sticker < ActiveRecord::Base
       end
       UserMailer.updated_sticker_locations(self).deliver
       self.last_location = self.locations.last.address if self.locations.count > 0
-      if new_locations && new_locations.count > 0
-        self.delay(run_at: Time.now + 10.seconds).do_update_locations
-      end
-      self.delay(run_at: Time.now + 10.seconds).do_update_locations
+      self.delay.do_update_locations
   end
   
   def update_last_location
