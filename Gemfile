@@ -21,7 +21,7 @@ gem 'coffee-rails', '3.2.2'
 gem 'uglifier', '1.2.3'
 gem 'execjs', '2.0.1'
 # gem 'therubyracer'
-gem 'less-rails-bootstrap'
+# gem 'less-rails-bootstrap'
 gem 'jquery-rails'
 gem 'sass-rails', '~> 3.2.3'
 
