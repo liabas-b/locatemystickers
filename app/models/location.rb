@@ -14,7 +14,7 @@
 #
 
 class Location < ActiveRecord::Base
-	attr_accessible :latitude, :longitude, :created_at, :id, :sticker_id, :updated_at, :sticker_code, :is_new
+	attr_accessible :latitude, :longitude, :created_at, :id, :sticker_id, :updated_at, :sticker_code, :is_new, :date
 	default_scope order: 'locations.id desc'
 
 	# Relations #
@@ -44,28 +44,6 @@ class Location < ActiveRecord::Base
 	# Methods #
 	########
 
-	# No need? (depends on maps jquery)
-	def gmaps4rails_marker_picture
-		{
-			"picture" => "/assets/marker.png",
-			"width" => 16,
-			"height" => 32
-		}
-	end
-
-	def gmaps4rails_marker_infowindow
-		render_to_string(:partial => "/locations/maps_info_window",
-										:locals => { :location => location })
-	end
-
-	def gmaps4rails_marker_title
-		self.created_at.to_datetime
-	end
-
-	def gmaps4rails_marker_json
-		render :json => { :id => self.id }
-	end
-
 	def self.search(search, column = 'name')
 		if search
 			where("#{column} LIKE ?", "%#{search}%")
@@ -94,9 +72,16 @@ class Location < ActiveRecord::Base
 	end
 
 	private
-
+		
 		def after_create_callback
-			PousseMailer.new_location(self).deliver
+			self.date = Time.now
+		 	self.is_new = true
+		 	if self.sticker_id.nil? && self.sticker_code
+		 		self.sticker = Sticker.find(self.sticker_code).id
+		 	end
+		 	if self.sticker_code.nil? && self.sticker_id
+		 		self.sticker_code = self.sticker.code
+		 	end
 			self.sticker.touch
 			self.sticker.last_longitude = self.longitude
 			self.sticker.last_latitude = self.latitude
