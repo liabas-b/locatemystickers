@@ -517,7 +517,7 @@ $(document).ready(function() {
     // Allow one request to get all address (use it for sticker.loation.address ? to avoid requests)--> Check - https://developers.google.com/maps/documentation/geocoding/?hl=FR#GeocodingRequests
     function create_address(lat, lng, address) {
         if (typeof(lat)!=='undefined' && typeof(lng)!=='undefined')
-        {   
+        {
             var latlng = new google.maps.LatLng(lat, lng);
             geocoder.geocode( { 'latlng': latlng}, function(results, status) {
                 console.log(results);

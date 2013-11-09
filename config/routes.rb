@@ -109,7 +109,6 @@ LocateMyStickers::Application.routes.draw do
   # Static pages #
   ##########
 
-  match '/map',    to: 'static_pages#map'
   match '/help',    to: 'static_pages#help'
   match '/about',   to: 'static_pages#about'
   match '/contact', to: 'static_pages#contact'
@@ -118,7 +117,7 @@ LocateMyStickers::Application.routes.draw do
   match '/documentation', to: 'static_pages#documentation'
 
 
-  # Admin #
+  # Admin  #
   #######
 
   match '/admin/routes', to: 'administration#routes'
@@ -138,6 +137,12 @@ LocateMyStickers::Application.routes.draw do
   match '/locations', to: 'locations#all_locations'
   match '/conversations', to: 'conversations#all_conversations'
   match '/zones', to: 'zones#all_zones'
+  
+
+  # Map   #
+  ######
+
+  match '/map',    to: 'map#map'
   
 end
 
