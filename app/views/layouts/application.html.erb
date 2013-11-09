@@ -2,8 +2,6 @@
 <html>
 	<head>
 		<title><%= full_title(yield :title) %></title>
-		<%= javascript_include_tag "application" %>
-		<%= javascript_tag Pousse::js([:everybody]) %>
 		<%= stylesheet_link_tag    "application", media: "all" %>
 		<LINK REL="SHORTCUT ICON" HREF="/assets/favicon.ico">
 		<%= csrf_meta_tags %>
@@ -13,5 +11,7 @@
 		<%= render 'layouts/header' %>
 		<%= render 'layouts/page' %>
 	</body>
+	<%= javascript_include_tag "application" %>
+	<%= javascript_tag Pousse::js([:everybody]) %>
 	<%= yield :scripts %>
 </html>

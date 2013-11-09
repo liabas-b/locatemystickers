@@ -8,10 +8,6 @@ class StaticPagesController < ApplicationController
   def help
   end
 
-  def map
-    render layout: 'map.html.erb'
-  end
-
   def about
     @admins = User.where(admin: true)
   end
