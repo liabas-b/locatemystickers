@@ -15,6 +15,7 @@ gem 'delayed_job_active_record'
 gem 'dotenv-rails', '~> 0.8'
 gem 'pousse'
 gem 'daemons'
+gem 'websocket-rails'
 
 # Assets
 gem 'coffee-rails', '3.2.2'

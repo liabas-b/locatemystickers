@@ -106,6 +106,16 @@ class Sticker < ActiveRecord::Base
     user.follow!(self.user.id, self.id)
   end
 
+  def self.broadcast_way_for_stickers stickers
+    stickers.each do |sticker|
+        sticker.locations.last(5).each do |location|
+          PousseMailer.new_location(location).deliver
+          sleep(2)
+        end
+        sticker.update_locations
+    end
+  end
+
   private
 
     def after_initialize_callback
