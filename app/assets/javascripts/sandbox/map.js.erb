@@ -8,22 +8,76 @@ $(document).ready(function() {
     var list_stickers = [];
     var list_friends = [];
     var me = null;
-    var map;
+    var map = null;
 
 
     function initialize() {
         // Call this on 'user_log()'
-        get_me();
+        //get_me();
+
+        create_map(function () {
+            if (this == "success") {
+                console.log('map created');
+            } else {
+                console.log('[error] create_map fail:'+this);
+            }
+        });
+
+        get_me(function () {
+            if (this != false) {
+                init_me(this, function () {
+                    if (this != false) {
+                        console.log(list_stickers);
+                    }
+                });
+            }
+        });
+
+        function () {
+            
+            if (this == "success") {
+                // User datas have been fill
+                --> Create doms element (me, stickers, friends, etc)
+                --> Socket to listen new locations: Store the new locations. 
+                --> 
+            } else {
+                console.log('[error] log_me fail: '+this);
+            }
+        }
 
         add_events_listner();
-        create_map();
-        get_stickers();
-        get_friends();
+
+        //get_stickers();
+        //get_friends();
 
         // Call a fuction to show history from last "Show" to visitor..
-        get_sticker_history();
+        //get_sticker_history();
     }
 //\_Application setup and start
+    
+    function init_me(json_initial, callback) {
+        if (json_initial.length > 0) {
+            $.each
+        }
+    }
+
+    function get_me(callback) {
+        var login   = ;
+        var pwd     = ;
+
+        // Log request
+        $.getJSON(base_url+'/users/1.json?=false', function (json_initial, status) {
+
+            console.log(status)
+            // Check what is a valid status 
+            if (status == "") {
+                callback.call(json_initial);
+            } else {
+                callback.call(false);
+                console.log("[error] bad status");
+            }
+        });
+    }
 
 //__Hide and show animations
     function toggle_friends_list (event) {
@@ -321,8 +375,8 @@ $(document).ready(function() {
     
 
 //__Create objects: map, marker, sticker, sticker.location, stickers.cards, friends, friends cards, history, address.
-    function create_map() {
-        // Fill lat and lng here and LATER --> Read from map_center. (Map center is set based on last Moving marker) 
+    function create_map(callback) {
+        // todo: map_center = bounds(-positions actuels de tout les stickers-), prendre les points les plus loings ( plus grandes valeur lat, lng )
         var map_center = new google.maps.LatLng(48.857423, 2.35147);
 
         var map_options = {
@@ -335,7 +389,11 @@ $(document).ready(function() {
 
         map = new google.maps.Map(document.getElementById("map_canvas"), map_options);
 
-        return map;
+        if (map != null) {
+            callback.call("success");
+        } else {
+            callback.call("[map] is empty");
+        }
     }
 
     function create_marker(lat, lng, title) {
