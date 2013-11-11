@@ -41,8 +41,9 @@ $(document).ready(function() {
           pusher.trigger('test_channel', 'my_event', {"message": "BOULOUYTE"});
         });
         var locations_channel = pusher.subscribe('locations_channel');
-        channel.bind('new_location', function(data) {
-          console.log(data.message);
+        locations_channel.bind('new_location', function(data) {
+          console.log("Pusher received: " + data.location);
+          create_marker(data.location.latitude, data.location.longitude, data.location.address);
         });
     }
 
