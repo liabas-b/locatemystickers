@@ -9,8 +9,5 @@ class MapController < ApplicationController
   end
 
   def map
-    Pusher['test_channel'].trigger('my_event', {
-      message: 'hello world'
-    })
   end
 end

@@ -90,6 +90,10 @@ class Location < ActiveRecord::Base
 
 		def after_create_callback
 			self.histories.create!(subject: "location", operation: "created", sticker_id: self.sticker, user_id: self.sticker.user)
+
+		      Pusher['locations_channel'].trigger('new_location', {
+		      	location: self
+		    	})
 		end
 
 		def after_update_callback
