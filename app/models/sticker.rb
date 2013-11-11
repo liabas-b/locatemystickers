@@ -116,6 +116,21 @@ class Sticker < ActiveRecord::Base
     end
   end
 
+  def pack
+      zones = Hash.new
+      self.zones.each do |z|
+        zones[:zone] = z
+        zones[:fence] = z.locations
+      end
+      {
+        sticker: self,
+        zones: zones,
+        locations: self.locations,
+        histories: self.histories,
+        configuration: self.sticker_configuration
+      }
+  end
+
   private
 
     def after_initialize_callback

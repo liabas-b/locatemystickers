@@ -9,19 +9,17 @@ class MapController < ApplicationController
   end
 
   def initialize_user_data
-    data = Hash.new
-    data[:stickers] = Array.new
-    current_user.stickers.each do |s|
-      sticker = Hash.new(s.to_json)
-      sticker[:locations] = s.locations
-      data[:stickers] << sticker
+    unless current_user.nil?
+      render :json => current_user.pack_default_data
+    else
+      render :json => false, status: :not_found
     end
-    render :json => data
   end
+
 
   def map
     Pusher['test_channel'].trigger('my_event', {
-      message: 'hello worldus'
+      message: 'hello world'
     })
   end
 end
