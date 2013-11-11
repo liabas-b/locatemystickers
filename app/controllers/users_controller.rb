@@ -6,7 +6,7 @@ class UsersController < ApplicationController
 
 	# Filters
 	before_filter :column_names, only: [:index, :friends]
-	before_filter :stickers_column_names, only: [:show, :stickers]	
+	before_filter :stickers_column_names, only: [:show, :stickers]
 
 	# GET /users
 	# GET /users.json
@@ -67,7 +67,7 @@ class UsersController < ApplicationController
 			format.html do
 				if @user.save
 					sign_in @user unless signed_in?
-			    		UserMailer.delay(run_at: Time.now, queue: 'mailing').welcome_email(@user)
+					UserMailer.delay(run_at: Time.now, queue: 'mailing').welcome_email(@user)
 					flash[:success] = "Welcome " + @user.name + "!"
 					redirect_to user_path(@user.id)
 				else
@@ -77,7 +77,7 @@ class UsersController < ApplicationController
 			format.json do
 				if @user.save
 					sign_in @user unless signed_in?
-			    		UserMailer.delay(run_at: Time.now, queue: 'mailing').welcome_email(@user)
+					UserMailer.delay(run_at: Time.now, queue: 'mailing').welcome_email(@user)
 					render :json => @user, status: :created
 				else
 					render :json => @user.errors, status: :bad_request
@@ -120,7 +120,7 @@ class UsersController < ApplicationController
 
 		respond_to do |format|
 			format.html do
-			 	redirect_to root_path
+				redirect_to root_path
 			end
 			format.json do
 				render :json => true
@@ -226,6 +226,15 @@ class UsersController < ApplicationController
 		render :json => 'completed'
 	end
 
+	def initialize_data
+		user = User.find(params[:id])
+		unless user.nil?
+			render :json => user.pack_default_data
+		else
+			render :json => false, status: :not_found
+		end
+	end
+
 	private
 
 		def column_names
@@ -278,13 +287,13 @@ class UsersController < ApplicationController
 				unless @last_locations.nil?
 					# @markers_json = @last_locations.to_gmaps4rails do |location, marker|
 						# marker.infowindow render_to_string(:partial => "/locations/maps_info_window",
-						# 																	 :locals => { :location => location })
+						#                                    :locals => { :location => location })
 						
 						# marker.picture({
-						# 								:picture => "http://www.blankdots.com/img/github-32x32.png",
-						# 								:width   => 32,
-						# 								:height  => 32
-						# 							 })
+						#                 :picture => "http://www.blankdots.com/img/github-32x32.png",
+						#                 :width   => 32,
+						#                 :height  => 32
+						#                })
 						# marker.title   location.created_at.to_datetime
 						# marker.json({ :id => location.id })
 						# CLogger.debug marker.inspect
