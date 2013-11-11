@@ -16,5 +16,3 @@
 //= require map
 //= require_tree .
 
-//= require websocket_rails/main
-

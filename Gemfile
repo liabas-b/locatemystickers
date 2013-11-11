@@ -25,7 +25,7 @@ gem 'therubyracer'
 gem 'less-rails-bootstrap'
 gem 'jquery-rails'
 gem 'sass-rails', '~> 3.2.3'
-
+gem 'pusher'
 
 group :development, :test do
   gem 'rspec-rails', '2.11.0'

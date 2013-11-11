@@ -27,17 +27,17 @@ $(document).ready(function() {
     }
 //\_Application setup and start
     function initialize_websockets () {
-        dispatcher = new WebSocketRails(base_url + '/websocket');
-
-        dispatcher.on_open = function(data) {
-            console.log('Connection has been established: ' + data);
-             // You can trigger new server events inside this callback if you wish.
+        // Enable pusher logging - don't include this in production
+        Pusher.log = function(message) {
+          if (window.console && window.console.log) {
+            window.console.log(message);
+          }
         };
-        dispatcher.bind('chat.new_message', function(data) {
-          console.log(data.message) // would output 'this is a message'
-        });
-        dispatcher.bind('locations.new_locations', function(locations) {
-          console.log('we just received ' + locations.length + ' new locations!');
+
+        var pusher = new Pusher('ba676f4f7e8139bcf138');
+        var channel = pusher.subscribe('test_channel');
+        channel.bind('my_event', function(data) {
+          console.log(data.message);
         });
     }
 
