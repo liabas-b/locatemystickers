@@ -11,7 +11,8 @@ $(document).ready(function() {
     var map = null;
 
 
-    function initialize() {
+    function initialize () {
+        initialize_websockets();
         // Call this on 'user_log()'
         //get_me();
 
@@ -76,6 +77,19 @@ $(document).ready(function() {
                 callback.call(false);
                 console.log("[error] bad status");
             }
+
+    function initialize_websockets () {
+        // Enable pusher logging - don't include this in production
+        Pusher.log = function(message) {
+          if (window.console && window.console.log) {
+            window.console.log(message);
+          }
+        };
+
+        var pusher = new Pusher('ba676f4f7e8139bcf138');
+        var channel = pusher.subscribe('test_channel');
+        channel.bind('my_event', function(data) {
+          console.log(data.message);
         });
     }
 

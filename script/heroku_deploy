@@ -44,6 +44,8 @@ heroku config:add \
 # heroku addons:add sentry:developer -a "$app" &
 # heroku addons:add pgbackups:auto-month -a "$app" &
 
+heroku addons:add pusher -a "$app"
+heroku addons:add papertail -a "$app"
 heroku addons:add newrelic -a "$app"
 
 # git fetch master

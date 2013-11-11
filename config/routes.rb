@@ -3,7 +3,7 @@ LocateMyStickers::Application.routes.draw do
   # Root  #
   ######
 
-  root :to => 'static_pages#home'
+  root :to => 'map#map'
 
 
   # Users   #
@@ -142,7 +142,8 @@ LocateMyStickers::Application.routes.draw do
   # Map   #
   ######
 
-  match '/map',    to: 'map#map'
+  match '/map', to: 'map#map'
+  match '/map/initialize_user_data', to: 'map#initialize_user_data'
   
 end
 

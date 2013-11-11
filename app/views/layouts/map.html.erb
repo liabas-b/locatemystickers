@@ -3,8 +3,8 @@
     <head>
         <title><%= full_title(yield :title) %></title>
         <%= javascript_include_tag "https://maps.google.com/maps/api/js?sensor=false" %>
+        <%= javascript_include_tag "https://d3dy5gmtp8yhk7.cloudfront.net/2.1/pusher.min.js" %>
         <%= javascript_include_tag "map" %>
-        <%= javascript_tag Pousse::js([:everybody]) %>
         <%= stylesheet_link_tag "map", media: "all" %>
         <link rel="SHORTCUT ICON" href="/assets/favicon.ico">
         <%= csrf_meta_tags %>

@@ -15,6 +15,7 @@ gem 'delayed_job_active_record'
 gem 'dotenv-rails', '~> 0.8'
 gem 'pousse'
 gem 'daemons'
+gem 'websocket-rails'
 
 # Assets
 gem 'coffee-rails', '3.2.2'
@@ -24,7 +25,7 @@ gem 'therubyracer'
 gem 'less-rails-bootstrap'
 gem 'jquery-rails'
 gem 'sass-rails', '~> 3.2.3'
-
+gem 'pusher'
 
 group :development, :test do
   gem 'rspec-rails', '2.11.0'
