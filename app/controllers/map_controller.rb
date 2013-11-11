@@ -1,5 +1,6 @@
 
 class MapController < ApplicationController
+  layout 'map.html.erb'
 
   def map_demo
     unless current_user.nil?
@@ -19,7 +20,5 @@ class MapController < ApplicationController
   end
 
   def map
-    map_demo
-    render layout: 'map.html.erb'
   end
 end

@@ -27,7 +27,7 @@ $(document).ready(function() {
     }
 //\_Application setup and start
     function initialize_websockets () {
-        dispatcher = new WebSocketRails('localhost:3000/websocket');
+        dispatcher = new WebSocketRails(base_url + '/websocket');
 
         dispatcher.on_open = function(data) {
             console.log('Connection has been established: ' + data);
@@ -45,12 +45,6 @@ $(document).ready(function() {
     function toggle_friends_list (event) {
         $('#friends_list').toggleClass('visible');
         $('#friends_button').toggleClass('active');
-        var message = {
-          title: 'This post was awful',
-          body: 'really awful',
-          post_id: 9
-        }
-        dispatcher.trigger('chat.new_message', message);
     }
 
     function toggle_stickers_list (event) {
