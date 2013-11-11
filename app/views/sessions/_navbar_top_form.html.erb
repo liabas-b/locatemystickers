@@ -1,10 +1,7 @@
-<form accept-charset="UTF-8" action="/sessions" method="post" class="navbar-form"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="✓"><input name="authenticity_token" type="hidden" value="6Chtw5yBJwWxzeH1NPlFokb0dizxsDDZDqm2nMq2Z+8="></div>
-      <div class="form-group">
-		<input class="form-control" id="session_email" name="session[email]" size="30" type="text">
-      </div>
-      <div class="form-group">
-		<input class="form-control" id="session_password" name="session[password]" size="30" type="password">
-      </div>
-		<input class="btn" name="commit" type="submit" value="Sign in">
-</form>
+
+<%= form_for :session, url: sessions_path, remote: true, format: :js do |f| %>
+      <%= f.text_field :email, class: 'email' %>
+      <%= f.password_field :password, class: 'password' %>
+      <%= f.submit "Sign in", class: "btn" %>
+<% end %>
 
