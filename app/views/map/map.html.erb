@@ -7,9 +7,13 @@
             
             <div id="main_buttons">
                 <div class="left">
+                  <% if signed_in? %>
                     <a href="<%= user_path(current_user.id) %>">
                         <div id="me_button" class="button"></div>
                     </a>
+                  <% else %>
+                    <%= render 'sessions/navbar_top_form' %>
+                  <% end %>
                 </div>
 
                 <div class="right">
@@ -108,4 +112,3 @@
             <source src="/assets/audio/decouverte.mp3" type="audio/mpeg">
             Your browser does not support the audio element.
         </audio>
-        

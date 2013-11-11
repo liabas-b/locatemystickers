@@ -8,10 +8,12 @@ $(document).ready(function() {
     var list_stickers = [];
     var list_friends = [];
     var me = null;
+    var dispatcher = null;
     var map;
 
 
-    function initialize() {
+    function initialize () {
+        initialize_websockets();
         // Call this on 'user_log()'
         get_me();
 
@@ -24,11 +26,31 @@ $(document).ready(function() {
         get_sticker_history();
     }
 //\_Application setup and start
+    function initialize_websockets () {
+        dispatcher = new WebSocketRails('localhost:3000/websocket');
+
+        dispatcher.on_open = function(data) {
+            console.log('Connection has been established: ' + data);
+             // You can trigger new server events inside this callback if you wish.
+        };
+        dispatcher.bind('chat.new_message', function(data) {
+          console.log(data.message) // would output 'this is a message'
+        });
+        dispatcher.bind('locations.new_locations', function(locations) {
+          console.log('we just received ' + locations.length + ' new locations!');
+        });
+    }
 
 //__Hide and show animations
     function toggle_friends_list (event) {
         $('#friends_list').toggleClass('visible');
         $('#friends_button').toggleClass('active');
+        var message = {
+          title: 'This post was awful',
+          body: 'really awful',
+          post_id: 9
+        }
+        dispatcher.trigger('chat.new_message', message);
     }
 
     function toggle_stickers_list (event) {
