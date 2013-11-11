@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131111193517) do
+ActiveRecord::Schema.define(:version => 20131106132554) do
 
   create_table "app_routes", :force => true do |t|
     t.string   "name"
@@ -128,7 +128,6 @@ ActiveRecord::Schema.define(:version => 20131111193517) do
     t.integer  "activate"
     t.datetime "created_at",       :null => false
     t.datetime "updated_at",       :null => false
-    t.integer  "sticker_id"
   end
 
   create_table "sticker_types", :force => true do |t|
@@ -176,14 +175,6 @@ ActiveRecord::Schema.define(:version => 20131111193517) do
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["remember_token"], :name => "index_users_on_remember_token"
-
-  create_table "web_socket_messages", :force => true do |t|
-    t.string   "channel"
-    t.text     "content"
-    t.boolean  "is_pending"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
 
   create_table "zone_locations", :force => true do |t|
     t.integer  "zone_id"

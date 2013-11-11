@@ -34,18 +34,20 @@ $(document).ready(function() {
             }
         });
 
+
+/*
         function () {
             
             if (this == "success") {
                 // User datas have been fill
-                --> Create doms element (me, stickers, friends, etc)
-                --> Socket to listen new locations: Store the new locations. 
-                --> 
+                //--> Create doms element (me, stickers, friends, etc)
+                //--> Socket to listen new locations: Store the new locations. 
+                //--> 
             } else {
                 console.log('[error] log_me fail: '+this);
             }
         }
-
+*/
         add_events_listner();
 
         //get_stickers();
@@ -63,8 +65,8 @@ $(document).ready(function() {
     }
 
     function get_me(callback) {
-        var login   = ;
-        var pwd     = ;
+        //var login   = ;
+        //var pwd     = ;
 
         // Log request
         $.getJSON(base_url+'/users/1.json?=false', function (json_initial, status) {
@@ -394,7 +396,7 @@ $(document).ready(function() {
         var map_center = new google.maps.LatLng(48.857423, 2.35147);
 
         var map_options = {
-            zoom: 4,
+            zoom: 16,
             center: map_center,
             mapTypeId: google.maps.MapTypeId.ROADMAP,
             streetViewControl: false,
@@ -402,6 +404,7 @@ $(document).ready(function() {
         };
 
         map = new google.maps.Map(document.getElementById("map_canvas"), map_options);
+        map.addMapType(G_SATELLITE_3D_MAP);
 
         if (map != null) {
             callback.call("success");
