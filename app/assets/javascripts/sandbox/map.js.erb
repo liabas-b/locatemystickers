@@ -38,6 +38,7 @@ $(document).ready(function() {
         var channel = pusher.subscribe('test_channel');
         channel.bind('my_event', function(data) {
           console.log(data.message);
+          pusher.trigger('test_channel', 'my_event', {"message": "BOULOUYTE"});
         });
     }
 
