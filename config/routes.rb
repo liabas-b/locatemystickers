@@ -14,6 +14,7 @@ LocateMyStickers::Application.routes.draw do
   match '/users/admins', to: 'users#admins'
   match '/users/count', to: 'users#count'
 
+  match '/users/:id/initialize_data', to: 'users#initialize_data'
   match '/users/:id/updateddata',  to: 'users#updated_data'
   match '/users/:id/getstickers',  to: 'stickers#get_stickers'
   match '/users/:id/friends',  to: 'users#friends', only: [:index]
@@ -143,7 +144,6 @@ LocateMyStickers::Application.routes.draw do
   ######
 
   match '/map', to: 'map#map'
-  match '/map/initialize_user_data', to: 'map#initialize_user_data'
   
 end
 

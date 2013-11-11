@@ -64,12 +64,9 @@ class StickersController < ApplicationController
 		@sticker = Sticker.find(params[:id])
 		@user = User.find_by_id(@sticker.user_id)
 		@form_path = user_stickers_path(@user)
-    		@sticker.delay.update_locations
 
 		respond_to do |format|
-			format.html {
-				gmaps_sticker_way
-			}
+			format.html { gmaps_sticker_way }
 			format.json { render :json => @sticker }
 			format.js
 		end
@@ -231,11 +228,6 @@ class StickersController < ApplicationController
 
 		render :json => results
 	end
-			# count: locations.count,
-			# after_filter_count: results.count,
-			# locations: locations,
-			#results: results
-		# } #User.find(params[:user_id]).stickers.map(&:locations)
 
 	private
 
