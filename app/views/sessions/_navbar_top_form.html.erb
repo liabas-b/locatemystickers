@@ -1,7 +1,5 @@
-
 <%= form_for :session, url: sessions_path, remote: true, format: :js do |f| %>
       <%= f.text_field :email, class: 'email' %>
       <%= f.password_field :password, class: 'password' %>
       <%= f.submit "Sign in", class: "btn" %>
 <% end %>
-

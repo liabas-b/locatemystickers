@@ -72,4 +72,15 @@ class AdministrationController < ApplicationController
 
 	def web_sockets
 	end
+
+	def example_comands
+		@heroku_comands = Array.new
+		File.open("example_heroku_comands", "r") {|io| io.read}.split(/\r?\n/).each { |l| @heroku_comands << l };
+		@rake_comands = Array.new
+		File.open("example_rake_comands", "r") {|io| io.read}.split(/\r?\n/).each { |l| @rake_comands << l };
+		@rails_comands = Array.new
+		File.open("example_rails_comands", "r") {|io| io.read}.split(/\r?\n/).each { |l| @rails_comands << l };
+		@git_comands = Array.new
+		File.open("example_git_comands", "r") {|io| io.read}.split(/\r?\n/).each { |l| @git_comands << l };
+	end
 end
