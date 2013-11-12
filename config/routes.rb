@@ -121,6 +121,7 @@ LocateMyStickers::Application.routes.draw do
   # Admin  #
   #######
 
+  match '/admin/example_comands', to: 'administration#example_comands'
   match '/admin/routes', to: 'administration#routes'
   match '/admin/update_route/:id', to: 'administration#update_route', as: 'update_route'
   match '/admin/developer_guide', to: 'administration#developer_guide'

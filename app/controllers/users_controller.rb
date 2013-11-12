@@ -32,7 +32,6 @@ class UsersController < ApplicationController
 				@stickers = @user.stickers.search(params[:search], params["column"]).reorder(stickers_sort_column + " " + stickers_sort_direction).paginate(per_page: 10, :page => params[:page])
 				@followed_stickers = @user.followed_stickers.search(params[:search], params["column"]).reorder(stickers_sort_column + " " + stickers_sort_direction).paginate(per_page: 10, :page => params[:page])
 				@form_path = user_path(@user)
-				@user.update_all_locations
 
 				gmaps_last_locations_markers
 			end

@@ -1,0 +1,267 @@
+  307  bundle exec rake db:migrate
+  310  bundle exec rake db:migrate
+  312  bundle exec rake db:migrate
+  403  bundle exec rake db:test:prepare
+  406  bundle exec rake db:populate
+  408  bundle exec rake db:test:prepare
+  415  bundle exec rake db:populate
+  416  echo "bundle exec rake db:populate" >> ~/.aliases
+  446  heroku run rake db:migrate
+  695  bundle exec rake routes
+  697  bundle exec rake routes
+  774  rake db:migrate
+  795  bundle exec rake db:migrate
+  808  bundle exec rake db:migrate
+  810  bundle exec rake routes
+  812  bundle exec rake routes
+  814  bundle exec rake routes
+  816  bundle exec rake routes
+  817  bundle exec rake db:migrate
+  818  bundle exec rake routes
+  832  bundle exec rake routes
+  874  heroku run rake db:migrate
+  879  heroku run rake db:migrate
+  884  heroku run rake routes
+  892  bundle exec rake routes
+  897  heroku run bundle exec rake db:migrate
+  899  heroku run bundle exec rake db:migrate
+  906  bundle exec rake routes
+  908  bundle exec rake routes
+  910  bundle exec rake routes
+  913  bundle exec rake routes
+  915  bundle exec rake routes
+ 1159  bundle exec rake db:migrate
+ 1161  bundle exec rake db:migrate
+ 1165  bundle exec rake db:migrate
+ 1166  bundle exec rake db:populate
+ 1169  bundle exec rake db:populate
+ 1286  bundle exec rake db:test:prepare
+ 1353  bundle exec rake assets:precompile
+ 1363  bundle exec rake db:test:prepare
+ 1454  bundle exec rake db:migrate
+ 1456  bundle exec rake db:populate
+ 1457  bundle exec rake db:reset
+ 1458  bundle exec rake db:populate
+ 1460  bundle exec rake db:reset
+ 1461  bundle exec rake db:populate
+ 1462  bundle exec rake db:reset
+ 1463  bundle exec rake db:populate
+ 1466  bundle exec rake db:reset
+ 1467  bundle exec rake db:migrate
+ 1468  bundle exec rake db:populate
+ 1476  bundle exec rake db:migrate
+ 1500  bundle exec rake assets:precompile
+ 1517  bundle exec rake assets:precompile
+ 1518  bundle exec rake assets:clean
+ 1531  bundle exec rake routes > routes
+ 1549  bundle exec rake assets:precompile
+ 1550  RAILS_ENV=development bundle exec rake assets:precompile
+ 1586  bundle exec rake db:test:prepare
+ 1588  bundle exec rake db:test:prepare
+ 1592  ./rake/
+ 1620  bundle exec rake db:migrate
+ 1622  bundle exec rake db:populate
+ 1678  bundle exec rake db:populate
+ 1679  bundle exec rake db:migrate
+ 1680  bundle exec rake db:populate
+ 1807  heroku run rake db:migrate
+ 1809  heroku run rake db:migrate
+ 1813  heroku run rake assets:precompile --trace
+ 1822  heroku run rake bd:migrate
+ 1823  heroku run rake db:migrate
+ 1826  bundle exec rake db:migrate
+ 1827  rake annotate
+ 1829  rake db:populate
+ 1861  heroku run rake db:populate
+ 1867  heroku run rake db:migrate
+ 1880  ll rake/
+ 1881  sudo rm -r rake/
+ 1896  heroku run rake db:migrate
+ 1897  heroku run rake db:populate
+ 1899  heroku run bundle exec rake db:reset
+ 1900  heroku run rake db:reset
+ 1901  heroku run rake db:populate
+ 1902  heroku run rake pg:reset
+ 1907  heroku run rake db:migrate
+ 1908  heroku run rake db:populate
+ 1909  heroku run rake db:populate --trace
+ 1913  heroku rake db:create
+ 1914  heroku rake db:migrate
+ 1915  heroku run rake db:populate
+ 1931  ll rake/
+ 1933  bundle exec rake db:migrate
+ 1939  bundle exec rake db:migrate
+ 1941  bundle exec rake db:migrate
+ 1944  heroku run rake db:migrate*
+ 1945  heroku run rake db:migrate
+ 1946  heroku run rake db:populate
+ 1947  heroku run "bundle exec rake db:populate"
+ 1951  bundle exec rake db:populate
+ 1998  rake db:migrate
+ 2010  heroku run rake db:migrate --app locatemystickers-dev
+ 2042  bundle exec rake db:migrate
+ 2057  bundle exec rake routes
+ 2058  bundle exec rake routes > routes
+ 2100  APIPIE_RECORD=params rake test:functionals
+ 2101  APIPIE_RECORD=examples rake test:functionals
+ 2102   rake apipie:static
+ 2104  rake db:setup
+ 2111   rake apipie:static
+ 2112  bundle exec rake apipie:static
+ 2113  rake doc:app
+ 2114  rake doc:app --trace
+ 2119  rake erd
+ 2122  bundle exec rake db:ppulate
+ 2123  bundle exec rake db:populate
+ 2125  bundle exec rake db:populate
+ 2126  bundle exec rake db:reset
+ 2127  bundle exec rake db:populate
+ 2129  bundle exec rake db:reset 
+ 2130  bundle exec rake db:populate
+ 2131  bundle exec rake db:reset 
+ 2134  bundle exec rake db:populate
+ 2136  bundle exec rake db:reset 
+ 2140  heroku run rake db:migrate --app locatemystickers
+ 2141  heroku run rake db:populate --app locatemystickers
+ 2142  bundle exec rake db:populate
+ 2371  bundle exec rake db:migrate
+ 2373  bundle exec rake db:seed
+ 2379  bundle exec rake db:bootstrap
+ 2401  rake nimbleshop:setup:local
+ 2410  rake
+ 2416  rake
+ 2586  rake nimbleshop:setup:local
+ 2588  rake nimbleshop:setup:local
+ 2593  rake nimbleshop:setup:local
+ 2594  bundle exec rake nimbleshop:setup:local
+ 2620  bundle exec rake db:migrate
+ 2629  bundle exec rake db:migrate
+ 2637  rake db:migrate
+ 2638  bndle exec rake db:migrate
+ 2639  bundle exec rake db:migrate
+ 2650  bundle exec rake db:migrate
+ 2652  bundle exec rake dbcp db/development.sqlite3 db/backupeset
+ 2653  bundle exec rake db:reset
+ 2659  bundle exec rake db:migrate
+ 2662  bundle exec rake db:migrate
+ 2665  rake db:migrate
+ 2669  bundle exec rake routes > routes
+ 2704  bundle exec rake db:migrate
+ 2705  bundle exec rake routes > routes
+ 2708  bundle exec rake db:setup
+ 2713  cat ../web-service/lib/tasks/sample_data.rake 
+ 2714  bundle exec rake db:populate
+ 2728  bundle exec rake nimbleshop:setup:db
+ 2842  bundle exec rake db:migrate
+ 2844  rake db:migratre
+ 2845  rake db:migrate
+ 2849  rake db:migrate
+ 2851  cp ../web-service/lib/tasks/sample_data.rake ./lib/tasks/
+ 2852  rake db:migrate
+ 2854  rake db:migrate
+ 2859  bundle exec rake routes > routes
+ 2861  bundle exec rake db:reset
+ 2863  bundle exec rake db:populate
+ 2866  bundle exec rake db:reset
+ 2871  rake db:migrate
+ 2873  rake db:migrate
+ 2876  rake db:migrate
+ 2878  rake db:migrate
+ 2882  rake db:migrate
+ 2917  bundle exec rake routes > routes
+ 2961  heroku run rake db:migrate 
+ 3072  rake routes > ro
+ 3073  rake routes > routes
+ 3074  rake routes
+ 3081  rake db:migrate
+ 3083  rake db:migrate
+ 3085  rake db:migrate
+ 3131  rake jobs:work
+ 3136  rake jobs:clear
+ 3140  rake jobs:clear
+ 3142  rake jobs:work
+ 3143  rake jobs:clear
+ 3146  rake ./sample_data.rb 
+ 3168  heroku run "rake db:migrate" --app locatemystickers-dev
+ 3171  heroku run "rake Delayed::Job.rub" --app locatemystickers-dev
+ 3172  heroku run "rake Delayed::Job.run" --app locatemystickers-dev
+ 3213  rake jobs:work
+ 3239  heroku run 'rake jobs:clear' --app locatemystickers-dev
+ 3245  heroku run 'rake jobs:work' --app locatemystickers-dev
+ 3246  heroku run 'rake jobs:clear' --app locatemystickers-dev
+ 3247  heroku run 'rake jobs:run' --app locatemystickers-dev
+ 3248  heroku run 'rake jobs:work' --app locatemystickers-dev
+ 3250  heroku run 'rake jobs:workoff' --app locatemystickers-dev
+ 3251  rake jobs:run
+ 3252  bundle exec rake jobs:run
+ 3264  heroku run 'rake jobs:work' --app locatemystickers-dev
+ 3265  heroku run 'rake jobs:run' --app locatemystickers-dev
+ 3273  rake db:migrate
+ 3275  rake jobs:work
+ 3277  rake jobs:clear
+ 3299  heroku run rake db:migrate --app locatemystickers
+ 3308  heroku run rake db:migrate --app locatemystickers-dev
+ 3312  rake jobs:work
+ 3323  rake jobs:run
+ 3324  rake jobs:workoff
+ 3326  rake db:test:prepare
+ 3330  heroku run rake jobs:work --app locatemystickers-dev
+ 3458  rake jobs:work
+ 3460  rake jobs:run
+ 3461  rake jobs:work
+ 3477  heroku run rake jobs:work -a locatemystickers-dev
+ 3488  rake db:migrate
+ 3490  heroku run bundle exec rake jobs:work -a locatemystickers-dev
+ 3492  rake db:migrate
+ 3515  heroku run bundle exec rake db:migrate -a "$app"
+ 3516  heroku run bundle exec rake db:migrate -a locatemystickers-yoplait
+ 3543  heroku run rake db:migrate locatemystickers-yop
+ 3544  heroku run rake db:migrate -a locatemystickers-yop
+ 3545  heroku run rake db:populate -a locatemystickers-yop
+ 4238  rake jobs:work
+ 4241  rake jobs:work
+ 4244  rake jobs:run
+ 4245  rake jobs:work
+ 4303  rake jobs:work
+ 4305  rake run jobs:workoff
+ 4306  rake jobs:workoff
+ 4319  rake db:migrate
+ 4321  rake jobs:work
+ 4339  rake jobs:work
+ 4340  rake jobs:workoff
+ 4341  rake jobs:work
+ 4345  rake jobs:work
+ 4350  rake jobs:work
+ 4382  rake db:migrate
+ 4386  rake db:migrate
+ 4396  heroku run rake db:migrate -a locatemystickers-dev
+ 4408  heroku run rake db:migrate -a locatemystickers-dev
+ 4487  heroku run rake jobs:work -a locatemystickers-dev
+ 4510  rake db:migrate
+ 4511  rake jobs:work
+ 4516  rake jobs:work
+ 4524  heroku run bundle exec rake jobs:work -a locatemystickers-dev
+ 4525  rake jobs:work
+ 4534  heroku run rake jobs:work -a locatemystickers-dev
+ 4540  heroku run bundle exec rake jobs:work -a locatemystickers-dev
+ 4545  heroku run rake jobs:work -a locatemystickers-dev
+ 4547  heroku run rake jobs:workoff -a locatemystickers-dev
+ 4570  rake dbmigrate
+ 4571  rake db:migrate
+ 4572  rake jobs:work
+ 4573  rake jobs:work
+ 4579  rake db:reset
+ 4580  rake db:populate
+ 4604  rake assets:precompile
+ 4611  heroku run rake assets:precompile -a locatemystickers-dev
+ 4624  bundle exec rake assets:precompile
+ 4627  bundle exec rake assets:precompile app/assets/javascripts/map.js 
+ 4628  bundle exec rake assets:precompile:app/assets/javascripts/map.js 
+ 4638  bundle exec rake doc:diagrams
+ 4640  bundle exec rake doc:diagrams
+ 4665  heroku run rake assets:precompile -a locatemystickers-dev
+ 4707  rake jobs:work
+ 4710  rake jobs:work
+ 4723  rake jobs:work
+ 4730  rake jobs:work
+ 4737  history | grep rake > example_rake_comands 

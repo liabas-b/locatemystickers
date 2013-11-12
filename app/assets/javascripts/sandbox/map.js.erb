@@ -84,10 +84,15 @@ $(document).ready(function() {
         };
 
         var pusher = new Pusher('ba676f4f7e8139bcf138');
-        var channel = pusher.subscribe('test_channel');
-        channel.bind('my_event', function(data) {
+        var test_channel = pusher.subscribe('test_channel');
+        test_channel.bind('my_event', function(data) {
           console.log(data.message);
           pusher.trigger('test_channel', 'my_event', {"message": "BOULOUYTE"});
+        });
+        var locations_channel = pusher.subscribe('locations_channel');
+        locations_channel.bind('new_location', function(data) {
+          console.log("Pusher received: " + data.location);
+          create_marker(data.location.latitude, data.location.longitude, data.location.address);
         });
     }
 

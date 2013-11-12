@@ -90,7 +90,6 @@ class Location < ActiveRecord::Base
 
 		def after_create_callback
 			self.histories.create!(subject: "location", operation: "created", sticker_id: self.sticker, user_id: self.sticker.user)
-
 		      Pusher['locations_channel'].trigger('new_location', {
 		      	location: self
 		    	})
@@ -98,10 +97,16 @@ class Location < ActiveRecord::Base
 
 		def after_update_callback
 			self.histories.create!(subject: "location", operation: "updated", sticker_id: self.sticker, user_id: self.sticker.user)
+		      Pusher['locations_channel'].trigger('new_location', {
+		      	location: self
+		    	})
 		end
 
 		def before_destroy_callback
 			self.histories.create!(subject: "location", operation: "deleted", sticker_id: self.sticker, user_id: self.sticker.user)
+		      Pusher['locations_channel'].trigger('new_location', {
+		      	location: self
+		    	})
 		end
 
 end

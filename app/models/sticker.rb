@@ -74,7 +74,6 @@ class Sticker < ActiveRecord::Base
       new_locations.each do |location|
         location.update_attributes(is_new: false)
         location.update_attributes(sticker_id: self.id) if location.sticker_id.nil?
-        PousseMailer.new_location(location).deliver
       end
       UserMailer.updated_sticker_locations(self).deliver
       self.last_location = self.locations.last.address if self.locations.count > 0
