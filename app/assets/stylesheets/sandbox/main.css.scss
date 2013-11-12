@@ -112,6 +112,24 @@ img {
   width: 100%;
   height: 100%;
 }
+#error {
+  display:none;
+  position: absolute;
+  top: 40%;
+  height: 20%;
+  bottom: 0;
+  vertical-align: middle;
+  left: 0;
+  right: 0;
+  margin: 0px auto;
+  width: 40%;
+  background-color: white;
+  padding: 10px 20px;
+}
+#error h3 {
+  text-align:center;
+  color:black;
+}
 header {
   position: fixed;
   z-index: 1001;

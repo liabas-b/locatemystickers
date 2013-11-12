@@ -3,8 +3,8 @@ $(document).ready(function() {
     initialize();
 });
 //__Application variables, setup and start
-    var base_url = "https://locatemystickers-dev.herokuapp.com";
-    // var base_url = "http://localhost:3000";
+    //var base_url = "https://locatemystickers-dev.herokuapp.com";
+    var base_url = "http://localhost:3000";
     var list_stickers = [];
     var list_friends = [];
     var me = null;
@@ -13,72 +13,67 @@ $(document).ready(function() {
 
     function initialize () {
         initialize_websockets();
-        // Call this on 'user_log()'
-        //get_me();
-
-        create_map(function () {
-            if (this == "success") {
-                console.log('map created');
-            } else {
-                console.log('[error] create_map fail:'+this);
-            }
-        });
-
-        get_me(function () {
-            if (this != false) {
-                init_me(this, function () {
-                    if (this != false) {
-                        console.log(list_stickers);
-                    }
-                });
-            }
-        });
-
-
-/*
-        function () {
-            
-            if (this == "success") {
-                // User datas have been fill
-                //--> Create doms element (me, stickers, friends, etc)
-                //--> Socket to listen new locations: Store the new locations. 
-                //--> 
-            } else {
-                console.log('[error] log_me fail: '+this);
-            }
-        }
-*/
         add_events_listner();
-
-        //get_stickers();
-        //get_friends();
+        create_map();
+        get_me(get_me_callback);
 
         // Call a fuction to show history from last "Show" to visitor..
         //get_sticker_history();
     }
 //\_Application setup and start
+    function get_me_callback() {
+        // this = json_initial
+        if (this != false) {
+            init_me(this, init_me_callback);
+        }
+    }
+
+    function init_me_callback() {
+        if (this == true) {
+            // me, me.stickers & me.stickers.marker created
+            create_dynamic_dom_elements();
+            //--> Socket to listen new locations: Store the new locations. 
+        }
+    }
+
+    function create_dynamic_dom_elements() {
+        create_stickers_cards();
+        create_friends_cards();
+        // create_me_card();
+    }
     
     function init_me(json_initial, callback) {
-        if (json_initial.length > 0) {
-            $.each
+        if (json_initial.user != null && json_initial.stickers != null) {
+            me = json_initial.user;
+            me.stickers = json_initial.stickers;
+
+            // Create markers here to display marker faster when user ask for it.
+            for(i=0;i<me.stickers.length;i++) {
+                sticker = me.stickers[i].sticker;
+                me.stickers[i].marker = create_marker(sticker);
+            }
+
+            callback.call(true);
+        } else {
+            console.log("[error] initialize failure")
+            callback.call(false);
         }
     }
 
     function get_me(callback) {
-        //var login   = ;
-        //var pwd     = ;
-
         // Log request
-        $.getJSON(base_url+'/users/1.json?=false', function (json_initial, status) {
-
-            console.log(status)
+        $.getJSON(base_url+'/users/1/initialize_data.json', function (json_initial, status) {
             // Check what is a valid status 
-            if (status == "") {
+            if (status == "success") {
                 callback.call(json_initial);
             } else {
-                callback.call(false);
                 console.log("[error] bad status");
+                callback.call(false);
             }
+        });
+    }
+
+    // Test avec le sticker[3] (id:75). pour l'history play. 
 
     function initialize_websockets () {
         // Enable pusher logging - don't include this in production
@@ -107,40 +102,55 @@ $(document).ready(function() {
         $('#stickers_button').toggleClass('active');
     }
 
-    function toggle_sticker_marker(event) {
+    function sticker_on_click(event) {
         var sticker_id = event.currentTarget.id.substr(8);
         var index = get_sticker_index(sticker_id);
-        var sticker = list_stickers[index];
+        var sticker = me.stickers[index];
 
-        if (sticker.marker == null) {
-            sticker.marker = create_marker( sticker.latitude,
-                                            sticker.longitude,
-                                            sticker.name);
-
-            sticker.visible = true;
-        } else if (sticker.visible == false) {
-            sticker.marker.setVisible(true);
-            sticker.visible = true;
-        } else if (sticker.visible == true && $(event.target).hasClass('Position')) {
-            sticker.marker.setVisible(false);
-            sticker.visible = false;
+        if (sticker.marker === "undefined") {
+            sticker.marker = create_marker(sticker.sticker);
         }
 
-        if (sticker.visible == true && $(event.target).hasClass('History')) {
-            play_sticker_history(sticker);
-        }
-
-        if ($(event.target).hasClass('Position')) {
-            $('#sticker_'+sticker_id).toggleClass('active');
-            $('#sticker_'+sticker_id+' .Position').toggleClass('active');
-            $('#sticker_'+sticker_id+' p').toggleClass('active');
-        } else if ($(event.target).hasClass('History')) {
-            // RE-WORK HERE
-            $('#sticker_'+sticker_id).toggleClass('active');
-            $('#sticker_'+sticker_id+' .History').toggleClass('active');
-            $('#sticker_'+sticker_id+' p').toggleClass('active');
+        if (sticker.marker != "undefined") {
+            if ($(event.target).hasClass('Position')) {
+                // Position 'clicked'
+                change_visibility(sticker_id, sticker);
+            } else if ($(event.target).hasClass('History')) {
+                // History 'clicked'
+                play_history(sticker_id, sticker);
+            }
+        } else {
+            console.log("error: Can't create marker, lat lng or name error")
         }
     }
+
+    function change_visibility(sticker_id, sticker) {
+        if (sticker.sticker.visible == false) {
+            sticker.marker.setVisible(true);
+            sticker.sticker.visible = true;
+        } else if (sticker.sticker.visible == true) {
+            sticker.marker.setVisible(false);
+            sticker.sticker.visible = false;
+        }
+
+        $('#sticker_'+sticker_id).toggleClass('active');
+        $('#sticker_'+sticker_id+' .Position').toggleClass('active');
+        $('#sticker_'+sticker_id+' p').toggleClass('active');
+    }
+
+    function play_history(sticker_id, sticker) {
+
+        if (sticker.sticker.visible == false) {
+            sticker.marker.setVisible(true);
+            sticker.sticker.visible = true;
+        }
+
+        // Re-work this area
+        $('#sticker_'+sticker_id).toggleClass('active');
+        $('#sticker_'+sticker_id+' .History').toggleClass('active');
+        $('#sticker_'+sticker_id+' p').toggleClass('active');
+    }
+
 
     function play_sticker_history(sticker) {
         console.log(sticker);
@@ -272,38 +282,18 @@ $(document).ready(function() {
 //\_Hide and show animations
 
 //__Getters: stickers, friends, sticker_history.
-    function get_me() {
+ /*   function get_me() {
         $.getJSON(base_url+'/users/1.json?paginate=false', function(json_user) {
             me = create_user(json_user);
             create_me_card();
         });
-    }
-
-    function get_stickers() {
-        $.getJSON(base_url+'/users/1/stickers.json?paginate=false', function(json_stickers) {
-            $.each(json_stickers, function(key, json_sticker) {
-               list_stickers.push(create_sticker(json_sticker));
-            });
-
-            create_stickers_cards();
-        });
-    }
-
-    function get_friends() {
-        $.getJSON(base_url+'/users/1/friends.json?paginate=false', function(json_friends) {
-            $.each(json_friends, function(key, json_friend) {
-               list_friends.push(create_friend(json_friend));
-            });
-
-            create_friends_cards();
-        });
-    }
+    }*/
 
     function get_sticker_index(sticker_id) {
         var index_sticker = null;
 
-        for(j=0; j<list_stickers.length; j++) {
-            if (list_stickers[j].id == sticker_id) {
+        for(j=0; j<me.stickers.length; j++) {
+            if (me.stickers[j].sticker.id == sticker_id) {
                 index_sticker = j;
                 break;
             }
@@ -392,12 +382,12 @@ $(document).ready(function() {
     
 
 //__Create objects: map, marker, sticker, sticker.location, stickers.cards, friends, friends cards, history, address.
-    function create_map(callback) {
+    function create_map() {
         // todo: map_center = bounds(-positions actuels de tout les stickers-), prendre les points les plus loings ( plus grandes valeur lat, lng )
         var map_center = new google.maps.LatLng(48.857423, 2.35147);
 
         var map_options = {
-            zoom: 16,
+            zoom: 5,
             center: map_center,
             mapTypeId: google.maps.MapTypeId.ROADMAP,
             streetViewControl: false,
@@ -405,39 +395,42 @@ $(document).ready(function() {
         };
 
         map = new google.maps.Map(document.getElementById("map_canvas"), map_options);
-        map.addMapType(G_SATELLITE_3D_MAP);
+        //var googleEarth = new GoogleEarth(map);
+    }
 
-        if (map != null) {
-            callback.call("success");
+    function create_marker(sticker) {
+        if (sticker.last_latitude != null && sticker.last_longitude != null && sticker.name != null) {
+            var infowindow = new google.maps.InfoWindow(
+            {
+                size: new google.maps.Size(150,50)
+            });
+
+            var position = new google.maps.LatLng(sticker.last_latitude, sticker.last_longitude);
+
+            var marker_description = '<b>'+sticker.name+'</b>';
+            var marker = new google.maps.Marker({
+                position: position,
+                map: map,
+                animation: google.maps.Animation.DROP,
+                title: sticker.name,
+                zIndex: Math.round(position.lat()*-100000)<<5
+            });
+
+            infowindow.setContent(marker_description);
+            marker.setVisible(false);
+            sticker.visible = false;
+            //infowindow.open(map,marker);
+            return marker
         } else {
-            callback.call("[map] is empty");
+            return "undefined";
         }
     }
 
-    function create_marker(lat, lng, title) {
-        var infowindow = new google.maps.InfoWindow(
-        {
-            size: new google.maps.Size(150,50)
-        });
+    function create_marker_callback() {
+        if (this == true) {
+            // Marker has been created 
 
-        var position = new google.maps.LatLng(lat, lng);
-
-        var marker_description = '<b>'+title+'</b>';
-        var marker = new google.maps.Marker({
-            position: position,
-            map: map,
-            animation: google.maps.Animation.DROP,
-            title: "titlex",
-            zIndex: Math.round(position.lat()*-100000)<<5
-        });
-        
-        // Maybe not required, test without
-        //marker.setVisible(false);
-
-        infowindow.setContent(marker_description);
-        //infowindow.open(map,marker);
-
-        return marker;
+        }
     }
 
     function create_user(json_user) {
@@ -515,44 +508,42 @@ $(document).ready(function() {
     }
 
     function create_stickers_cards() {
-        if (list_stickers != null) {
+        if (me.stickers != null) {
             $('#loading_stickers').addClass('hidden');
-            $.each(list_stickers, function(key, value) {
-                $("<div>", {
-                    "id":   'sticker_'+value.id,
-                    "class":'sticker_card',
-                    html:   '<label style="background-color:#78B0EC"></label>'+
-                            '<p></p>'+
-                            '<h2 class="card_name">'+value.name+'</h2>'+
-                            '<div class="options">'+
-                                '<div class="spinner hidden"></div>'+
-                                '<h2 class="Position">Position</h2>'+
-                                '<h2 class="History">History</h2>'+
-                            '</div>'
-                }).appendTo("#stickers_list");
-
-                // Listen click on the new sticker_card. 
-                $('#sticker_'+value.id).click(toggle_sticker_marker);
-            });
-            return true;
-        } else {
-            return false;
+            $.each(me.stickers, create_sticker_card);
         }
     }
 
+    function create_sticker_card(key, value) {
+        $("<div>", {
+            "id":   'sticker_'+value.sticker.id,
+            "class":'sticker_card',
+            html:   '<label style="background-color:#78B0EC"></label>'+
+                    '<p></p>'+
+                    '<h2 class="card_name">'+value.sticker.name+'</h2>'+
+                    '<div class="options">'+
+                        '<div class="spinner hidden"></div>'+
+                        '<h2 class="Position">Position</h2>'+
+                        '<h2 class="History">History</h2>'+
+                    '</div>'
+        }).appendTo("#stickers_list");
+
+        // Listen click on the new sticker_card. 
+        $('#sticker_'+value.sticker.id).click(sticker_on_click);
+    }
+
     function create_friends_cards() {
-        if (list_friends != null) {
-            $.each(list_friends, function(key, value) {
-                $("<img>", {
-                    "id":   'friend_'+value.id,
-                    "class":'friend_card',
-                    "src":'http://www.gravatar.com/avatar/'+md5(value.email)+'.jpg?s=49&d=mm'
-                }).appendTo("#friends_list");
-            });
-            return true;
-        } else {
-            return false;
+        if (me.friends != null) {
+            $.each(me.friends, create_friend_card);         
         }
+    }
+
+    function create_friend_card(key, value) {
+        $("<img>", {
+            "id":   'friend_'+value.id,
+            "class":'friend_card',
+            "src":'http://www.gravatar.com/avatar/'+md5(value.email)+'.jpg?s=49&d=mm'
+        }).appendTo("#friends_list");
     }
 
     // Function will be re-worked later - POC
@@ -620,12 +611,6 @@ $(document).ready(function() {
     function add_events_listner() {
         $('#stickers_button').click(toggle_stickers_list);
         $('#friends_button').click(toggle_friends_list);
-    }
-
-    function move_marker(marker, latlng) {
-
-
-        marker.setPosition(latlng);
     }
 //\_Helpers: listner
 
