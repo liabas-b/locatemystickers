@@ -1,0 +1,442 @@
+  211  gem install rails --version '~> 3.2.0'
+  212  sudo gem install rails --version '~> 3.2.0'
+  220  gem install rails --version '~> 3.2.0'
+  234  gem install rails --version '~> 3.2.0'
+  247  gem install rails --version '~> 3.2.0'
+  264  echo "alias dev-rails='cd ~/d/r'" >> ~/.aliases
+  266  dev-rails 
+  274  dev-rails 
+  299  dev-rails 
+  340   gem install rails sqlite3-ruby
+  342  dev-rails 
+  345  gem install rails sqlite3-ruby
+  384  rails generate rspec:install
+  385  rails generate rspec:model posts
+  400  dev-rails 
+  421  dev-rails 
+  433  dev-rails 
+  551  chmod +x ./s/init-rails-dev-complete.sh
+  561  init-rails-dev-complete.sh 
+  565  init-rails-dev-complete.sh 
+  567  init-rails-dev-complete.sh 
+  569  init-rails-dev-complete.sh 
+  570  init-rails-dev-complete.sh
+  576  init-rails-dev-complete.sh
+  578  init-rails-dev-complete.sh
+  591  install-rails-env.sh 
+  592  install-rails-env.sh 
+  595  install-rails-env.sh 
+  597  install-rails-env.sh 
+  599  install-rails-env.sh 
+  601  install-rails-env.sh 
+  604  rails -v
+  605  install-rails-env.sh 
+  607  bundle show rails
+  610  rvm gemset create rails400
+  612  rvm use ruby-1.9.3-p448@rails400
+  613  gem install rails -v 4.0.0
+  615  install-rails-env.sh 
+  616  rails -v
+  618  install-rails-env.sh 
+  622  rvm gemset user rails400
+  623  rvm gemset use rails400
+  624  rails -v
+  625  rvm gemset use rails3.2.2
+  627  rvm gemset use rails3.2.0
+  628  rails -v
+  629  install-rails-env.sh 
+  631  install-rails-env.sh 
+  634  rvm gemset use rails3.2.2
+  636  rvm gemset use rails3.2.2
+  637  rvm gemset use rails3.2.0
+  638  install-rails-env.sh 
+  640  install-rails-env.sh 
+  643  install-rails-env.sh 
+  644  install-rails-env.sh 4.0.0
+  646  rails new testlol
+  650  chmod +x ~/s/rails-app-from-template.sh 
+  652  rails-app-from-template.sh 
+  654  rails-app-from-template.sh 
+  656  rails-app-from-template.sh 
+  659  rails-app-from-template.sh test templates/test.rb 
+  661  rails-app-from-template.sh test templates/test.rb 
+  663  rails-app-from-template.sh test templates/test.rb 
+  674  rails-app-from-template.sh test templates/test.rb 
+  675  rails-app-from-template.sh test ../../templates/test.rb
+  676  rails-app-from-template.sh demo ../../templates/test.rb
+  681  rails-app-from-template.sh demo ../../templates/test.rb
+  683  rails-app-from-template.sh demo ../../templates/test.rb
+  685  rails-app-from-template.sh demo ../../templates/test.rb
+  686  rails s _h
+  687  rails s _h | grep detach
+  688  rails s -h | grep detach
+  689  rails server -h
+  690  rails _h
+  691  rails-app-from-template.sh demo ../../templates/test.rb
+  702  rails-app-from-template.sh demo ../../templates/test.rb
+  704  rails-app-from-template.sh demo ../../templates/test.rb
+  708  rails-app-from-template.sh demo ../../templates/test.rb
+  713  rails-app-from-template.sh walala ../../templates/test.rb
+  716  rails new APP_NAME -m https://github.com/RailsApps/rails3-application-templates/raw/master/rails3-haml-html5-template.rb
+  719  git clone rails new APP_NAME -m https://github.com/RailsApps/rails3-application-templates/raw/master/rails3-haml-html5-template.rb
+  720  install-rails-env.sh
+  721  rails new APP_NAME -m https://github.com/RailsApps/rails3-application-templates/raw/master/rails3-haml-html5-template.rb
+  723  rails new htm5-template -m https://github.com/RailsApps/rails3-application-templates/raw/master/rails3-haml-html5-template.rb
+  724  rails -b
+  725  rails -v
+  726  git clone git@github.com:RailsApps/rails3-application-templates.git
+  728  gem install rails -v 3.2.0
+  729  rails new htm5-template -m https://github.com/RailsApps/rails3-application-templates/raw/master/rails3-haml-html5-template.rb
+  730  rails -v
+  734  rvm gemset use rails3.2.0
+  735  rails -v
+  736  sudo gem install rails -v 3.2.0
+  737  gem remove rails
+  738  gem delete rails
+  739  gem uninstall rails
+  740  rails new htm5-template -m https://github.com/RailsApps/rails3-application-templates/raw/master/rails3-haml-html5-template.rb
+  742  rails -v
+  744  ll /home/ladeno/.rvm/gems/ruby-1.9.3-p448@rails3.2.0/bin
+  745  ll /home/ladeno/.rvm/gems/ruby-1.9.3-p448@rails3.2.0/bin/rails
+  746  cat /home/ladeno/.rvm/gems/ruby-1.9.3-p448@rails3.2.0/bin/rails
+  747  rvm gemset create rails3.2.0
+  748  rvm 1.9.3-p448@rails3.2.0
+  749  rvm ruby-1.9.3-p448@rails3.2.0
+  750  gem install rails --version=3.2.0
+  751  rails -v
+  753  gem install rails -v 3.2.0
+  754  rails new htm5-template -m https://github.com/RailsApps/rails3-application-templates/raw/master/rails3-haml-html5-template.rb
+  755  rails -v
+  756  rails new mytemplate -m https://github.com/dennybritz/rails_startup_template/blob/master/template.rb
+  759  rails-app-from-template.sh walala ../../templates/template.rb 
+  763  rails s
+  768  rails s
+  769  rails s _p 3001
+  772  rails g scaffold item name:string
+  775  rails s -p 3001
+  779  rails-app-from-template.sh walala ../../templates/test.rb 
+  783  rails-app-from-template.sh walala ../../templates/test.rb 
+  785  rails-app-from-template.sh walala ../../templates/test.rb 
+  787  rails-app-from-template.sh walala ../../templates/test.rb 
+  789  rails g devise:install
+  791  rails g devise:install
+  792  rails s*
+  793  rails s
+  794  rails s -p 3001
+  803  rails-app-from-template.sh walala ../../templates/test.rb 
+  804  rails s -p 3001
+  807  rails s -p 3001
+  811  rails generate devise:views users
+  815  rails generate devise user
+  819  rails s -p 3001
+  822  rails-app-from-template.sh ololo ../../templates/test.rb 
+  823  rails-app-from-template.sh ululu ../../templates/test.rb 
+  824  rails-app-from-template.sh aaaa ../../templates/test.rb 
+  825  rails-app-from-template.sh v ../../templates/test.rb 
+  833  rails g devise:views user
+  834  rails g devise user
+  835  rails generate devise user
+  837  rails generate devise:install
+  839  rails generate devise user
+  840  rails generate devise:install
+  841  rails s -p 3001
+  846  rails-app-from-template.sh aaaa ../../templates/test.rb 
+  848  rails-app-from-template.sh aaaa ../../templates/test.rb 
+  849  top | grep rails
+  853  rails-app-from-template.sh aaaa ../../templates/test.rb 
+  854  rails-app-from-template.sh aaaa ../templates/test.rb 
+  855  rails-app-from-template.sh hello ../templates/test.rb 
+  856  rails-app-from-template.sh hello../templates/test.rb 
+  857  rails-app-from-template.sh ola ../templates/test.rb 
+  867  rails-app-from-template.sh 01 ../templates/test.rb 
+  868  rails-app-from-template.sh biatch ../templates/test.rb 
+  870  rails-app-from-template.sh biatchon ../templates/test.rb 
+  877  rails-app-from-template.sh biatchon ../templates/test.rb 
+  880  heroku run rails g devise:install
+  881  heroku run rails g devise:vieuws user
+  882  heroku run rails g devise:views user
+  893  rails g devise:install user
+  896  rails-app-from-template.sh biatchon ../templates/test.rb 
+  903  rails-app-from-template.sh biatchon ../templates/test.rb
+  905  rails-app-from-template.sh biatchon ../templates/test.rb
+  909  rails generate devise:views users
+  917  rails generate devise MODEL
+  918  rails generate devise user
+  920  rails generate devise user
+  923  rails-app-from-template.sh biatchon ../templates/test.rb
+  950  rails-app-from-template.sh biatchon ../templates/test.rb
+  952  rails-app-from-template.sh biatchon ../templates/test.rb
+  953  rails-app-from-template.sh avalon ../templates/test.rb
+  960  rails s -p 45453
+  966  cd test-railsadmin/
+  967  rails c
+  991  rails-app-from-template.sh test-railsadmin ../templates/test.rb
+ 1039  rails-app-from-template.sh azerty ../templates/test.rb
+ 1042  rails-app-from-template.sh 
+ 1138  rails-app-from-template.sh wouloulou templates/test.rb 
+ 1140  rails-app-from-template.sh wouloulou templates/test.rb 
+ 1270  subl ../generator/scripts/rails-app-from-template.sh 
+ 1351  rails s
+ 1436  rails-app-from-template.sh ASTERO templates/test.rb 
+ 1442  rails s
+ 1449  rails 
+ 1451  rails s
+ 1453  rails generate migration AddLatitudeAndLongitudeToLocations latitude:float longitude:float
+ 1455  rails c
+ 1464  rails g migration AddAddressToLocations
+ 1465  rails g migration AddAddressToLocations address:string
+ 1475  rails g migration AddColorToStickers color:string
+ 1479  rails c
+ 1509  rails s
+ 1516  rails s
+ 1519  rails s
+ 1533  rails s
+ 1541  rails c
+ 1543  rails ce
+ 1571  rails g rspec:controller users
+ 1602  rails c
+ 1603  rails s
+ 1623  rails generate less_rails_bootstrap:custom_bootstrap
+ 1624  bundle show  less-rails-bootstrap
+ 1625  ls /home/ladeno/.rvm/gems/ruby-1.9.3-p448/gems/less-rails-bootstrap-3.0.3
+ 1626  ls /home/ladeno/.rvm/gems/ruby-1.9.3-p448/gems/less-rails-bootstrap-3.0.3/app/assets/stylesheets/twitter/bootstrap.less 
+ 1627  cat /home/ladeno/.rvm/gems/ruby-1.9.3-p448/gems/less-rails-bootstrap-3.0.3/app/assets/stylesheets/twitter/bootstrap.less 
+ 1632  git clone git@github.com:metaskills/less-rails-bootstrap-test.git
+ 1634  cp ../less-rails-bootstrap-test/app/assets/stylesheets/ ./app/assets/stylesheets/
+ 1635  cp -r ../less-rails-bootstrap-test/app/assets/stylesheets/ ./app/assets/stylesheets/
+ 1636  cp -r ../less-rails-bootstrap-test/app/assets/javascripts/ ./app/assets/javascripts/
+ 1637  cp -r ../less-rails-bootstrap-test/app/assets/images/ ./app/assets/images/
+ 1641  cp -r ../less-rails-bootstrap-test/app/assets/stylesheets/* ./app/assets/stylesheets/
+ 1642  cp -r ../less-rails-bootstrap-test/app/assets/stylesheets/basic_less/* ./app/assets/stylesheets/basic_less
+ 1645  rails generate less_rails_bootstrap:custom_bootstrap
+ 1646  rails c
+ 1656  cp ../LMS_SAV-BEFORE_REFONTE/web-service/app/assets/stylesheets/gmaps4rails.css app/assets/stylesheets/
+ 1657  cp -r ../LMS_SAV-BEFORE_REFONTE/web-service/app/assets/javascripts/gmaps4rails app/assets/javascripts/
+ 1658  rails s
+ 1675  rails s -p 3333
+ 1677  rails s -p 3333
+ 1681  rails s -p 3333
+ 1683  rails c
+ 1691  rails s -p 3333
+ 1708  rails s
+ 1949  heroku run rails c
+ 1958  heroku run rails c
+ 1988  cp ../d/r/web-service/.gitignore ./.gitignore-for-rails
+ 1994  rails s
+ 1997  rails g migration AddLastLocationToSticker last_location:string
+ 2021  rails s
+ 2028  rails s
+ 2043  rails s
+ 2063  heroku run rails c
+ 2097  echo "gem 'apipie-rails'" >> Gemfile
+ 2099  rails g apipie:install
+ 2103  rails g apipie:install --api_path ""
+ 2116  echo 'gem "rails-erd"' >> Gemfile
+ 2135  rails s
+ 2143  heroku run rails c --app locatemystickers
+ 2145  rails s
+ 2146  rails s -p 3333
+ 2147  heroku run rails c 
+ 2164  rails s -p 3333
+ 2182  rails s
+ 2184  rails s -p 3333
+ 2191  rails s
+ 2192  rails s
+ 2195  rails s -p 3333
+ 2233  rails s
+ 2349  cdrails
+ 2363  ./scripts/rails-app-from-template.sh output/Hello
+ 2366  rails s
+ 2367  ./scripts/rails-app-from-template.sh output/Hello templates/main.rb 
+ 2377  rails c
+ 2378  rails s
+ 2380  rails c
+ 2400  rails s
+ 2403  rails s
+ 2421  gem show rails
+ 2422  rvm show rails
+ 2423  rails -v
+ 2424  rails new base
+ 2433  sudo rm -r less-rails-bootstrap-test/
+ 2437  rvm gemset create rails3.2.9
+ 2438  rvm use rails3.2.9
+ 2439  rvm gemset use rails3.2.9
+ 2440  gem install rails -v 3.2.9
+ 2443  rails new base
+ 2461  rails s
+ 2470  rails s
+ 2471  rails s
+ 2601  rails s
+ 2609  rvm gemset use rails4.0.0
+ 2610  rails new Base
+ 2621  rails s
+ 2622  rails s -p 3333 -D
+ 2623  rails s -p 3333 -d
+ 2625  rails g scaffold Welcome title:string hook_sentence:string text:text
+ 2627  rails g scaffold Welcome title:string hook_sentence:string text:text
+ 2633  rails s -p 3333 -d
+ 2635  rails generate devise_install
+ 2636  rails generate devise User
+ 2641  rails generate devise_install
+ 2642  rails generate devise:install
+ 2643  rails generate devise:uninstall
+ 2648  rails generate devise:uninstall
+ 2649  rails generate devise:install
+ 2658  rails generate devise:install
+ 2660  rails generate devise:install
+ 2661  rails generate devise User
+ 2663  rails generate devise:install
+ 2664  rails generate devise User
+ 2666  rails generate devise:views
+ 2667  rails destroy devise:views
+ 2668  rails generate devise:views users
+ 2672  rails s
+ 2674  rails s
+ 2717  rvm use rails3.29
+ 2718  rvm gemset use rails3.29
+ 2719  rvm gemset use rails3.2.9
+ 2720  rails new myshop
+ 2727  bundle exec rails generate nimbleshop:install
+ 2744  bundle exec rails c
+ 2755  rails s
+ 2768  rails s
+ 2832  rails s
+ 2841  rails g scaffold Welcome title:string hook_sentence:string text:text
+ 2843  rails g model Client authorization_key:string
+ 2846  rails g scaffold Site brand:string hook_sentence:string visits:integer update_count:integer products_count:integer products_sold:integer logo:string owner_id:integer current_welcome:integer
+ 2847  rails g model Base pages_displayed:integer version:string secret_token:string
+ 2848  rails g migration AddAuthorizedToClient autorized:boolean
+ 2855  rails g controller Client
+ 2856  rails d controller Client
+ 2857  rails g controller ClientS
+ 2858  rails g controller Clients
+ 2864  rails c
+ 2867  rails c
+ 2869  rails s
+ 2870  rails g migration AddSiteIdToShops site_id:integer
+ 2872  rails g migration AddShopIdToShites shop_id:integer
+ 2874  rails d migration AddShopIdToShites shop_id:integer
+ 2875  rails g migration AddShopIdToSites shop_id:integer
+ 2877  rails g migration AddSiteIdToWelcomes site_id:integer
+ 2880  rails generate formtastic:install 
+ 2881  rails g migration AddClientIdToSties client_id:integer
+ 2884  rails g nested_form:install
+ 2920  rails s
+ 2965  rails c
+ 2966  rails s -p 3222
+ 2985  rails s
+ 2986  rails c*
+ 3034  rails c
+ 3080  rails generate delayed_job:active_record
+ 3082  rails generate delayed_job:upgrade
+ 3133  rails c
+ 3134  rails s
+ 3135  rails c
+ 3170  heroku run "rails c" --app locatemystickers-dev
+ 3185  heroku run "rails c" --app locatemystickers-dev
+ 3196  heroku run "rails c" --app locatemystickers-dev
+ 3207  rails c
+ 3216  heroku run "rails c" --app locatemystickers-dev
+ 3227  rails s
+ 3253  heroku run 'rails c' --app locatemystickers-dev
+ 3257  rails s
+ 3258  rails c
+ 3263  heroku run rails c
+ 3269  rails s
+ 3270  heroku run rails c --app locatemystickers-dev
+ 3272  rails g migration AddLatitudeAndLongitudeToStickers last_longitude:float last_latitude:float
+ 3276  rails s
+ 3278  rails c
+ 3284  rails generate mailer UserMailer
+ 3285  rails s
+ 3346  rails s
+ 3347  rails s -p 3333
+ 3358  rails s
+ 3360  rails s
+ 3362  rails s
+ 3364  rails s
+ 3366  rails s
+ 3368  rails s
+ 3370  rails s
+ 3372  rails s
+ 3409  rails s
+ 3447  rails s
+ 3455  rails 
+ 3456  rails c*
+ 3457  rails c
+ 3459  rails s
+ 3467  heroku run rails c -a locatemystickers-dev
+ 3487  rails g model AppRoute name:string path:string method:string description:string goal:string title:string arguments:string extensions:string responses_status:string response_body:string example_request:string
+ 3489  heroku run rails c -a locatemystickers-dev
+ 3491  rails g migration AddActionToAppRoutes action:string
+ 3511  rails g websocket_rails:install
+ 3512  rails g controller LiveLocations
+ 3513  rails s
+ 3525  rails s
+ 3527  rails c
+ 3540  rails s
+ 3546  heroku run rails c -a locatemystickers-yop
+ 3831        <p>Pousse, simple realtime for rails app
+ 4185  heroku run rails c -a locatemystickers-yop
+ 4234  rails s
+ 4235  rails c
+ 4237  rails c
+ 4240  rails c
+ 4247  rails s
+ 4248  rails c
+ 4261  rails c
+ 4263  rails c
+ 4265  rails c
+ 4270  heroku run rails c -a locatemystickers-dev
+ 4284  rails c
+ 4285  rails s
+ 4287  rails c
+ 4290  rails s
+ 4291  rails c
+ 4295  heroku run rails c -a locatemystickers-dev
+ 4299  rails s
+ 4318  rails g model WebSocketMessage channel:string content:text is_pending:boolean
+ 4320  rails s
+ 4322  rails c
+ 4332  rails s
+ 4335  rails c
+ 4343  rails s
+ 4344  rails c
+ 4347  rails s
+ 4359  rails c
+ 4360  rails s
+ 4361  rails c
+ 4379  rails g migration AddStickerCodeToLocations sticker_code:string
+ 4384  rails g migration AddIsNewToLocations is_new:boolean
+ 4397  rails g migration AddDateToLocations date:datetime
+ 4439  heroku run rails c
+ 4451  rails s
+ 4478  rails s
+ 4505  heroku run rails c -a locatemystickers-dev
+ 4506  heroku run rails c
+ 4509  rails c
+ 4514  rails c
+ 4515  rails s
+ 4527  rails c
+ 4529  heroku run rails c -a locatemystickers-dev
+ 4535  rails s
+ 4541  heroku run rails c -a locatemystickers-dev
+ 4560  heroku run rails c -a locatemystickers-dev
+ 4574  rails c
+ 4575  rails s
+ 4577  rails c
+ 4581  rails c
+ 4582  rails s
+ 4584  rails c
+ 4648  rails c
+ 4651  heroku run rails c -a locatemystickers-dev
+ 4652  rails c
+ 4689  rails s
+ 4693  rails s
+ 4709  rails c
+ 4724  rails c
+ 4725  rails s
+ 4727  rails c
+ 4729  rails c
+ 4732  rails s
+ 4738  history | grep rails > example_rails_comands 

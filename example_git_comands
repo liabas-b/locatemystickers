@@ -1,0 +1,929 @@
+  163  apt-get -y install build-essential openssl libreadline6 libreadline6-dev curl git-core zlib1g zlib1g-dev libssl-dev libyaml-dev libsqlite3-dev sqlite3 libxml2-dev libxslt-dev autoconf libc6-dev ncurses-dev automake libtool bison subversion python
+  164  sudo apt-get -y install build-essential openssl libreadline6 libreadline6-dev curl git-core zlib1g zlib1g-dev libssl-dev libyaml-dev libsqlite3-dev sqlite3 libxml2-dev libxslt-dev autoconf libc6-dev ncurses-dev automake libtool bison subversion python
+  208  i git
+  213  git clone git://anongit.kde.org/oxygen-transparent
+  226  sudo apt-get install build-essential cmake kdelibs5-dev kdebase-workspace-dev libxrender-dev libx11-dev git
+  257  git clone git@heroku.com:audio-cloud.git
+  263  git clone git@heroku.com:audio-cloud.git
+  268  as git
+  275  git clone git@heroku.com:coffee-blog.git
+  276  git clone git@locatemystickers.com:development/web-service.git
+  279  git clone git@heroku.com:warm-wildwood-4154.git
+  283  git clone git@heroku.com:warm-wildwood-4154.git
+  285  git clone git@heroku.com:warm-wildwood-4154.git
+  286  git clone git@locatemystickers.com:development/web-service.git
+  362  git pull
+  363  git add .
+  367  git commit -a -m "migrate to Debian"
+  368  git pull
+  427  git add .
+  428  git commit -a -m "Can add sugar"
+  429  git push heroku master
+  430  git push 
+  438  git push
+  441  heroku git:remote -a coffee-blog
+  442  git push heroku master
+  472  git pull
+  511  cd ~/.config; git clone https://github.com/tony/awesome-config.git awesome
+  513  cd ~/.config; git clone https://github.com/tony/awesome-config.git awesome
+  515  git submodule init && git submodule update
+  716  rails new APP_NAME -m https://github.com/RailsApps/rails3-application-templates/raw/master/rails3-haml-html5-template.rb
+  719  git clone rails new APP_NAME -m https://github.com/RailsApps/rails3-application-templates/raw/master/rails3-haml-html5-template.rb
+  721  rails new APP_NAME -m https://github.com/RailsApps/rails3-application-templates/raw/master/rails3-haml-html5-template.rb
+  723  rails new htm5-template -m https://github.com/RailsApps/rails3-application-templates/raw/master/rails3-haml-html5-template.rb
+  726  git clone git@github.com:RailsApps/rails3-application-templates.git
+  729  rails new htm5-template -m https://github.com/RailsApps/rails3-application-templates/raw/master/rails3-haml-html5-template.rb
+  740  rails new htm5-template -m https://github.com/RailsApps/rails3-application-templates/raw/master/rails3-haml-html5-template.rb
+  754  rails new htm5-template -m https://github.com/RailsApps/rails3-application-templates/raw/master/rails3-haml-html5-template.rb
+  756  rails new mytemplate -m https://github.com/dennybritz/rails_startup_template/blob/master/template.rb
+  860  git add .
+  861  git add . Â
+  862  git add . -A
+  863  git commit -a -m "test"
+  864  git push heroku master
+  886  git add .
+  887  git commit -a -m "sucker"
+  888  git push herolku master
+  889  git push heroku master
+ 1077  git init
+ 1078  git add .
+ 1079  git commit -a -m "first commit
+ 1096  git reset
+ 1101  git init
+ 1102  git add .
+ 1103  git commit -a -m "Hello, world"
+ 1104  git config --global user.email b.liabastre@gmail.com
+ 1105  git config --global user.name "Benoit Liabastre"
+ 1106  git remote add git@github.com:liabas-b/generator3000.git
+ 1107  git remote add -m git@github.com:liabas-b/generator3000.git
+ 1108  git remote add -m git@github.com:liabas-b/generator3000.git master
+ 1109  git remote add -m master git@github.com:liabas-b/generator3000.git
+ 1110  git remote add -m main git@github.com:liabas-b/generator3000.git
+ 1111  git remote add main git@github.com:liabas-b/generator3000.git
+ 1112  git push
+ 1114  ne .git/config 
+ 1115  git push
+ 1117  ne ../Collocator/.git/config
+ 1119  git push
+ 1121  git push
+ 1122  ne .git/config 
+ 1123  git push
+ 1124  git pull
+ 1125  git commit
+ 1126  git commit -m "Hello"
+ 1127  git pull
+ 1128  git push
+ 1143  git clone git@localhost:development/web-service.git
+ 1144  git clone git@locatemystickerS.com:development/web-service.git
+ 1149  git clone git@locatemystickers.com:development/web-service.git
+ 1168  git clone git@locatemystickers.com:development/web-service.git
+ 1231  git clone git@locatemystickers.com:development/web-service.git
+ 1251  git checkout -b "merge-app-and-service"
+ 1252  git add -p
+ 1253  git --color add -p
+ 1254  git config --global color.ui auto
+ 1255  git --color add -p
+ 1256  git add -p
+ 1257  git status
+ 1258  git commit -a -m "commiting all.."
+ 1259  git branch
+ 1260  git merge merge-app-and-service
+ 1261  git push merge-app-and-service master
+ 1262  git push master merge-app-and-service
+ 1263  git push -u origin merge-app-and-service
+ 1264  git checkout master
+ 1265  git fetch origin
+ 1266  git merge origin/merge-app-and-service
+ 1267  git push origin master
+ 1339  git fetch spec/models
+ 1340  git fetch master spec/models
+ 1341  git checkout master spec/models
+ 1412  git clone git@github.com:tutsplus/nodejs-websockets-chat-service.git
+ 1439  git checkout -b mise-sur-pieds
+ 1453  rails generate migration AddLatitudeAndLongitudeToLocations latitude:float longitude:float
+ 1469  git add -A
+ 1470  git commit -a -m "lastlazy commit"
+ 1471  git push origin mise-sur-pieds
+ 1477  git branch -b colorfull-stickers
+ 1478  git checkout -b colorfull-stickers
+ 1493  git clone git@github.com:iurevych/Flat-UI.git
+ 1499  ne .gitignore 
+ 1507  git log
+ 1522  git add -A
+ 1523  git commit -m "flat io hard integration"
+ 1525  git branch colorfull-stickers
+ 1526  git checkout -b colorfull-stickers
+ 1527  git checkout colorfull-stickers
+ 1528  git push origin colorfull-stickers
+ 1532  git checkout master
+ 1537  git fetch origin
+ 1538  git merge origin/colorfull-stickers
+ 1539  git push origin master
+ 1563  git clone git@locatemystickers.com:develoment/web-service.git
+ 1564  git clone git@locatemystickers.com:development/web-service.git
+ 1568  git clone git@locatemystickers.com:development/web-service.git
+ 1570  git clone --depth=1 git@locatemystickers.com:development/web-service.git
+ 1606  git checkout -b "restore-service""
+ 1607  git checkout -b "restore-service"
+ 1608  git add -A 
+ 1609  git commit -m "Most resources back to life"
+ 1610  git diff
+ 1611  git push origin restore-service
+ 1612  git checkout master
+ 1613  git fetch origin
+ 1614  git merge origin/restore-service
+ 1615  git push origin master
+ 1616  git checkout -b "refonte-layout"
+ 1617  git add -A 
+ 1621  git commit -a -m "rebase assets and gems"
+ 1632  git clone git@github.com:metaskills/less-rails-bootstrap-test.git
+ 1648  git add -A .
+ 1649  git commit -m "New layout comming up"
+ 1651  git push origin  refonte-layout
+ 1652  git checkout master
+ 1653  git fetch origin
+ 1654  git merge origin/refonte-layout
+ 1655  git push origin master
+ 1666  git clone git@github.com:apneadiving/Google-Maps-for-Rails.git
+ 1670  git clone git@heroku.com:stickersserver.git 
+ 1684  git add . _A
+ 1685  git add . -A
+ 1686  git commit -a -m "added sticker_last_location"
+ 1687  git push heroku master
+ 1688  git push master
+ 1689  git push
+ 1699  git clone git@github.com:Studyka/poussette.git
+ 1706  git push heroku master
+ 1711  git push heroku master
+ 1714  git push heroku master
+ 1716  git commit -a -m 'ol'
+ 1717  git push heroku master
+ 1723  git push hroku master
+ 1724  git push heroku master
+ 1734  git checkout -b last-location-nil
+ 1735  git add _p
+ 1736  git add .
+ 1738  git add .
+ 1739  git commit -a -m "user profile back to life"
+ 1740  git push origin last-location-nil
+ 1743  git checkout master
+ 1744  ne ./script/merge_current_git_branch
+ 1745  chmod +x ./script/merge_current_git_branch 
+ 1746  ./script/merge_current_git_branch 
+ 1748  ne ./script/merge_current_git_branch
+ 1749  ./script/merge_current_git_branch 
+ 1751  ne ./script/merge_current_git_branch
+ 1752  ./script/merge_current_git_branch 
+ 1753  rm ./script/merge_current_git_branch
+ 1755  git fetch origin
+ 1756  git merge origin/last-location-nil
+ 1757  git push origin master
+ 1761  git push heroku master
+ 1763  git ls
+ 1764  git help
+ 1765  cat .git/config 
+ 1772  ll .git
+ 1773  du .git -c -h -d 1
+ 1774  du .git/objects/ -c -h -d 1
+ 1775  git push herok master
+ 1776  git push heroku master
+ 1777  ne .git/config 
+ 1779  git push heroku master
+ 1784  sudo rm -r .git
+ 1786  git push heroku master
+ 1787  git push heroku
+ 1788  git push
+ 1789  git init
+ 1791  git push heroku
+ 1792  git push heroku master
+ 1794  git add .
+ 1796  git rm -r doc
+ 1798  git rm doc
+ 1799  git rm -r doc
+ 1800  git add .
+ 1801  git commit -a -m "pushing to hero"
+ 1802  git push heroku master
+ 1804  git commit -a -m "pushing to hero"
+ 1805  git push heroku master
+ 1810  git commit -a -m "pushing to hero"
+ 1811  git push heroku master
+ 1812  git push heroku master --trace
+ 1817  git add .
+ 1818  git commit -a -m "Config for heroku"
+ 1819  git push heroku master
+ 1820  git commit -a -m "Config for heroku"
+ 1821  git push heroku master
+ 1824  git checkout -b remove-sidebar-margin-on-homepage
+ 1825  git rm -r app/views/service
+ 1831  ne .gitignore 
+ 1834  ne .gitignore 
+ 1848  git add .
+ 1849  git commit -am "Home page back to life (missing some JS). Buttons visible again, home page full screen, better page layout"
+ 1850  git commit -am "little margin on page search bar"
+ 1851  git push heroku master
+ 1852  git add .
+ 1853  git commit -a -m "little margin on page search bar"
+ 1854  git push origin remove-sidebar-margin-on-homepage
+ 1855  git push master remove-sidebar-margin-on-homepage
+ 1856  git push heroku remove-sidebar-margin-on-homepage
+ 1857  git checkout master
+ 1858  git merge remove-sidebar-margin-on-homepage
+ 1859  git push heroku master
+ 1862  git commit -am "fixed home sign up btn"
+ 1863  git push heroku master
+ 1868  git commit -am "TEST STICKER color :)"
+ 1869  git push heroku master
+ 1888  git commit -a -m "uncoment coffee script in Gemfile""
+ 1889  git commit -a -m "uncoment coffee script in Gemfile"
+ 1890  git push heroku master
+ 1892  git push heroku master
+ 1893  git commit -a -m "uncoment coffee script in Gemfile"
+ 1894  git push heroku master
+ 1905  git commit -a -m "database privileges"
+ 1906  git push heroku master
+ 1916  ne .git/config 
+ 1917  git commit -a -m "can create stickers"
+ 1918  git push heroku master
+ 1919  git remote add origin git@github.com:liabas-b/locatemystickers-dev.git
+ 1920  git push -u origin master
+ 1942  git commit -a -m "can't populate db on heroku. need to user curl......."
+ 1943  git push heroku master
+ 1952  git push origin master
+ 1954  ne .git/config
+ 1955  git add .
+ 1956  git commit -a -m "Deploying to prod"
+ 1957  git push heroku-prod master
+ 1963  git remote add origin git@github.com:liabas-b/stickersserver.git
+ 1964  git remote add github git@github.com:liabas-b/stickersserver.git
+ 1965  git push -u github master
+ 1982  got clone git@github.com:liabas-b/dotfiles.git
+ 1983  git clone git@github.com:liabas-b/dotfiles.git
+ 1988  cp ../d/r/web-service/.gitignore ./.gitignore-for-rails
+ 1989  git add .
+ 1990  git commit -a -m "added fast some useful dotfiles, unsorted, no explanation (upcomming)"
+ 1993  git push 
+ 1999  git checkout -b webservice-controllers
+ 2000  git add .
+ 2001  git commit -a -m "Refonte de beaucoup de choses, ajout de status au retours des requetes de l'user, add last_location to sticker"
+ 2002  git push -u origin webservice-controllers
+ 2003  git checkout master
+ 2004  git pul
+ 2005  git pull
+ 2006  git push heroku master
+ 2012  git checkout -b webservice
+ 2013  git add .
+ 2014  git commit -m "Solved some issiues, cleand code"
+ 2015  git push origin webservice
+ 2016  git checkout master
+ 2017  git pul
+ 2018  git pull
+ 2019  git push heroku master
+ 2023  git remote add git@heroku.com:testlms.git
+ 2024  git remote add test git@heroku.com:testlms.git
+ 2025  git push test
+ 2031  git push test master
+ 2064  git add .
+ 2065  git commit -a -m "get configuration by sticker code enabled"
+ 2066  git remite
+ 2067  git remote
+ 2068  git push gitub
+ 2069  git push github
+ 2070  git push heroku master
+ 2071  git push master
+ 2072  git push
+ 2073  git add .
+ 2074  git push origin master
+ 2075  git push heroku master
+ 2076  git commit -a -m "Sticker configurations almost synced with stickers server - CRUD OK"
+ 2077  git push heroku master
+ 2078  git remote
+ 2079  git push heroku-prod master
+ 2082  brew install --HEAD   https://raw.github.com/apiaryio/snowcrash/master/tools/homebrew/snowcrash.rb
+ 2085  git clone git://github.com/apiaryio/snowcrash.git
+ 2087   git submodule update --init --recursive
+ 2124  git push heroku-prod master
+ 2128  git add .
+ 2137  git commit -a -m "sitcker configurations nearly work"
+ 2138  git psuh heroku master
+ 2139  git push heroku-prod master
+ 2149  git commit -a -m "added /last_location (sitcker_code)"
+ 2150  git push heroku master
+ 2151  git push master
+ 2152  git push origin
+ 2154  git commit -a -m "added /last_location (sitcker_code)"
+ 2155  git push origin
+ 2156  git commit -a -m "added /last_location (sitcker_code)"
+ 2157  git push origin
+ 2158  git commit -a -m "added /last_location (sitcker_code)"
+ 2159  git push origin
+ 2160  git commit -a -m "added /last_location (sitcker_code)"
+ 2161  git push origin
+ 2162  git commit -a -m "added /last_location (sitcker_code)"
+ 2163  git push origin
+ 2166  git add .
+ 2167  git commit -a -m "almost live..."
+ 2168  git pull
+ 2169  git push
+ 2170  git push heroku master
+ 2171  git remote
+ 2172  git push origin master
+ 2174  git add .
+ 2175  git commit -a -m "almost live..."
+ 2176  git add .
+ 2177  git commit -a -m "almost live.."
+ 2178  git push heroku master
+ 2179  git commit -a -m "almost live.."
+ 2180  git push origin master
+ 2183  git push heroku master
+ 2185  git commit -a -m "almost live..."
+ 2186  git push origin master
+ 2187  git commit -a -m "almost live..."
+ 2188  git push origin master
+ 2189  git commit -a -m "almost live.."
+ 2190  git push heroku master
+ 2193  git add .
+ 2194  git commit -a -m "almost live..."
+ 2197  git push heroku master
+ 2198  git add .
+ 2199  git commit -a -m "almost live..."
+ 2200  git push origin master
+ 2201  git add .
+ 2202  git commit -a -m "almost live..."
+ 2203  git push origin master
+ 2204  git push heroku-prod master
+ 2209  git commit -a -m "sitcker configurations nearly work"
+ 2210  git push heroku-prod master
+ 2211  git push heroku master
+ 2213  git add .
+ 2214  git commit -a -m "..."
+ 2215  git push heroku master
+ 2217  git commit -a -m "almost live..."
+ 2218  git push origin master
+ 2219  git commit -a -m "almost live..."
+ 2220  git pull
+ 2221  git commit -a -m "almost live..."
+ 2223  git add .
+ 2226  git add .
+ 2227  git commit -a -m "almost live..."
+ 2228  git push origin master
+ 2229  git push heroku master
+ 2230  git push heroku-prod master
+ 2357  git status
+ 2360  git add .
+ 2384  git clone git://github.com/nimbleshop/nimbleshop.git
+ 2385  git clone git://github.com/nimbleshop/nimbleshop_simply.git
+ 2484  git init
+ 2485  git add .
+ 2487  git commit -m "Hello word"
+ 2488  git remote add origin git@github.com:liabas-b/base-app.git
+ 2489  git push
+ 2491  git push -u origin master
+ 2492  git commit -m -a "Hello word"
+ 2493  git commit -a -m "Hello word"
+ 2494  git add *
+ 2495  git commit -a -m "Hello word"
+ 2497  rm -rf .git
+ 2499  rm -rf .git
+ 2502  git add .
+ 2503  git commit -a -m "ola"
+ 2504  rm -rf .git
+ 2505  git init
+ 2506  git remote add git@github.com:liabas-b/base-app.git
+ 2508  git clone
+ 2509  git clone git@github.com:liabas-b/base-app.git
+ 2511  git rm -r *
+ 2512  git rm -R *
+ 2513  git rm -rf *
+ 2515  git rm -rf *
+ 2517  git add .
+ 2518  git commit -a -m "ola'
+ 2519  git commit -a -m "ola"
+ 2520  git push
+ 2522  rm -rf .git
+ 2523  git
+ 2524  git status
+ 2525  git remote add style git@github.com:liabas-b/base-app-style.git
+ 2526  git push -u style master
+ 2527  git add .
+ 2528  git commmit -a -m "first style cvommit"
+ 2529  git commit -a -m "first style cvommit"
+ 2530  git push -u style master
+ 2532  rm -rf .git
+ 2534  git status
+ 2535  git init
+ 2536  git add .
+ 2537  git commit -a -m "first style cvommit"
+ 2538  git remote add origin git@github.com:liabas-b/base-app-style.git
+ 2539  git push
+ 2540  git pull
+ 2541  git push
+ 2542  rm -rf .git
+ 2543  git init
+ 2544  git add .
+ 2545  git commit -m "first commit"
+ 2546  git remote add git@github.com:liabas-b/base-app.git
+ 2547  git push --force
+ 2548  git remote add origin git@github.com:liabas-b/base-app.git
+ 2552  rm -rf .git
+ 2553  git init
+ 2554  git add .
+ 2555  git commit -a -m "first style cvommit"
+ 2556  git remote add origin git@github.com:liabas-b/base-app-core.git
+ 2558  ne .git/config 
+ 2559  git push --force
+ 2560  git push --force
+ 2565  rm -rf .git
+ 2566  git init
+ 2567  git add .
+ 2568  git commit -a -m "first style cvommit"
+ 2569  git remote add origin git@github.com:liabas-b/base-app-core.git
+ 2570  git push --force
+ 2571  git push 
+ 2572  git push origin master
+ 2583  git clone git://github.com/nimbleshop/nimbleshop.git
+ 2584  git clone git://github.com/nimbleshop/nimbleshop_simply.git
+ 2678  git status
+ 2679  git init
+ 2680  git remote add origin git@github.com:liabas-b/base-app.git
+ 2681  git add .
+ 2682  git commit -a -m "first"
+ 2683  git push
+ 2684  git push --force
+ 2731  git clone git://github.com/nimbleshop/nimbleshop_simply.git
+ 2735  git tag _l
+ 2736  git tag -l
+ 2737  git checkout v0.0.20
+ 2738  git checkout -b base-app-theme
+ 2739  git push
+ 2740  ne .git/config 
+ 2741  git push
+ 2742  git remote add github git@github.com:liabas-b/base-app-theme.git
+ 2743  git push -u github 
+ 2749  git push -u github base-app-theme
+ 2750  sudo rm -r /home/ladeno/.rvm/gems/ruby-1.9.3-p448/cache/bundler/git/base-app-theme-6ceb76a604e9a3b019ca3de15fa8ba2ea63074e9
+ 2757  git commit -m "test change style"
+ 2758  git push -u github base-app-theme
+ 2759  git push github base-app-theme
+ 2760  git add .
+ 2761  git commit -a -m "changed style"
+ 2762  git push github base-app-theme
+ 2765  git commit -a -m "changed style"
+ 2766  git push github base-app-theme
+ 2772  git remote add heroku git@heroku.com:stormy-river-3670.git
+ 2773  cat .git/con
+ 2775  ll .git
+ 2776  git init
+ 2777  git add .
+ 2778  git commit -a -m 'hello'
+ 2779  git remote add origin git@github.com:liabas-b/base-app.git
+ 2780  git push origin master
+ 2783  git push origin master --force
+ 2784  git push heroku master
+ 2788  git commit -m "changed gemfile"
+ 2789  git commit -m -a -m "reo"
+ 2790  git rm Gemfile.lock
+ 2793  git add .
+ 2794  git commit -m "changed gemfile"
+ 2795  git push heroku master
+ 2797  git commit -m "changed gemfile"
+ 2798  git commit -m -a "changed gemfile"
+ 2799  git commit -a -m "changed gemfile"
+ 2800  git push heroku master
+ 2801  git add Gemfile.lock
+ 2802  git commit -a -m "changed gemfile"
+ 2805  git push heroku master
+ 2815  git add .
+ 2816  git commit -a -m "drroo"
+ 2817  git push
+ 2819  git commit -a -m "drroo"
+ 2828  git commit -a -m "drroo"
+ 2829  git push
+ 2925  git add .
+ 2926  git commit -a -m
+ 2927  git commit -a -m "added test header to locations#index.json"
+ 2928  git push
+ 2929  git push heroku master
+ 2930  git remote
+ 2931  git push github master
+ 2932  git push origin master
+ 2953  git commit -a -m
+ 2954  git commit -a -m 'added access_token to response headers'
+ 2955  git push origin master
+ 2956  git add .*
+ 2957  git add .
+ 2958  git commit -a -m "wouhou"
+ 2959  git push 
+ 2960  git push heroku master
+ 2990  git checkout -b sticker-to-param
+ 2991  git add .
+ 2992  git commit -m "stickers get by code or id OK"
+ 2993  git push
+ 2994  git remote list
+ 2995  git remote
+ 2996  git push -u origin sticker-to-param
+ 2997  git checkout master
+ 2998  git commit -m "stickers get by code or id OK"
+ 2999  git push origin master
+ 3000  git push origin sticker-to-param
+ 3001  git merge master
+ 3002  git checkout master
+ 3003  git stash
+ 3004  git pull
+ 3005  git checkout marger
+ 3006  git checkout master
+ 3007  git pull
+ 3008  git checkout -b restore-all-views
+ 3009  git pull
+ 3010  git checkout <661a5b98d9993cb5245fd0ce7f8d07291b9ec94c
+ 3011  git checkout 661a5b98d9993cb5245fd0ce7f8d07291b9ec94c
+ 3012  git checkout master
+ 3013  git pull
+ 3049  git add .
+ 3050  git commit -a -m "lots of stuff, making views work
+ 3051  git commit -a -m "lots of stuff, making views work"
+ 3052  git push origin master
+ 3053  git push heroku-prod master
+ 3150  git addd .
+ 3151  git add .
+ 3152  git commit -a -m "pagination bigger"
+ 3153  git push origin master
+ 3158  git add .
+ 3159  git commit -a -m "Lots of stuff"
+ 3160  git push heroku master
+ 3164  git add .
+ 3165  git commit -a -m "Lots of stuff"
+ 3166  git push heroku master
+ 3180  git add .
+ 3181  git commit -a -m "Lots of stuff"
+ 3182  git push heroku master
+ 3192  git add .
+ 3193  git commit -a -m "Lots of stuff"
+ 3194  git push heroku master
+ 3197  git add .
+ 3198  git commit -a -m "fff"
+ 3199  git push heroku master
+ 3200  git add .
+ 3201  git commit -a -m "tryu"
+ 3202  git push heroku master
+ 3209  git add .
+ 3210  git commit -a -m "machin"
+ 3211  git push heroku master
+ 3212  git push origin master
+ 3229  git add .
+ 3230  git commit -m "testing"
+ 3231  git push heroku mater
+ 3232  git push heroku master
+ 3234  git add .
+ 3235  git commit -m "testing"
+ 3236  git push heroku master
+ 3237  git add .
+ 3238  git commit -m "testing"
+ 3240  git push heroku master
+ 3242  git add .
+ 3243  git commit -m "testing"
+ 3244  git push heroku master
+ 3260  git add .
+ 3261  git commit -m "testing"
+ 3262  git push heroku master
+ 3272  rails g migration AddLatitudeAndLongitudeToStickers last_longitude:float last_latitude:float
+ 3281  git add .
+ 3282  git commit -a -m "Added last_longitude and last_latitude to sticker"
+ 3283  git push origin master
+ 3286  git checkout -b "mailers"
+ 3287  git add .
+ 3288  git commit -a -m "Added last_longitude and last_latitude to sticker"
+ 3289  git push origin mailers
+ 3290  git merge origin mailers
+ 3291  git merge mailers master
+ 3292  git merge mailers origin
+ 3293  git merge master mailers
+ 3294  git checkout master
+ 3295  git pull
+ 3296  git push heroku-prod master
+ 3301  git push heroku-prod master
+ 3302  git push heroku master
+ 3303  git add .
+ 3304  git commit -a -m "notifier"
+ 3305  git push heroku master
+ 3309  git push heroku-prod master
+ 3310  git commit -a -m "notifier"
+ 3311  git push heroku master
+ 3313  git add .
+ 3314  git commit -a -m "ebauche of delayed jobs
+ 3315  git commit -a -m "ebauche of delayed jobs"
+ 3316  git push heroku master
+ 3317  git push origin master
+ 3319  git add .
+ 3320  git commit -a -m "locations access"
+ 3321  git push heroku master
+ 3322  git push origin master
+ 3338  git add .
+ 3339  git commit -a -m "websockets in admin/web_sockets"
+ 3340  git pull
+ 3341  git push origin master
+ 3342  git push heroku master
+ 3343  git push herok-prod master
+ 3344  git push heroku-prod master
+ 3348  git add .
+ 3349  git commit -a -m "add wbsockets"
+ 3350  git push heroku master
+ 3351  git push master
+ 3352  git push origin master
+ 3353  git push github master
+ 3373  git add .
+ 3374  git commiot -a -m "stickers locations"
+ 3375  git commit -a -m "stickers locations"
+ 3376  git push origin master
+ 3377  git push heroku master
+ 3378  git push heroku-prod master
+ 3396  git clone git@github.com:Studyka/skror.git
+ 3417  git add .
+ 3418  git commit -a -m "newrelic"
+ 3419  git push heroku master
+ 3421  git add .
+ 3422  git commit -m "user create"
+ 3423  git push heroku-test master
+ 3426  git add .
+ 3427  git commit -m "user create"
+ 3428  git push heroku-test master
+ 3430  git push heroku-test master
+ 3432  git add .
+ 3433  git commit -m "user create"
+ 3434  git push heroku-test master
+ 3436  git commit -m "user create"
+ 3437  git add .
+ 3438  git commit -m "user create"
+ 3439  git push heroku-test master
+ 3441  git add .
+ 3442  git commit -m "user create"
+ 3443  git push heroku-test master
+ 3452  git pull upstream master
+ 3453  git pull origin master
+ 3462  git add .
+ 3463  git commit -a -m "delayed jobs and email"
+ 3465  git push heroku masteer
+ 3466  git push heroku master
+ 3469  git add .
+ 3470  git commit -a -m "dotenv"
+ 3471  git push heroku master
+ 3472  git reset
+ 3473  git commit -a -m "delayed jobs and email"
+ 3474  git add .
+ 3475  git commit -a -m "delayed jobs and email"
+ 3476  git push heroku master
+ 3481  git add .
+ 3482  git commit -a -m dj
+ 3483  git push heroku master
+ 3484  git add .
+ 3485  git commit -a -m dj
+ 3486  git push heroku master
+ 3494  git add .
+ 3495  git commit -a -m "routes admion"
+ 3496  git push heroku master
+ 3497  git push 
+ 3498  git push heroku-prod master
+ 3502  git branch -B web-sockets
+ 3503  git branch -B web-sockets master
+ 3504  git branch -B web-sockets origin
+ 3505  git branch -b web-sockets
+ 3506  git checkout -b web-sockets
+ 3519  git add .
+ 3520  git commit -m hey
+ 3521  git push web-
+ 3522  git push web-sockets master
+ 3523  git push origin web-sockets
+ 3528  git checkout master
+ 3529  git pull
+ 3531  git pull
+ 3532  git fetch origin/auchan
+ 3533  git fetch auchan
+ 3534  git fetch auchan -t upstream
+ 3535  git fetch upstream/auchan -t upstream
+ 3536  git fetch origin/auchan -t upstream
+ 3537  git remote
+ 3538  git remote -v
+ 3594      <a class="header-logo-invertocat" href="https://github.com/">
+ 3595    <span class="mega-octicon octicon-mark-github"></span>
+ 3629              <li><a href="https://gist.github.com">Gist</a></li>
+ 3631            <li><a href="https://help.github.com">Help</a></li>
+ 3638          <img height="20" src="https://0.gravatar.com/avatar/6097e140c3cd3eaf9378d71f6b474f99?d=https%3A%2F%2Fidenticons.github.com%2F687dbaf1cb222d382432423b478eed0e.png&amp;r=x&amp;s=140" width="20"> liabas-b
+ 3742              <span class="octicon octicon-git-branc
+ 3773              <span class="octicon octicon-git-pull-request"></span> <span class="full-word">Pull Requests</span>
+ 3918              <span class="octicon octicon-git
+ 4085  <pre><code>git clon
+ 4089  git push hero
+ 4152        <li><a href="https://status.github.com/">Status</a></li
+ 4182  git add .
+ 4183  git commit -m 'debug'
+ 4184  git push heroku
+ 4189  git add .
+ 4190  git commit -m "pousse"
+ 4191  git push heroku master
+ 4209  git add .
+ 4210  git commit -m "pousse"
+ 4211  git pull
+ 4212  git push heroku master
+ 4267  git clone git@github.com:heroku-examples/geosockets.git
+ 4272  git push heroku master
+ 4289              <span class="octicon octicon-git-pull-request"></span> <span class="full-word">Pull Requests</span>
+ 4292  git add .
+ 4293  git commit -m "pouss"
+ 4294  git push  heroku master
+ 4330  git checkout app/mailers/pousse_mailer.rb -t heroku
+ 4362  git add .
+ 4363  git commit -a -m "DJ, sync, live"
+ 4364  git push heroku-dev master
+ 4365  git push heroku master
+ 4366  git remote -v*
+ 4367  git remote -v
+ 4368  git push heroku-prod master
+ 4369  git push heroku-test master
+ 4380  git add .
+ 4381  git commit -m "added sticker_code to locations"
+ 4383  git push heroku master
+ 4385  git add .
+ 4387  git add .
+ 4388  git commit -m "added is_new to locations"
+ 4390  git add .
+ 4391  git commit -m "Linked databaAse to remote app lms-dev"
+ 4392  git push heroku master*
+ 4393  git push heroku master
+ 4394  git push
+ 4395  git push heroku master
+ 4398  git add .
+ 4399  git commit -m "added date to locations"
+ 4400  git push heroku master
+ 4401  git add .
+ 4402  git commit -m "removed options from locations"
+ 4403  git push heroku master
+ 4404  git push
+ 4405  git push github
+ 4406  git remote -v
+ 4407  git push origin master
+ 4409  git add .
+ 4410  git commit -a -m "DJ, sync, live"
+ 4411  git push heroku master
+ 4412  git add .
+ 4413  git commit -m "removed options from locations"
+ 4414  git push
+ 4415  git add .
+ 4416  git commit -m "removed options from locations"
+ 4417  git push
+ 4418  git add .
+ 4419  git commit -m "removed options"
+ 4420  git push 
+ 4421  git remote -v
+ 4422  git push origin master
+ 4423  git add .
+ 4424  git commit -m "syntax error"
+ 4425  git push origin master
+ 4426  git add .
+ 4427  git commit -m "enhance locations"
+ 4428  git push origin master
+ 4429  git add .
+ 4430  git commit -m "add reverse geocoding"
+ 4431  git push origin master
+ 4433  git push origin master
+ 4434  git commit -m "add reverse geocoding"
+ 4435  git push origin master
+ 4436  git add Gemfile.lock
+ 4437  git commit -m "add reverse geocoding"
+ 4438  git push origin master
+ 4444  git add .
+ 4445  git commit -m "copied models from ws"
+ 4446  git push origin master
+ 4447  git add .
+ 4448  git commit -m "copied models from ws"
+ 4449  git push origin master
+ 4452  git add Gemfile
+ 4453  git add Gemfile.lock
+ 4454  git commit -m "copied models from ws"
+ 4455  git push origin master
+ 4460  git add .
+ 4461  git commit -m "copied models from ws"
+ 4462  git push origin master
+ 4463  git push origin master --force
+ 4464  git add .
+ 4465  git commit -a -m "copied models from ws"
+ 4468  git push origin master
+ 4469  git pull origin master
+ 4471  git add .
+ 4472  git commit -a -m "rollback"
+ 4473  git push origin master
+ 4474  git commit -a -m "rollback"
+ 4475  git push origin master
+ 4476  git commit -a -m "rollback"
+ 4477  git push origin master
+ 4479  git add .
+ 4480  git commit -a -m "sync"
+ 4481  git push heroku master
+ 4482  git add .
+ 4483  git commit -a -m "sync"
+ 4484  git push heroku master
+ 4485  git commit -a -m "sync"
+ 4486  git push heroku master
+ 4488  git commit -a -m "sync"
+ 4489  git push heroku master
+ 4496  git add .
+ 4497  git commit -a -m "sync"
+ 4498  git push origin mastyer
+ 4499  git push origin master
+ 4500  git commit -a -m "sync"
+ 4501  git push origin master
+ 4502  git commit -a -m "sync"
+ 4503  git push origin master
+ 4504  git commit -a -m "sync"
+ 4507  git push heroku master
+ 4517  git commit -a -m "sync"
+ 4518  git commit -a -m "sync"
+ 4519  git push origin master
+ 4520  git push heroku master
+ 4521  git commit -a -m "sync"
+ 4522  git commit -a -m "sync"
+ 4523  git push heroku master
+ 4526  git push heroku master
+ 4530  git add .
+ 4531  git commit -a -m "sync"
+ 4532  git push heroku master
+ 4533  git commit -a -m "rollback"
+ 4537  git add .
+ 4538  git commit -a -m "sync"
+ 4539  git push heroku master
+ 4554  git add .
+ 4555  git commit -a -m "sync"
+ 4557  git add .
+ 4558  git commit -a -m "sync"
+ 4559  git push heroku master
+ 4566  git add .
+ 4567  git commit -a -m "sync"
+ 4568  git push heroku master
+ 4599  git add .
+ 4600  git commit -a -m "new map layout by hermes :)"
+ 4601  git push heroku master
+ 4602  git commit -a -m "new map layout by hermes :)"
+ 4603  git push heroku master
+ 4605  git commit -a -m "new map layout by hermes :)"
+ 4606  git push heroku master
+ 4607  git push heroku-prod master
+ 4608  git commit -a -m "new map layout by hermes :)"
+ 4609  git push heroku master
+ 4613  git add public/assets/
+ 4614  git commit -a -m "new map layout by hermes :)"
+ 4615  git push heroku master
+ 4617  git commit -a -m "new map layout by hermes :)"
+ 4618  git push heroku master
+ 4619  git commit -a -m "new map layout by hermes :)"
+ 4620  git push heroku master
+ 4621  git add .
+ 4622  git commit -a -m "new map layout by hermes :)"
+ 4623  git push heroku master
+ 4625  git commit -a -m "new map layout by hermes :)"
+ 4626  git push heroku master
+ 4629  git commit -a -m "new map layout by hermes :)"
+ 4630  git push heroku master
+ 4631  git commit -a -m "new map layout by hermes :)"
+ 4632  git push heroku master
+ 4633  git add ./app/assets/audio/
+ 4634  git add ./app/assets/images/
+ 4635  git add ./app/assets/images/sandbox/
+ 4636  git commit -a -m "new map layout by hermes :)"
+ 4637  git push heroku master
+ 4641  git commit -a -m "new map layout by hermes :)"
+ 4642  git push heroku master
+ 4643  git commit -a -m "new map layout by hermes :)"
+ 4644  git push heroku master
+ 4645  git add .
+ 4646  git commit -a -m "new map layout by hermes :)"
+ 4647  git push heroku master
+ 4649  git commit -a -m "new map layout by hermes :)"
+ 4650  git push heroku master
+ 4654  git commit -a -m "new map layout by hermes :)"
+ 4655  git push heroku master
+ 4656  git push origin master
+ 4657  git push heroku-prod master
+ 4658  git commit -a -m "new map layout by hermes :)"
+ 4659  git push heroku master && git push heroku-prod master && git push origin master
+ 4681  git add .
+ 4682  git commit -a -m "Update hermes layout"
+ 4683  git push origin master
+ 4684  git pull
+ 4685  git checkout -b layout-origin
+ 4686  git checkout 7b187411506d4f2df2af7a4b21d0db510959eaec -- app/assets/stylesheets/custom_bootstrap
+ 4695  git commit -a -m "full layout"
+ 4696  git push origin layout-origin
+ 4697  git checkout origin master
+ 4698  git checkout master
+ 4699  git pull
+ 4700  git push heroku master
+ 4701  git push heroku-prod master
+ 4702  git add .
+ 4703  git commit -m "just checking"
+ 4704  git commit -m "map layout <3"
+ 4705  git push heroku master
+ 4706  git push heroku-prod master
+ 4714  git checkout -b root-to-map
+ 4715  git add -p
+ 4716  git push origin root-to-map
+ 4717  git checkout -b login-on-map
+ 4718  git checkout -b login-on-map -t origin
+ 4739  history | grep git > example_git_comands 

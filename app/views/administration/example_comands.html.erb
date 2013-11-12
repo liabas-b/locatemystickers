@@ -1,0 +1,134 @@
+<% provide(:title, 'Example comands') %>
+<div style="opacity:.9; width:1024px; margin:0 auto;">
+  <div class="well" style="margin-top:100px;">
+    <h1>Example comands</h1><br/>
+    <div class="row">
+      <div class="col-md-12">
+
+<div class="panel-group" id="accordion" class="paper-shadow">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <div class="input-prepend">
+          <span class="add-on">
+            <a style="display:inline;" class="accordion-toggle btn-default btn-default dropdown-toggle btn-sm" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+        <span class="lead">
+          Some heroku examples
+        </span>
+                  <span class="caret"></span>
+            </a>
+          </span>
+
+        </div>
+      </div>
+      <div class="panel-collapse">
+        <div class="panel-body">
+
+        <table class="table table-hover">
+          <% @heroku_comands.each do |comand| %>
+            <tr>
+              <td><%= comand %></td>
+            </tr>
+          <% end %>
+        </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+<div class="panel-group" id="accordion" class="paper-shadow">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <div class="input-prepend">
+          <span class="add-on">
+            <a style="display:inline;" class="accordion-toggle btn-default btn-default dropdown-toggle btn-sm" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+        <span class="lead">
+          Some rake examples
+        </span>
+                  <span class="caret"></span>
+            </a>
+          </span>
+
+        </div>
+      </div>
+      <div class="panel-collapse">
+        <div class="panel-body">
+
+        <table class="table table-hover">
+          <% @rake_comands.each do |comand| %>
+            <tr>
+              <td><%= comand %></td>
+            </tr>
+          <% end %>
+        </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+<div class="panel-group" id="accordion" class="paper-shadow">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <div class="input-prepend">
+          <span class="add-on">
+            <a style="display:inline;" class="accordion-toggle btn-default btn-default dropdown-toggle btn-sm" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+        <span class="lead">
+          Some rails examples
+        </span>
+                  <span class="caret"></span>
+            </a>
+          </span>
+
+        </div>
+      </div>
+      <div class="panel-collapse">
+        <div class="panel-body">
+
+        <table class="table table-hover">
+          <% @rails_comands.each do |comand| %>
+            <tr>
+              <td><%= comand %></td>
+            </tr>
+          <% end %>
+        </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+<div class="panel-group" id="accordion" class="paper-shadow">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <div class="input-prepend">
+          <span class="add-on">
+            <a style="display:inline;" class="accordion-toggle btn-default btn-default dropdown-toggle btn-sm" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+        <span class="lead">
+          Some git examples
+        </span>
+                  <span class="caret"></span>
+            </a>
+          </span>
+
+        </div>
+      </div>
+      <div class="panel-collapse">
+        <div class="panel-body">
+
+        <table class="table table-hover">
+          <% @git_comands.each do |comand| %>
+            <tr>
+              <td><%= comand %></td>
+            </tr>
+          <% end %>
+        </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+      </div>
+    </div>
+  </div>
+</div>
