@@ -70,9 +70,6 @@ class AdministrationController < ApplicationController
 		end
 	end
 
-	def web_sockets
-	end
-
 	def example_comands
 		@heroku_comands = Array.new
 		File.open("example_heroku_comands", "r") {|io| io.read}.split(/\r?\n/).each { |l| @heroku_comands << l };

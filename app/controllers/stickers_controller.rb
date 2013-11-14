@@ -89,6 +89,7 @@ class StickersController < ApplicationController
 	# GET /users/1/stickers/1/edit
 	def edit
 		@sticker = Sticker.find(params[:id])
+		@sticker.tags.build
 		@user = User.find_by_id(@sticker.user_id)
 	end
 

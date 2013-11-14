@@ -1,0 +1,33 @@
+<h1>Listing tags</h1>
+
+<table>
+  <tr>
+    <th>Key</th>
+    <th>Times used</th>
+    <th>Popularity</th>
+    <th>Color</th>
+    <th>Forbidden</th>
+    <th>Scope</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @tags.each do |tag| %>
+  <tr>
+    <td><%= tag.key %></td>
+    <td><%= tag.times_used %></td>
+    <td><%= tag.popularity %></td>
+    <td><%= tag.color %></td>
+    <td><%= tag.forbidden %></td>
+    <td><%= tag.scope %></td>
+    <td><%= link_to 'Show', tag %></td>
+    <td><%= link_to 'Edit', edit_tag_path(tag) %></td>
+    <td><%= link_to 'Destroy', tag, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Tag', new_tag_path %>

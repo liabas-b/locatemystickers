@@ -15,4 +15,5 @@
 //= require jquery.easing
 //= require map
 //= require_tree .
+//= require jquery_nested_form
 

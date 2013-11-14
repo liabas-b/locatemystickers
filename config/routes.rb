@@ -1,5 +1,8 @@
 LocateMyStickers::Application.routes.draw do
   
+  resources :tags
+
+
   # Root  #
   ######
 
@@ -121,13 +124,12 @@ LocateMyStickers::Application.routes.draw do
   # Admin  #
   #######
 
-  match '/admin/example_comands', to: 'administration#example_comands'
   match '/admin/routes', to: 'administration#routes'
   match '/admin/update_route/:id', to: 'administration#update_route', as: 'update_route'
   match '/admin/developer_guide', to: 'administration#developer_guide'
   match '/admin/launch_simulation', to: 'administration#launch_simulation'
   match '/admin/simulator', to: 'administration#simulator'
-  match '/admin/web_sockets', to: 'administration#web_sockets'
+  match '/admin/example_comands', to: 'administration#example_comands'
   match '/admin', to: 'administration#admin'
 
 

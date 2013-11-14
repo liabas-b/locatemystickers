@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Key:</b>
+  <%= @tag.key %>
+</p>
+
+<p>
+  <b>Times used:</b>
+  <%= @tag.times_used %>
+</p>
+
+<p>
+  <b>Popularity:</b>
+  <%= @tag.popularity %>
+</p>
+
+<p>
+  <b>Color:</b>
+  <%= @tag.color %>
+</p>
+
+<p>
+  <b>Forbidden:</b>
+  <%= @tag.forbidden %>
+</p>
+
+<p>
+  <b>Scope:</b>
+  <%= @tag.scope %>
+</p>
+
+
+<%= link_to 'Edit', edit_tag_path(@tag) %> |
+<%= link_to 'Back', tags_path %>
