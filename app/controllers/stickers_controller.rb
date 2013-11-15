@@ -215,14 +215,14 @@ class StickersController < ApplicationController
 		results = Hash.new
 		total = locations.length
 		n = params[:n].to_i
+		n = 100 if n == 0
 		i = 0
 		locations.each do |location|
 			results[location.sticker_id] = Array.new if results[location.sticker_id].nil?
 
 			gap = Location.where('sticker_id = ' + location.sticker.id.to_s).count
-			gap |= 1
-			puts gap
-			results[location.sticker_id].push(location) if results[location.sticker_id].count < n && i % gap == 0
+			gap = 1 if gap == 0
+			results[location.sticker_id].push(location) if results[location.sticker_id].count < n && 
 
 			i += 1
 		end
