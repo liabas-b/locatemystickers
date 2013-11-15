@@ -2,29 +2,45 @@ $(document).ready(function() {
     initialize();
     initialize_websockets();
 });
-//__Application variables, setup and start
+
+$('#map_canvas').ready(function() {
+    create_map();
+});
+
+//__Variables & init functions
     var base_url = "https://locatemystickers.herokuapp.com";
     // var base_url = "http://localhost:3000";
     var list_stickers = [];
     var list_friends = [];
     var me = null;
-    var dispatcher = null;
-    var map;
-
+    var map = null;
+    var VirtualPointer;
 
     function initialize () {
-        // Call this on 'user_log()'
-        get_me();
-
+        cube_fix();
         add_events_listner();
-        create_map();
-        get_stickers();
-        get_friends();
-
-        // Call a fuction to show history from last "Show" to visitor..
-        get_sticker_history();
+        get_me(get_me_callback);
     }
-//\_Application setup and start
+
+    function init_me(json_initial, callback) {
+        if (json_initial.user != null && json_initial.stickers != null) {
+            me = json_initial.user;
+            me.stickers = json_initial.stickers;
+
+            // Create markers here to display marker faster when user ask for it.
+            for(i=0;i<me.stickers.length;i++) {
+                sticker = me.stickers[i].sticker;
+                me.stickers[i].marker = create_marker(sticker);
+                me.stickers[i].locations.reverse();
+            }
+
+            callback.call(true);
+        } else {
+            console.log("[error] initialize failure")
+            callback.call(false);
+        }
+    }
+
     function initialize_websockets () {
         // Enable pusher logging - don't include this in production
         // Pusher.log = function(message) {
@@ -38,10 +54,115 @@ $(document).ready(function() {
         //   test_channel.bind('my_event', function(data) {
         // });
         var locations_channel = pusher.subscribe('locations_channel');
-        locations_channel.bind('new_location', function(data) {
-          create_marker(data.location.latitude, data.location.longitude, data.location.address);
+        locations_channel.bind('new_location', function(json_data) {
+            new_sticker_position(75, json_data.location);
         });
     }
+//\_Application setup and start
+
+//__Callbacks
+    function get_me_callback() {
+        // this = json_initial
+        if (this != false) {
+            init_me(this, init_me_callback);
+        }
+    }
+
+    function init_me_callback() {
+        if (this == true) {
+            // me, me.stickers & me.stickers.marker created
+            init_dom_elements();
+            initialize_websockets();
+            console.log('ready');
+            //--> Socket to listen new locations: Store the new locations. 
+        }
+    }
+//\_Callbacks
+
+//__DOM Elements
+    function init_dom_elements() {
+        create_stickers_cards();
+        create_friends_cards();
+        // create_me_card();
+    }
+
+    function create_me_card() {
+        if (me != null) {
+            $('<img>', {
+                'id':'me_img',
+                'src':'http://www.gravatar.com/avatar/'+md5(me.email)+'.jpg?s=50&d=m'
+            }).appendTo("#me_button");   
+        }
+    }
+
+    function create_stickers_cards() {
+        if (me.stickers != null) {
+            $('#loading_stickers').addClass('hidden');
+            $.each(me.stickers, create_sticker_card);
+        }
+    }
+
+    function create_sticker_card(key, value) {
+        $("<div>", {
+            "id":   'sticker_'+value.sticker.id,
+            "class":'sticker_card',
+            html:   '<label style="background-color:#78B0EC"></label>'+
+                    '<p></p>'+
+                    '<h2 class="card_name">'+value.sticker.name+'</h2>'+
+                    '<div class="options">'+
+                        '<div class="spinner hidden"></div>'+
+                        '<h2 class="Position">Position</h2>'+
+                        '<h2 class="History">History</h2>'+
+                    '</div>'
+        }).appendTo("#stickers_list");
+
+        // Listen click on the new sticker_card. 
+        $('#sticker_'+value.sticker.id).click(sticker_on_click);
+    }
+
+    function create_friends_cards() {
+        if (me.friends != null) {
+            $.each(me.friends, create_friend_card);         
+        }
+    }
+
+    function create_friend_card(key, value) {
+        $("<img>", {
+            "id":   'friend_'+value.id,
+            "class":'friend_card',
+            "src":'http://www.gravatar.com/avatar/'+md5(value.email)+'.jpg?s=49&d=mm'
+        }).appendTo("#friends_list");
+    }
+//\_DOM Elements
+
+//__Helpers --> Must be implemented in the objects or object callback.
+    // First, we add the location and we move. Then, we add a add.position function to the sticker. And the callback is the display (if stickers[x].sticker.visible = true)
+    function new_sticker_position(sticker_id, json_location) {
+        var index = get_sticker_index(sticker_id);
+        var sticker = me.stickers[index];
+
+        if (json_location.latitude != null && json_location.longitude != null) {
+            // Add the new location for 'sticker_id'
+            sticker.locations.push(json_location);
+
+            // Update sticker last position
+            sticker.sticker.last_latitude    = json_location.latitude;
+            sticker.sticker.last_longitude   = json_location.longitude;
+
+            update_sticker_position(sticker, true);
+        }
+    }
+
+    function update_sticker_position(sticker, center_map) {
+        // Set la position du marker sur    sitcker.last_lat & last_lng
+        var latlng = new google.maps.LatLng(sticker.sticker.last_latitude, sticker.sticker.last_longitude);
+        sticker.marker.setPosition(latlng);
+
+        // Later, check if 'me.lock_view == true'
+        if (sticker.sticker.visible == true && center_map == true)
+            map.panTo(latlng);
+    }
+//\_Helpers --> Must be implemented in the objects or object callback.
 
 //__Hide and show animations
     function toggle_friends_list (event) {
@@ -54,40 +175,121 @@ $(document).ready(function() {
         $('#stickers_button').toggleClass('active');
     }
 
-    function toggle_sticker_marker(event) {
+    function sticker_on_click(event, s_sticker_id) {
+
+        // SIMULATE TMP Function
+        if (event == 'simulate_position') {
+            index = get_sticker_index(s_sticker_id);
+            sticker = me.stickers[index];
+            if (sticker.marker === "undefined") {
+                sticker.marker = create_marker(sticker.sticker);
+            }
+            change_visibility(s_sticker_id, sticker);
+            return;
+        }
+
         var sticker_id = event.currentTarget.id.substr(8);
         var index = get_sticker_index(sticker_id);
-        var sticker = list_stickers[index];
+        var sticker = me.stickers[index];
 
-        if (sticker.marker == null) {
-            sticker.marker = create_marker( sticker.latitude,
-                                            sticker.longitude,
-                                            sticker.name);
-
-            sticker.visible = true;
-        } else if (sticker.visible == false) {
-            sticker.marker.setVisible(true);
-            sticker.visible = true;
-        } else if (sticker.visible == true && $(event.target).hasClass('Position')) {
-            sticker.marker.setVisible(false);
-            sticker.visible = false;
+        if (sticker.marker === "undefined") {
+            sticker.marker = create_marker(sticker.sticker);
         }
 
-        if (sticker.visible == true && $(event.target).hasClass('History')) {
-            play_sticker_history(sticker);
-        }
-
-        if ($(event.target).hasClass('Position')) {
-            $('#sticker_'+sticker_id).toggleClass('active');
-            $('#sticker_'+sticker_id+' .Position').toggleClass('active');
-            $('#sticker_'+sticker_id+' p').toggleClass('active');
-        } else if ($(event.target).hasClass('History')) {
-            // RE-WORK HERE
-            $('#sticker_'+sticker_id).toggleClass('active');
-            $('#sticker_'+sticker_id+' .History').toggleClass('active');
-            $('#sticker_'+sticker_id+' p').toggleClass('active');
+        if (sticker.marker != "undefined") {
+            if ($(event.target).hasClass('Position')) {
+                // Position 'clicked'
+                change_visibility(sticker_id, sticker);
+            } else if ($(event.target).hasClass('History')) {
+                // History 'clicked'
+                play_history(sticker_id, sticker);
+            }
+        } else {
+            console.log("error: Can't create marker, lat lng or name error")
         }
     }
+
+    function change_visibility(sticker_id, sticker) {
+        if (sticker.sticker.visible == false) {
+            sticker.marker.setVisible(true);
+            sticker.sticker.visible = true;
+        } else if (sticker.sticker.visible == true) {
+            sticker.marker.setVisible(false);
+            sticker.sticker.visible = false;
+        }
+
+        $('#sticker_'+sticker_id).toggleClass('active');
+        $('#sticker_'+sticker_id+' .Position').toggleClass('active');
+        $('#sticker_'+sticker_id+' p').toggleClass('active');
+    }
+
+    function play_history(sticker_id, sticker) {
+
+        if (sticker.sticker.visible == false) {
+            sticker.marker.setVisible(true);
+            sticker.sticker.visible = true;
+        }
+
+        // Play history only if more than one location.
+        if (sticker.locations.length > 1) {
+            
+            var one_day_ago_timestamp = new Date();
+            var one_week_ago_timestamp = new Date();
+            one_day_ago_timestamp.setDate( one_day_ago_timestamp.getDate() - 1 );
+            one_week_ago_timestamp.setDate( one_week_ago_timestamp.getDate() - 7 );
+            
+            for (from=sticker.locations.length - 1;from>0;from--) {
+                var created_at_timestamp = new Date().getTime(sticker.locations[from].created_at);
+
+                if (created_at_timestamp < one_week_ago_timestamp) {
+                    console.log('more than 1 week');
+                    break;
+                } else {
+                    console.log('create at:['+created_at_timestamp+'], one_day_ago:['+one_week_ago_timestamp+']');
+                }
+            }
+
+            if (from >= 0) {
+                console.log('[ok] calling animate with: from='+from);
+                animate_sticker_marker(sticker, from);
+            }
+            //var date = Date.parse(locations[x].created_at);
+        } else {
+            console.log('[warning] locations < 2');
+        }
+
+        /*
+            on se met sur la last (i = leng)
+            et on decrease tant que i > 0.
+
+            0 - vieille
+            1 -         - 
+            2 -         - one day ago ok
+            3 - recente 
+            4 - last
+        */
+
+        // Re-work this area
+        $('#sticker_'+sticker_id).toggleClass('active');
+        $('#sticker_'+sticker_id+' .History').toggleClass('active');
+        $('#sticker_'+sticker_id+' p').toggleClass('active');
+    }
+
+    function animate_sticker_marker(sticker, to) {
+        
+        if (to > sticker.locations.length - 1)
+            return;
+
+        var location = sticker.locations[to];
+        var latlng = new google.maps.LatLng(location.latitude, location.longitude);
+        sticker.marker.setPosition(latlng);
+
+        // Replace 100 with the real timeStamp
+        t = setTimeout(function () {
+            animate_sticker_marker(sticker, (to+1));
+        }, 100);
+    }
+
 
     function play_sticker_history(sticker) {
         console.log(sticker);
@@ -170,113 +372,35 @@ $(document).ready(function() {
         }
 
         // Next todo: geocode the position ? To display a new adress if it change.
-        // Update poly: Trace poly to the next 5m distance.
-
-        
+        // Update poly: Trace poly to the next 5m distance.    
    }
-
-
-
-   /* 
-    function animate(d) {
-        // alert("animate("+d+")");
-        if (d>eol) {
-            map.panTo(endLocation.latlng);
-            marker.setPosition(endLocation.latlng);
-            return;
-        }
-        $
-        var p = polyline.GetPointAtDistance(d);
-        
-        // Center the map on the marker new Position.
-        //map.panTo(p);
-
-        // Set the marker new Positions.
-        marker.setPosition(p);
-        
-        // Display Marker Address when it change. 
-        geocoder.geocode( 
-        {
-            latLng: p
-        },
-        function(results, status) 
-        {
-            if (status == google.maps.GeocoderStatus.OK)
-            {
-                console.log(results[0].formatted_address);
-                if (contentString != results[0].formatted_address)
-                {
-                    contentString = '<b>'+results[0].formatted_address+'</b>';
-                    infowindow.setContent(contentString);
-                }
-            }
-        });
-
-        updatePoly(d);
-        timerHandle = setTimeout("animate("+(d+step)+")", tick);
-    }*/
-
 //\_Hide and show animations
 
-//__Getters: stickers, friends, sticker_history.
-    function get_me() {
-        $.getJSON(base_url+'/users/1.json?paginate=false', function(json_user) {
-            me = create_user(json_user);
-            create_me_card();
-        });
-    }
-
-    function get_stickers() {
-        $.getJSON(base_url+'/users/1/stickers.json?paginate=false', function(json_stickers) {
-            $.each(json_stickers, function(key, json_sticker) {
-               list_stickers.push(create_sticker(json_sticker));
-            });
-
-            create_stickers_cards();
-        });
-    }
-
-    function get_friends() {
-        $.getJSON(base_url+'/users/1/friends.json?paginate=false', function(json_friends) {
-            $.each(json_friends, function(key, json_friend) {
-               list_friends.push(create_friend(json_friend));
-            });
-
-            create_friends_cards();
+//__Getters: me, sticker_index.
+    function get_me(callback) {
+        // Log request
+        $.getJSON(base_url+'/users/1/initialize_data.json', function (json_initial, status) {
+            // Check what is a valid status 
+            if (status == "success") {
+                callback.call(json_initial);
+            } else {
+                console.log("[error] bad status");
+                callback.call(false);
+            }
         });
     }
 
     function get_sticker_index(sticker_id) {
         var index_sticker = null;
 
-        for(j=0; j<list_stickers.length; j++) {
-            if (list_stickers[j].id == sticker_id) {
+        for(j=0; j<me.stickers.length; j++) {
+            if (me.stickers[j].sticker.id == sticker_id) {
                 index_sticker = j;
                 break;
             }
         }
 
         return index_sticker;
-    }
-
-    function get_sticker_history(sticker_id) {
-        var asking_locations = 10;
-
-        $.getJSON(base_url+'/users/1/stickers/locations.json?n='+asking_locations, function(json_locations) {
-            $.each(json_locations, function(key, sticker_location) {
-                if (sticker_location != '') {
-                    for (i=0;i<sticker_location.length;i++) {
-                        if (sticker_location[i] != 'undefined') {
-                            var sticker_id =    key;
-                            var sticker_index = get_sticker_index(sticker_id);
-
-                            list_stickers[sticker_index].locations.push(create_location(sticker_location[i]));
-                        } 
-                    }
-                } 
-            });
-            create_stickers_history();
-        });
     }
 
     function get_directions(sticker_key, from, to, checkpoints) {
@@ -290,25 +414,12 @@ $(document).ready(function() {
             travelMode: travelMode
         };
 
-        /*
-
-
-        */
-
         directionsService.route(request, function(response, status) {
-            if (status == google.maps.DirectionsStatus.OK)
-            {   
-                var route      = response.routes[0];
-
+            if (status == google.maps.DirectionsStatus.OK) {   
+                var route = response.routes[0];
                 for (i=0; i<route.legs.length; i++) {
                     for (j=0; j<route.legs[i].steps.length; j++) {
-                        
                         polyline = new google.maps.Polyline();
-
-
-
-
-
                         var nextSegment = route.legs[i].steps[j].path;
                         for (k=0;k<nextSegment.length;k++) {
                             polyline.getPath().push(nextSegment[k]);
@@ -317,24 +428,14 @@ $(document).ready(function() {
                         }
 
                         polyline.points = polyline.GetPointsAtDistance(5);
-
                         //polyline = route.legs[i].steps[j].polyline;
-
                         list_stickers[sticker_key].polylines.push(polyline);
 
                     }
                 }
-                //var history_leg = create_history_leg(routes);
-                //list_stickers[sticker_key].history_steps.push(history_leg);
             } else {
                 console.log('no route: '+status);
             }
-            //console.log(response.routes[0].legs[0].steps);
-
-            // Create a renderer for directions and bind it to the map.
-            //var rendererOptions = {map: map}
-            //directionsDisplay = new google.maps.DirectionsRenderer(rendererOptions);
-            //directionsDisplay.setDirections(response);
         });
     }
 //\_Getters: stickers, friends, sticker_history.
@@ -342,11 +443,11 @@ $(document).ready(function() {
 
 //__Create objects: map, marker, sticker, sticker.location, stickers.cards, friends, friends cards, history, address.
     function create_map() {
-        // Fill lat and lng here and LATER --> Read from map_center. (Map center is set based on last Moving marker) 
+        // todo: map_center = bounds(-positions actuels de tout les stickers-), prendre les points les plus loings ( plus grandes valeur lat, lng )
         var map_center = new google.maps.LatLng(48.857423, 2.35147);
 
         var map_options = {
-            zoom: 4,
+            zoom: 10,
             center: map_center,
             mapTypeId: google.maps.MapTypeId.ROADMAP,
             streetViewControl: true,
@@ -358,80 +459,35 @@ $(document).ready(function() {
         };
 
         map = new google.maps.Map(document.getElementById("map_canvas"), map_options);
-
-        return map;
+        //var googleEarth = new GoogleEarth(map);
     }
 
-    function create_marker(lat, lng, title) {
-        var infowindow = new google.maps.InfoWindow(
-        {
-            size: new google.maps.Size(150,50)
-        });
-        var position = new google.maps.LatLng(lat, lng);
+    function create_marker(sticker) {
+        if (sticker.last_latitude != null && sticker.last_longitude != null && sticker.name != null) {
+            var infowindow = new google.maps.InfoWindow(
+            {
+                size: new google.maps.Size(150,50)
+            });
 
-        var marker_description = '<b>'+title+'</b>';
-        var marker = new google.maps.Marker({
-            position: position,
-            map: map,
-            animation: google.maps.Animation.DROP,
-            title: "titlex",
-            zIndex: Math.round(position.lat()*-100000)<<5
-        });
-        
-        // Maybe not required, test without
-        //marker.setVisible(false);
+            var position = new google.maps.LatLng(sticker.last_latitude, sticker.last_longitude);
 
-        infowindow.setContent(marker_description);
-        //infowindow.open(map,marker);
+            var marker_description = '<b>'+sticker.name+'</b>';
+            var marker = new google.maps.Marker({
+                position: position,
+                map: map,
+                animation: google.maps.Animation.DROP,
+                title: sticker.name,
+                zIndex: Math.round(position.lat()*-100000)<<5
+            });
 
-        return marker;
-    }
-
-    function create_user(json_user) {
-        var user = new Object();
-
-        user.id         = json_user.id;
-        user.name       = json_user.name;
-        user.email      = json_user.email;
-        user.first_name = json_user.first_name;
-        user.last_name  = json_user.last_name;
-        user.adress     = json_user.adress;
-        user.city       = json_user.city;
-        user.zip_code   = json_user.zip_code;
-        user.country    = json_user.country;
-        user.created_at = json_user.created_at;
-        user.phone      = json_user.phone;
-
-        return user;
-    }
-
-    function create_sticker(json_sticker) {
-        var sticker = new Object();
-
-        sticker.name            = json_sticker.name;
-        sticker.id              = json_sticker.id;
-        sticker.type_id         = json_sticker.sticker_type_id;
-        sticker.date            = json_sticker.updated_at;
-        sticker.latitude        = json_sticker.last_latitude,
-        sticker.longitude       = json_sticker.last_longitude,
-        sticker.visible         = false;
-        sticker.marker          = null;
-        sticker.locations       = [];
-        sticker.history_steps   = [];
-        sticker.polylines       = [];
-
-        return sticker;
-    }
-
-    function create_location(sticker_location) {
-        var location = new Object();
-
-        location.id =           sticker_location.id;
-        location.latitude =     sticker_location.latitude
-        location.longitude =    sticker_location.longitude;
-        location.timestamp =    sticker_location.created_at;
-
-        return location;
+            infowindow.setContent(marker_description);
+            marker.setVisible(false);
+            sticker.visible = false;
+            //infowindow.open(map,marker);
+            return marker
+        } else {
+            return "undefined";
+        }
     }
 
     function create_history_leg(routes) {
@@ -440,66 +496,6 @@ $(document).ready(function() {
         history_step.legs   = routes.legs;
 
         return history_step;
-    }
-
-    function create_friend(json_friend) {
-        var friend = new Object();
-
-        friend.name =   json_friend.name;
-        friend.id =     json_friend.id;
-        friend.email =  json_friend.email;
-
-        return friend;
-    }
-
-    function create_me_card() {
-        if (me != null) {
-            $('<img>', {
-                'id':'me_img',
-                'src':'http://www.gravatar.com/avatar/'+md5(me.email)+'.jpg?s=50&d=m'
-            }).appendTo("#me_button");   
-        }
-    }
-
-    function create_stickers_cards() {
-        if (list_stickers != null) {
-            $('#loading_stickers').addClass('hidden');
-            $.each(list_stickers, function(key, value) {
-                $("<div>", {
-                    "id":   'sticker_'+value.id,
-                    "class":'sticker_card',
-                    html:   '<label style="background-color:#78B0EC"></label>'+
-                            '<p></p>'+
-                            '<h2 class="card_name">'+value.name+'</h2>'+
-                            '<div class="options">'+
-                                '<div class="spinner hidden"></div>'+
-                                '<h2 class="Position">Position</h2>'+
-                                '<h2 class="History">History</h2>'+
-                            '</div>'
-                }).appendTo("#stickers_list");
-
-                // Listen click on the new sticker_card. 
-                $('#sticker_'+value.id).click(toggle_sticker_marker);
-            });
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    function create_friends_cards() {
-        if (list_friends != null) {
-            $.each(list_friends, function(key, value) {
-                $("<img>", {
-                    "id":   'friend_'+value.id,
-                    "class":'friend_card',
-                    "src":'http://www.gravatar.com/avatar/'+md5(value.email)+'.jpg?s=49&d=mm'
-                }).appendTo("#friends_list");
-            });
-            return true;
-        } else {
-            return false;
-        }
     }
 
     // Function will be re-worked later - POC
@@ -563,27 +559,90 @@ $(document).ready(function() {
     }
 //\_Create objects: map, marker, sticker, sticker.location, stickers.cards, friends, friends cards, history, address.
 
-//__Helpers: listner
+//__Helpers: listner, fix
     function add_events_listner() {
         $('#stickers_button').click(toggle_stickers_list);
         $('#friends_button').click(toggle_friends_list);
+
+        /*document.onmousemove = function(e)
+        {
+            var x = e.pageX;
+            var y = e.pageY;
+            console.log(x);
+            console.log(y);
+            // do what you want with x and y
+        };*/
+
+         // SIMULATE TMP Function
+        $('#get_started').click(function() {
+            //$('.wrapper_cube').css('-webkit-perspective', '1000px');
+            //$('.cube').css('-webkit-transform','rotateX(-90deg) translateZ(140px)');
+            
+            //$('.cube').toggleClass('show_up');
+            $('#music_visit').get(0).play();
+
+            var tm0 = setTimeout(function() {
+                var windows_height  = $('#first_actions').height();
+                var translation_z   = (windows_height) / 2;
+                $('.cube').css('-webkit-transform', 'translateZ(-'+translation_z+'px) rotateX(-90deg)');
+                $('.wrapper_cube').toggleClass('zoom_out_1');
+
+                var tm0 = setTimeout(function() {
+                    toggle_stickers_list();
+                    stickers_id = new Array(186, 112, 149, 190);
+
+                    var tm1 = setTimeout(simulate_sticker_card(stickers_id, 0), 1400);
+
+                    var tm8 = setTimeout(function () {
+                        var windows_height  = $('#first_actions').height();
+                        var translation_z   = (windows_height) / 2;
+                        $('.cube').css('-webkit-transform', 'translateZ(-'+translation_z+'px) rotateX(-180deg)');
+                        $('.wrapper_cube').toggleClass('zoom_out_1');
+                    }, 15000)
+                }, 5000);
+            }, 2000);
+        });
     }
 
-    function move_marker(marker, latlng) {
+    function simulate_sticker_card(stickers_id, i) {
+        var j = i;
 
+        if (j > 4) {
+            return;
+        }
 
-        marker.setPosition(latlng);
+        sticker_id = stickers_id[j];
+        var tm2 = setTimeout(function() {
+            $('#sticker_'+sticker_id).css('background','#ccc');
+            $('#sticker_'+sticker_id+' .options').css('opacity','0.9');
+            $('#sticker_'+sticker_id+' .options .Position').toggleClass('active');
+
+            var tm3 = setTimeout(function() {
+                sticker_on_click('simulate_position', sticker_id);
+                $('#sticker_'+sticker_id).css('background','#fff');
+                $('#sticker_'+sticker_id+' .options').css('opacity','0');
+                $('#sticker_'+sticker_id+' .options .Position').toggleClass('active');
+
+                j = j + 1;
+                simulate_sticker_card(stickers_id, j);
+            }, 800);
+        }, 1300);
     }
-//\_Helpers: listner
+
+    function cube_fix() {
+            var windows_height  = $('#first_actions').height();
+            var translation_z   = (windows_height) / 2;
+
+            $('.cube').css('-webkit-transform', 'translateZ(-'+translation_z+'px)');
+            $('.front').css('-webkit-transform', 'rotateX(0deg) translateZ('+translation_z+'px)');
+            $('.up').css('-webkit-transform', 'rotateX(90deg) translateZ('+translation_z+'px)');
+            $('.back').css('-webkit-transform', 'rotateX(180deg) translateZ('+translation_z+'px)');
+    }
+//\_Helpers: listner, fix
 
 //  TODO : Change WRAPPER, CONTAINER, .. pour AREA ! Wrapper_sticker --> sticker_area
 
-/*$('#get_started').click(function() {
-    //$('.wrapper_cube').css('-webkit-perspective', '1000px');
-    //$('.cube').css('-webkit-transform','rotateX(-90deg) translateZ(140px)');
-    //$('.cube').toggleClass('show_up');
-    //$('.cube').function(next());
-});
+/*
 
 $('#understand_layout').click(function() {
     $('#no_sticker_yet').toggleClass('hidden up');
@@ -603,8 +662,7 @@ function nextface(up) {
 
 }*/
 
-
-
+/* NOT SURE ABOUT THIS FUNCTION
     function live_location(lat, lng, title) {
         var infowindow = new google.maps.InfoWindow(
         {
@@ -638,4 +696,4 @@ function sleep(milliseconds) {
       break;
     }
   }
-}
+}*/

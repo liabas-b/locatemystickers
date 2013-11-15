@@ -191,14 +191,6 @@ ActiveRecord::Schema.define(:version => 20131113205903) do
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["remember_token"], :name => "index_users_on_remember_token"
 
-  create_table "web_socket_messages", :force => true do |t|
-    t.string   "channel"
-    t.text     "content"
-    t.boolean  "is_pending"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
   create_table "zone_locations", :force => true do |t|
     t.integer  "zone_id"
     t.float    "latitude"
