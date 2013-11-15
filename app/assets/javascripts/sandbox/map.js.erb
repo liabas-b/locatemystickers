@@ -1,6 +1,9 @@
 $(document).ready(function() {
-    initialize();
-    initialize_websockets();
+    var from = new google.maps.LatLng(48.818316,2.370224);
+    var to = new google.maps.LatLng(48.815519,2.363561);
+    get_directions('ola', from, to);
+    // initialize();
+    // initialize_websockets();
 });
 //__Application variables, setup and start
     var base_url = "https://locatemystickers.herokuapp.com";
@@ -320,7 +323,17 @@ $(document).ready(function() {
 
                         //polyline = route.legs[i].steps[j].polyline;
 
-                        list_stickers[sticker_key].polylines.push(polyline);
+                        // list_stickers[sticker_key].polylines.push(polyline);
+                        for (k=0;k<polyline.points.length;k++) {
+                            t = k
+                            time_gap_seconds = 3 * (k / 20);
+                            if ((t %  10) == 0) {
+                                $('#request_output').append('sticker.locations.create!({latitude: ' + polyline.points[k].ob + ', longitude: ' + polyline.points[k].pb + ', date: Time.now - ' + time_gap_seconds + '.seconds })<br>');
+                                $('#request_output').append('sleep(0.25)<br>');
+                            }
+                        }
+
+
                     }
                 }
                 //var history_leg = create_history_leg(routes);
