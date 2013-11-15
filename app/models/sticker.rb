@@ -87,14 +87,14 @@ class Sticker < ActiveRecord::Base
     def after_create_callback
       self.histories.create!(subject: "sticker", operation: "created", user_id: self.user_id)
       self.tags_as_string.split(";").each do |t|
-        self.tags.create!(key: t.humanize)
+        self.tags.create!(key: t.humanize) if Tag.find_by_key(t.humanize).nil?
       end
     end
 
     def after_update_callback
       self.histories.create!(subject: "sticker", operation: "updated", user_id: self.user_id)
       self.tags_as_string.split(";").each do |t|
-        self.tags.create!(key: t.humanize)
+        self.tags.create!(key: t.humanize) if Tag.find_by_key(t.humanize).nil?
       end
     end
 

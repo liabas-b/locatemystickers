@@ -124,13 +124,6 @@ class User < ActiveRecord::Base
     message.save
   end
 
-  
-  # Synchronization
-
-  def update_all_locations
-    self.stickers.each { |sticker| sticker.update_locations }
-  end
-
   def pack_default_data
       data = Hash.new
       data[:stickers] = self.pack_stickers
