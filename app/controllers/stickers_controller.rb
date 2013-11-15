@@ -220,9 +220,9 @@ class StickersController < ApplicationController
 		locations.each do |location|
 			results[location.sticker_id] = Array.new if results[location.sticker_id].nil?
 
-			gap = Location.where('sticker_id = ' + location.sticker.id.to_s).count
+			gap = Location.where('sticker_id = ' + location.sticker.id.to_s).count / n.round
 			gap = 1 if gap == 0
-			results[location.sticker_id].push(location) if results[location.sticker_id].count < n && 
+			results[location.sticker_id].push(location) if results[location.sticker_id].count < n && i % gap == 0
 
 			i += 1
 		end
