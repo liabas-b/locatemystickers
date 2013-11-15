@@ -8,8 +8,7 @@
             <div id="main_buttons">
                 <div class="left">
                   <% if signed_in? %>
-                    <a href="<%= user_path(current_user.id) %>">
-                        <div id="me_button" class="button"></div>
+                    <a href="<%= user_path(current_user.id) %>"  id="me_button" class="button">
                     </a>
                   <% else %>
                     <%= render 'sessions/navbar_top_form' %>
@@ -38,9 +37,12 @@
         <div id="friends_list">
 
         </div>
+<!--         <div id="request_output">
+        </div> -->
         <div id="first_actions" class="wrapper_big wrapper_cube">
             <div class="cube">
                 <div id="get_started" class="front">
+
                     <h1>Try me !</h1>
                 </div>
 
@@ -53,7 +55,7 @@
                 </div>
 
                 <div id="get_started" class="back">
-                    <h1>Stay tuned !</h1>
+                    <h1>Stay tuned [mail]</h1>
                 </div>
                 <!--div id="no_sticker_yet" class="hidden">
                     <div class="get box_action">

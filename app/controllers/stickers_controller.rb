@@ -89,6 +89,7 @@ class StickersController < ApplicationController
 	# GET /users/1/stickers/1/edit
 	def edit
 		@sticker = Sticker.find(params[:id])
+		@sticker.tags.build
 		@user = User.find_by_id(@sticker.user_id)
 	end
 
@@ -152,13 +153,13 @@ class StickersController < ApplicationController
 	def last_location_address
 		sticker = Sticker.find(params[:id])
 		sticker.update_last_location
-		render :json =>  sticker.last_location
+		render :json =>  sticker.last_location, status: :ok
 	end
 
 	def last_location
 		sticker = Sticker.find(params[:id])
 		sticker.update_last_location
-		render :json =>  sticker.locations.last
+		render :json =>  sticker.locations.last, status: :ok
 	end
 
 	def share_with_user
@@ -173,7 +174,7 @@ class StickersController < ApplicationController
 		@new_locations = @sticker.delay(run_at: Time.now, queue: 'locations').update_locations
 		respond_to do |format|
 			format.js
-			format.json { render :json => @new_locations }
+			format.json { render :json => @new_locations, status: :ok }
 		end
 	end
 
@@ -199,14 +200,14 @@ class StickersController < ApplicationController
 			count: locations.count,
 			after_filter_count: results.count,
 			locations: results
-		} #User.find(params[:user_id]).stickers.map(&:locations)
+		}, status: :ok
 	end
 
 	def locations
 		params[:from_date] = Time.now - 3000.days
 		params[:to_date] = Time.now
-		params[:count_per_gap] = nil
-		params[:time_gap] = nil
+		params[:count_per_gap] = 1
+		params[:time_gap] = 60*24*7 # 1 week in minuts
 
 		user = User.find(params[:user_id])
 		locations = Location.for_stickers(user.stickers).between_two_dates(params[:from_date], params[:to_date])
@@ -214,19 +215,19 @@ class StickersController < ApplicationController
 		results = Hash.new
 		total = locations.length
 		n = params[:n].to_i
+		n = 100 if n == 0
 		i = 0
 		locations.each do |location|
-			results[location.sticker_id] = Array.new if results[location.sticker_id].nil? 
+			results[location.sticker_id] = Array.new if results[location.sticker_id].nil?
 
 			gap = Location.where('sticker_id = ' + location.sticker.id.to_s).count / n.round
-			gap |= 1
-			puts gap
+			gap = 1 if gap == 0
 			results[location.sticker_id].push(location) if results[location.sticker_id].count < n && i % gap == 0
 
 			i += 1
 		end
 
-		render :json => results
+		render :json => results, status: :ok
 	end
 
 	private

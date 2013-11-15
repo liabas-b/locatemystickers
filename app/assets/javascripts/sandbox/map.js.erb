@@ -1,13 +1,17 @@
 $(document).ready(function() {
     initialize();
+    initialize_websockets();
+
+    $(".alert").delay(5000).fadeOut('slow');
 });
 
 $('#map_canvas').ready(function() {
     create_map();
 });
+
 //__Variables & init functions
-    //var base_url = "https://locatemystickers-dev.herokuapp.com";
-    var base_url = "http://localhost:3000";
+    var base_url = "https://locatemystickers.herokuapp.com";
+    // var base_url = "http://localhost:3000";
     var list_stickers = [];
     var list_friends = [];
     var me = null;
@@ -41,22 +45,18 @@ $('#map_canvas').ready(function() {
 
     function initialize_websockets () {
         // Enable pusher logging - don't include this in production
-        Pusher.log = function(message) {
-            if (window.console && window.console.log) {
-                window.console.log(message);
-            }
-        };
+        // Pusher.log = function(message) {
+        //   if (window.console && window.console.log) {
+        //     window.console.log(message);
+        //   }
+        // };
 
         var pusher = new Pusher('ba676f4f7e8139bcf138');
-        var test_channel = pusher.subscribe('test_channel');
-        test_channel.bind('my_event', function(data) {
-            pusher.trigger('test_channel', 'my_event', {"message": "BOULOUYTE"});
-        });
-
+        // var test_channel = pusher.subscribe('test_channel');
+        //   test_channel.bind('my_event', function(data) {
+        // });
         var locations_channel = pusher.subscribe('locations_channel');
         locations_channel.bind('new_location', function(json_data) {
-            console.log(json_data.location);
-            // Replace 75 with 'json_data.location.sticker_id'.
             new_sticker_position(75, json_data.location);
         });
     }
@@ -425,6 +425,7 @@ $('#map_canvas').ready(function() {
                         var nextSegment = route.legs[i].steps[j].path;
                         for (k=0;k<nextSegment.length;k++) {
                             polyline.getPath().push(nextSegment[k]);
+
                             //bounds.extend(nextSegment[k]);
                         }
 
@@ -450,8 +451,12 @@ $('#map_canvas').ready(function() {
             zoom: 10,
             center: map_center,
             mapTypeId: google.maps.MapTypeId.ROADMAP,
-            streetViewControl: false,
-            mapTypeControl: false,
+            streetViewControl: true,
+            mapTypeControl: true,
+            panControl: false,
+            zoomControl: true,
+            scaleControl: true,
+            overviewMapControl: false
         };
 
         map = new google.maps.Map(document.getElementById("map_canvas"), map_options);
@@ -656,4 +661,40 @@ $('#no_sticker_yet .add').click(function() {
 
 function nextface(up) {
 
+}*/
+
+/* NOT SURE ABOUT THIS FUNCTION
+    function live_location(lat, lng, title) {
+        var infowindow = new google.maps.InfoWindow(
+        {
+            size: new google.maps.Size(150,50)
+        });
+
+        var position = new google.maps.LatLng(lat, lng);
+
+        var marker_description = '<b>'+title+'</b>';
+        var marker = new google.maps.Marker({
+            position: position,
+            map: map,
+            animation: google.maps.Animation.DROP,
+            title: "titlex",
+            zIndex: Math.round(position.lat()*-100000)<<5
+        });
+        
+        // Maybe not required, test without
+        //marker.setVisible(false);
+
+        infowindow.setContent(marker_description);
+        // infowindow.open(map,marker);
+
+        return marker;
+    }
+
+function sleep(milliseconds) {
+  var start = new Date().getTime();
+  for (var i = 0; i < 1e7; i++) {
+    if ((new Date().getTime() - start) > milliseconds){
+      break;
+    }
+  }
 }*/

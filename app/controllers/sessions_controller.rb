@@ -9,6 +9,7 @@ class SessionsController < ApplicationController
 
     if user && user.authenticate(params[:session][:password])
       sign_in user
+      flash[:success] = "Hello, " + user.name + " :)"
     else
     end
     respond_to do |format|
@@ -20,6 +21,7 @@ class SessionsController < ApplicationController
 
   def destroy
     sign_out
+    flash[:success] = "Successfuly logged out"
     redirect_to root_url
   end
   

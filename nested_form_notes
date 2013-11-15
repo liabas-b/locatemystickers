@@ -1,0 +1,16 @@
+
+<!-- 
+<%= nested_form_for @sticker, url: user_sticker_path(@sticker.user, @sticker) do |f| %>
+<table id="tags">
+  <%= f.fields_for :tags, :wrapper => false do |tag_form| %>
+    <tr class="fields">
+      <td><%= tag_form.text_field :key %></td>
+      <td><%= tag_form.link_to_remove "Remove this tag" %></td>
+    </tr>
+  <% end %>
+</table>
+<p><%= f.link_to_add "Add a tag", :tags, :data => { :target => "#tags" } %></p>
+<%= f.submit %>
+<% end %>
+ -->
+ 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131111193517) do
+ActiveRecord::Schema.define(:version => 20131113205903) do
 
   create_table "app_routes", :force => true do |t|
     t.string   "name"
@@ -152,9 +152,23 @@ ActiveRecord::Schema.define(:version => 20131111193517) do
     t.string   "last_location"
     t.float    "last_longitude"
     t.float    "last_latitude"
+    t.string   "tags_as_string"
   end
 
   add_index "stickers", ["code"], :name => "index_stickers_on_code", :unique => true
+
+  create_table "tags", :force => true do |t|
+    t.string   "key"
+    t.integer  "times_used"
+    t.float    "popularity"
+    t.string   "color"
+    t.boolean  "forbidden"
+    t.string   "scope"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+    t.string   "taggable_type"
+    t.integer  "taggable_id"
+  end
 
   create_table "users", :force => true do |t|
     t.string   "name"

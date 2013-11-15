@@ -83,7 +83,7 @@ class LocationsController < ApplicationController
   # POST /users/1/stickers/1/locations.json
   def create
     @location = Location.new(params[:location])
-    @location.sticker_id = params[:id]
+    @location.sticker_id = params[:sticker_id]
     @sticker = Sticker.find_by_id(@location.sticker_id)
     @user = User.find_by_id(@sticker.user_id)
 

@@ -1,72 +1,64 @@
 
-  # admin = User.create!(first_name: "Benoit",
-  #                      last_name: "Liabastre",
-  #                      email:     "b.liabastre@gmail.com",
-  #                      password:  "ladeno12",
-  #                      password_confirmation: "ladeno12",
-  #                      adress:    "13 Les Grenadiers",
-  #                      zip_code:  "83310",
-  #                      city:      "Grimaud",
-  #                      country:   "France",
-  #                      phone:     "008613001938293",
-  #                      compteur: 0)
-  # admin.toggle!(:admin)
+  admin = User.create!(first_name: "Benoit",
+                       last_name: "Liabastre",
+                       email:     "b.liabastre@gmail.com",
+                       password:  "ladeno12",
+                       password_confirmation: "ladeno12",
+                       adress:    "13 Les Grenadiers",
+                       zip_code:  "83310",
+                       city:      "Grimaud",
+                       country:   "France",
+                       phone:     "008613001938293")
+  admin.toggle!(:admin)
 
-  # admin = User.create!(first_name: "Frederic",
-  #                      last_name: "Theault",
-  #                      email:    "ftheault@gmail.com",
-  #                      password: "astero",
-  #                      password_confirmation: "astero",
-  # admin.toggle!(:admin)
-                       # compteur: 0)
+  admin = User.create!(first_name: "Frederic",
+                       last_name: "Theault",
+                       email:    "ftheault@gmail.com",
+                       password: "astero",
+                       password_confirmation: "astero")
+  admin.toggle!(:admin)
 
   admin = User.create!(first_name: "Hermes",
                        last_name: "Bozec",
                        email:    "hermes.bozec@epitech.eu",
                        password: "azerty",
-                       password_confirmation: "azerty",
-                       compteur: 0)
+                       password_confirmation: "azerty")
   admin.toggle!(:admin)
 
-#   admin = User.create!(first_name:     "Adrien",
-#                        last_name: "Guffens",
-#                        email:    "adril.gu@gmail.com",
-#                        password: "adri24",
-#                        password_confirmation: "adri24",
-#                        compteur: 0)
-#   admin.toggle!(:admin)
+  admin = User.create!(first_name:     "Adrien",
+                       last_name: "Guffens",
+                       email:    "adril.gu@gmail.com",
+                       password: "adri24",
+                       password_confirmation: "adri24")
+  admin.toggle!(:admin)
 
-#   admin = User.create!(first_name:     "Denis",
-#                        last_name: "Anfossi",
-#                        email:    "anfoss_d@epitech.net",
-#                        password: "password",
-#                        password_confirmation: "password",
-#                        compteur: 0)
-#   admin.toggle!(:admin)
+  admin = User.create!(first_name:     "Denis",
+                       last_name: "Anfossi",
+                       email:    "anfoss_d@epitech.net",
+                       password: "password",
+                       password_confirmation: "password")
+  admin.toggle!(:admin)
 
-#   admin = User.create!(first_name:     "Sylvain",
-#                        last_name: "Reclus",
-#                        email:    "reclus_s@epitech.net",
-#                        password: "password",
-#                        password_confirmation: "password",
-#                        compteur: 0)
-#   admin.toggle!(:admin)
+  admin = User.create!(first_name:     "Sylvain",
+                       last_name: "Reclus",
+                       email:    "reclus_s@epitech.net",
+                       password: "password",
+                       password_confirmation: "password")
+  admin.toggle!(:admin)
 
-#   admin = User.create!(first_name:     "Irfane",
-#                        last_name: "Goulamabasse",
-#                        email:    "goulam_a@epitech.net",
-#                        password: "password",
-#                        password_confirmation: "password",
-#                        compteur: 0)
-#   admin.toggle!(:admin)
+  admin = User.create!(first_name:     "Irfane",
+                       last_name: "Goulamabasse",
+                       email:    "goulam_a@epitech.net",
+                       password: "password",
+                       password_confirmation: "password")
+  admin.toggle!(:admin)
   
-#   admin = User.create!(first_name:     "Yann",
-#                        last_name: "Koeth",
-#                        email:    "koeth_y@epitech.net",
-#                        password: "password",
-#                        password_confirmation: "password",
-#                        compteur: 0)
-#   admin.toggle!(:admin)
+  admin = User.create!(first_name:     "Yann",
+                       last_name: "Koeth",
+                       email:    "koeth_y@epitech.net",
+                       password: "password",
+                       password_confirmation: "password")
+  admin.toggle!(:admin)
   
 #   30.times do |n|
 #     first_name  = Faker::Name.first_name
@@ -81,9 +73,9 @@
 #                  compteur: 0)
 #   end
 
-#   StickerType.create!(name: "sticker", icon: "icon-user")
-#   StickerType.create!(name: "iPhone", icon: "icon-user")
-#   StickerType.create!(name: "Android", icon: "icon-user")
+  StickerType.create!(name: "sticker", icon: "icon-user")
+  StickerType.create!(name: "iPhone", icon: "icon-user")
+  StickerType.create!(name: "Android", icon: "icon-user")
 
 #   users = User.all
 #   5.times do |n|
@@ -121,3 +113,18 @@
 #   users.each do |u|
 #     u.send_message!(admin, Faker::Lorem.sentence(12), get_message_suject(u, admin)) unless u == admin
 #   end
+User.first.stickers.create!(name: "My professional case",
+                                        text: "I can never lose it !",
+                                        color: '#bd1e39', tags_as_string: "professional;security")
+User.first.stickers.create!(name: "At Epitech",
+                                        text: "Just jammin'",
+                                        color: '#2E8300', tags_as_string: "school;projects")
+User.create!(first_name:     "Jean Charles",
+                       last_name: "Delajoie",
+                       email:    "delajoie@departout.com",
+                       password: "password",
+                       password_confirmation: "password")
+
+user.stickers.create!(name: "Employee 1",
+                                        text: "Wandering around'",
+                                        color: '#DB3000', tags_as_string: "professional;Employee")

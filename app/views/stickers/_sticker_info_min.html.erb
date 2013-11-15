@@ -10,6 +10,11 @@
 					</a>
 				</h4>
 				<p>
+					<% sticker.tags.each do |tag| %>
+						<span class="label label-default"><%= tag.key %></span>
+					<% end %>
+				</p>
+				<p>
 					Owned by
 					<a href="<%= user_path(user) %>">
 							<%= user.name %>.
