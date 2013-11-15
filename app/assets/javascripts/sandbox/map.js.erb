@@ -1,8 +1,6 @@
 $(document).ready(function() {
     initialize();
     initialize_websockets();
-
-    $(".alert").delay(5000).fadeOut('slow');
 });
 
 $('#map_canvas').ready(function() {
@@ -441,6 +439,7 @@ $('#map_canvas').ready(function() {
                         polyline.points = polyline.GetPointsAtDistance(5);
                         //polyline = route.legs[i].steps[j].polyline;
                         list_stickers[sticker_key].polylines.push(polyline);
+
                     }
                 }
             } else {
