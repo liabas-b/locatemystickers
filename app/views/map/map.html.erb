@@ -41,7 +41,10 @@
         <div id="first_actions" class="wrapper_big wrapper_cube">
             <div class="cube">
                 <div id="get_started" class="front">
-                    <h1 class="hidden">Get Started</h1>
+                    <h1>Try me !</h1>
+                </div>
+
+                <div id="understand_layout" class="up">
                     <div id="map_canvas"></div>
 
                     <div id="stickers_list">
@@ -49,11 +52,10 @@
                     </div>
                 </div>
 
-                <!--div id="understand_layout" class="up">
-                    <h1>Okay, next !</h1>
+                <div id="get_started" class="back">
+                    <h1>Stay tuned !</h1>
                 </div>
-
-                <div id="no_sticker_yet" class="hidden">
+                <!--div id="no_sticker_yet" class="hidden">
                     <div class="get box_action">
                         <h1>Get</h1>
                         <i class="icon"></i>
@@ -107,9 +109,10 @@
                 </div-->
             </div>
         </div>
-        <%= yield :scripts %>
         <audio id="music_visit" controls style="display:none">
             <source src="/assets/decouverte.mp3" type="audio/mpeg">
             Your browser does not support the audio element.
         </audio>
         <div id="error"><h3>Test</h3></div>
+        <div id="mouse"></div>
+        <%= yield :scripts %>

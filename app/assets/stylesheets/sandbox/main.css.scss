@@ -1,5 +1,9 @@
 @import url("https://fonts.googleapis.com/css?family=Lato:900,400,700,300,100,400italic,300italic,100italic");
+html {
+  height:100%;
+}
 body {
+  height:100%;
   font-family: "Lato", Helvetica, Arial, sans-serif;
   margin: 0px;
   background-color: black;
@@ -87,6 +91,7 @@ img {
   top: 50px;
 }
 #friends_list {
+  overflow: hidden;
   top: -5px;
   height: 50px;
   position: relative;
@@ -268,6 +273,7 @@ header #login_wrap input {
 .stickers_list_visible {
   right: 0!important;
 }
+
 #stickers_list {
   overflow-x: scroll;
   position: absolute;
@@ -277,8 +283,9 @@ header #login_wrap input {
   right: -272px;
   top: 0;
   z-index: 10000;
-  -webkit-transition: all 0.5s ease-in-out;
+  -webkit-transition: right 0.5s ease-in-out;
 }
+
 #stickers_list .sticker_card {
   position: relative;
   opacity: 0.9;
@@ -404,7 +411,6 @@ header #login_wrap input {
   height: 100%;
   margin: auto;
   width: 100%;
-  -webkit-transform: translateZ(-586px);
   transition: -webkit-transform 2s ease-in-out;
   -webkit-transition: -webkit-transform 2s ease-in-out;
   transform-style: preserve-3d;
@@ -417,15 +423,19 @@ header #login_wrap input {
 .up {background-color:white;width:100%;height:92%;-webkit-transform-origin: 50% 50% @cube_height_half;-webkit-transform: rotateX(90deg)}
 .down {-webkit-transform-origin: 50% 50% @cube_height_half;-webkit-transform: rotateX(-90deg)}
 */
-.show_up {
+/*.show_up {
   -webkit-transform: translateZ(-586px) rotateX(-90deg);
-}
+}*/
 .front {
   -webkit-transform: rotateY(0deg) translateZ(586px);
 }
 .up {
   -webkit-transform: rotateX(90deg) translateZ(586px);
 }
+.back {
+  -webkit-transform: rotateX(180deg) translateZ(586px);
+}
+
 #get_started,
 #understand_layout,
 #no_sticker_yet,
@@ -461,11 +471,13 @@ header #login_wrap input {
 #understand_layout {
   background: white;
   cursor: pointer;
+  overflow: hidden;
 }
 #get_started h1,
 #understand_layout h1 {
   z-index: 1000;
-  height: 80px;
+  height: 110px;
+  font-size:110px;
   position: absolute!important;
   color: #78b0ec !important;
   text-shadow: 0px 0px 20px #fff;
@@ -474,6 +486,13 @@ header #login_wrap input {
   bottom: 0!important;
   right: 0!important;
   margin: auto!important;
+}
+#get_started h1 {
+  -webkit-animation: scale_effect 5s infinite ease-in-out;
+  -webkit-transition:all 1s ease-in-out;
+}
+#get_started h1:hover {
+  -webkit-filter: drop-shadow(0px 0px 1px #bd1e39);
 }
 #no_sticker_yet .get,
 #get_sticker .get,
@@ -568,12 +587,27 @@ div.spinner {
   -webkit-border-radius: 50%;
   -webkit-animation: spin 0.5s infinite linear;
 }
+.zoom_out_1 {
+  -webkit-animation:zoom_out_1 2s ease-in-out;
+}
+
 @-webkit-keyframes spin {
   from {
     -webkit-transform: rotate(0deg);
   }
   to {
     -webkit-transform: rotate(359deg);
+  }
+}
+@-webkit-keyframes scale_effect {
+  0% {
+    -webkit-transform: scale(1);
+  }
+  50% {
+    -webkit-transform: scale(1.2);
+  }
+  100% {
+    -webkit-transform: scale(1);
   }
 }
 @-webkit-keyframes jump_1 /* Safari and Chrome */ {
@@ -588,6 +622,17 @@ div.spinner {
   100% {
     top: 0px;
     -webkit-filter: drop-shadow(0px 8px 5px 0);
+  }
+}
+@-webkit-keyframes zoom_out_1 {
+  0% {
+    -webkit-transform:scale(1);
+  }
+  50% {
+    -webkit-transform:scale(0.8);
+  }
+  100% {
+    -webkit-transform:scale(1);
   }
 }
 @-webkit-keyframes big_icon_active/* Safari and Chrome #222 */ {
