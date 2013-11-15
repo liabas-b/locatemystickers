@@ -1,6 +1,11 @@
 
 $(document).ready(function() {
     initialize();
+    console.log('1');
+    sleep(1000);
+    google.maps.event.trigger(map, "resize");
+    initialize_websockets();
+    console.log('2');
 });
 //__Application variables, setup and start
     var base_url = "https://locatemystickers-dev.herokuapp.com";
@@ -13,7 +18,6 @@ $(document).ready(function() {
 
 
     function initialize () {
-        initialize_websockets();
         // Call this on 'user_log()'
         get_me();
 
@@ -28,16 +32,16 @@ $(document).ready(function() {
 //\_Application setup and start
     function initialize_websockets () {
         // Enable pusher logging - don't include this in production
-        Pusher.log = function(message) {
-          if (window.console && window.console.log) {
-            window.console.log(message);
-          }
-        };
+        // Pusher.log = function(message) {
+        //   if (window.console && window.console.log) {
+        //     window.console.log(message);
+        //   }
+        // };
 
         var pusher = new Pusher('ba676f4f7e8139bcf138');
-        var test_channel = pusher.subscribe('test_channel');
-          test_channel.bind('my_event', function(data) {
-        });
+        // var test_channel = pusher.subscribe('test_channel');
+        //   test_channel.bind('my_event', function(data) {
+        // });
         var locations_channel = pusher.subscribe('locations_channel');
         locations_channel.bind('new_location', function(data) {
           create_marker(data.location.latitude, data.location.longitude, data.location.address);
@@ -348,8 +352,12 @@ $(document).ready(function() {
             zoom: 4,
             center: map_center,
             mapTypeId: google.maps.MapTypeId.ROADMAP,
-            streetViewControl: false,
-            mapTypeControl: false,
+            streetViewControl: true,
+            mapTypeControl: true,
+            panControl: false,
+            zoomControl: true,
+            scaleControl: true,
+            overviewMapControl: false
         };
 
         map = new google.maps.Map(document.getElementById("map_canvas"), map_options);
@@ -626,3 +634,12 @@ function nextface(up) {
 
         return marker;
     }
+
+function sleep(milliseconds) {
+  var start = new Date().getTime();
+  for (var i = 0; i < 1e7; i++) {
+    if ((new Date().getTime() - start) > milliseconds){
+      break;
+    }
+  }
+}
