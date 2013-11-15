@@ -8,6 +8,7 @@
         <%= render 'layouts/shim' %>
     </head>
     <body>
+        <%= render 'layouts/alerts' %>
         <%= yield %>
     </body>
     <%= javascript_include_tag "https://maps.google.com/maps/api/js?sensor=false" %>

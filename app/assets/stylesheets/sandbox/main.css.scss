@@ -169,6 +169,34 @@ header #main_buttons .left #me_button img#me_img {
   width: 50px;
   height: 50px;
 }
+header #main_buttons .left input {
+  margin-left: 12px;
+  display: inline-block;
+  color: black;
+  background-color: #f1F1F1;
+  border: none;
+  text-align: center;
+  width: 150px;
+  font-size: 18px;
+  height: 30px;
+  padding: 0 5px;
+  margin-top: 11px;
+  -webkit-transition: all 0.25s ease-in-out;
+}
+header #main_buttons .left .btn {
+  background-color: #f1f1f1;
+  border-left: 1px solid #ccc;
+  padding: 0 14px;
+}
+header #main_buttons .left .btn .icon {
+  float: left;
+}
+header #main_buttons .left #session_email:hover input {
+  width: 150px;
+}
+header #main_buttons .left #session_email:hover input::-webkit-input-placeholder {
+  color: #999;
+}
 header #main_buttons .right .button {
   background-color: #f1f1f1;
   border-left: 1px solid #ccc;
@@ -637,4 +665,34 @@ div.spinner {
   top: 200px;
   overflow: scroll;
   z-index: 12;
+}
+
+.alerts {
+  position: fixed;
+  bottom: 24px;
+  left: 24px;
+  width: 300px;
+  z-index: 1;
+  background: #f1f1f1;
+}
+.alert-success {
+}
+
+.alert {
+    margin: 5px;
+    opacity: 0.5;/* l'opacite que vous voulez au depart */
+    border: none;/* enlever les border d'une image en lien */
+    -ms-filter: "prodig:DXImageTransform.Microsoft.Alpha(Opacity=25)"; /* Hack IE8 */
+    filter: alpha(opacity = 25); /* Hack IE 5-7 */
+    -webkit-transition: opacity 0.5s ease-in-out;/* transition pour Chrome et Safari */
+    -moz-transition: opacity 0.5s ease-in-out;/* transition pour Firefox */
+    -o-transition: opacity 0.5s ease-in-out;/* transition pour Opéra */
+    transition: opacity 0.5s ease-in-out; /* on écrit cette ligne à la fin de façon à ce que ce soit elle qui soit prise en compte lorsque l'attribut transition sera pris en compte par tous les navigateurs */
+ 
+}
+ 
+.alert:hover, .alert:focus {
+    opacity: 0.9; /* opacite au survol */
+    -ms-filter:"prodig:DXImageTransform.Microsoft.Alpha(Opacity=90)"; /* Hack IE 8 */
+    filter: alpha(opacity = 90); /* Hack IE 5-7 */
 }

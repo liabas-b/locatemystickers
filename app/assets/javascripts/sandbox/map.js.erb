@@ -1,6 +1,8 @@
 $(document).ready(function() {
     initialize();
     initialize_websockets();
+
+    $(".alert").delay(5000).fadeOut('slow');
 });
 //__Application variables, setup and start
     var base_url = "https://locatemystickers.herokuapp.com";
