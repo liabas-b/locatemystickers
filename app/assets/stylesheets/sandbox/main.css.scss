@@ -384,7 +384,7 @@ header #login_wrap input {
 }
 .cube {
   height: 100%;
-  margin: auto;
+  /*margin: auto;*/
   width: 100%;
   -webkit-transform: translateZ(-586px);
   transition: -webkit-transform 2s ease-in-out;
@@ -627,3 +627,14 @@ div.spinner {
     100% {width: 100%;-webkit-transform: translateZ(0px)}
 }
 */
+
+#request_output {
+  position: absolute;
+  background: white;
+  width: 100%;
+  height: 400px;
+  margin: auto;
+  top: 200px;
+  overflow: scroll;
+  z-index: 12;
+}
