@@ -188,6 +188,14 @@ $('#map_canvas').ready(function() {
             }
             change_visibility(s_sticker_id, sticker);
             return;
+        } else if (event == 'simulate_history') {
+            index = get_sticker_index(s_sticker_id);
+            sticker = me.stickers[index];
+            if (sticker.marker === "undefined") {
+                sticker.marker = create_marker(sticker.sticker);
+            }
+            play_history(s_sticker_id, sticker);
+            return;
         }
 
         var sticker_id = event.currentTarget.id.substr(8);
@@ -195,6 +203,7 @@ $('#map_canvas').ready(function() {
         var sticker = me.stickers[index];
 
         if (sticker.marker === "undefined") {
+            console.log(sticker.sticker);
             sticker.marker = create_marker(sticker.sticker);
         }
 
@@ -605,27 +614,28 @@ $('#map_canvas').ready(function() {
         });
     }
 
-    function simulate_sticker_card(stickers_id, i) {
-        var j = i;
+    function simulate_sticker_card(stickers_id, jm) {
+        var jm = jm;
 
-        if (j > 4) {
+        if (jm > 4) {
             return;
         }
 
-        sticker_id = stickers_id[j];
+        sticker_id = stickers_id[jm];
         var tm2 = setTimeout(function() {
             $('#sticker_'+sticker_id).css('background','#ccc');
             $('#sticker_'+sticker_id+' .options').css('opacity','0.9');
-            $('#sticker_'+sticker_id+' .options .Position').toggleClass('active');
+            $('#sticker_'+sticker_id+' .options .History').toggleClass('active');
 
             var tm3 = setTimeout(function() {
-                sticker_on_click('simulate_position', sticker_id);
+                console.log(sticker_id);
+                sticker_on_click('simulate_history', sticker_id);
                 $('#sticker_'+sticker_id).css('background','#fff');
                 $('#sticker_'+sticker_id+' .options').css('opacity','0');
-                $('#sticker_'+sticker_id+' .options .Position').toggleClass('active');
+                $('#sticker_'+sticker_id+' .options .History').toggleClass('active');
 
-                j = j + 1;
-                simulate_sticker_card(stickers_id, j);
+                jm = jm + 1;
+                simulate_sticker_card(stickers_id, jm);
             }, 800);
         }, 1300);
     }
