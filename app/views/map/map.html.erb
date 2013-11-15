@@ -8,8 +8,7 @@
             <div id="main_buttons">
                 <div class="left">
                   <% if signed_in? %>
-                    <a href="<%= user_path(current_user.id) %>">
-                        <div id="me_button" class="button"></div>
+                    <a href="<%= user_path(current_user.id) %>"  id="me_button" class="button">
                     </a>
                   <% else %>
                     <%= render 'sessions/navbar_top_form' %>
